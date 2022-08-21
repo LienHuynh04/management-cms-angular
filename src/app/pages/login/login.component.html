@@ -1,0 +1,36 @@
+<nz-layout>
+  <div class="login-form-wrapper" [ngStyle]="{backgroundImage: 'url(assets/images/background.svg)'}">
+    <div class="login-card">
+      <nz-spin [nzSpinning]="false">
+        <!-- [nzTitle]="'AUTH.LOGIN' | translate"-->
+        <nz-card [ngStyle]="{width: '400px'}">
+          <!-- Login Form -->
+          <form nz-form [formGroup]="validateForm" class="login-form" >
+            <!-- Username -->
+            <nz-form-item>
+              <nz-form-control>
+                <nz-input-group nzPrefixIcon="user">
+                  <input type="text" nz-input formControlName="userName"/>
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+
+            <!-- Password -->
+            <nz-form-item>
+              <nz-form-control>
+                <nz-input-group nzPrefixIcon="lock">
+                  <input type="password" nz-input formControlName="password"/>
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+
+            <!-- Login button -->
+            <button nz-button class="login-form-button login-form-margin"
+                    [nzType]="'primary'">Login
+            </button>
+          </form>
+        </nz-card>
+      </nz-spin>
+    </div>
+  </div>
+</nz-layout>
