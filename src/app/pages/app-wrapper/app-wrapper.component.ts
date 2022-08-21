@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
+import {NavbarItem, NAVIGATIONS} from '../../core/interfaces/navigation';
 
 @Component({
   selector: 'app-app-wrapper',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppWrapperComponent implements OnInit {
   isCollapsed = false;
-  constructor() { }
+  constructor(
+    @Inject(NAVIGATIONS)
+    public navigations: NavbarItem[],
+  ) { }
 
   ngOnInit(): void {
   }
