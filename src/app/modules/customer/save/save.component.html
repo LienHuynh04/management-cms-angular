@@ -1,0 +1,49 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <!--full_name-->
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="full_name">Tên khách hàng</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="full_name" id="full_name" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <!--phone_number-->
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="phone_number">Số điện thoại</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="phone_number" id="phone_number" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <!--address-->
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="address">Địa chỉ</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="address" id="address" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <!--email-->
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="full_name">Email</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="email" id="email" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <!--note-->
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="full_name">Ghi chú</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <textarea nz-input formControlName="note" id="note"></textarea>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item nz-row class="create-area">
+    <nz-form-control [nzSpan]="14" [nzOffset]="6">
+      <button nz-button [routerLink]="['', '/']">Quay lại</button>
+      <button nz-button nzType="primary"
+              [disabled]="!validateForm.valid">Tạo mới</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

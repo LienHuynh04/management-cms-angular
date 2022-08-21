@@ -63,15 +63,17 @@ export class AuthenticationService {
     })
       .pipe(
         finalize(() => {
-          this.currentUserValue
-            ? this.router.navigate([''])
-            : this.router.navigate(['login']);
+          if (!this.currentUserValue) {
+            return this.router.navigate(['login']);
+          }
+          return true
         }),
         tap(({data}) => {
           this.currentUserSubject.next(data);
           // Load permission
           this.ngxPermissionsService.flushPermissions();
           this.ngxPermissionsService.loadPermissions([data?.roles[0].name]);
+          return this.router.navigate([location.pathname === '/login' ? '' : location.pathname]);
         }));
   }
 
@@ -79,7 +81,7 @@ export class AuthenticationService {
     this.apiBase.delete(apiEndpoints.logout)
       .pipe(finalize(() => {
         this.tokenService.clearToken();
-        this.router.navigate(['login'])
+        this.router.navigate(['login']);
       })).subscribe();
   }
 

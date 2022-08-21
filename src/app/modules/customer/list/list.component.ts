@@ -1,12 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {ColumnInterface, ColumnConfig, COLUMNS} from '../../core/interfaces/column.interface';
+import {ColumnConfig, ColumnInterface, COLUMNS} from '../../../core/interfaces/column.interface';
 
 @Component({
-  selector: 'app-customers',
-  templateUrl: './customers.component.html',
-  styleUrls: ['./customers.component.scss']
+  selector: 'app-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.scss']
 })
-export class CustomersComponent implements OnInit {
+export class ListComponent implements OnInit {
   cols: ColumnInterface[] = this.colums.customer;
   listOfData: any;
   constructor(
@@ -25,4 +25,5 @@ export class CustomersComponent implements OnInit {
     }));
   }
 
+  confirm() {}
 }

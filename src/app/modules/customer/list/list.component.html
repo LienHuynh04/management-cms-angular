@@ -1,0 +1,53 @@
+<!--Button Create-->
+<button
+  nz-button
+  nzType="primary"
+  class="btn-create"
+  [routerLink]="['/customers', 'create']"
+>
+  <i nz-icon nzType="plus" nzTheme="outline"></i>
+  Tạo mới
+</button>
+
+
+<nz-table
+  #basicTable
+  [nzBordered]="true"
+  [nzVirtualItemSize]="54"
+  [nzData]="listOfData"
+  [nzFrontPagination]="false"
+  [nzShowPagination]="false"
+  [nzScroll]="{ x: '1200px', y: '500px' }"
+  nzBordered
+>
+  <thead>
+  <tr>
+    <th
+      *ngFor="let col of cols"
+      [nzWidth]="col.style?.width">
+      {{col.header}}
+    </th>
+    <th [nzWidth]="'110px'"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+    <td *ngFor="let col of cols;">
+      {{ data[col?.field] }}
+    </td>
+    <td>
+      <button nz-button nzType="primary" nzShape="circle" style="margin-right: 5px">
+        <i nz-icon nzType="edit" nzTheme="outline"></i>
+      </button>
+      <button nz-button nzShape="circle" nzDanger
+              nz-popconfirm
+              nzPopconfirmTitle="Are you sure delete this task?"
+              nzPopconfirmPlacement="leftTop"
+              (nzOnConfirm)="confirm()"
+      >
+        <i nz-icon nzType="delete"></i>
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>

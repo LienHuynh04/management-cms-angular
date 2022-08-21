@@ -28,7 +28,7 @@
                [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
             ></i>
         </span>
-        <a nz-dropdown [nzDropdownMenu]="menu">
+        <a nz-dropdown [nzDropdownMenu]="menu" [nzPlacement]="'bottomRight'">
             {{authService.currentUserValue.name}}
           <i nz-icon nzType="down"></i>
         </a>

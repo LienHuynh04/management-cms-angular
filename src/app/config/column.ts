@@ -78,11 +78,7 @@ export const column: ColumnConfig = {
       style: {
         width: '200px'
       }
-    },
-    {
-      header: '',
-      field: 'action'
-    },
+    }
   ]
 };
 
