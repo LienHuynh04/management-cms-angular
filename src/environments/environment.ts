@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiDomain: '',
-  apiRoute: ''
+  apiDomain: 'https://api-wonda.dmk.gumiviet.com',
+  apiRoute: '/admin/',
 };
 
 /*

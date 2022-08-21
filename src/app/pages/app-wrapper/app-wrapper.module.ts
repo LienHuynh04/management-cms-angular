@@ -9,6 +9,8 @@ import {NzIconModule} from 'ng-zorro-antd/icon';
 import {SharedModule} from '../../shared/shared.module';
 import {CustomersComponent} from '../../modules/customers/customers.component';
 import {NzTableModule} from 'ng-zorro-antd/table';
+import {NgxPermissionsModule} from 'ngx-permissions';
+import {NzDropDownModule} from 'ng-zorro-antd/dropdown';
 
 
 @NgModule({
@@ -20,6 +22,8 @@ import {NzTableModule} from 'ng-zorro-antd/table';
     NzMenuModule,
     NzIconModule,
     NzTableModule,
+    NgxPermissionsModule,
+    NzDropDownModule,
   ]
 })
 export class AppWrapperModule { }

@@ -5,7 +5,7 @@
         <!-- [nzTitle]="'AUTH.LOGIN' | translate"-->
         <nz-card [ngStyle]="{width: '400px'}">
           <!-- Login Form -->
-          <form nz-form [formGroup]="validateForm" class="login-form" >
+          <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="login()">
             <!-- Username -->
             <nz-form-item>
               <nz-form-control>

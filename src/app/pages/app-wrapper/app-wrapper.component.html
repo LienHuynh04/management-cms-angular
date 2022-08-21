@@ -28,6 +28,16 @@
                [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
             ></i>
         </span>
+        <a nz-dropdown [nzDropdownMenu]="menu">
+            {{authService.currentUserValue.name}}
+          <i nz-icon nzType="down"></i>
+        </a>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu nzSelectable>
+            <li nz-menu-item nzDanger (click)="logout()">Đăng xuất</li>
+          </ul>
+        </nz-dropdown-menu>
+
       </div>
     </nz-header>
     <nz-content>

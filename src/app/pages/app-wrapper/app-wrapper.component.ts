@@ -1,5 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {NavbarItem, NAVIGATIONS} from '../../core/interfaces/navigation';
+import {AuthenticationService} from '../../core/services/authentication.service';
 
 @Component({
   selector: 'app-app-wrapper',
@@ -11,9 +12,14 @@ export class AppWrapperComponent implements OnInit {
   constructor(
     @Inject(NAVIGATIONS)
     public navigations: NavbarItem[],
+    public authService: AuthenticationService
   ) { }
 
   ngOnInit(): void {
+  }
+
+  logout() {
+    this.authService.logout()
   }
 
 }

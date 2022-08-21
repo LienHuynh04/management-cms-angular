@@ -35,11 +35,7 @@ export class ApiBase {
       .post(`${environment.apiDomain}${environment.apiRoute}${path}`, body, {
         ...httpOptions,
         reportProgress: true
-      }).pipe(
-        map((resp: any) => {
-          return resp.data;
-        })
-      );
+      })
   }
 
   delete(path: string, params: any | HttpParams = new HttpParams()): Observable<any> {

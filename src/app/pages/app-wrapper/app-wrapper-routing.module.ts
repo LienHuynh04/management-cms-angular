@@ -11,7 +11,12 @@ const routes: Routes = [
       {
         path: 'customers',
         component: CustomersComponent
-      }
+      },
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'customers'
+      },
     ]
   }
 ];

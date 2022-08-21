@@ -6,7 +6,7 @@ export interface NavbarItem {
   children?: NavbarItem[];
   icon?: any;
   permissions?: {
-    only?: Array<string>;
+    only?: Array<string> | any;
     except?: Array<string>;
   };
 }
