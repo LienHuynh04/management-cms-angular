@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {finalize, switchMap, tap} from 'rxjs/operators';
+import {BehaviorSubject, Observable, of} from 'rxjs';
+import {catchError, finalize, map, switchMap, tap} from 'rxjs/operators';
 
 // Plugins
 import {NgxPermissionsService} from 'ngx-permissions';
@@ -9,12 +9,13 @@ import {NgxPermissionsService} from 'ngx-permissions';
 // Core Module
 import {ApiBase} from './api.service';
 import {apiEndpoints} from '../../config/global-vars';
-import {TokenService} from './token.service';
+import {CredentialsService} from './credentials.service';
+import {IAdmin} from '../interfaces';
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
   public currentUser: Observable<any>;
-  private currentUserSubject: BehaviorSubject<any>;
+  currentUserSubject: BehaviorSubject<any>;
   private sessionName = 'management';
   returnUrl: string;
 
@@ -23,7 +24,7 @@ export class AuthenticationService {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private ngxPermissionsService: NgxPermissionsService,
-    private tokenService: TokenService
+    private credentialsService: CredentialsService
   ) {
     const user = this.readUserData();
     this.currentUserSubject = new BehaviorSubject<any>(user);
@@ -48,41 +49,72 @@ export class AuthenticationService {
 
   login(username: string, password: string, rememberMe?: false): Observable<any> {
     return this.apiBase.post(apiEndpoints.login, {login_id: username, password}).pipe(
-      tap(({access_token}) => {
-        if (access_token) {
-          this.tokenService.accessToken = access_token;
+      tap((user) => {
+        if (user) {
+          const { data } = user;
+          this.currentUserSubject.next(data.user);
+          this.credentialsService.setCredentials(
+            { access_token: data.access_token },
+            rememberMe
+          );
         }
-      }), switchMap(resp => {
-        return this.profile();
-      }));
+      }),
+      switchMap((resp) => {
+        return this.profile().pipe(
+          finalize(() => {
+            this.router.navigate(['/customers']);
+          })
+        );
+      })
+    );
   }
 
   profile(): any {
-    return this.apiBase.get(apiEndpoints.profile, {
-      include: 'roles'
-    })
+    return this.apiBase
+      .get(apiEndpoints.profile, {
+        with: 'roles.permissions',
+      })
       .pipe(
-        finalize(() => {
-          if (!this.currentUserValue) {
-            return this.router.navigate(['login']);
-          }
-          return true
-        }),
-        tap(({data}) => {
-          this.currentUserSubject.next(data);
+        map((resp) => {
+          const user: IAdmin = this.currentUserValue || {};
+          Object.assign(user, resp.data);
+          this.currentUserSubject.next(user);
           // Load permission
           this.ngxPermissionsService.flushPermissions();
-          this.ngxPermissionsService.loadPermissions([data?.roles[0].name]);
-          return this.router.navigate([location.pathname === '/login' ? '' : location.pathname]);
-        }));
+          this.ngxPermissionsService.loadPermissions(
+            [user.login_id as string]
+            // user.roles[0].permissions.map((per: any) => {
+            //   return per.name;
+            // })
+          );
+          return true;
+        }),
+        catchError((err) => {
+          this.router.navigateByUrl('404');
+          return of(false);
+        })
+      );
   }
 
+  /**
+   * Logs out the user and clear credentials.
+   * @return True if the user was logged out successfully.
+   */
   logout(): void {
-    this.apiBase.delete(apiEndpoints.logout)
-      .pipe(finalize(() => {
-        this.tokenService.clearToken();
-        this.router.navigate(['login']);
-      })).subscribe();
+    this.apiBase
+      .delete(apiEndpoints.logout)
+      .pipe(
+        finalize(() => {
+         this.clearAndLogout()
+        })
+      )
+      .subscribe();
   }
 
+
+  clearAndLogout(): void {
+    this.credentialsService.setCredentials();
+    this.currentUserSubject.next(null);
+    this.router.navigate(['/login']);
+  }
 }

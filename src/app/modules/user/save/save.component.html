@@ -1,0 +1,51 @@
+<form nz-form [formGroup]="userForm" (ngSubmit)="submitForm()">
+  <!--phone_number-->
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="login_id">Login ID</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="login_id" id="login_id"/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <!--full_name-->
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="full_name">Tên khách hàng</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="full_name" id="full_name"/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <!--email-->
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="full_name">Email</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="email" id="email"/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <!--password-->
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="full_name">Password</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="password" id="password"/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <!--confirm password-->
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="full_name">Password Confirmation</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="password_confirmation" id="password_confirmation"/>
+    </nz-form-control>
+  </nz-form-item>
+
+
+  <nz-form-item nz-row class="create-area">
+    <nz-form-control [nzSpan]="14" [nzOffset]="6">
+      <button nz-button [routerLink]="['', 'user']">Quay lại</button>
+      <button nz-button nzType="primary"
+              [disabled]="!userForm.valid">Tạo mới
+      </button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

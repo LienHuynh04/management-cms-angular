@@ -1,25 +1,41 @@
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
+import {HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS, HttpErrorResponse} from '@angular/common/http';
 import {EMPTY, Observable, throwError} from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import {catchError, debounceTime, distinctUntilChanged, finalize} from 'rxjs/operators';
 import {Router} from '@angular/router';
-import {TokenService} from '../services/token.service';
+import {CredentialsService} from '../services/credentials.service';
+import {LoadingOverlayService} from '../services/loading.service';
+import {AuthenticationService} from '../services/authentication.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
   constructor(
+    private authenticationService: AuthenticationService,
+    private loadingOverlayService: LoadingOverlayService,
+    private credentialService: CredentialsService,
     private router: Router,
-    private tokenService: TokenService
   ) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    this.loadingOverlayService.isLoading = true;
+    // If the call fails, retry until 2 times before throwing an error
     return next.handle(request).pipe(
-      catchError((resp, http) => {
-        this.tokenService.clearToken();
-        this.router.navigate(['login'])
-        return throwError(resp);
+      debounceTime(1000),
+      distinctUntilChanged(),
+      finalize(() => {
+        this.loadingOverlayService.isLoading = false;
+      }),
+      catchError((err: HttpErrorResponse) => {
+        this.authenticationService.clearAndLogout();
+        this.router.navigate(['/login'])
+        return throwError(err);
       })
     );
   }
+
 }
+
+export const ErrorInterceptorProviders = [
+  { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+];

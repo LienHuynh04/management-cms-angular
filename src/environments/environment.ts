@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiDomain: '',
-  apiRoute: '/',
+  apiDomain: 'https://wcrm.my-serv.work',
+  apiRoute: '/api/',
 };
 
 /*

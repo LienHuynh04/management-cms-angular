@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 import {AuthenticationService} from '../services/authentication.service';
-import {TokenService} from '../services/token.service';
+import {CredentialsService} from '../services/credentials.service';
 
 // Core Module
 
@@ -10,17 +10,24 @@ export class AuthGuard implements CanActivate {
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
-    private tokenService: TokenService
+    private credentialsService: CredentialsService
   ) {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any {
-    if (!this.tokenService.accessToken) {
-      return this.router.navigate(['login']);
-    }
-    if (this.tokenService.accessToken && !this.authenticationService.currentUserValue) {
+    const currentUser = this.authenticationService.currentUserValue;
+    // have tokens but no users
+    if (this.credentialsService.isAuthenticated() && !currentUser) {
       return this.authenticationService.profile();
     }
-    return true;
+
+    // have tokens, user
+    if (this.credentialsService.isAuthenticated() && currentUser) {
+      // logged in so return true
+      return true;
+    }
+    // not logged in so redirect to login page with the return url
+    this.router.navigate(['/login']);
+    return false;
   }
 }

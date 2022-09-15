@@ -2,6 +2,7 @@ import { InjectionToken } from '@angular/core';
 
 export interface ColumnConfig {
   customer: ColumnInterface[];
+  user: ColumnInterface[];
 
   [key: string]: ColumnInterface[];
 }

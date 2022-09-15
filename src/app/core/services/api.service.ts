@@ -9,11 +9,6 @@ export class ApiBase {
   constructor(private http: HttpClient) {
   }
 
-  getCsv(path: string, params: any | HttpParams = new HttpParams()): Observable<any> {
-    return this.http
-      .get(`${environment.apiDomain}${environment.apiRoute}${path}`, {params, responseType: 'arraybuffer'});
-  }
-
   get(path: string, params: any | HttpParams = new HttpParams()): Observable<any> {
     return this.http
       .get(`${environment.apiDomain}${environment.apiRoute}${path}`, {params});

@@ -1,26 +1,32 @@
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
+import {HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {TokenService} from '../services/token.service';
+import {CredentialsService} from '../services/credentials.service';
 
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   constructor(
-    private tokenService: TokenService
-  ) {
-  }
+    private credentialsService: CredentialsService
+  ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // add authorization header with jwt token if available
-    const accessToken = this.tokenService.accessToken;
-    if (accessToken && request.url.includes('/api')) {
+    // add auth header with jwt if user is logged in and request is to api url
+    const credentials = this.credentialsService.credentials;
+    const isLoggedIn = this.credentialsService.isAuthenticated();
+
+    if (isLoggedIn && request.url.includes('/api')) {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${accessToken}`
+          Authorization: `Bearer ${credentials?.access_token}`,
+          ['x-localization']: localStorage.getItem('lang') || 'ja'
         }
       });
     }
     return next.handle(request);
   }
 }
+
+export const AuthInterceptorProviders = [
+  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+];
