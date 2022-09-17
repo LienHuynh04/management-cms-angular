@@ -7,21 +7,30 @@ import {
 import {forkJoin, Observable, of} from 'rxjs';
 import {CustomerService, ProjectService} from '../../../core/services';
 import {map} from 'rxjs/operators';
-import {UserService} from '../../../core/services/user.service';
+import {UserService} from '../../../core/services';
+import {RoleService} from '../../../core/services/role.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SaveResolver implements Resolve<boolean> {
   constructor(
-    private projectService: ProjectService,
+    private roleService: RoleService,
     private userService: UserService
   ) {
   }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
+    const source$ = [this.roleService.getAll()]
     if(route.params.id) {
-     return this.userService.getById(route.params.id)
+      source$.push(this.userService.getById(route.params.id))
     }
-    return of([])
+    return forkJoin(source$).pipe(
+      map((resp) => {
+        return  {
+          roles: resp[0]?.data,
+          data : resp[1]?.data,
+        }
+      })
+    )
   }
 }

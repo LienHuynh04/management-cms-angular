@@ -6,6 +6,6 @@ export interface IRoleList {
 }
 
 export interface IRole {
-  id: string;
+  id: string | number;
   name: string;
 }
