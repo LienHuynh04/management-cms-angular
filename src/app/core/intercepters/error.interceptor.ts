@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import {HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS, HttpErrorResponse} from '@angular/common/http';
-import {EMPTY, Observable, throwError} from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HTTP_INTERCEPTORS, HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
 import {catchError, debounceTime, distinctUntilChanged, finalize} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {CredentialsService} from '../services/credentials.service';
@@ -27,8 +27,10 @@ export class ErrorInterceptor implements HttpInterceptor {
         this.loadingOverlayService.isLoading = false;
       }),
       catchError((err: HttpErrorResponse) => {
-        this.authenticationService.clearAndLogout();
-        this.router.navigate(['/login'])
+        if (err.status == 401) {
+          this.authenticationService.clearAndLogout();
+          this.router.navigate(['/login']);
+        }
         return throwError(err);
       })
     );

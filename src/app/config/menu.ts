@@ -9,7 +9,17 @@ export const navigations: NavbarItem[] = [
   {
     title: 'Nhân sự',
     url: '/user',
-    icon: 'team',
+    icon: 'user',
+  },
+  {
+    title: 'Dự án',
+    url: '/project',
+    icon: 'project',
+  },
+  {
+    title: 'Chăm sóc khách hàng',
+    url: '/customer-care',
+    icon: 'check-square',
   }
 ];
 

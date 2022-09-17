@@ -1,0 +1,5 @@
+<ng-container *ngIf="(formField?.errors && (formField?.dirty || formField?.touched))">
+  <div class="ant-form-item-explain ant-form-item-explain-error">
+    {{ listOfErrors()[0]}}
+  </div>
+</ng-container>

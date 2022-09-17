@@ -8,8 +8,4 @@ export interface IRoleList {
 export interface IRole {
   id: string;
   name: string;
-  status: string;
-  created_at: string;
-  updated_at: string;
-  permissions: [];
 }

@@ -10,7 +10,7 @@ export interface IAdmin {
   id?: string;
   login_id?: string;
   full_name?: string;
-  roles?: IRole[] | any;
+  role?: IRole[] | any;
   is_active?: boolean;
   created_at?: string;
   updated_at?: string;

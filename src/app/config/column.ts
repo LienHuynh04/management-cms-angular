@@ -40,6 +40,30 @@ export const column: ColumnConfig = {
       header: 'Email',
       field: 'email'
     },
-  ]
+  ],
+  project: [
+    {
+      header: 'ID',
+      field: 'id'
+    },
+    {
+      header: 'Tên',
+      field: 'name'
+    }
+  ],
+  customer_care: [
+    {
+      header: 'Login ID',
+      field: 'login_id'
+    },
+    {
+      header: 'Tên',
+      field: 'full_name'
+    },
+    {
+      header: 'Email',
+      field: 'email'
+    },
+  ],
 };
 

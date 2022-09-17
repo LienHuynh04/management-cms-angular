@@ -1,8 +1,10 @@
-import { InjectionToken } from '@angular/core';
+import {InjectionToken} from '@angular/core';
 
 export interface ColumnConfig {
   customer: ColumnInterface[];
   user: ColumnInterface[];
+  project: ColumnInterface[];
+  customer_care: ColumnInterface[];
 
   [key: string]: ColumnInterface[];
 }

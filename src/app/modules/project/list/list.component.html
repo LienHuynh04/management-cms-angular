@@ -1,20 +1,21 @@
 <!--Button Create-->
 <button
+  (click)="openModal()"
+  class="btn-create"
   nz-button
   nzType="primary"
-  class="btn-create"
-  [routerLink]="['/customers', 'create']"
 >
-  <i nz-icon nzType="plus" nzTheme="outline"></i>
+  <i nz-icon nzTheme="outline" nzType="plus"></i>
   Tạo mới
 </button>
+
 
 <nz-table
   #basicTable
   [nzBordered]="true"
-  [nzVirtualItemSize]="54"
-  [nzData]="customers"
+  [nzData]="project"
   [nzScroll]="{ y: '500px' }"
+  [nzVirtualItemSize]="54"
   nzBordered
 >
   <thead>
@@ -33,18 +34,18 @@
       {{ data[col?.field] }}
     </td>
     <td>
-      <button nz-button
-              nzType="primary" nzShape="circle"
+      <button (click)="openModal(data.id)"
+              nz-button nzShape="circle"
+              nzType="primary"
               style="margin-right: 5px"
-              [routerLink]="['update', data.id]"
       >
-        <i nz-icon nzType="edit" nzTheme="outline"></i>
+        <i nz-icon nzTheme="outline" nzType="edit"></i>
       </button>
-      <button nz-button nzShape="circle" nzDanger
-              nz-popconfirm
-              nzPopconfirmTitle="Are you sure delete this task?"
+      <button (nzOnConfirm)="confirm(data.id)" nz-button nz-popconfirm
+              nzDanger
               nzPopconfirmPlacement="leftTop"
-              (nzOnConfirm)="confirm(data.id)"
+              nzPopconfirmTitle="Are you sure delete this task?"
+              nzShape="circle"
       >
         <i nz-icon nzType="delete"></i>
       </button>

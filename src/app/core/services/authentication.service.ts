@@ -79,13 +79,13 @@ export class AuthenticationService {
           const user: IAdmin = this.currentUserValue || {};
           Object.assign(user, resp.data);
           this.currentUserSubject.next(user);
+
           // Load permission
           this.ngxPermissionsService.flushPermissions();
           this.ngxPermissionsService.loadPermissions(
-            [user.login_id as string]
-            // user.roles[0].permissions.map((per: any) => {
-            //   return per.name;
-            // })
+            user.role.map((per: any) => {
+              return per.name;
+            })
           );
           return true;
         }),

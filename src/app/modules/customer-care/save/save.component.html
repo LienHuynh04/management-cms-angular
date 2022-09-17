@@ -1,9 +1,9 @@
 <form (ngSubmit)="submitForm()" [formGroup]="saveForm" nz-form>
   <!--phone_number-->
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="login_id">Login ID</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="login_id" nzRequired>Login ID</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="login_id" id="login_id"/>
+      <input formControlName="login_id" id="login_id" nz-input/>
       <app-control-errors
         fieldName="login_id"
       ></app-control-errors>
@@ -12,9 +12,9 @@
 
   <!--full_name-->
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="full_name">Tên khách hàng</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="full_name" nzRequired>Tên khách hàng</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="full_name" id="full_name"/>
+      <input formControlName="full_name" id="full_name" nz-input/>
       <app-control-errors
         fieldName="full_name"
       ></app-control-errors>
@@ -25,7 +25,7 @@
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="email" nzRequired>Email</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="email" id="email"/>
+      <input formControlName="email" id="email" nz-input/>
       <app-control-errors
         fieldName="email"
       ></app-control-errors>
@@ -36,7 +36,7 @@
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Password</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="password" id="password"/>
+      <input formControlName="password" id="password" nz-input/>
       <app-control-errors
         fieldName="password"
       ></app-control-errors>
@@ -47,7 +47,7 @@
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password_confirmation" nzRequired>Password Confirmation</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="password_confirmation" id="password_confirmation"/>
+      <input formControlName="password_confirmation" id="password_confirmation" nz-input/>
       <app-control-errors
         fieldName="password_confirmation"
       ></app-control-errors>
@@ -55,11 +55,11 @@
   </nz-form-item>
 
 
-  <nz-form-item nz-row class="create-area">
-    <nz-form-control [nzSpan]="14" [nzOffset]="6">
-      <button nz-button [routerLink]="['', 'user']">Quay lại</button>
-      <button nz-button nzType="primary"
-              [disabled]="!saveForm.valid">Tạo mới
+  <nz-form-item class="create-area" nz-row>
+    <nz-form-control [nzOffset]="6" [nzSpan]="14">
+      <button [routerLink]="['', 'user']" nz-button>Quay lại</button>
+      <button [disabled]="!saveForm.valid" nz-button
+              nzType="primary">Tạo mới
       </button>
     </nz-form-control>
   </nz-form-item>

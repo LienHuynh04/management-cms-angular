@@ -18,7 +18,7 @@ export class ListResolver implements Resolve<boolean> {
     state: RouterStateSnapshot)
     : Observable<IPaginateList<CustomerInterface>> | boolean | any {
     // return this.userService.getAll()
-    return of([])
+    return of([]);
 
   }
 }

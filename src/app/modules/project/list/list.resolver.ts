@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
+import {ProjectService} from '../../../core/services';
 import {CustomerInterface, IPaginateList} from '../../../core/interfaces';
-import {UserService} from '../../../core/services/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ListResolver implements Resolve<boolean> {
   constructor(
-    private userService: UserService
+    private projectService: ProjectService
   ) {
   }
 
@@ -17,8 +17,7 @@ export class ListResolver implements Resolve<boolean> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot)
     : Observable<IPaginateList<CustomerInterface>> | boolean | any {
-    // return this.userService.getAll()
-    return of([])
+    return this.projectService.getAll();
 
   }
 }
