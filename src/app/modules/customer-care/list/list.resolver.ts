@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs';
-import {CustomerInterface, IPaginateList} from '../../../core/interfaces';
+import {CustomerCareInterface, IPaginateList} from '../../../core/interfaces';
 import {CustomerCareService} from '../../../core/services';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class ListResolver implements Resolve<boolean> {
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot)
-    : Observable<IPaginateList<CustomerInterface>> | boolean | any {
+    : Observable<IPaginateList<CustomerCareInterface>> | boolean | any {
     return this.customerCareService.getAll();
   }
 }

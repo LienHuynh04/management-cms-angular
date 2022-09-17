@@ -1,4 +1,4 @@
-<form (ngSubmit)="validationForm()" [formGroup]="saveForm" nz-form>
+<form [formGroup]="saveForm" nz-form>
   <!--full_name-->
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="full_name">Tên khách hàng</nz-form-label>
@@ -34,7 +34,7 @@
 
   <!--email-->
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="full_name">Email</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Email</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input formControlName="email" id="email"/>
       <app-control-errors
@@ -43,27 +43,79 @@
     </nz-form-control>
   </nz-form-item>
 
-  <!--note-->
+  <!--user-->
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="full_name">Dự án khách hàng</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="assign_for_user_id">Assign for user</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-<!--      <nz-select-->
-<!--        [nzMaxTagCount]="3"-->
-<!--        nzMode="multiple"-->
-<!--        nzPlaceHolder="Please select"-->
-<!--        formControlName="customer_project"-->
-<!--      >-->
-<!--        <nz-option *ngFor="let item of customerProject" [nzLabel]="$any(item?.name)" [nzValue]="$any(item?.id)"></nz-option>-->
-<!--      </nz-select>-->
+      <nz-select
+        nzPlaceHolder="Please select"
+        formControlName="assign_for_user_id"
+      >
+        <nz-option *ngFor="let item of users" [nzLabel]="$any(item?.full_name)" [nzValue]="$any(item?.id)"></nz-option>
+      </nz-select>
+      <app-control-errors
+        fieldName="assign_for_user_id"
+      ></app-control-errors>
     </nz-form-control>
   </nz-form-item>
 
-  <!--  <nz-form-item nz-row class="create-area">-->
-  <!--    <nz-form-control [nzSpan]="14" [nzOffset]="6">-->
-  <!--      <button nz-button [routerLink]="['', '/']">Quay lại</button>-->
-  <!--      <button nz-button nzType="primary"-->
-  <!--              [disabled]="!customerForm.valid">Tạo mới-->
-  <!--      </button>-->
-  <!--    </nz-form-control>-->
-  <!--  </nz-form-item>-->
+  <!--project_note-->
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="project_note">Project note</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="project_note" id="project_note"/>
+      <app-control-errors
+        fieldName="project_note"
+      ></app-control-errors>
+    </nz-form-control>
+  </nz-form-item>
+
+  <!--note-->
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="note">Ghi chú</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="note" id="note"/>
+      <app-control-errors
+        fieldName="note"
+      ></app-control-errors>
+    </nz-form-control>
+  </nz-form-item>
+
+  <!--result-->
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="result">Kết quả</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="result" id="result"/>
+      <app-control-errors
+        fieldName="result"
+      ></app-control-errors>
+    </nz-form-control>
+  </nz-form-item>
+
+  <!--customer_project-->
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="customer_project">Dự án khách hàng</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-select
+        nzMode="multiple"
+        nzPlaceHolder="Please select"
+        formControlName="customer_project"
+      >
+        <nz-option *ngFor="let item of projects"
+                   [nzLabel]="item?.name"
+                   [nzValue]="item?.name"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+    <nz-form-item nz-row class="create-area">
+      <nz-form-control [nzSpan]="14" [nzOffset]="6">
+        <button nz-button [routerLink]="['', '/']">Quay lại</button>
+        <button nz-button nzType="primary"
+                (click)="validationForm()"
+                [disabled]="!saveForm.valid">
+          {{record ? 'Cập nhật' : 'Tạo mới'}}
+        </button>
+      </nz-form-control>
+    </nz-form-item>
 </form>

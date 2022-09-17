@@ -33,7 +33,8 @@ export class CustomerCareService {
   delete(id: number) {
     return this.apiBase.delete(apiEndpoints.customer + '/' + id)
   }
-  update(id: number, body: CustomerCareInterface) {
+
+  update(id: string | number, body: CustomerCareInterface) {
     return this.apiBase.put(apiEndpoints.customer + '/' + id, {
       ...body
     })

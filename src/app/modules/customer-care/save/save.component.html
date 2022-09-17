@@ -1,63 +1,40 @@
-<form (ngSubmit)="submitForm()" [formGroup]="saveForm" nz-form>
-  <!--phone_number-->
+<form [formGroup]="saveForm" (ngSubmit)="validationForm()"  nz-form>
+  <!--customer_id-->
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="login_id" nzRequired>Login ID</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="customer_id" nzRequired>Khách hàng</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input formControlName="login_id" id="login_id" nz-input/>
+      <input formControlName="customer_id" id="customer_id" nz-input/>
       <app-control-errors
-        fieldName="login_id"
+        fieldName="customer_id"
       ></app-control-errors>
     </nz-form-control>
   </nz-form-item>
 
-  <!--full_name-->
+  <!--staff_id-->
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="full_name" nzRequired>Tên khách hàng</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="staff_id" nzRequired>Nhân viên</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input formControlName="full_name" id="full_name" nz-input/>
+      <input formControlName="staff_id" id="staff_id" nz-input/>
       <app-control-errors
-        fieldName="full_name"
+        fieldName="staff_id"
       ></app-control-errors>
     </nz-form-control>
   </nz-form-item>
 
-  <!--email-->
+  <!--description-->
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="email" nzRequired>Email</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="description" nzRequired>Mô tả</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input formControlName="email" id="email" nz-input/>
+      <input formControlName="description" id="description" nz-input/>
       <app-control-errors
-        fieldName="email"
+        fieldName="description"
       ></app-control-errors>
     </nz-form-control>
   </nz-form-item>
-
-  <!--password-->
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Password</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input formControlName="password" id="password" nz-input/>
-      <app-control-errors
-        fieldName="password"
-      ></app-control-errors>
-    </nz-form-control>
-  </nz-form-item>
-
-  <!--confirm password-->
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password_confirmation" nzRequired>Password Confirmation</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input formControlName="password_confirmation" id="password_confirmation" nz-input/>
-      <app-control-errors
-        fieldName="password_confirmation"
-      ></app-control-errors>
-    </nz-form-control>
-  </nz-form-item>
-
 
   <nz-form-item class="create-area" nz-row>
     <nz-form-control [nzOffset]="6" [nzSpan]="14">
-      <button [routerLink]="['', 'user']" nz-button>Quay lại</button>
+      <button [routerLink]="['', 'customer-care']" nz-button>Quay lại</button>
       <button [disabled]="!saveForm.valid" nz-button
               nzType="primary">Tạo mới
       </button>

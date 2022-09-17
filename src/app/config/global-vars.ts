@@ -14,10 +14,10 @@ export const apiEndpoints: Endpoint = {
   login: 'auth/login',
   profile: 'auth/me',
   logout: 'auth/logout',
-  customer: 'customer',
-  project: 'project',
-  user: 'user',
-  customer_care: 'care',
-  role: 'role',
+  customer: 'customers',
+  project: 'projects',
+  user: 'users',
+  customer_care: 'cares',
+  role: 'roles',
 };
 

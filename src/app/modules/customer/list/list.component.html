@@ -32,21 +32,12 @@
     <td *ngFor="let col of cols;">
       {{ data[col?.field] }}
     </td>
-    <td>
+    <td style="text-align: center">
       <button nz-button
               nzType="primary" nzShape="circle"
-              style="margin-right: 5px"
               [routerLink]="['update', data.id]"
       >
         <i nz-icon nzType="edit" nzTheme="outline"></i>
-      </button>
-      <button nz-button nzShape="circle" nzDanger
-              nz-popconfirm
-              nzPopconfirmTitle="Are you sure delete this task?"
-              nzPopconfirmPlacement="leftTop"
-              (nzOnConfirm)="confirm(data.id)"
-      >
-        <i nz-icon nzType="delete"></i>
       </button>
     </td>
   </tr>

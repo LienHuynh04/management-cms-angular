@@ -30,10 +30,6 @@ export class CustomerService {
     return this.apiBase.get(apiEndpoints.customer + '/' + id);
   }
 
-  delete(id: number) {
-    return this.apiBase.delete(apiEndpoints.customer + '/' + id)
-  }
-
   update(id: string, body: CustomerInterface) {
     return this.apiBase.put(apiEndpoints.customer + '/' + id, {
       ...body

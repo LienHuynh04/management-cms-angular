@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CustomerService} from '../../../core/services';
-import {CustomerInterface} from '../../../core/interfaces';
+import {CustomerInterface, ProjectInterface} from '../../../core/interfaces';
 import {BaseForm} from '../../../shared/abstracts';
 
 @Component({
@@ -11,7 +11,8 @@ import {BaseForm} from '../../../shared/abstracts';
   styleUrls: ['./save.component.scss']
 })
 export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit {
-  customerProject = [];
+  projects: ProjectInterface[] = [];
+  users = [];
 
   constructor(
     private fb: FormBuilder,
@@ -20,7 +21,8 @@ export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit
     private activatedRoute: ActivatedRoute
   ) {
     super(activatedRoute, router);
-    this.customerProject = this.resolvedData.customerProject;
+    this.projects = this.resolvedData.projects;
+    this.users = this.resolvedData.users;
   }
 
   ngOnInit(): void {
@@ -33,9 +35,19 @@ export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit
       phone_number: ['', Validators.required],
       address: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      customer_project: [[]]
+      assign_for_user_id: [null],
+      project_note: [null],
+      note: [null],
+      result: [null],
+      customer_project: []
     });
+    if (this.record) {
+      this.record.assign_for_user_id = this.record.assign_for_user?.id;
+      this.record.customer_project = this.record.customer_project.map((p: any) => {
+        return p?.name;
+      });
 
+    }
     super.patchValueForm();
   }
 
