@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserService} from '../../../core/services/user.service';
 import {BaseForm} from '../../../shared/abstracts';
 import {ConfirmedValidator} from '../../../shared';
+import {CustomerCareService} from '../../../core/services';
 
 @Component({
   selector: 'app-save',
@@ -16,7 +16,7 @@ export class SaveComponent extends BaseForm implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private userService: UserService,
+    private customerCareService: CustomerCareService,
     private activatedRoute: ActivatedRoute
   ) {
     super(activatedRoute, router);
@@ -49,11 +49,11 @@ export class SaveComponent extends BaseForm implements OnInit {
     }
 
     if (this.record) {
-      this.userService.update(this.record.id, this.saveForm.value).subscribe(() => {
+      this.customerCareService.update(this.record.id, this.saveForm.value).subscribe(() => {
         this.router.navigate(['', '/']);
       });
     } else {
-      this.userService.createUser(this.saveForm.value).subscribe(() => {
+      this.customerCareService.create(this.saveForm.value).subscribe(() => {
         this.router.navigate(['', '/']);
       });
     }

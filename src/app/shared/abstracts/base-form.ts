@@ -4,16 +4,17 @@ import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
 
-export abstract class BaseForm {
-  record!: any;
+export abstract class BaseForm<T> {
+  resolvedData;
+  record: T;
   saveForm!: FormGroup;
 
   protected constructor(
     protected activatedRouteBase?: ActivatedRoute,
     protected routerBase?: Router
   ) {
-    const resolvedData = this.activatedRouteBase?.snapshot?.data?.resolvedData;
-    this.record = resolvedData?.data;
+    this.resolvedData = this.activatedRouteBase?.snapshot?.data?.resolvedData;
+    this.record = this.resolvedData?.data;
   }
 
   /*Process Data*/
@@ -26,6 +27,7 @@ export abstract class BaseForm {
       )
       .subscribe(resp => {
         this.record = resp;
+        if(redirectUrl) this.routerBase?.navigate([redirectUrl])
       });
   }
 
@@ -57,6 +59,12 @@ export abstract class BaseForm {
       return;
     }
     this.submitForm();
+  }
+
+  protected patchValueForm() {
+    if(this.record) {
+      this.saveForm.patchValue(this.record)
+    }
   }
 
   /*Convert data*/

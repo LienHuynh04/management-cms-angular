@@ -21,7 +21,7 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     const resolvedData = this.activatedRoute.snapshot.data.resolvedData;
-    this.customers = resolvedData.data;
+    this.customers = resolvedData?.data;
   }
 
   confirm(id: number) {

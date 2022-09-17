@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {ColumnConfig, ColumnInterface, COLUMNS, CustomerInterface} from '../../../core/interfaces';
+import {ColumnConfig, ColumnInterface, COLUMNS, CustomerInterface, IPaginateList} from '../../../core/interfaces';
 import {ActivatedRoute} from '@angular/router';
 import {CustomerService} from '../../../core/services';
 import {switchMap} from 'rxjs/operators';
@@ -11,7 +11,8 @@ import {switchMap} from 'rxjs/operators';
 })
 export class ListComponent implements OnInit {
   cols: ColumnInterface[] = this.colums.customer;
-  customers!: any;
+  customers!: CustomerInterface[];
+
   constructor(
     @Inject(COLUMNS)
     public colums: ColumnConfig,
@@ -29,7 +30,7 @@ export class ListComponent implements OnInit {
       switchMap(() => {
         return this.customerService.getAll()
       })
-    ).subscribe((resp) => {
+    ).subscribe(resp => {
       this.customers = resp.data;
     })
   }

@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ApiBase} from './api.service';
 import {apiEndpoints} from '../../config/global-vars';
-import {IPaginateList} from '../interfaces';
+import {IPaginateList, UserInterface} from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -13,17 +13,17 @@ export class UserService {
     private apiBase: ApiBase
   ) { }
 
-  getAll(): Observable<IPaginateList<any>> {
+  getAll(): Observable<IPaginateList<UserInterface>> {
     return this.apiBase.get(apiEndpoints.user, {
       page: 1,
       per_page: 10
     });
   }
 
-  createUser(body: any) {
+  create(body: UserInterface) {
     return this.apiBase.post(apiEndpoints.user, {
       ...body
-    })
+    });
   }
 
   getById(id: number) {
@@ -31,11 +31,12 @@ export class UserService {
   }
 
   delete(id: number) {
-    return this.apiBase.delete(apiEndpoints.user + '/' + id)
+    return this.apiBase.delete(apiEndpoints.user + '/' + id);
   }
-  update(id: number, body: any) {
+
+  update(id: number, body: UserInterface) {
     return this.apiBase.put(apiEndpoints.user + '/' + id, {
       ...body
-    })
+    });
   }
 }

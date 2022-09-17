@@ -2,15 +2,15 @@ import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CustomerService} from '../../../core/services';
+import {CustomerInterface} from '../../../core/interfaces';
+import {BaseForm} from '../../../shared/abstracts';
 
 @Component({
   selector: 'app-save',
   templateUrl: './save.component.html',
   styleUrls: ['./save.component.scss']
 })
-export class SaveComponent implements OnInit {
-  customerData: any
-  customerForm!: FormGroup;
+export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit {
   customerProject = []
   constructor(
     private fb: FormBuilder,
@@ -18,11 +18,8 @@ export class SaveComponent implements OnInit {
     private customerService: CustomerService,
     private activatedRoute: ActivatedRoute
   ) {
-    const resolvedData = this.activatedRoute.snapshot.data.resolvedData;
-
-    this.customerProject = resolvedData.customerProject;
-    this.customerData = resolvedData.data;
-    console.log(this.customerData);
+    super(activatedRoute, router)
+    this.customerProject = this.resolvedData.customerProject;
   }
 
   ngOnInit(): void {
@@ -30,7 +27,7 @@ export class SaveComponent implements OnInit {
   }
 
   initForm() {
-    this.customerForm = this.fb.group({
+    this.saveForm = this.fb.group({
       full_name: ['', Validators.required],
       phone_number: ['', Validators.required],
       address: ['', Validators.required],
@@ -38,29 +35,14 @@ export class SaveComponent implements OnInit {
       customer_project: [[]]
     });
 
-    if(this.customerData) {
-      this.customerForm.patchValue(this.customerData)
-    }
+    super.patchValueForm()
   }
 
   submitForm(): void {
-    for (const i in this.customerForm.controls) {
-      this.customerForm.controls[i].markAsDirty();
-      this.customerForm.controls[i].updateValueAndValidity();
-    }
-
-    if (this.customerForm.invalid) {
-      return;
-    }
-
-    if(this.customerData) {
-      this.customerService.update(this.customerData.id, this.customerForm.value).subscribe(() => {
-        this.router.navigate(['', '/']);
-      })
-    }else {
-      this.customerService.createCustomer(this.customerForm.value).subscribe(() => {
-        this.router.navigate(['', '/']);
-      })
-    }
+    this.processData(this.record
+      ? this.customerService.update(this.record.id, this.saveForm.value)
+      : this.customerService.create(this.saveForm.value),
+      'customers'
+    )
   }
 }

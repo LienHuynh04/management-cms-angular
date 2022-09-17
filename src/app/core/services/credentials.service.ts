@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import {AuthenticationService} from './authentication.service';
-import {Router} from '@angular/router';
 
 export interface ICredentials {
   access_token: string;

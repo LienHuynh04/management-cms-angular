@@ -2,25 +2,25 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {ApiBase} from './api.service';
 import {apiEndpoints} from '../../config/global-vars';
-import {CustomerInterface, IPaginateList} from '../interfaces';
+import {CustomerCareInterface, CustomerInterface, IPaginateList} from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerService {
+export class CustomerCareService {
 
   constructor(
     private apiBase: ApiBase
   ) { }
 
-  getAll(): Observable<IPaginateList<CustomerInterface>> {
+  getAll(): Observable<IPaginateList<CustomerCareInterface>> {
     return this.apiBase.get(apiEndpoints.customer, {
       page: 1,
       per_page: 10
     });
   }
 
-  create(body: CustomerInterface) {
+  create(body: CustomerCareInterface) {
     return this.apiBase.post(apiEndpoints.customer, {
       ...body
     })
@@ -33,8 +33,7 @@ export class CustomerService {
   delete(id: number) {
     return this.apiBase.delete(apiEndpoints.customer + '/' + id)
   }
-
-  update(id: string, body: CustomerInterface) {
+  update(id: number, body: CustomerCareInterface) {
     return this.apiBase.put(apiEndpoints.customer + '/' + id, {
       ...body
     })

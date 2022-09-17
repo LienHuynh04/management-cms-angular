@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {ColumnConfig, ColumnInterface, COLUMNS} from '../../../core/interfaces';
 import {ActivatedRoute} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
-import {UserService} from '../../../core/services/user.service';
+import {CustomerCareService} from '../../../core/services';
 
 @Component({
   selector: 'app-list',
@@ -17,7 +17,7 @@ export class ListComponent implements OnInit {
     @Inject(COLUMNS)
     public colums: ColumnConfig,
     private activatedRoute: ActivatedRoute,
-    private userService: UserService
+    private customerCareService: CustomerCareService
   ) {
   }
 
@@ -27,9 +27,9 @@ export class ListComponent implements OnInit {
   }
 
   confirm(id: number) {
-    this.userService.delete(id).pipe(
+    this.customerCareService.delete(id).pipe(
       switchMap(() => {
-        return this.userService.getAll();
+        return this.customerCareService.getAll();
       })
     ).subscribe((resp: any) => {
       this.customers = resp.data;

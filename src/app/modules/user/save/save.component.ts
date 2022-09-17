@@ -53,7 +53,7 @@ export class SaveComponent extends BaseForm implements OnInit {
         this.router.navigate(['', '/']);
       });
     } else {
-      this.userService.createUser(this.saveForm.value).subscribe(() => {
+      this.userService.create(this.saveForm.value).subscribe(() => {
         this.router.navigate(['', '/']);
       });
     }

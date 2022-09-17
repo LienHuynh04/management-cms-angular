@@ -7,6 +7,7 @@ import {
 import {forkJoin, Observable, of} from 'rxjs';
 import {CustomerService, ProjectService} from '../../../core/services';
 import {map} from 'rxjs/operators';
+import {CustomerInterface} from '../../../core/interfaces';
 
 @Injectable({
   providedIn: 'root'
