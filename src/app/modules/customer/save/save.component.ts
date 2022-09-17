@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CustomerService} from '../../../core/services';
 import {CustomerInterface} from '../../../core/interfaces';
@@ -11,14 +11,15 @@ import {BaseForm} from '../../../shared/abstracts';
   styleUrls: ['./save.component.scss']
 })
 export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit {
-  customerProject = []
+  customerProject = [];
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private customerService: CustomerService,
     private activatedRoute: ActivatedRoute
   ) {
-    super(activatedRoute, router)
+    super(activatedRoute, router);
     this.customerProject = this.resolvedData.customerProject;
   }
 
@@ -35,14 +36,14 @@ export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit
       customer_project: [[]]
     });
 
-    super.patchValueForm()
+    super.patchValueForm();
   }
 
   submitForm(): void {
     this.processData(this.record
-      ? this.customerService.update(this.record.id, this.saveForm.value)
-      : this.customerService.create(this.saveForm.value),
+        ? this.customerService.update(this.record.id, this.saveForm.value)
+        : this.customerService.create(this.saveForm.value),
       'customers'
-    )
+    );
   }
 }

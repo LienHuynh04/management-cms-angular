@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {ColumnConfig, ColumnInterface, COLUMNS, CustomerInterface, IPaginateList} from '../../../core/interfaces';
+import {ColumnConfig, ColumnInterface, COLUMNS, CustomerInterface} from '../../../core/interfaces';
 import {ActivatedRoute} from '@angular/router';
 import {CustomerService} from '../../../core/services';
 import {switchMap} from 'rxjs/operators';
@@ -18,7 +18,8 @@ export class ListComponent implements OnInit {
     public colums: ColumnConfig,
     private activatedRoute: ActivatedRoute,
     private customerService: CustomerService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     const resolvedData = this.activatedRoute.snapshot.data.resolvedData;
@@ -28,10 +29,10 @@ export class ListComponent implements OnInit {
   confirm(id: number) {
     this.customerService.delete(id).pipe(
       switchMap(() => {
-        return this.customerService.getAll()
+        return this.customerService.getAll();
       })
     ).subscribe(resp => {
       this.customers = resp.data;
-    })
+    });
   }
 }

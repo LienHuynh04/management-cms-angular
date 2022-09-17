@@ -1,13 +1,8 @@
-import { Injectable } from '@angular/core';
-import {
-  Router, Resolve,
-  RouterStateSnapshot,
-  ActivatedRouteSnapshot
-} from '@angular/router';
-import {forkJoin, Observable, of} from 'rxjs';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
+import {forkJoin, Observable} from 'rxjs';
 import {CustomerService, ProjectService} from '../../../core/services';
 import {map} from 'rxjs/operators';
-import {CustomerInterface} from '../../../core/interfaces';
 
 @Injectable({
   providedIn: 'root'
