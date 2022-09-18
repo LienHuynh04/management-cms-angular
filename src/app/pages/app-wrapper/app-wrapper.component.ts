@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {NavbarItem, NAVIGATIONS} from '../../core/interfaces/navigation';
-import {AuthenticationService} from '../../core/services/authentication.service';
+import { delay } from 'rxjs/operators';
+import {NavbarItem, NAVIGATIONS} from '../../core/interfaces';
+import {AuthenticationService, LoadingOverlayService} from '../../core/services';
 
 @Component({
   selector: 'app-app-wrapper',
@@ -8,12 +9,20 @@ import {AuthenticationService} from '../../core/services/authentication.service'
   styleUrls: ['./app-wrapper.component.scss']
 })
 export class AppWrapperComponent implements OnInit {
+  isLoading = false;
   isCollapsed = false;
   constructor(
     @Inject(NAVIGATIONS)
     public navigations: NavbarItem[],
-    public authService: AuthenticationService
-  ) { }
+    public authService: AuthenticationService,
+    public loadingOverlayService: LoadingOverlayService,
+  ) {
+    this.loadingOverlayService.isLoading$
+      .pipe(delay(0))
+      .subscribe((isLoading) => {
+        this.isLoading = isLoading;
+      });
+  }
 
   ngOnInit(): void {
   }

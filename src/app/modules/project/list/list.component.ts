@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {ColumnConfig, ColumnInterface, COLUMNS, ProjectInterface} from '../../../core/interfaces';
 import {ActivatedRoute} from '@angular/router';
-import {switchMap} from 'rxjs/operators';
+import {switchMap, tap} from 'rxjs/operators';
 import {ProjectService} from '../../../core/services';
 import {NzModalService} from 'ng-zorro-antd/modal';
 import {SaveComponent} from '../save/save.component';
@@ -48,10 +48,10 @@ export class ListComponent implements OnInit {
       },
     });
 
-    modal.afterClose.subscribe(() => {
-      this.projectService.getAll().subscribe((resp) => {
-        this.projects = resp.data;
-      });
+    modal.afterClose.subscribe((res) => {
+      if(res) {
+        this.projects = res.data
+      }
     });
   }
 }

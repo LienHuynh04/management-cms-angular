@@ -1,19 +1,17 @@
-<nz-card [nzTitle]="record ? 'Cập nhật' : 'Tạo mới'">
-  <form [formGroup]="saveForm" nz-form>
-    <!--phone_number-->
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name" nzRequired>Tên</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24">
-        <input formControlName="name" id="name" nz-input/>
-        <app-control-errors
-          fieldName="name"
-        ></app-control-errors>
-      </nz-form-control>
-    </nz-form-item>
-  </form>
+<form [formGroup]="saveForm" nz-form>
+  <!--phone_number-->
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name" nzRequired>Tên</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input formControlName="name" id="name" nz-input/>
+      <app-control-errors
+        fieldName="name"
+      ></app-control-errors>
+    </nz-form-control>
+  </nz-form-item>
+</form>
 
-  <div *nzModalFooter>
-    <button (click)="closeModal()" nz-button nzType="default">Quay lại</button>
-    <button (click)="validationForm()" nz-button nzType="primary">{{id ? 'Cập nhật' : 'Tạo mới'}}</button>
-  </div>
-</nz-card>
+<div *nzModalFooter>
+  <button (click)="closeModal(null)" nz-button nzType="default">Quay lại</button>
+  <button (click)="validationForm()" nz-button nzType="primary">{{id ? 'Cập nhật' : 'Tạo mới'}}</button>
+</div>

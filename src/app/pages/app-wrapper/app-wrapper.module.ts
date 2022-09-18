@@ -5,6 +5,7 @@ import {AppWrapperComponent} from './app-wrapper.component';
 import {NgxPermissionsModule} from 'ngx-permissions';
 import {SharedModule} from '../../shared/shared.module';
 import {ProfileComponent} from '../../modules/profile/profile.component';
+import {NzSpinModule} from 'ng-zorro-antd/spin';
 
 @NgModule({
   declarations: [AppWrapperComponent, ProfileComponent],
@@ -12,7 +13,7 @@ import {ProfileComponent} from '../../modules/profile/profile.component';
     CommonModule,
     AppWrapperRoutingModule,
     NgxPermissionsModule,
-    SharedModule
+    SharedModule,
   ]
 })
 export class AppWrapperModule {

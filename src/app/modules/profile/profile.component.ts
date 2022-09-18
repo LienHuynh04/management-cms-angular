@@ -46,6 +46,7 @@ export class ProfileComponent extends BaseForm<IAdmin> implements OnInit {
       delete body.password;
       delete body.password_confirmation
     }
+
     this.userService.update(this.authService.currentUserValue.id, body)
       .pipe(
         switchMap(() => this.authService.profile())

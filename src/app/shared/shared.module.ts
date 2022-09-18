@@ -19,6 +19,7 @@ import {NzModalModule, NzModalService} from 'ng-zorro-antd/modal';
 import {NgxPermissionsModule} from 'ngx-permissions';
 import {NzToolTipModule} from 'ng-zorro-antd/tooltip';
 import {NzRadioModule} from 'ng-zorro-antd/radio';
+import {NzSpinModule} from 'ng-zorro-antd/spin';
 
 const ANTD = [
   NzGridModule,
@@ -37,7 +38,8 @@ const ANTD = [
   NzSelectModule,
   NzModalModule,
   NzToolTipModule,
-  NzRadioModule
+  NzRadioModule,
+  NzSpinModule
 ];
 @NgModule({
   declarations: [ControlErrorsComponent],

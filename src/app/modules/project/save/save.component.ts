@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {ProjectService} from '../../../core/services';
-import {map} from 'rxjs/operators';
+import {map, switchMap} from 'rxjs/operators';
 import {NzModalRef} from 'ng-zorro-antd/modal';
 import {BaseForm} from '../../../shared/abstracts';
 import {Observable} from 'rxjs';
-import {ProjectInterface} from '../../../core/interfaces';
+import {IPaginateList, ProjectInterface} from '../../../core/interfaces';
 
 @Component({
   selector: 'app-save',
@@ -43,14 +43,16 @@ export class SaveComponent extends BaseForm<ProjectInterface> implements OnInit 
     let source$: Observable<any> = this.id
       ? this.projectService.update(this.id, this.saveForm.value)
       : this.projectService.create(this.saveForm.value);
-    source$.subscribe(_ => {
-      this.closeModal();
+    source$.pipe(
+      switchMap(() => this.projectService.getAll())
+    ).subscribe((res) => {
+      this.closeModal(res);
     });
   }
 
-  closeModal() {
+  closeModal(data: IPaginateList<ProjectInterface> | null) {
+    this.modal.destroy(data);
     this.saveForm.reset();
-    this.modal.destroy();
   }
 
   fetchData() {

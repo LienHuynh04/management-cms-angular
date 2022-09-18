@@ -44,7 +44,10 @@ export const column: ColumnConfig = {
   project: [
     {
       header: 'ID',
-      field: 'id'
+      field: 'id',
+      style: {
+        width: '100px'
+      }
     },
     {
       header: 'Tên',
@@ -68,7 +71,10 @@ export const column: ColumnConfig = {
   role: [
     {
       header: 'ID',
-      field: 'id'
+      field: 'id',
+      style: {
+        width: '100px'
+      }
     },
     {
       header: 'Tên',

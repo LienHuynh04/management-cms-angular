@@ -1,4 +1,4 @@
-<nz-layout class="app-layout">
+<nz-layout class="app-layout {{isLoading ? 'app-loading' : ''}}">
   <nz-sider class="menu-sidebar"
             nzCollapsible
             nzWidth="240px"
@@ -46,4 +46,9 @@
         <router-outlet></router-outlet>
     </nz-content>
   </nz-layout>
+  <div class="loading-overlay" [hidden]="!isLoading">
+    <div class="spinner">
+      <nz-spin nzSimple [nzSize]="'large'"></nz-spin>
+    </div>
+  </div>
 </nz-layout>

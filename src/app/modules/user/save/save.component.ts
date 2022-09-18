@@ -50,9 +50,14 @@ export class SaveComponent extends BaseForm<UserInterface> implements OnInit {
   }
 
   submitForm(): void {
+    const body  = {...this.saveForm.value}
+    if(!body.password) {
+      delete body.password;
+      delete body.password_confirmation
+    }
     this.processData(
       this.record
-        ? this.userService.update(this.record.id, this.saveForm.value)
+        ? this.userService.update(this.record.id, body)
         : this.userService.create(this.saveForm.value),
       'users'
     );
