@@ -4,3 +4,9 @@ button {
 ::ng-deep .create-area .ant-form-item-control-input {
   margin: 0 0 0 auto;
 }
+
+::ng-deep  [nz-radio] {
+  display: block;
+  height: 32px;
+  line-height: 32px;
+}

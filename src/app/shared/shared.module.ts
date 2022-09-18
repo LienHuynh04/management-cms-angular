@@ -16,6 +16,9 @@ import {NzInputModule} from 'ng-zorro-antd/input';
 import {NzCheckboxModule} from 'ng-zorro-antd/checkbox';
 import {NzSelectModule} from 'ng-zorro-antd/select';
 import {NzModalModule, NzModalService} from 'ng-zorro-antd/modal';
+import {NgxPermissionsModule} from 'ngx-permissions';
+import {NzToolTipModule} from 'ng-zorro-antd/tooltip';
+import {NzRadioModule} from 'ng-zorro-antd/radio';
 
 const ANTD = [
   NzGridModule,
@@ -32,16 +35,20 @@ const ANTD = [
   NzInputModule,
   NzCheckboxModule,
   NzSelectModule,
-  NzModalModule
+  NzModalModule,
+  NzToolTipModule,
+  NzRadioModule
 ];
 @NgModule({
   declarations: [ControlErrorsComponent],
   imports: [
     CommonModule,
+    NgxPermissionsModule,
     ...ANTD
   ],
   exports: [
     ControlErrorsComponent,
+    NgxPermissionsModule,
     ...ANTD
   ],
   providers: [NzModalService]

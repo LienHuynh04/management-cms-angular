@@ -51,7 +51,9 @@
         nzPlaceHolder="Please select"
         formControlName="assign_for_user_id"
       >
-        <nz-option *ngFor="let item of users" [nzLabel]="$any(item?.full_name)" [nzValue]="$any(item?.id)"></nz-option>
+        <nz-option *ngFor="let item of users"
+                   [nzLabel]="item.full_name"
+                   [nzValue]="item.id"></nz-option>
       </nz-select>
       <app-control-errors
         fieldName="assign_for_user_id"
@@ -63,7 +65,7 @@
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="project_note">Project note</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="project_note" id="project_note"/>
+      <textarea rows="4" nz-input formControlName="project_note" id="project_note"></textarea>
       <app-control-errors
         fieldName="project_note"
       ></app-control-errors>
@@ -74,7 +76,7 @@
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="note">Ghi chú</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="note" id="note"/>
+      <textarea rows="4" nz-input formControlName="note" id="note"></textarea>
       <app-control-errors
         fieldName="note"
       ></app-control-errors>
@@ -85,7 +87,13 @@
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="result">Kết quả</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="result" id="result"/>
+      <nz-radio-group formControlName="result">
+        <label nz-radio
+               *ngFor="let result of optionResultField"
+               [nzValue]="result">
+          {{resultEnum[result]}}
+        </label>
+      </nz-radio-group>
       <app-control-errors
         fieldName="result"
       ></app-control-errors>
@@ -102,8 +110,8 @@
         formControlName="customer_project"
       >
         <nz-option *ngFor="let item of projects"
-                   [nzLabel]="item?.name"
-                   [nzValue]="item?.name"></nz-option>
+                   [nzLabel]="item.name"
+                   [nzValue]="item.name"></nz-option>
       </nz-select>
     </nz-form-control>
   </nz-form-item>

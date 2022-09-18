@@ -12,7 +12,7 @@
 
   <!--full_name-->
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="full_name">Tên khách hàng</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="full_name">Tên</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input formControlName="full_name" id="full_name"/>
       <app-control-errors
@@ -73,9 +73,9 @@
 
   <nz-form-item nz-row class="create-area">
     <nz-form-control [nzSpan]="14" [nzOffset]="6">
-      <button nz-button [routerLink]="['', 'user']">Quay lại</button>
+      <button nz-button [routerLink]="['', 'users']">Quay lại</button>
       <button nz-button nzType="primary"
-              (click)="submitForm()"
+              (click)="validationForm()"
               [disabled]="!saveForm.valid">
         {{record ? 'Cập nhật' : 'Tạo mới'}}
       </button>

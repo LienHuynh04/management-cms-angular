@@ -26,11 +26,11 @@ export class CustomerService {
     })
   }
 
-  getById(id: number) {
+  getById(id: number | string | undefined) {
     return this.apiBase.get(apiEndpoints.customer + '/' + id);
   }
 
-  update(id: string, body: CustomerInterface) {
+  update(id: number | string | undefined, body: CustomerInterface) {
     return this.apiBase.put(apiEndpoints.customer + '/' + id, {
       ...body
     })

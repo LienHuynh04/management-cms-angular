@@ -7,16 +7,18 @@
             [nzTrigger]="null">
     <div class="logo"></div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li
-        nz-menu-item
-        *ngFor="let nav of navigations"
-        [routerLink]="nav?.url"
-        nzMatchRouter nzMatchRouterExact
-        routerLinkActive="active"
-      >
-        <i nz-icon [nzType]="nav?.icon"></i>
-        <span>{{nav?.title}}</span>
-      </li>
+      <ng-container *ngFor="let nav of navigations">
+        <li
+          nz-menu-item
+          [routerLink]="nav?.url"
+          nzMatchRouter nzMatchRouterExact
+          routerLinkActive="active"
+          *ngxPermissionsOnly="nav?.permissions?.only"
+        >
+          <i nz-icon [nzType]="nav?.icon"></i>
+          <span>{{nav?.title}}</span>
+        </li>
+      </ng-container>
     </ul>
   </nz-sider>
   <nz-layout>

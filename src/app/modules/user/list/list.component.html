@@ -3,7 +3,7 @@
   nz-button
   nzType="primary"
   class="btn-create"
-  [routerLink]="['/user', 'create']"
+  [routerLink]="['/users', 'create']"
 >
   <i nz-icon nzType="plus" nzTheme="outline"></i>
   Tạo mới
@@ -14,7 +14,7 @@
   #basicTable
   [nzBordered]="true"
   [nzVirtualItemSize]="54"
-  [nzData]="customers"
+  [nzData]="users"
   [nzScroll]="{ y: '500px' }"
   nzBordered
 >

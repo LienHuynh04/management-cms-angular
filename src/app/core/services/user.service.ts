@@ -26,15 +26,15 @@ export class UserService {
     });
   }
 
-  getById(id: number) {
+  getById(id: number | string | undefined) {
     return this.apiBase.get(apiEndpoints.user + '/' + id);
   }
 
-  delete(id: number) {
+  delete(id: number | string | undefined) {
     return this.apiBase.delete(apiEndpoints.user + '/' + id);
   }
 
-  update(id: number, body: UserInterface) {
+  update(id: number | string | undefined, body: UserInterface) {
     return this.apiBase.put(apiEndpoints.user + '/' + id, {
       ...body
     });

@@ -2,8 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CustomerService} from '../../../core/services';
-import {CustomerInterface, ProjectInterface} from '../../../core/interfaces';
+import {CustomerInterface, ProjectInterface, UserInterface} from '../../../core/interfaces';
 import {BaseForm} from '../../../shared/abstracts';
+import {ResultEnum} from '../../../core/enums';
 
 @Component({
   selector: 'app-save',
@@ -11,8 +12,10 @@ import {BaseForm} from '../../../shared/abstracts';
   styleUrls: ['./save.component.scss']
 })
 export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit {
-  projects: ProjectInterface[] = [];
-  users = [];
+  projects!: ProjectInterface[];
+  users !: UserInterface[];
+  resultEnum : any = ResultEnum
+  optionResultField = Object.keys(this.resultEnum).filter(r => r)
 
   constructor(
     private fb: FormBuilder,

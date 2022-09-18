@@ -5,15 +5,16 @@ import {map} from 'rxjs/operators';
 import {NzModalRef} from 'ng-zorro-antd/modal';
 import {BaseForm} from '../../../shared/abstracts';
 import {Observable} from 'rxjs';
+import {ProjectInterface} from '../../../core/interfaces';
 
 @Component({
   selector: 'app-save',
   templateUrl: './save.component.html',
   styleUrls: ['./save.component.scss']
 })
-export class SaveComponent extends BaseForm implements OnInit {
-  @Input() id !: number;
-  project = [];
+export class SaveComponent extends BaseForm<ProjectInterface> implements OnInit {
+  @Input() id !: number | string | undefined;
+  project !: ProjectInterface[];
 
   constructor(
     private projectService: ProjectService,

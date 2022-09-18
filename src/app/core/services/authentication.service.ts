@@ -1,21 +1,23 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {BehaviorSubject, Observable, of} from 'rxjs';
+import {BehaviorSubject, forkJoin, Observable, of} from 'rxjs';
 import {catchError, finalize, map, switchMap, tap} from 'rxjs/operators';
 
 // Plugins
-import {NgxPermissionsService} from 'ngx-permissions';
+import {NgxPermissionsService, NgxRolesService} from 'ngx-permissions';
 
 // Core Module
 import {ApiBase} from './api.service';
 import {apiEndpoints} from '../../config/global-vars';
 import {CredentialsService} from './credentials.service';
-import {IAdmin} from '../interfaces';
+import {IAdmin, IPaginateList, IRole, UserInterface} from '../interfaces';
+import {RoleService} from './role.service';
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
-  public currentUser: Observable<any>;
-  currentUserSubject: BehaviorSubject<any>;
+  public currentUser: Observable<IAdmin | null>;
+  currentUserSubject = new BehaviorSubject<IAdmin | null>(null);
+
   private sessionName = 'management';
   returnUrl: string;
 
@@ -24,18 +26,15 @@ export class AuthenticationService {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private ngxPermissionsService: NgxPermissionsService,
-    private credentialsService: CredentialsService
+    private credentialsService: CredentialsService,
+    private roleService: RoleService,
+    private ngxRoleService: NgxRolesService
   ) {
     const user = this.readUserData();
-    this.currentUserSubject = new BehaviorSubject<any>(user);
+    this.currentUserSubject.next(user);
     this.currentUser = this.currentUserSubject.asObservable();
-    this.returnUrl = this.activatedRoute.snapshot.queryParams.returnUrl || '/';
 
-    // Load permission
-    if (user && user.roles) {
-      this.ngxPermissionsService.flushPermissions();
-      this.ngxPermissionsService.loadPermissions([user.roles[0]]);
-    }
+    this.returnUrl = this.activatedRoute.snapshot.queryParams.returnUrl || '/';
   }
 
   readUserData(): any {
@@ -79,13 +78,10 @@ export class AuthenticationService {
           const user: IAdmin = this.currentUserValue || {};
           Object.assign(user, resp.data);
           this.currentUserSubject.next(user);
-
           // Load permission
           this.ngxPermissionsService.flushPermissions();
           this.ngxPermissionsService.loadPermissions(
-            user.role.map((per: any) => {
-              return per.name;
-            })
+           [user.role[0].name]
           );
           return true;
         }),

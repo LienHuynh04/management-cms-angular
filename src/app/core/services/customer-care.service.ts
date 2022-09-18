@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ApiBase} from './api.service';
 import {apiEndpoints} from '../../config/global-vars';
-import {CustomerCareInterface, CustomerInterface, IPaginateList} from '../interfaces';
+import {CustomerCareInterface, IPaginateList} from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -26,15 +26,15 @@ export class CustomerCareService {
     })
   }
 
-  getById(id: number) {
+  getById(id: number | string | undefined) {
     return this.apiBase.get(apiEndpoints.customer + '/' + id);
   }
 
-  delete(id: number) {
-    return this.apiBase.delete(apiEndpoints.customer + '/' + id)
+  delete(id: number | string | undefined) {
+    return this.apiBase.delete(apiEndpoints.customer + '/' + id);
   }
 
-  update(id: string | number, body: CustomerCareInterface) {
+  update(id: number | string | undefined, body: CustomerCareInterface) {
     return this.apiBase.put(apiEndpoints.customer + '/' + id, {
       ...body
     })

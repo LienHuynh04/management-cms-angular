@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ApiBase} from './api.service';
 import {apiEndpoints} from '../../config/global-vars';
-import {IPaginateList, UserInterface} from '../interfaces';
+import {IPaginateList, IRole} from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -13,28 +13,28 @@ export class RoleService {
     private apiBase: ApiBase
   ) { }
 
-  getAll(): Observable<IPaginateList<UserInterface>> {
+  getAll(): Observable<IPaginateList<IRole>> {
     return this.apiBase.get(apiEndpoints.role, {
       page: 1,
       per_page: 10
     });
   }
 
-  create(body: UserInterface) {
+  create(body: IRole) {
     return this.apiBase.post(apiEndpoints.role, {
       ...body
     });
   }
 
-  getById(id: number) {
+  getById(id: number | string | undefined) {
     return this.apiBase.get(apiEndpoints.role + '/' + id);
   }
 
-  delete(id: number) {
+  delete(id: number | string | undefined) {
     return this.apiBase.delete(apiEndpoints.role + '/' + id);
   }
 
-  update(id: number, body: UserInterface) {
+  update(id: number | string | undefined, body: IRole) {
     return this.apiBase.put(apiEndpoints.role + '/' + id, {
       ...body
     });

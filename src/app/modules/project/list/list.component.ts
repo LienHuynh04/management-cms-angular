@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {ColumnConfig, ColumnInterface, COLUMNS} from '../../../core/interfaces';
+import {ColumnConfig, ColumnInterface, COLUMNS, ProjectInterface} from '../../../core/interfaces';
 import {ActivatedRoute} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
 import {ProjectService} from '../../../core/services';
@@ -13,7 +13,7 @@ import {SaveComponent} from '../save/save.component';
 })
 export class ListComponent implements OnInit {
   cols: ColumnInterface[] = this.colums.project;
-  project!: any;
+  projects !: ProjectInterface[];
 
   constructor(
     @Inject(COLUMNS)
@@ -26,20 +26,20 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     const resolvedData = this.activatedRoute.snapshot.data.resolvedData;
-    this.project = resolvedData.data;
+    this.projects = resolvedData.data;
   }
 
-  confirm(id: number) {
+  confirm(id: number | string | undefined) {
     this.projectService.delete(id).pipe(
       switchMap(() => {
         return this.projectService.getAll();
       })
     ).subscribe((resp: any) => {
-      this.project = resp.data;
+      this.projects = resp.data;
     });
   }
 
-  openModal(id?: number) {
+  openModal(id?: number | string | undefined) {
     const modal = this.modalService.create({
       nzTitle: id ? 'Cập nhật' : 'Tạo mới',
       nzContent: SaveComponent,
@@ -50,7 +50,7 @@ export class ListComponent implements OnInit {
 
     modal.afterClose.subscribe(() => {
       this.projectService.getAll().subscribe((resp) => {
-        this.project = resp.data;
+        this.projects = resp.data;
       });
     });
   }

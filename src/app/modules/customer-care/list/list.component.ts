@@ -26,7 +26,7 @@ export class ListComponent implements OnInit {
     this.customers = resolvedData.data;
   }
 
-  confirm(id: number) {
+    confirm(id: number | string | undefined){
     this.customerCareService.delete(id).pipe(
       switchMap(() => {
         return this.customerCareService.getAll();

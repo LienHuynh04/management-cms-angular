@@ -11,7 +11,7 @@ export interface ColumnConfig {
 
 export interface ColumnInterface {
   header: string;
-  field?: string;
+  field: any;
   field_child?: string;
   style?: {
     width?: any;
