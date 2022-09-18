@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AuthenticationService} from '../../core/services/authentication.service';
+import {AuthenticationService} from '../../core/services';
 
 @Component({
   selector: 'app-login',
@@ -8,6 +8,7 @@ import {AuthenticationService} from '../../core/services/authentication.service'
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  passwordVisible = false;
   validateForm!: FormGroup;
   constructor(
     private fb: FormBuilder,
@@ -36,8 +37,6 @@ export class LoginComponent implements OnInit {
   doLogin(): void {
     const data = this.validateForm.value
     this.authService.login(data.userName, data.password)
-    .subscribe(resp => {
-      console.log(resp);
-    });
+    .subscribe();
   }
 }

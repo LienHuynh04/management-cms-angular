@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {ColumnConfig, ColumnInterface, COLUMNS, UserInterface} from '../../../core/interfaces';
 import {ActivatedRoute} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
-import {UserService} from '../../../core/services';
+import {AuthenticationService, UserService} from '../../../core/services';
 
 @Component({
   selector: 'app-list',
@@ -16,7 +16,8 @@ export class ListComponent implements OnInit {
     @Inject(COLUMNS)
     public colums: ColumnConfig,
     private activatedRoute: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    public authService: AuthenticationService
   ) { }
 
   ngOnInit(): void {

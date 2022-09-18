@@ -1,55 +1,61 @@
-<!--Button Create-->
-<button
-  nz-button
-  nzType="primary"
-  class="btn-create"
-  [routerLink]="['/users', 'create']"
->
-  <i nz-icon nzType="plus" nzTheme="outline"></i>
-  Tạo mới
-</button>
+<nz-card>
+  <!--Button Create-->
+  <button
+    nz-button
+    nzType="primary"
+    class="btn-create"
+    [routerLink]="['/users', 'create']"
+  >
+    <i nz-icon nzType="plus" nzTheme="outline"></i>
+    Tạo mới
+  </button>
 
 
-<nz-table
-  #basicTable
-  [nzBordered]="true"
-  [nzVirtualItemSize]="54"
-  [nzData]="users"
-  [nzScroll]="{ y: '500px' }"
-  nzBordered
->
-  <thead>
-  <tr>
-    <th
-      *ngFor="let col of cols"
-      [nzWidth]="col.style?.width">
-      {{col.header}}
-    </th>
-    <th [nzWidth]="'110px'"></th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let data of basicTable.data">
-    <td *ngFor="let col of cols;">
-      {{ data[col?.field] }}
-    </td>
-    <td>
-      <button nz-button
-              nzType="primary" nzShape="circle"
-              style="margin-right: 5px"
-              [routerLink]="['update', data.id]"
-      >
-        <i nz-icon nzType="edit" nzTheme="outline"></i>
-      </button>
-      <button nz-button nzShape="circle" nzDanger
-              nz-popconfirm
-              nzPopconfirmTitle="Are you sure delete this task?"
-              nzPopconfirmPlacement="leftTop"
-              (nzOnConfirm)="confirm(data.id)"
-      >
-        <i nz-icon nzType="delete"></i>
-      </button>
-    </td>
-  </tr>
-  </tbody>
-</nz-table>
+  <nz-table
+    #basicTable
+    [nzBordered]="true"
+    [nzVirtualItemSize]="54"
+    [nzData]="users"
+    [nzScroll]="{ y: '500px' }"
+    nzBordered
+  >
+    <thead>
+    <tr>
+      <th
+        *ngFor="let col of cols"
+        [nzWidth]="col.style?.width">
+        {{col.header}}
+      </th>
+      <th [nzWidth]="'110px'"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td *ngFor="let col of cols;">
+        {{ data[col?.field] }}
+      </td>
+      <td>
+        <ng-container *ngIf="!(data.id == 1 || authService.currentUserValue.id == data.id)">
+          <button nz-button
+                  nzType="primary" nzShape="circle"
+                  style="margin-right: 5px"
+                  [routerLink]="['update', data.id]"
+          >
+            <i nz-icon nzType="edit" nzTheme="outline"></i>
+          </button>
+          <button nz-button nzShape="circle" nzDanger
+                  nz-popconfirm
+                  nzPopconfirmTitle="Are you sure delete this task?"
+                  nzPopconfirmPlacement="leftTop"
+                  (nzOnConfirm)="confirm(data.id)"
+          >
+            <i nz-icon nzType="delete"></i>
+          </button>
+        </ng-container>
+
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+
+</nz-card>

@@ -1,12 +1,18 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AppWrapperComponent} from './app-wrapper.component';
+import {AuthGuard} from '../../core/guards';
+import {ProfileComponent} from '../../modules/profile/profile.component';
 
 const routes: Routes = [
   {
     path: '',
     component: AppWrapperComponent,
     children: [
+      {
+        path: 'profile',
+        component: ProfileComponent
+      },
       {
         path: 'customers',
         loadChildren: () => import('../../modules/customer/customer.module').then(m => m.CustomerModule)
@@ -30,7 +36,7 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'customers'
+        redirectTo: 'profile'
       },
     ]
   }

@@ -24,6 +24,7 @@ import {AuthInterceptor} from './core/intercepters/auth.interceptor';
 import {LoadingOverlayInterceptor} from './core/intercepters/loading-overlay-interceptor.service';
 import {ErrorInterceptor} from './core/intercepters/error.interceptor';
 import {LoadingOverlayService} from './core/services/loading.service';
+import {NzIconModule} from 'ng-zorro-antd/icon';
 
 registerLocaleData(en);
 
@@ -47,7 +48,8 @@ registerLocaleData(en);
     NzCardModule,
     NzFormModule,
     NzInputModule,
-    NzButtonModule
+    NzButtonModule,
+    NzIconModule
   ],
   providers: [
     {provide: NZ_I18N, useValue: en_US},

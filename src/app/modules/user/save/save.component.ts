@@ -13,6 +13,8 @@ import {IRole, UserInterface} from '../../../core/interfaces';
 })
 export class SaveComponent extends BaseForm<UserInterface> implements OnInit {
   roles: IRole[] = [];
+  passwordVisible = false;
+  passwordVisibleConfirm = false;
 
   constructor(
     private fb: FormBuilder,

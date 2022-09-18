@@ -61,7 +61,7 @@ export class AuthenticationService {
       switchMap((resp) => {
         return this.profile().pipe(
           finalize(() => {
-            this.router.navigate(['/customers']);
+            this.router.navigate(['/profile']);
           })
         );
       })

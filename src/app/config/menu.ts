@@ -2,6 +2,11 @@ import {NavbarItem} from '../core/interfaces';
 
 export const navigations: NavbarItem[] = [
   {
+    title: 'Thông tin cá nhân',
+    url: '/profile',
+    icon: 'user'
+  },
+  {
     title: 'Quản lý khách hàng',
     url: '/customers',
     icon: 'team',

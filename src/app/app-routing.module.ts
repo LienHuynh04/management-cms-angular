@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './pages/login/login.component';
 import {AuthGuard, LoginGuard} from './core/guards';
 
@@ -17,7 +17,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'customers'
+    redirectTo: 'profile'
   },
 ];
 

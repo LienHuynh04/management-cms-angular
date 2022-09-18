@@ -10,7 +10,7 @@
             <nz-form-item>
               <nz-form-control>
                 <nz-input-group nzPrefixIcon="user">
-                  <input type="text" nz-input formControlName="userName"/>
+                  <input type="text" nz-input formControlName="userName" placeholder="username"/>
                 </nz-input-group>
               </nz-form-control>
             </nz-form-item>
@@ -18,9 +18,19 @@
             <!-- Password -->
             <nz-form-item>
               <nz-form-control>
-                <nz-input-group nzPrefixIcon="lock">
-                  <input type="password" nz-input formControlName="password"/>
+                <nz-input-group nzPrefixIcon="lock" [nzSuffix]="suffixTemplate">
+                  <input [type]="passwordVisible ? 'text' : 'password'"
+                         nz-input
+                         placeholder="password"
+                         formControlName="password"/>
                 </nz-input-group>
+                <ng-template #suffixTemplate>
+                  <span
+                    nz-icon
+                    [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+                    (click)="passwordVisible = !passwordVisible"
+                  ></span>
+                </ng-template>
               </nz-form-control>
             </nz-form-item>
 
