@@ -14,28 +14,28 @@ export class CustomerCareService {
   ) { }
 
   getAll(): Observable<IPaginateList<CustomerCareInterface>> {
-    return this.apiBase.get(apiEndpoints.customer, {
+    return this.apiBase.get(apiEndpoints.customer_care, {
       page: 1,
       per_page: 10
     });
   }
 
   create(body: CustomerCareInterface) {
-    return this.apiBase.post(apiEndpoints.customer, {
+    return this.apiBase.post(apiEndpoints.customer_care, {
       ...body
     })
   }
 
   getById(id: number | string | undefined) {
-    return this.apiBase.get(apiEndpoints.customer + '/' + id);
+    return this.apiBase.get(apiEndpoints.customer_care + '/' + id);
   }
 
   delete(id: number | string | undefined) {
-    return this.apiBase.delete(apiEndpoints.customer + '/' + id);
+    return this.apiBase.delete(apiEndpoints.customer_care + '/' + id);
   }
 
   update(id: number | string | undefined, body: CustomerCareInterface) {
-    return this.apiBase.put(apiEndpoints.customer + '/' + id, {
+    return this.apiBase.put(apiEndpoints.customer_care + '/' + id, {
       ...body
     })
   }

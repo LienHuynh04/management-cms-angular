@@ -1,43 +1,60 @@
-<form [formGroup]="saveForm" (ngSubmit)="validationForm()"  nz-form>
-  <!--customer_id-->
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="customer_id" nzRequired>Khách hàng</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input formControlName="customer_id" id="customer_id" nz-input/>
-      <app-control-errors
-        fieldName="customer_id"
-      ></app-control-errors>
-    </nz-form-control>
-  </nz-form-item>
+<nz-card [nzTitle]="record ? 'Cập nhật' : 'Tạo mới'">
+  <form [formGroup]="saveForm" nz-form>
+    <!--customer_id-->
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="customer_id" nzRequired>Khách hàng</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <nz-select
+          nzPlaceHolder="Vui lòng chọn"
+          formControlName="customer_id"
+        >
+          <nz-option *ngFor="let item of customer" [nzLabel]="item.full_name" [nzValue]="item.id"></nz-option>
+        </nz-select>
+        <app-control-errors
+          fieldName="customer_id"
+        ></app-control-errors>
+      </nz-form-control>
+    </nz-form-item>
 
-  <!--staff_id-->
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="staff_id" nzRequired>Nhân viên</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input formControlName="staff_id" id="staff_id" nz-input/>
-      <app-control-errors
-        fieldName="staff_id"
-      ></app-control-errors>
-    </nz-form-control>
-  </nz-form-item>
+    <!--staff_id-->
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="staff_id" nzRequired>Nhân viên</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <nz-select
+          nzPlaceHolder="Vui lòng chọn"
+          formControlName="staff_id"
+        >
+          <nz-option *ngFor="let item of user" [nzLabel]="item.full_name" [nzValue]="item.id"></nz-option>
+        </nz-select>
+        <app-control-errors
+          fieldName="staff_id"
+        ></app-control-errors>
+      </nz-form-control>
+    </nz-form-item>
 
-  <!--description-->
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="description" nzRequired>Mô tả</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input formControlName="description" id="description" nz-input/>
-      <app-control-errors
-        fieldName="description"
-      ></app-control-errors>
-    </nz-form-control>
-  </nz-form-item>
+    <!--description-->
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="customer_id" nzRequired>Mô tả</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <textarea rows="4" nz-input formControlName="description" id="description"></textarea>
+        <app-control-errors
+          fieldName="description"
+        ></app-control-errors>
+      </nz-form-control>
+    </nz-form-item>
 
-  <nz-form-item class="create-area" nz-row>
-    <nz-form-control [nzOffset]="6" [nzSpan]="14">
-      <button [routerLink]="['', 'customer-care']" nz-button>Quay lại</button>
-      <button [disabled]="!saveForm.valid" nz-button
-              nzType="primary">Tạo mới
-      </button>
-    </nz-form-control>
-  </nz-form-item>
-</form>
+
+    <nz-form-item class="create-area" nz-row>
+      <nz-form-control [nzOffset]="6" [nzSpan]="14">
+        <button [routerLink]="['', 'customer-care']" nz-button>Quay lại</button>
+        <button
+          nz-button
+          (click)="validationForm()"
+          [disabled]="!saveForm.valid"
+          nzType="primary">
+          {{record ? 'Cập nhật' : 'Tạo mới'}}
+        </button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-card>

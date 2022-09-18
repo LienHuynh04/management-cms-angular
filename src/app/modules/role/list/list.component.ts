@@ -1,8 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {ColumnConfig, ColumnInterface, COLUMNS, CustomerCareInterface} from '../../../core/interfaces';
+import {ColumnConfig, ColumnInterface, COLUMNS, IRole, UserInterface} from '../../../core/interfaces';
 import {ActivatedRoute} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
-import {CustomerCareService} from '../../../core/services';
+import {RoleService} from '../../../core/services';
+import {NzModalService} from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-list',
@@ -10,19 +11,17 @@ import {CustomerCareService} from '../../../core/services';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  cols: ColumnInterface[] = this.colums.care;
-  care!: CustomerCareInterface[];
-
+  cols: ColumnInterface[] = this.colums.role;
+  roles!: IRole[];
   constructor(
     @Inject(COLUMNS)
     public colums: ColumnConfig,
-    private activatedRoute: ActivatedRoute,
-  ) {
-  }
+    private activatedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
     const resolvedData = this.activatedRoute.snapshot.data.resolvedData;
-    this.care = resolvedData.data;
+    this.roles = resolvedData?.data;
   }
 
 }

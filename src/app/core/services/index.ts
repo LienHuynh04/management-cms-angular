@@ -6,3 +6,4 @@ export * from './loading.service';
 export * from './project.service';
 export * from './customer-care.service';
 export * from './user.service';
+export * from './role.service';

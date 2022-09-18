@@ -25,7 +25,6 @@ export class SaveComponent extends BaseForm<ProjectInterface> implements OnInit 
   }
 
   ngOnInit(): void {
-
     this.initForm();
   }
 

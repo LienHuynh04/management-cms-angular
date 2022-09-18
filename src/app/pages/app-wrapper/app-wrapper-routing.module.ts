@@ -24,6 +24,10 @@ const routes: Routes = [
         loadChildren: () => import('../../modules/customer-care/customer-care.module').then(m => m.CustomerCareModule)
       },
       {
+        path: 'roles',
+        loadChildren: () => import('../../modules/role/role.module').then(m => m.RoleModule)
+      },
+      {
         path: '',
         pathMatch: 'full',
         redirectTo: 'customers'

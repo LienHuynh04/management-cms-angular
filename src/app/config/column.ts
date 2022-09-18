@@ -65,5 +65,27 @@ export const column: ColumnConfig = {
       field: 'email'
     },
   ],
+  role: [
+    {
+      header: 'ID',
+      field: 'id'
+    },
+    {
+      header: 'Tên',
+      field: 'name'
+    }
+  ],
+  care: [
+    {
+      header: 'Nhân Viên',
+      field: 'staff',
+      colspan: 2
+    },
+    {
+      header: 'Khách hàng',
+      field: 'customer',
+      colspan: 2
+    }
+  ],
 };
 

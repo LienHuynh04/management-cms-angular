@@ -32,6 +32,14 @@ export const navigations: NavbarItem[] = [
     permissions: {
       only: ['admin', 'sales', 'agency', 'cooperator']
     }
+  },
+  {
+    title: 'Phân quyền',
+    url: '/roles',
+    icon: 'apartment',
+    permissions: {
+      only: ['admin']
+    }
   }
 ];
 

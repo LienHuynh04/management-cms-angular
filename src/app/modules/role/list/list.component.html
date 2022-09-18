@@ -1,0 +1,28 @@
+<nz-card>
+  <nz-table
+    #basicTable
+    [nzBordered]="true"
+    [nzData]="roles"
+    [nzScroll]="{ y: '500px' }"
+    [nzFrontPagination]="false"
+    nzBordered
+  >
+    <thead>
+    <tr>
+      <th
+        *ngFor="let col of cols"
+        [nzWidth]="col.style?.width">
+        {{col.header}}
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td *ngFor="let col of cols;">
+        {{ data[col?.field] }}
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+
+</nz-card>

@@ -13,10 +13,11 @@ export class CustomerService {
     private apiBase: ApiBase
   ) { }
 
-  getAll(): Observable<IPaginateList<CustomerInterface>> {
+  getAll(params ?: any): Observable<IPaginateList<CustomerInterface>> {
     return this.apiBase.get(apiEndpoints.customer, {
       page: 1,
-      per_page: 10
+      per_page: 2,
+      ...params
     });
   }
 

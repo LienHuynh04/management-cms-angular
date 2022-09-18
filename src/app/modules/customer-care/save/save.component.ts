@@ -3,7 +3,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BaseForm} from '../../../shared/abstracts';
 import {CustomerCareService} from '../../../core/services';
-import {CustomerCareInterface, ProjectInterface} from '../../../core/interfaces';
+import {CustomerCareInterface, CustomerInterface, ProjectInterface, UserInterface} from '../../../core/interfaces';
 
 @Component({
   selector: 'app-save',
@@ -12,6 +12,9 @@ import {CustomerCareInterface, ProjectInterface} from '../../../core/interfaces'
 })
 export class SaveComponent extends BaseForm<CustomerCareInterface> implements OnInit {
   project: ProjectInterface[] = [];
+  customer !: CustomerInterface[];
+  user!: UserInterface[];
+  care!: CustomerCareInterface[];
 
   constructor(
     private fb: FormBuilder,
@@ -20,6 +23,8 @@ export class SaveComponent extends BaseForm<CustomerCareInterface> implements On
     private activatedRoute: ActivatedRoute
   ) {
     super(activatedRoute, router);
+    this.customer = this.resolvedData?.customer;
+    this.user = this.resolvedData?.user;
   }
 
   ngOnInit(): void {
@@ -28,15 +33,15 @@ export class SaveComponent extends BaseForm<CustomerCareInterface> implements On
 
   initForm() {
     this.saveForm = this.fb.group({
-      customer_id: ['', Validators.required],
-      staff_id: ['', [Validators.required]],
-      description: ['', Validators.required],
+      customer_id: [this.record ? this.record.customer.id : '', Validators.required],
+      staff_id: [this.record ? this.record.staff.id : '', [Validators.required]],
+      description: [this.record?.description, Validators.required],
     });
   }
 
   submitForm(): void {
     this.processData(
-      this.router
+      this.record
         ? this.customerCareService.update(this.record.id, this.saveForm.value)
         : this.customerCareService.create(this.saveForm.value),
       'customer-care'
