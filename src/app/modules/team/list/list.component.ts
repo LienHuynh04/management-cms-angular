@@ -1,28 +1,28 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {ColumnConfig, ColumnInterface, COLUMNS, UserInterface} from '../../../core/interfaces';
 import {ActivatedRoute} from '@angular/router';
-import {switchMap} from 'rxjs/operators';
-import {AuthenticationService, UserService} from '../../../core/services';
+import {AuthenticationService, TeamService} from '../../../core/services';
 import {BaseTable} from '../../../shared/abstracts';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {TeamInterface} from '../../../core/interfaces/team.interface';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent extends BaseTable<UserInterface> implements OnInit {
-  cols: ColumnInterface[] = this.colums.user;
+export class ListComponent extends BaseTable<TeamInterface> implements OnInit {
+  cols: ColumnInterface[] = this.colums.team;
 
   constructor(
     @Inject(COLUMNS)
     public colums: ColumnConfig,
     private activatedRoute: ActivatedRoute,
-    private userService: UserService,
+    private teamService: TeamService,
     public authService: AuthenticationService,
     private fb: FormBuilder,
   ) {
-    super(activatedRoute)
+    super(activatedRoute);
   }
 
   ngOnInit(): void {
@@ -31,16 +31,14 @@ export class ListComponent extends BaseTable<UserInterface> implements OnInit {
 
   initFormFilter(): FormGroup {
     this.filterForm = this.fb.group({
-      login_id: [null],
-      full_name: [null],
-      email: [null]
+      name: [null]
     });
     return this.filterForm;
   }
 
   confirm(id: number | string | undefined) {
-    this.userService.delete(id).subscribe(() => {
-      this.processData(this.userService.getAll(super.processFilter()));
+    this.teamService.delete(id).subscribe(() => {
+      this.processData(this.teamService.getAll(super.processFilter()));
     });
   }
 
@@ -48,7 +46,7 @@ export class ListComponent extends BaseTable<UserInterface> implements OnInit {
    * Call api to get list
    */
   fetchData(): void {
-    const request = this.userService.getAll(super.processFilter());
+    const request = this.teamService.getAll(super.processFilter());
     this.processData(request);
   }
 }

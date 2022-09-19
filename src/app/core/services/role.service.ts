@@ -15,8 +15,7 @@ export class RoleService {
 
   getAll(): Observable<IPaginateList<IRole>> {
     return this.apiBase.get(apiEndpoints.role, {
-      page: 1,
-      per_page: 10
+      page: 1
     });
   }
 

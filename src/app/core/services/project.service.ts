@@ -14,10 +14,11 @@ export class ProjectService {
   ) {
   }
 
-  getAll(): Observable<IPaginateList<ProjectInterface>> {
+  getAll(params ?: any): Observable<IPaginateList<ProjectInterface>> {
     return this.apiBase.get(apiEndpoints.project, {
       page: 1,
-      per_page: 10
+      per_page: 50,
+      ...params
     });
   }
 

@@ -12,10 +12,7 @@ import {BaseTable} from '../../../shared/abstracts';
 })
 export class ListComponent extends BaseTable<CustomerInterface> implements OnInit {
   cols: ColumnInterface[] = this.colums.customer;
-  fetchParams: any = {
-    page: 1,
-    per_page: 50
-  };
+
   constructor(
     @Inject(COLUMNS)
     public colums: ColumnConfig,
@@ -35,25 +32,16 @@ export class ListComponent extends BaseTable<CustomerInterface> implements OnIni
       full_name: [null],
       phone_number: [null],
       address: [null],
-      email: [null],
+      email: [null]
     });
     return this.filterForm;
   }
 
-  onSearch(isReset = false) {
-    if (isReset) {
-      this.filterForm.reset();
-    }
-    let param: any = {};
-    let filterData = {...this.filterForm.value};
-    Object.keys(this.filterForm.value).forEach(key => {
-      if (filterData[key]) {
-        param[`filter[${key}]`] = filterData[key];
-      }
-    });
-
-    this.customerService.getAll(param).subscribe(resp => {
-      console.log(resp);
-    });
+  /**
+   * Call api to get list
+   */
+  fetchData(): void {
+    const request = this.customerService.getAll(super.processFilter());
+    this.processData(request);
   }
 }

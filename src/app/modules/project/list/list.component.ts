@@ -1,19 +1,19 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {ColumnConfig, ColumnInterface, COLUMNS, ProjectInterface} from '../../../core/interfaces';
 import {ActivatedRoute} from '@angular/router';
-import {switchMap, tap} from 'rxjs/operators';
+import {switchMap} from 'rxjs/operators';
 import {ProjectService} from '../../../core/services';
 import {NzModalService} from 'ng-zorro-antd/modal';
 import {SaveComponent} from '../save/save.component';
+import {BaseTable} from '../../../shared/abstracts';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit {
+export class ListComponent extends BaseTable<ProjectInterface> implements OnInit {
   cols: ColumnInterface[] = this.colums.project;
-  projects !: ProjectInterface[];
 
   constructor(
     @Inject(COLUMNS)
@@ -22,20 +22,16 @@ export class ListComponent implements OnInit {
     private projectService: ProjectService,
     private modalService: NzModalService
   ) {
+    super(activatedRoute);
   }
 
   ngOnInit(): void {
-    const resolvedData = this.activatedRoute.snapshot.data.resolvedData;
-    this.projects = resolvedData.data;
+
   }
 
   confirm(id: number | string | undefined) {
-    this.projectService.delete(id).pipe(
-      switchMap(() => {
-        return this.projectService.getAll();
-      })
-    ).subscribe((resp: any) => {
-      this.projects = resp.data;
+    this.projectService.delete(id).subscribe(() => {
+      this.processData(this.projectService.getAll());
     });
   }
 
@@ -50,8 +46,17 @@ export class ListComponent implements OnInit {
 
     modal.afterClose.subscribe((res) => {
       if(res) {
-        this.projects = res.data
+        this.setDataAndPagination(res.data, res.pagination);
       }
     });
+  }
+
+
+  /**
+   * Call api to get list
+   */
+  fetchData(): void {
+    const request = this.projectService.getAll(super.processFilter());
+    this.processData(request);
   }
 }

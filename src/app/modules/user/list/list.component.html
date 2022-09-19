@@ -1,22 +1,68 @@
+<!--Filter-->
+<nz-card nzTitle="Tìm kiếm" [nzExtra]="extraTemplate" style="margin-bottom: 15px">
+  <form nz-form nzLayout="vertical" [formGroup]="filterForm">
+    <!--CONTROLS-->
+    <div nz-row [nzGutter]="24">
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'login_id'">Login ID</nz-form-label>
+          <nz-form-control>
+            <input
+              nz-input
+              formControlName="login_id"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <!--Search email-->
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'email'">Email</nz-form-label>
+          <nz-form-control>
+            <input
+              nz-input
+              formControlName="email"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+
+    <div nz-row [nzGutter]="24">
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'full_name'">Tên</nz-form-label>
+          <nz-form-control>
+            <input
+              nz-input
+              formControlName="full_name"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+
+    <div nz-row>
+      <div nz-col [nzSpan]="24" class="search-area">
+        <button nz-button (click)="onSearch(true)">Xóa tìm kiếm</button>
+        <button nz-button [nzType]="'primary'" (click)="onSearch()">Tìm kiếm</button>
+      </div>
+    </div>
+  </form>
+</nz-card>
+
 <nz-card>
-  <!--Button Create-->
-  <button
-    nz-button
-    nzType="primary"
-    class="btn-create"
-    [routerLink]="['/users', 'create']"
-  >
-    <i nz-icon nzType="plus" nzTheme="outline"></i>
-    Tạo mới
-  </button>
-
-
   <nz-table
     #basicTable
-    [nzBordered]="true"
     [nzVirtualItemSize]="54"
-    [nzData]="users"
-    [nzScroll]="{ y: '500px' }"
+    [nzData]="records"
+    [nzPaginationPosition]="'both'"
+   [nzScroll]="{ x: '1024px', y: '100vh' }"
+    [nzFrontPagination]="false"
+    [nzTotal]="pagination.total"
+    [nzPageSize]="pagination.perPage"
+    [nzPageIndex]="pagination.currentPage"
+    (nzQueryParams)="onQueryParamsChange($event)"
     nzBordered
   >
     <thead>
@@ -59,3 +105,16 @@
   </nz-table>
 
 </nz-card>
+
+<ng-template #extraTemplate>
+  <!--Button Create-->
+  <button
+    nz-button
+    nzType="primary"
+    class="btn-create"
+    [routerLink]="['/users', 'create']"
+  >
+    <i nz-icon nzType="plus" nzTheme="outline"></i>
+    Tạo mới
+  </button>
+</ng-template>

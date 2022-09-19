@@ -51,7 +51,10 @@ export const column: ColumnConfig = {
     },
     {
       header: 'Tên',
-      field: 'name'
+      field: 'name',
+      style: {
+        width: '400px'
+      }
     }
   ],
   customer_care: [
@@ -91,6 +94,20 @@ export const column: ColumnConfig = {
       header: 'Khách hàng',
       field: 'customer',
       colspan: 2
+    }
+  ],
+  team: [
+    {
+      header: 'Tên nhóm',
+      field: 'name',
+    },
+    {
+      header: 'Trưởng nhóm',
+      field: 'leader',
+    },
+    {
+      header: 'Mô tả',
+      field: 'description'
     }
   ],
 };

@@ -121,8 +121,7 @@
       <nz-form-control [nzSpan]="14" [nzOffset]="6">
         <button nz-button [routerLink]="['', '/']">Quay lại</button>
         <button nz-button nzType="primary"
-                (click)="validationForm()"
-                [disabled]="!saveForm.valid">
+                (click)="submitForm()">
           {{record ? 'Cập nhật' : 'Tạo mới'}}
         </button>
       </nz-form-control>

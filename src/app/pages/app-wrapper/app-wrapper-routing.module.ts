@@ -34,6 +34,10 @@ const routes: Routes = [
         loadChildren: () => import('../../modules/role/role.module').then(m => m.RoleModule)
       },
       {
+        path: 'teams',
+        loadChildren: () => import('../../modules/team/team.module').then(m => m.TeamModule)
+      },
+      {
         path: '',
         pathMatch: 'full',
         redirectTo: 'profile'

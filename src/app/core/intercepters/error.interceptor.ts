@@ -27,6 +27,9 @@ export class ErrorInterceptor implements HttpInterceptor {
         this.loadingOverlayService.isLoading = false;
       }),
       catchError((err: HttpErrorResponse) => {
+        if (err.status == 403) {
+          this.router.navigate(['/profile']);
+        }
         if (err.status == 401) {
           this.authenticationService.clearAndLogout();
           this.router.navigate(['/login']);

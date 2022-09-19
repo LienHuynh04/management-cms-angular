@@ -16,7 +16,7 @@ export class CustomerService {
   getAll(params ?: any): Observable<IPaginateList<CustomerInterface>> {
     return this.apiBase.get(apiEndpoints.customer, {
       page: 1,
-      per_page: 2,
+      per_page: 50,
       ...params
     });
   }

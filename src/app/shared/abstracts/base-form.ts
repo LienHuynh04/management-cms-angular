@@ -22,6 +22,9 @@ export abstract class BaseForm<T> {
     request
       .pipe(
         catchError((error: HttpErrorResponse | any) => {
+          if (error.status === 422) {
+            this.setFormErrors(error.error.errors);
+          }
           return throwError(error);
         })
       )
@@ -75,6 +78,16 @@ export abstract class BaseForm<T> {
 
   protected submitForm() {
   }
+
+  setFormErrors(errors: any): void {
+    Object.keys(errors).forEach((key: string) => {
+      this.saveForm.get(key)?.setErrors({
+        taken: errors[key][0]
+      });
+    });
+    this.saveForm.markAllAsTouched()
+  }
+
 
   /*End - Handle Form*/
 }

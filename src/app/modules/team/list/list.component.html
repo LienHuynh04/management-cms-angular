@@ -1,60 +1,19 @@
 <!--Filter-->
-<nz-card nzTitle="Tìm kiếm" [nzExtra]="extraTemplate" style="margin-bottom: 15px">
+<nz-card nzTitle="Tìm kiếm" style="margin-bottom: 15px" [nzExtra]="extraTemplate">
   <form nz-form nzLayout="vertical" [formGroup]="filterForm">
-    <!--CONTROLS-->
     <div nz-row [nzGutter]="24">
       <div nz-col [nzSpan]="12">
         <nz-form-item>
-          <nz-form-label [nzFor]="'full_name'">Tên</nz-form-label>
+          <nz-form-label [nzFor]="'name'">Tên</nz-form-label>
           <nz-form-control>
             <input
               nz-input
-              formControlName="full_name"
-            />
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-
-      <!--Search sdt-->
-      <div nz-col [nzSpan]="12">
-        <nz-form-item>
-          <nz-form-label [nzFor]="'phone_number'">Số điện thoại</nz-form-label>
-          <nz-form-control>
-            <input
-              nz-input
-              formControlName="phone_number"
-            />
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-
-      <!--Search địa chỉ-->
-      <div nz-col [nzSpan]="12">
-        <nz-form-item>
-          <nz-form-label [nzFor]="'address'">Địa chỉ</nz-form-label>
-          <nz-form-control>
-            <input
-              nz-input
-              formControlName="address"
-            />
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-
-      <!--Search email-->
-      <div nz-col [nzSpan]="12">
-        <nz-form-item>
-          <nz-form-label [nzFor]="'email'">Email</nz-form-label>
-          <nz-form-control>
-            <input
-              nz-input
-              formControlName="email"
+              formControlName="name"
             />
           </nz-form-control>
         </nz-form-item>
       </div>
     </div>
-
 
     <div nz-row>
       <div nz-col [nzSpan]="24" class="search-area">
@@ -68,15 +27,16 @@
 <nz-card>
   <nz-table
     #basicTable
-    [nzBordered]="true"
+    [nzVirtualItemSize]="54"
     [nzData]="records"
     [nzPaginationPosition]="'both'"
-    [nzScroll]="{ x: '1024px', y: '100vh' }"
+   [nzScroll]="{ x: '1024px', y: '100vh' }"
     [nzFrontPagination]="false"
     [nzTotal]="pagination.total"
     [nzPageSize]="pagination.perPage"
     [nzPageIndex]="pagination.currentPage"
     (nzQueryParams)="onQueryParamsChange($event)"
+    nzBordered
   >
     <thead>
     <tr>
@@ -85,7 +45,7 @@
         [nzWidth]="col.style?.width">
         {{col.header}}
       </th>
-      <th [nzWidth]="'110px'"></th>
+      <th [nzWidth]="'150px'"></th>
     </tr>
     </thead>
     <tbody>
@@ -93,17 +53,27 @@
       <td *ngFor="let col of cols;">
         {{ data[col?.field] }}
       </td>
-      <td style="text-align: center">
+      <td>
         <button nz-button
                 nzType="primary" nzShape="circle"
+                style="margin-right: 5px"
                 [routerLink]="['update', data.id]"
         >
           <i nz-icon nzType="edit" nzTheme="outline"></i>
+        </button>
+        <button nz-button nzShape="circle" nzDanger
+                nz-popconfirm
+                nzPopconfirmTitle="Are you sure delete this task?"
+                nzPopconfirmPlacement="leftTop"
+                (nzOnConfirm)="confirm(data.id)"
+        >
+          <i nz-icon nzType="delete"></i>
         </button>
       </td>
     </tr>
     </tbody>
   </nz-table>
+
 </nz-card>
 
 <ng-template #extraTemplate>
@@ -112,7 +82,7 @@
     nz-button
     nzType="primary"
     class="btn-create"
-    [routerLink]="['/customers', 'create']"
+    [routerLink]="['/teams', 'create']"
   >
     <i nz-icon nzType="plus" nzTheme="outline"></i>
     Tạo mới

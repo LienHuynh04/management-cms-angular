@@ -13,10 +13,12 @@ export class UserService {
     private apiBase: ApiBase
   ) { }
 
-  getAll(): Observable<IPaginateList<UserInterface>> {
+  getAll(params ?: any): Observable<IPaginateList<UserInterface>> {
     return this.apiBase.get(apiEndpoints.user, {
       page: 1,
-      per_page: 10
+      per_page: 50,
+      with: 'team',
+      ...params
     });
   }
 
@@ -38,5 +40,9 @@ export class UserService {
     return this.apiBase.put(apiEndpoints.user + '/' + id, {
       ...body
     });
+  }
+
+  updateProfile(body: UserInterface) {
+    return this.apiBase.put(apiEndpoints.profile_update, body)
   }
 }
