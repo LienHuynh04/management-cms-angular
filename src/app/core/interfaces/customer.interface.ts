@@ -12,4 +12,5 @@ export interface CustomerInterface {
   note: string;
   result: string;
   customer_project: string[];
+  care: [];
 }
