@@ -85,7 +85,7 @@
         [nzWidth]="col.style?.width">
         {{col.header}}
       </th>
-      <th [nzWidth]="'110px'"></th>
+      <th [nzWidth]="'150px'"></th>
     </tr>
     </thead>
     <tbody>
@@ -99,6 +99,13 @@
                 [routerLink]="['update', data.id]"
         >
           <i nz-icon nzType="edit" nzTheme="outline"></i>
+        </button>
+        <button nz-button
+                [disabled]="!data.care.length"
+                nzType="default" nzShape="circle"
+                (click)="openModalCare(data.care)"
+        >
+          <i nz-icon nzType="eye" nzTheme="outline"></i>
         </button>
       </td>
     </tr>

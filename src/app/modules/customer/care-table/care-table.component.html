@@ -1,0 +1,17 @@
+<nz-table #basicTable
+          [nzData]="care"
+          nzBordered
+>
+  <thead>
+  <tr>
+    <th>Tên nhân viên</th>
+    <th>Email nhân viên</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+    <td>{{data.staff_name}}</td>
+    <td>{{data.staff_email}}</td>
+  </tr>
+  </tbody>
+</nz-table>

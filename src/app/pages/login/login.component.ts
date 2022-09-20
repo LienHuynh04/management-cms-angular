@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AuthenticationService} from '../../core/services';
+import {AuthenticationService, LoadingOverlayService} from '../../core/services';
+import {delay} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -8,14 +9,22 @@ import {AuthenticationService} from '../../core/services';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  isLoading = false;
   passwordVisible = false;
   validateForm!: FormGroup;
   constructor(
     private fb: FormBuilder,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    public loadingOverlayService: LoadingOverlayService
     ) {}
 
   ngOnInit(): void {
+    this.loadingOverlayService.isLoading$
+      .pipe(delay(0))
+      .subscribe((isLoading) => {
+        this.isLoading = isLoading;
+      });
+
     this.validateForm = this.fb.group({
       userName: [null, [Validators.required]],
       password: [null, [Validators.required]],
@@ -35,7 +44,7 @@ export class LoginComponent implements OnInit {
   }
 
   doLogin(): void {
-    const data = this.validateForm.value
+    const data = this.validateForm.value;
     this.authService.login(data.userName, data.password)
     .subscribe();
   }

@@ -4,6 +4,8 @@ import {ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {CustomerService} from '../../../core/services';
 import {BaseTable} from '../../../shared/abstracts';
+import {CareTableComponent} from '../care-table/care-table.component';
+import {NzModalService} from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-list',
@@ -12,13 +14,13 @@ import {BaseTable} from '../../../shared/abstracts';
 })
 export class ListComponent extends BaseTable<CustomerInterface> implements OnInit {
   cols: ColumnInterface[] = this.colums.customer;
-
   constructor(
     @Inject(COLUMNS)
     public colums: ColumnConfig,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private modal: NzModalService
   ) {
     super(activatedRoute)
   }
@@ -43,5 +45,21 @@ export class ListComponent extends BaseTable<CustomerInterface> implements OnIni
   fetchData(): void {
     const request = this.customerService.getAll(super.processFilter());
     this.processData(request);
+  }
+
+  openModalCare(care: any) {
+    this.modal.create({
+      nzTitle: 'Thông tin nhân viên chăm sóc',
+      nzContent: CareTableComponent,
+      nzMaskClosable: false,
+      nzClosable: false,
+      nzWidth: '70vw',
+      nzStyle: {
+        top: '30%'
+      },
+      nzComponentParams: {
+        care: care
+      }
+    });
   }
 }

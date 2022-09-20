@@ -44,3 +44,8 @@
     </div>
   </div>
 </nz-layout>
+<div class="loading-overlay" [hidden]="!isLoading">
+  <div class="spinner">
+    <nz-spin nzSimple [nzSize]="'large'"></nz-spin>
+  </div>
+</div>
