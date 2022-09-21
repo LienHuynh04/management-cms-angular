@@ -3,7 +3,7 @@
     #basicTable
     [nzVirtualItemSize]="54"
     [nzData]="records"
-   [nzScroll]="{ x: '1024px', y: '100vh' }"
+    [nzScroll]="{ x: '1024px', y: '100vh' }"
     [nzShowPagination]="false"
     nzBordered
   >
@@ -19,7 +19,11 @@
     <tbody>
     <tr *ngFor="let data of basicTable.data">
       <td *ngFor="let col of cols;">
-        {{ data[col?.field] }}
+        {{
+        col.slot == 'role'
+          ? nameRoleEnum[roleEnum[data.name]]
+          : data[col?.field]
+        }}
       </td>
     </tr>
     </tbody>

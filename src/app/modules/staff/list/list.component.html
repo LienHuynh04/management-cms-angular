@@ -78,9 +78,13 @@
     <tbody>
     <tr *ngFor="let data of basicTable.data">
       <td *ngFor="let col of cols;">
-        {{ data[col?.field] }}
+        {{
+        col.slot == 'role'
+          ? nameRoleEnum[roleEnum[data.role[0].name]]
+          : data[col?.field]
+        }}
       </td>
-      <td>
+      <td style="text-align: center">
         <ng-container *ngIf="!(data.id == 1 || authService.currentUserValue.id == data.id)">
           <button nz-button
                   nzType="primary" nzShape="circle"
@@ -109,7 +113,7 @@
     nz-button
     nzType="primary"
     class="btn-create"
-    [routerLink]="['/users', 'create']"
+    [routerLink]="['/staff', 'create']"
   >
     <i nz-icon nzType="plus" nzTheme="outline"></i>
     Tạo mới

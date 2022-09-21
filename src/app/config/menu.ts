@@ -8,7 +8,7 @@ export const navigations: NavbarItem[] = [
   },
   {
     title: 'Nhân sự',
-    url: '/users',
+    url: '/staff',
     icon: 'user',
     permissions: {
       only: ['admin', 'human-resource']

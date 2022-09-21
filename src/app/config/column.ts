@@ -25,9 +25,17 @@ export const column: ColumnConfig = {
     {
       header: 'Ghi chú',
       field: 'note'
-    }
+    },
+    {
+      header: 'Ngày tạo',
+      field: 'created_at'
+    },
+    {
+      header: 'Ngày cập nhật',
+      field: 'updated_at'
+    },
   ],
-  user: [
+  staff: [
     {
       header: 'Login ID',
       field: 'login_id'
@@ -39,6 +47,11 @@ export const column: ColumnConfig = {
     {
       header: 'Email',
       field: 'email'
+    },
+    {
+      header: 'Phân quyền',
+      field: 'role',
+      slot: 'role'
     },
   ],
   project: [
@@ -81,7 +94,8 @@ export const column: ColumnConfig = {
     },
     {
       header: 'Tên',
-      field: 'name'
+      field: 'name',
+      slot: 'role'
     }
   ],
   care: [

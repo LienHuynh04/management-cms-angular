@@ -3,12 +3,16 @@
     <!--phone_number-->
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24"
-                     autocomplete="new-input"
                      nzRequired nzFor="login_id">
         Login ID
       </nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24">
-        <input nz-input formControlName="login_id" id="login_id"/>
+        <input nz-input
+               *ngIf="!record"
+               formControlName="login_id"
+               autocomplete="new-input"
+               id="login_id"/>
+        <span *ngIf="record">{{record.login_id}}</span>
         <app-control-errors
           fieldName="login_id"
         ></app-control-errors>
@@ -46,6 +50,7 @@
             [type]="passwordVisible ? 'text' : 'password'"
             nz-input
             formControlName="password"
+            autocomplete="new-password"
             id="password"
           />
         </nz-input-group>
@@ -70,6 +75,7 @@
           <input
             [type]="passwordVisibleConfirm ? 'text' : 'password'"
             nz-input
+            autocomplete="new-password"
             formControlName="password_confirmation"
             id="password_confirmation"
           />
@@ -92,11 +98,16 @@
       <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="role_id" nzRequired>Phân quyền</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24">
         <nz-select
+          *ngIf="!record; else updateTemplate"
           nzPlaceHolder="Vui lòng chọn"
           formControlName="role_id"
         >
-          <nz-option *ngFor="let item of roles" [nzLabel]="$any(item?.name)" [nzValue]="$any(item?.id)"></nz-option>
+          <nz-option *ngFor="let item of roles" [nzLabel]="$any(nameRoleEnum[roleEnum[item.name]])" [nzValue]="$any(item?.id)"></nz-option>
         </nz-select>
+
+        <ng-template #updateTemplate>
+          {{record.role ? nameRoleEnum[roleEnum[record.role[0].name]] : ''}}
+        </ng-template>
         <app-control-errors
           fieldName="role_id"
         ></app-control-errors>
@@ -105,7 +116,7 @@
 
     <nz-form-item nz-row class="create-area">
       <nz-form-control [nzSpan]="14" [nzOffset]="6">
-        <button nz-button [routerLink]="['', 'users']">Quay lại</button>
+        <button nz-button [routerLink]="['', 'staff']">Quay lại</button>
         <button nz-button nzType="primary"
                 (click)="confirmUpdate()"
                 [disabled]="!saveForm.valid">

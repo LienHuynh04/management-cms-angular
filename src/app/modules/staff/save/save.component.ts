@@ -6,6 +6,7 @@ import {BaseForm} from '../../../shared/abstracts';
 import {ConfirmedValidator} from '../../../shared';
 import {IRole, UserInterface} from '../../../core/interfaces';
 import {NzModalService} from 'ng-zorro-antd/modal';
+import {NameRoleEnum, RoleEnum} from '../../../core/enums';
 
 @Component({
   selector: 'app-save',
@@ -16,6 +17,8 @@ export class SaveComponent extends BaseForm<UserInterface> implements OnInit {
   roles: IRole[] = [];
   passwordVisible = false;
   passwordVisibleConfirm = false;
+  roleEnum = RoleEnum;
+  nameRoleEnum = NameRoleEnum;
 
   constructor(
     private fb: FormBuilder,
@@ -46,7 +49,8 @@ export class SaveComponent extends BaseForm<UserInterface> implements OnInit {
     super.patchValueForm();
 
     if(this.record) {
-      this.field('role_id').patchValue(this.roles[0].id as any);
+      this.field('role_id').disable()
+      this.field('login_id').disable()
       this.field('password').setValidators([Validators.minLength(8)])
     }
   }
@@ -61,7 +65,7 @@ export class SaveComponent extends BaseForm<UserInterface> implements OnInit {
       this.record
         ? this.userService.update(this.record.id, body)
         : this.userService.create(this.saveForm.value),
-      'users'
+      'staff'
     );
   }
 }
