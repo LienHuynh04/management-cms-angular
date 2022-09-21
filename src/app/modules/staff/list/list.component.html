@@ -89,16 +89,13 @@
           >
             <i nz-icon nzType="edit" nzTheme="outline"></i>
           </button>
-          <button nz-button nzShape="circle" nzDanger
-                  nz-popconfirm
-                  nzPopconfirmTitle="Are you sure delete this task?"
-                  nzPopconfirmPlacement="leftTop"
-                  (nzOnConfirm)="confirm(data.id)"
+          <button nz-button nzShape="circle"
+                  nzDanger
+                  (click)="confirmDelete(data.id)"
           >
             <i nz-icon nzType="delete"></i>
           </button>
         </ng-container>
-
       </td>
     </tr>
     </tbody>

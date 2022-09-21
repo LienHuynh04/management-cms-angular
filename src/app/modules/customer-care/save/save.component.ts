@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {BaseForm} from '../../../shared/abstracts';
 import {CustomerCareService} from '../../../core/services';
 import {CustomerCareInterface, CustomerInterface, ProjectInterface, UserInterface} from '../../../core/interfaces';
+import {NzModalService} from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-save',
@@ -20,9 +21,10 @@ export class SaveComponent extends BaseForm<CustomerCareInterface> implements On
     private fb: FormBuilder,
     private router: Router,
     private customerCareService: CustomerCareService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    public modalService: NzModalService
   ) {
-    super(activatedRoute, router);
+    super(modalService, activatedRoute, router);
     this.customer = this.resolvedData?.customer;
     this.user = this.resolvedData?.user;
   }

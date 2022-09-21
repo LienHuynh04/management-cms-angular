@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
+import {NzModalService} from 'ng-zorro-antd/modal';
 
 export abstract class BaseForm<T> {
   resolvedData;
@@ -10,6 +11,7 @@ export abstract class BaseForm<T> {
   saveForm!: FormGroup;
 
   protected constructor(
+    protected modalSerice: NzModalService,
     protected activatedRouteBase?: ActivatedRoute,
     protected routerBase?: Router
   ) {
@@ -90,4 +92,17 @@ export abstract class BaseForm<T> {
 
 
   /*End - Handle Form*/
+  confirmUpdate() {
+    this.modalSerice.confirm({
+      nzTitle: this.record ? 'Bạn có muốn thay đổi ?' : 'Bạn có muốn tạo mới ?',
+      nzOkText: 'Có',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzStyle: {
+        top: '30%'
+      },
+      nzCancelText: 'Không',
+      nzOnOk: () => this.validationForm(),
+    });
+  }
 }

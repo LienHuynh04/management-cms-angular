@@ -5,6 +5,7 @@ import {UserService} from '../../../core/services';
 import {BaseForm} from '../../../shared/abstracts';
 import {ConfirmedValidator} from '../../../shared';
 import {IRole, UserInterface} from '../../../core/interfaces';
+import {NzModalService} from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-save',
@@ -20,9 +21,10 @@ export class SaveComponent extends BaseForm<UserInterface> implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private userService: UserService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    public modalService: NzModalService
   ) {
-    super(activatedRoute, router);
+    super(modalService, activatedRoute, router);
     this.roles = this.resolvedData.roles;
   }
 

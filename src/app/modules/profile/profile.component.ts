@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {AuthenticationService, UserService} from '../../core/services';
 import {ConfirmedValidator} from '../../shared';
 import {IAdmin} from '../../core/interfaces';
 import {BaseForm} from '../../shared/abstracts';
 import {switchMap} from 'rxjs/operators';
+import {NzModalService} from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-login',
@@ -18,9 +19,10 @@ export class ProfileComponent extends BaseForm<IAdmin> implements OnInit {
   constructor(
     private fb: FormBuilder,
     public authService: AuthenticationService,
-    public userService: UserService
+    public userService: UserService,
+    public modalService: NzModalService
   ) {
-    super();
+    super(modalService);
   }
 
   ngOnInit(): void {

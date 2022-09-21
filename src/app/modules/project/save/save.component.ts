@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {ProjectService} from '../../../core/services';
 import {map, switchMap} from 'rxjs/operators';
-import {NzModalRef} from 'ng-zorro-antd/modal';
+import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
 import {BaseForm} from '../../../shared/abstracts';
 import {Observable} from 'rxjs';
 import {IPaginateList, ProjectInterface} from '../../../core/interfaces';
@@ -19,9 +19,10 @@ export class SaveComponent extends BaseForm<ProjectInterface> implements OnInit 
   constructor(
     private projectService: ProjectService,
     private modal: NzModalRef,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public modalService: NzModalService
   ) {
-    super();
+    super(modalService);
   }
 
   ngOnInit(): void {

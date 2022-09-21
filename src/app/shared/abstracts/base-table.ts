@@ -3,6 +3,7 @@ import {IPaginateList, IPagination} from '../../core/interfaces';
 import {ActivatedRoute} from '@angular/router';
 import {NzTableQueryParams} from 'ng-zorro-antd/table';
 import {Observable} from 'rxjs';
+import {NzModalService} from 'ng-zorro-antd/modal';
 
 export abstract class BaseTable<T> {
   records: T[] = [];
@@ -15,6 +16,7 @@ export abstract class BaseTable<T> {
 
   protected constructor(
     protected activatedRouteBase: ActivatedRoute,
+    protected modalService: NzModalService
   ) {
     const resolvedData = this.activatedRouteBase?.snapshot?.data?.resolvedData;
     this.setDataAndPagination(resolvedData?.data, resolvedData?.pagination);
@@ -70,4 +72,20 @@ export abstract class BaseTable<T> {
       this.fetchData();
     }
   }
+
+  confirmDelete(id: number | string | undefined) {
+    this.modalService.confirm({
+      nzTitle: 'Bạn có chắc chắn xóa không?',
+      nzOkText: 'Có',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzStyle: {
+        top: '30%'
+      },
+      nzCancelText: 'Không',
+      nzOnOk: () => this.confirm(id),
+    })
+  }
+
+ protected confirm(id: number | string | undefined) {}
 }

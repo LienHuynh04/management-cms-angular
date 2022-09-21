@@ -19,7 +19,7 @@ const routes: Routes = [
       },
       {
         path: 'users',
-        loadChildren: () => import('../../modules/user/user.module').then(m => m.UserModule)
+        loadChildren: () => import('../../modules/staff/staff.module').then(m => m.StaffModule)
       },
       {
         path: 'project',

@@ -5,6 +5,7 @@ import {CustomerService} from '../../../core/services';
 import {CustomerInterface, ProjectInterface, UserInterface} from '../../../core/interfaces';
 import {BaseForm} from '../../../shared/abstracts';
 import {ResultEnum} from '../../../core/enums';
+import {NzModalService} from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-save',
@@ -21,9 +22,10 @@ export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit
     private fb: FormBuilder,
     private router: Router,
     private customerService: CustomerService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    public modalService: NzModalService
   ) {
-    super(activatedRoute, router);
+    super(modalService, activatedRoute, router);
     this.projects = this.resolvedData.projects;
     this.users = this.resolvedData.users;
   }

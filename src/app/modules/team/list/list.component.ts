@@ -1,10 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {ColumnConfig, ColumnInterface, COLUMNS, UserInterface} from '../../../core/interfaces';
+import {ColumnConfig, ColumnInterface, COLUMNS} from '../../../core/interfaces';
 import {ActivatedRoute} from '@angular/router';
-import {AuthenticationService, TeamService} from '../../../core/services';
+import {TeamService} from '../../../core/services';
 import {BaseTable} from '../../../shared/abstracts';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {TeamInterface} from '../../../core/interfaces/team.interface';
+import {NzModalService} from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-list',
@@ -19,10 +20,10 @@ export class ListComponent extends BaseTable<TeamInterface> implements OnInit {
     public colums: ColumnConfig,
     private activatedRoute: ActivatedRoute,
     private teamService: TeamService,
-    public authService: AuthenticationService,
     private fb: FormBuilder,
+    public modalService: NzModalService
   ) {
-    super(activatedRoute);
+    super(activatedRoute, modalService);
   }
 
   ngOnInit(): void {

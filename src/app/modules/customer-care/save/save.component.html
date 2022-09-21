@@ -49,7 +49,7 @@
         <button [routerLink]="['', 'customer-care']" nz-button>Quay lại</button>
         <button
           nz-button
-          (click)="validationForm()"
+          (click)="confirmUpdate()"
           [disabled]="!saveForm.valid"
           nzType="primary">
           {{record ? 'Cập nhật' : 'Tạo mới'}}

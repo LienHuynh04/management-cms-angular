@@ -20,9 +20,9 @@ export class ListComponent extends BaseTable<ProjectInterface> implements OnInit
     public colums: ColumnConfig,
     private activatedRoute: ActivatedRoute,
     private projectService: ProjectService,
-    private modalService: NzModalService
+    public modalService: NzModalService
   ) {
-    super(activatedRoute);
+    super(activatedRoute, modalService);
   }
 
   ngOnInit(): void {

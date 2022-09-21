@@ -3,6 +3,7 @@ import {ColumnConfig, ColumnInterface, COLUMNS, CustomerCareInterface} from '../
 import {ActivatedRoute, Router} from '@angular/router';
 import {BaseTable} from '../../../shared/abstracts';
 import {CustomerCareService} from '../../../core/services';
+import {NzModalService} from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-list',
@@ -16,9 +17,10 @@ export class ListComponent extends BaseTable<CustomerCareInterface> implements O
     @Inject(COLUMNS)
     public colums: ColumnConfig,
     private activatedRoute: ActivatedRoute,
-    private careService: CustomerCareService
+    private careService: CustomerCareService,
+    public modalService: NzModalService
   ) {
-    super(activatedRoute);
+    super(activatedRoute, modalService);
   }
 
   ngOnInit(): void {

@@ -20,9 +20,9 @@ export class ListComponent extends BaseTable<CustomerInterface> implements OnIni
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private customerService: CustomerService,
-    private modal: NzModalService
+    public modalService: NzModalService
   ) {
-    super(activatedRoute)
+    super(activatedRoute, modalService);
   }
 
   ngOnInit(): void {
@@ -48,7 +48,7 @@ export class ListComponent extends BaseTable<CustomerInterface> implements OnIni
   }
 
   openModalCare(care: any) {
-    this.modal.create({
+    this.modalService.create({
       nzTitle: 'Thông tin nhân viên chăm sóc',
       nzContent: CareTableComponent,
       nzMaskClosable: false,

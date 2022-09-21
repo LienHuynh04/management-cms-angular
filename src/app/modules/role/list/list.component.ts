@@ -3,6 +3,7 @@ import {ColumnConfig, ColumnInterface, COLUMNS, IRole} from '../../../core/inter
 import {ActivatedRoute} from '@angular/router';
 import {RoleService} from '../../../core/services';
 import {BaseTable} from '../../../shared/abstracts';
+import {NzModalService} from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-list',
@@ -16,9 +17,10 @@ export class ListComponent extends BaseTable<IRole> implements OnInit {
     @Inject(COLUMNS)
     public colums: ColumnConfig,
     private activatedRoute: ActivatedRoute,
-    private roleService: RoleService
+    private roleService: RoleService,
+    public modalService: NzModalService
   ) {
-    super(activatedRoute);
+    super(activatedRoute, modalService);
   }
 
   ngOnInit(): void {

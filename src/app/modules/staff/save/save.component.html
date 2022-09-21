@@ -1,8 +1,12 @@
 <nz-card [nzTitle]="record ? 'Cập nhật' : 'Tạo mới'">
-  <form [formGroup]="saveForm" nz-form>
+  <form [formGroup]="saveForm" nz-form autocomplete="off">
     <!--phone_number-->
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="login_id">Login ID</nz-form-label>
+      <nz-form-label [nzSm]="6" [nzXs]="24"
+                     autocomplete="new-input"
+                     nzRequired nzFor="login_id">
+        Login ID
+      </nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24">
         <input nz-input formControlName="login_id" id="login_id"/>
         <app-control-errors
@@ -99,17 +103,15 @@
       </nz-form-control>
     </nz-form-item>
 
-
     <nz-form-item nz-row class="create-area">
       <nz-form-control [nzSpan]="14" [nzOffset]="6">
         <button nz-button [routerLink]="['', 'users']">Quay lại</button>
         <button nz-button nzType="primary"
-                (click)="validationForm()"
+                (click)="confirmUpdate()"
                 [disabled]="!saveForm.valid">
           {{record ? 'Cập nhật' : 'Tạo mới'}}
         </button>
       </nz-form-control>
     </nz-form-item>
   </form>
-
 </nz-card>

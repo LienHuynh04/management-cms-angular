@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {UserRoutingModule} from './user-routing.module';
+import {StaffRoutingModule} from './staff-routing.module';
 import {ListComponent} from './list/list.component';
 import {SaveComponent} from './save/save.component';
 import {SharedModule} from '../../shared/shared.module';
@@ -11,9 +11,9 @@ import {SharedModule} from '../../shared/shared.module';
   declarations: [ListComponent, SaveComponent],
   imports: [
     CommonModule,
-    UserRoutingModule,
+    StaffRoutingModule,
     SharedModule,
   ]
 })
-export class UserModule {
+export class StaffModule {
 }

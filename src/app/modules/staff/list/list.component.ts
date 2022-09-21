@@ -1,10 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {ColumnConfig, ColumnInterface, COLUMNS, UserInterface} from '../../../core/interfaces';
 import {ActivatedRoute} from '@angular/router';
-import {switchMap} from 'rxjs/operators';
 import {AuthenticationService, UserService} from '../../../core/services';
 import {BaseTable} from '../../../shared/abstracts';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {NzModalService} from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-list',
@@ -21,8 +21,9 @@ export class ListComponent extends BaseTable<UserInterface> implements OnInit {
     private userService: UserService,
     public authService: AuthenticationService,
     private fb: FormBuilder,
+    public modalService: NzModalService
   ) {
-    super(activatedRoute)
+    super(activatedRoute, modalService);
   }
 
   ngOnInit(): void {
