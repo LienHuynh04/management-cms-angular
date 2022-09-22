@@ -15,13 +15,13 @@ export enum RoleEnum {
 export enum NameRoleEnum {
   ADMIN = 'Quản trị viên',
 
-  MARKETING = 'Tiếp thị',
+  MARKETING = 'Marketing',
 
-  HUMAN_RESOURCE = 'Nhân viên',
+  HUMAN_RESOURCE = 'Nhân sự',
 
-  SALES = 'Bán hàng',
+  SALES = 'Kinh doanh',
 
-  AGENCY = 'Hãng',
+  AGENCY = 'Đại lí',
 
-  COOPERATOR = 'Nhà hợp tác',
+  COOPERATOR = 'Nhà phân phối',
 }
