@@ -11,7 +11,8 @@ export class CustomerCareService {
 
   constructor(
     private apiBase: ApiBase
-  ) { }
+  ) {
+  }
 
   getAll(params ?: any): Observable<IPaginateList<CustomerCareInterface>> {
     return this.apiBase.get(apiEndpoints.customer_care, {
@@ -24,7 +25,7 @@ export class CustomerCareService {
   create(body: CustomerCareInterface) {
     return this.apiBase.post(apiEndpoints.customer_care, {
       ...body
-    })
+    });
   }
 
   getById(id: number | string | undefined) {

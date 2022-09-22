@@ -15,7 +15,9 @@ export class SaveResolver implements Resolve<boolean> {
   ) {
   }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
-    const source$ = [this.projectService.getAll(), this.userService.getAll()]
+    const source$ = [this.projectService.getAll(), this.userService.getAll({
+      'filter[sales]': 1
+    })]
     if(route.params.id) {
       source$.push(this.customerService.getById(route.params.id))
     }

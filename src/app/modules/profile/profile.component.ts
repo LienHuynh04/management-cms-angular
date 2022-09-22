@@ -6,6 +6,7 @@ import {IAdmin} from '../../core/interfaces';
 import {BaseForm} from '../../shared/abstracts';
 import {switchMap} from 'rxjs/operators';
 import {NzModalService} from 'ng-zorro-antd/modal';
+import {RoleEnum} from '../../core/enums';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,8 @@ import {NzModalService} from 'ng-zorro-antd/modal';
 export class ProfileComponent extends BaseForm<IAdmin> implements OnInit {
   passwordVisible = false;
   passwordVisibleConfirm = false;
+
+  roleEnum = RoleEnum;
 
   constructor(
     private fb: FormBuilder,

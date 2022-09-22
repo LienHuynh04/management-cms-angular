@@ -5,7 +5,7 @@ import {AuthenticationService, UserService} from '../../../core/services';
 import {BaseTable} from '../../../shared/abstracts';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {NzModalService} from 'ng-zorro-antd/modal';
-import {NameRoleEnum, RoleEnum} from '../../../core/enums';
+import {RoleEnum} from '../../../core/enums';
 
 @Component({
   selector: 'app-list',
@@ -15,7 +15,7 @@ import {NameRoleEnum, RoleEnum} from '../../../core/enums';
 export class ListComponent extends BaseTable<UserInterface> implements OnInit {
   cols: ColumnInterface[] = this.colums.staff;
   roleEnum = RoleEnum;
-  nameRoleEnum = NameRoleEnum;
+
   constructor(
     @Inject(COLUMNS)
     public colums: ColumnConfig,

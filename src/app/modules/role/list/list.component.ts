@@ -4,7 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {RoleService} from '../../../core/services';
 import {BaseTable} from '../../../shared/abstracts';
 import {NzModalService} from 'ng-zorro-antd/modal';
-import {NameRoleEnum, RoleEnum} from '../../../core/enums';
+import {RoleEnum} from '../../../core/enums';
 
 @Component({
   selector: 'app-list',
@@ -14,7 +14,7 @@ import {NameRoleEnum, RoleEnum} from '../../../core/enums';
 export class ListComponent extends BaseTable<IRole> implements OnInit {
   cols: ColumnInterface[] = this.colums.role;
   roleEnum = RoleEnum;
-  nameRoleEnum = NameRoleEnum;
+
   constructor(
     @Inject(COLUMNS)
     public colums: ColumnConfig,

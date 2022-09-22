@@ -84,7 +84,8 @@
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="role_id">Quyền</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24">
-        {{record.role[0].name}}
+        {{[roleEnum[record.role[0].name]]}}
+
       </nz-form-control>
     </nz-form-item>
 

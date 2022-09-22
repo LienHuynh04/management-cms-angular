@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {ColumnConfig, ColumnInterface, COLUMNS, CustomerInterface} from '../../../core/interfaces';
+import {ColumnConfig, ColumnInterface, COLUMNS, CustomerInterface, UserInterface} from '../../../core/interfaces';
 import {ActivatedRoute} from '@angular/router';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {CustomerService} from '../../../core/services';
 import {BaseTable} from '../../../shared/abstracts';
 import {CareTableComponent} from '../care-table/care-table.component';
@@ -13,7 +13,12 @@ import {NzModalService} from 'ng-zorro-antd/modal';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent extends BaseTable<CustomerInterface> implements OnInit {
+  isVisibleAssign = false;
   cols: ColumnInterface[] = this.colums.customer;
+  staff: UserInterface[] = [];
+  staffControl = new FormControl('');
+  customer !: CustomerInterface;
+
   constructor(
     @Inject(COLUMNS)
     public colums: ColumnConfig,
@@ -27,6 +32,7 @@ export class ListComponent extends BaseTable<CustomerInterface> implements OnIni
 
   ngOnInit(): void {
     this.initFormFilter();
+    this.staff = this.resolvedData.staff;
   }
 
   initFormFilter(): FormGroup {
@@ -61,5 +67,32 @@ export class ListComponent extends BaseTable<CustomerInterface> implements OnIni
         care: care
       }
     });
+  }
+
+  openModalAssign(customer: CustomerInterface) {
+    this.isVisibleAssign = true;
+    this.customer = {...customer};
+    this.staffControl.setValue(customer.assign_for_user.id);
+  }
+
+  assignStaff() {
+    if (this.staffControl.dirty) {
+      this.modalService.confirm({
+        nzTitle: 'Bạn có muốn thay đổi ?',
+        nzOkText: 'Có',
+        nzOkType: 'primary',
+        nzOkDanger: true,
+        nzCancelText: 'Không',
+        nzOnOk: () => {
+          this.customerService.update(this.customer.id, {
+            assign_for_user_id: this.staffControl.value
+          }).subscribe((_) => {
+            this.isVisibleAssign = false;
+          });
+        }
+      });
+    }else {
+      this.isVisibleAssign = false;
+    }
   }
 }

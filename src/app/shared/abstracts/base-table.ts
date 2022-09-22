@@ -8,6 +8,7 @@ import {NzModalService} from 'ng-zorro-antd/modal';
 export abstract class BaseTable<T> {
   records: T[] = [];
   filterForm!: FormGroup;
+  resolvedData: any;
   pagination: IPagination = {
     perPage: 50,
     currentPage: 1,
@@ -18,8 +19,8 @@ export abstract class BaseTable<T> {
     protected activatedRouteBase: ActivatedRoute,
     protected modalService: NzModalService
   ) {
-    const resolvedData = this.activatedRouteBase?.snapshot?.data?.resolvedData;
-    this.setDataAndPagination(resolvedData?.data, resolvedData?.pagination);
+    this.resolvedData = this.activatedRouteBase?.snapshot?.data?.resolvedData;
+    this.setDataAndPagination(this.resolvedData?.data, this.resolvedData?.pagination);
   }
 
 

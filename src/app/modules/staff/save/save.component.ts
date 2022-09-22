@@ -6,7 +6,7 @@ import {BaseForm} from '../../../shared/abstracts';
 import {ConfirmedValidator} from '../../../shared';
 import {IRole, UserInterface} from '../../../core/interfaces';
 import {NzModalService} from 'ng-zorro-antd/modal';
-import {NameRoleEnum, RoleEnum} from '../../../core/enums';
+import {RoleEnum} from '../../../core/enums';
 
 @Component({
   selector: 'app-save',
@@ -18,7 +18,6 @@ export class SaveComponent extends BaseForm<UserInterface> implements OnInit {
   passwordVisible = false;
   passwordVisibleConfirm = false;
   roleEnum = RoleEnum;
-  nameRoleEnum = NameRoleEnum;
 
   constructor(
     private fb: FormBuilder,

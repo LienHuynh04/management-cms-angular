@@ -102,11 +102,11 @@
           nzPlaceHolder="Vui lòng chọn"
           formControlName="role_id"
         >
-          <nz-option *ngFor="let item of roles" [nzLabel]="$any(nameRoleEnum[roleEnum[item.name]])" [nzValue]="$any(item?.id)"></nz-option>
+          <nz-option *ngFor="let item of roles" [nzLabel]="$any([roleEnum[item.name]])" [nzValue]="$any(item?.id)"></nz-option>
         </nz-select>
 
         <ng-template #updateTemplate>
-          {{record.role ? nameRoleEnum[roleEnum[record.role[0].name]] : ''}}
+          {{record.role ? [roleEnum[record.role[0].name]] : ''}}
         </ng-template>
         <app-control-errors
           fieldName="role_id"

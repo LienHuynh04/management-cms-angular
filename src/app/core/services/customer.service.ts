@@ -31,7 +31,7 @@ export class CustomerService {
     return this.apiBase.get(apiEndpoints.customer + '/' + id);
   }
 
-  update(id: number | string | undefined, body: CustomerInterface) {
+  update(id: number | string | undefined, body: CustomerInterface | {assign_for_user_id: number}) {
     return this.apiBase.put(apiEndpoints.customer + '/' + id, {
       ...body
     })

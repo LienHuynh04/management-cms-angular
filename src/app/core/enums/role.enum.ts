@@ -1,27 +1,13 @@
 export enum RoleEnum {
-  'admin' = 'ADMIN',
+  'admin' = 'Quản trị viên',
 
-  'marketing' = 'MARKETING',
+  'marketing' = 'Marketing',
 
-  'human-resource' = 'HUMAN_RESOURCE',
+  'human-resource' = 'Nhân sự',
 
-  'sales' = 'SALES',
+  'sales' = 'Kinh doanh',
 
-  'agency' = 'AGENCY',
+  'agency' = 'Đại lí',
 
-  'cooperator' = 'COOPERATOR',
-}
-
-export enum NameRoleEnum {
-  ADMIN = 'Quản trị viên',
-
-  MARKETING = 'Marketing',
-
-  HUMAN_RESOURCE = 'Nhân sự',
-
-  SALES = 'Kinh doanh',
-
-  AGENCY = 'Đại lí',
-
-  COOPERATOR = 'Nhà phân phối',
+  'cooperator' = 'Nhà phân phối',
 }

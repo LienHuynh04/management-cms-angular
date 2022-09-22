@@ -21,7 +21,7 @@
       <td *ngFor="let col of cols;">
         {{
         col.slot == 'role'
-          ? nameRoleEnum[roleEnum[data.name]]
+          ? [roleEnum[data.name]]
           : data[col?.field]
         }}
       </td>
