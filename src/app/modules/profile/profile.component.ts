@@ -1,12 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
-import {AuthenticationService, UserService} from '../../core/services';
+import {AuthenticationService, LoadingOverlayService, StaffService} from '../../core/services';
 import {ConfirmedValidator} from '../../shared';
 import {IAdmin} from '../../core/interfaces';
 import {BaseForm} from '../../shared/abstracts';
 import {switchMap} from 'rxjs/operators';
 import {NzModalService} from 'ng-zorro-antd/modal';
 import {RoleEnum} from '../../core/enums';
+import {Router} from '@angular/router';
+import {NzNotificationService} from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-login',
@@ -22,10 +24,13 @@ export class ProfileComponent extends BaseForm<IAdmin> implements OnInit {
   constructor(
     private fb: FormBuilder,
     public authService: AuthenticationService,
-    public userService: UserService,
-    public modalService: NzModalService
+    public staffService: StaffService,
+    public modalService: NzModalService,
+    public loadingOverlayService: LoadingOverlayService,
+    public router: Router,
+    public notification: NzNotificationService
   ) {
-    super(modalService);
+    super(modalService, loadingOverlayService, notification);
   }
 
   ngOnInit(): void {
@@ -52,12 +57,13 @@ export class ProfileComponent extends BaseForm<IAdmin> implements OnInit {
       delete body.password_confirmation
     }
 
-    this.userService.updateProfile(body)
+    this.staffService.updateProfile(body)
       .pipe(
         switchMap(() => this.authService.profile())
       )
       .subscribe( _ => {
         super.patchValueForm();
+        this.router.navigate(['dashboard'])
       });
   }
 }

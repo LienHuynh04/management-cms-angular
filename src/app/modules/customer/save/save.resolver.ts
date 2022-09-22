@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {forkJoin, Observable} from 'rxjs';
-import {CustomerService, ProjectService, UserService} from '../../../core/services';
+import {CustomerService, ProjectService, StaffService} from '../../../core/services';
 import {map} from 'rxjs/operators';
 
 @Injectable({
@@ -11,11 +11,11 @@ export class SaveResolver implements Resolve<boolean> {
   constructor(
     private projectService: ProjectService,
     private customerService: CustomerService,
-    private userService: UserService
+    private staffService: StaffService
   ) {
   }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
-    const source$ = [this.projectService.getAll(), this.userService.getAll({
+    const source$ = [this.projectService.getAll(), this.staffService.getAll({
       'filter[sales]': 1
     })]
     if(route.params.id) {

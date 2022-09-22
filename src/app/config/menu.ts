@@ -2,24 +2,32 @@ import {NavbarItem} from '../core/interfaces';
 
 export const navigations: NavbarItem[] = [
   {
-    title: 'Thông tin cá nhân',
-    url: '/profile',
-    icon: 'user'
+    title: 'Trang chủ',
+    url: '/dashboard',
+    icon: 'home'
   },
   {
-    title: 'Nhân sự',
-    url: '/staff',
-    icon: 'user',
+    title: 'Khách hàng',
+    url: '/customers',
+    icon: 'team',
     permissions: {
-      only: ['admin', 'human-resource']
+      only: ['admin', 'marketing', 'sales', 'agency', 'cooperator']
     }
   },
   {
-    title: 'Quản lý nhóm phòng kinh doanh',
+    title: 'Phòng kinh doanh',
     url: '/teams',
     icon: 'team',
     permissions: {
       only: ['admin']
+    }
+  },
+  {
+    title: 'Nhân viên',
+    url: '/staff',
+    icon: 'user',
+    permissions: {
+      only: ['admin', 'human-resource']
     }
   },
   {
@@ -31,17 +39,17 @@ export const navigations: NavbarItem[] = [
     }
   },
   {
-    title: 'Quản lý khách hàng',
-    url: '/customers',
-    icon: 'team',
-    permissions: {
-      only: ['admin', 'marketing', 'sales', 'agency', 'cooperator']
-    }
-  },
-  {
     title: 'Phân quyền',
     url: '/roles',
     icon: 'apartment',
+    permissions: {
+      only: ['admin']
+    }
+  },
+  {
+    title: 'Thống kê',
+    url: '/bar-chart',
+    icon: 'bar-chart',
     permissions: {
       only: ['admin']
     }

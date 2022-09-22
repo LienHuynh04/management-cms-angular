@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {forkJoin, Observable, of} from 'rxjs';
 import {CustomerCareService, CustomerService, ProjectService} from '../../../core/services';
-import {UserService} from '../../../core/services';
+import {StaffService} from '../../../core/services';
 import {map} from 'rxjs/operators';
 
 @Injectable({
@@ -11,13 +11,13 @@ import {map} from 'rxjs/operators';
 export class SaveResolver implements Resolve<boolean> {
   constructor(
     private careService: CustomerCareService,
-    private userService: UserService,
+    private staffService: StaffService,
     private customerService: CustomerService,
   ) {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
-    const source$ = [this.customerService.getAll(), this.userService.getAll()]
+    const source$ = [this.customerService.getAll(), this.staffService.getAll()]
     if (route.params.id) {
       source$.push(this.careService.getById(route.params.id));
     }

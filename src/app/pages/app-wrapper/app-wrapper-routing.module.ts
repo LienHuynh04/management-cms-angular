@@ -10,6 +10,10 @@ const routes: Routes = [
     component: AppWrapperComponent,
     children: [
       {
+        path: 'dashboard',
+        loadChildren: () => import('../../modules/dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
+      {
         path: 'profile',
         component: ProfileComponent
       },
@@ -40,7 +44,7 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'profile'
+        redirectTo: 'dashboard'
       },
     ]
   }

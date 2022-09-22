@@ -6,6 +6,7 @@ import {BaseTable} from '../../../shared/abstracts';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {TeamInterface} from '../../../core/interfaces/team.interface';
 import {NzModalService} from 'ng-zorro-antd/modal';
+import {NzNotificationService} from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-list',
@@ -21,9 +22,10 @@ export class ListComponent extends BaseTable<TeamInterface> implements OnInit {
     private activatedRoute: ActivatedRoute,
     private teamService: TeamService,
     private fb: FormBuilder,
-    public modalService: NzModalService
+    public modalService: NzModalService,
+    public notification: NzNotificationService,
   ) {
-    super(activatedRoute, modalService);
+    super(activatedRoute, modalService, notification);
   }
 
   ngOnInit(): void {
@@ -40,6 +42,7 @@ export class ListComponent extends BaseTable<TeamInterface> implements OnInit {
   confirm(id: number | string | undefined) {
     this.teamService.delete(id).subscribe(() => {
       this.processData(this.teamService.getAll(super.processFilter()));
+      super.confirm()
     });
   }
 

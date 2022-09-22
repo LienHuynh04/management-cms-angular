@@ -2,9 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BaseForm} from '../../../shared/abstracts';
-import {CustomerCareService} from '../../../core/services';
+import {CustomerCareService, LoadingOverlayService} from '../../../core/services';
 import {CustomerCareInterface, CustomerInterface, ProjectInterface, UserInterface} from '../../../core/interfaces';
 import {NzModalService} from 'ng-zorro-antd/modal';
+import {NzNotificationService} from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-save',
@@ -22,9 +23,11 @@ export class SaveComponent extends BaseForm<CustomerCareInterface> implements On
     private router: Router,
     private customerCareService: CustomerCareService,
     private activatedRoute: ActivatedRoute,
-    public modalService: NzModalService
+    public modalService: NzModalService,
+    public loadingOverlayService: LoadingOverlayService,
+    public notification: NzNotificationService
   ) {
-    super(modalService, activatedRoute, router);
+    super(modalService, loadingOverlayService, notification,  activatedRoute, router);
     this.customer = this.resolvedData?.customer;
     this.user = this.resolvedData?.user;
   }

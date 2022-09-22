@@ -72,7 +72,7 @@
         [nzWidth]="col.style?.width">
         {{col.header}}
       </th>
-      <th [nzWidth]="'150px'"></th>
+      <th [nzWidth]="'150px'" nzRight></th>
     </tr>
     </thead>
     <tbody>
@@ -84,7 +84,7 @@
           : data[col?.field]
         }}
       </td>
-      <td style="text-align: center">
+      <td style="text-align: center" nzRight>
         <ng-container *ngIf="!(data.id == 1 || authService.currentUserValue.id == data.id)">
           <button nz-button
                   nzType="primary" nzShape="circle"

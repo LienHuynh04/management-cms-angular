@@ -6,6 +6,7 @@ import {CustomerService} from '../../../core/services';
 import {BaseTable} from '../../../shared/abstracts';
 import {CareTableComponent} from '../care-table/care-table.component';
 import {NzModalService} from 'ng-zorro-antd/modal';
+import {NzNotificationService} from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-list',
@@ -25,9 +26,10 @@ export class ListComponent extends BaseTable<CustomerInterface> implements OnIni
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private customerService: CustomerService,
-    public modalService: NzModalService
+    public modalService: NzModalService,
+    public notification: NzNotificationService,
   ) {
-    super(activatedRoute, modalService);
+    super(activatedRoute, modalService, notification);
   }
 
   ngOnInit(): void {

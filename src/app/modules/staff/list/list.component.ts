@@ -1,11 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {ColumnConfig, ColumnInterface, COLUMNS, UserInterface} from '../../../core/interfaces';
 import {ActivatedRoute} from '@angular/router';
-import {AuthenticationService, UserService} from '../../../core/services';
+import {AuthenticationService, StaffService} from '../../../core/services';
 import {BaseTable} from '../../../shared/abstracts';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {NzModalService} from 'ng-zorro-antd/modal';
 import {RoleEnum} from '../../../core/enums';
+import {NzNotificationService} from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-list',
@@ -20,12 +21,13 @@ export class ListComponent extends BaseTable<UserInterface> implements OnInit {
     @Inject(COLUMNS)
     public colums: ColumnConfig,
     private activatedRoute: ActivatedRoute,
-    private userService: UserService,
+    private staffService: StaffService,
     public authService: AuthenticationService,
     private fb: FormBuilder,
-    public modalService: NzModalService
+    public modalService: NzModalService,
+    public notification: NzNotificationService,
   ) {
-    super(activatedRoute, modalService);
+    super(activatedRoute, modalService, notification);
   }
 
   ngOnInit(): void {
@@ -42,8 +44,9 @@ export class ListComponent extends BaseTable<UserInterface> implements OnInit {
   }
 
   confirm(id: number | string | undefined) {
-    this.userService.delete(id).subscribe(() => {
-      this.processData(this.userService.getAll(super.processFilter()));
+    this.staffService.delete(id).subscribe(() => {
+      this.processData(this.staffService.getAll(super.processFilter()));
+      super.confirm()
     });
   }
 
@@ -51,7 +54,7 @@ export class ListComponent extends BaseTable<UserInterface> implements OnInit {
    * Call api to get list
    */
   fetchData(): void {
-    const request = this.userService.getAll(super.processFilter());
+    const request = this.staffService.getAll(super.processFilter());
     this.processData(request);
   }
 }

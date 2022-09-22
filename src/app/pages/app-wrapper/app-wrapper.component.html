@@ -1,7 +1,7 @@
 <nz-layout class="app-layout {{isLoading ? 'app-loading' : ''}}">
   <nz-sider class="menu-sidebar"
             nzCollapsible
-            nzWidth="300px"
+            nzWidth="250px"
             nzBreakpoint="md"
             [(nzCollapsed)]="isCollapsed"
             [nzTrigger]="null">
@@ -14,6 +14,9 @@
           nzMatchRouter nzMatchRouterExact
           routerLinkActive="active"
           *ngxPermissionsOnly="nav?.permissions?.only"
+          nz-tooltip
+          nzTooltipPlacement="right"
+          [nzTooltipTitle]="isCollapsed ? (nav?.title  ) : ''"
         >
           <i nz-icon [nzType]="nav?.icon"></i>
           <span>{{nav?.title}}</span>
@@ -36,6 +39,7 @@
         </a>
         <nz-dropdown-menu #menu="nzDropdownMenu">
           <ul nz-menu nzSelectable>
+            <li nz-menu-item [routerLink]="['profile']">Thông tin</li>
             <li nz-menu-item nzDanger (click)="logout()">Đăng xuất</li>
           </ul>
         </nz-dropdown-menu>

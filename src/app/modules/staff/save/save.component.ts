@@ -1,12 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserService} from '../../../core/services';
+import {LoadingOverlayService, StaffService} from '../../../core/services';
 import {BaseForm} from '../../../shared/abstracts';
 import {ConfirmedValidator} from '../../../shared';
 import {IRole, UserInterface} from '../../../core/interfaces';
 import {NzModalService} from 'ng-zorro-antd/modal';
 import {RoleEnum} from '../../../core/enums';
+import {NzNotificationService} from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-save',
@@ -22,11 +23,13 @@ export class SaveComponent extends BaseForm<UserInterface> implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private userService: UserService,
+    private staffService: StaffService,
     private activatedRoute: ActivatedRoute,
-    public modalService: NzModalService
+    public modalService: NzModalService,
+    public loadingOverlayService: LoadingOverlayService,
+    public notification: NzNotificationService
   ) {
-    super(modalService, activatedRoute, router);
+    super(modalService, loadingOverlayService, notification, activatedRoute, router);
     this.roles = this.resolvedData.roles;
   }
 
@@ -62,8 +65,8 @@ export class SaveComponent extends BaseForm<UserInterface> implements OnInit {
     }
     this.processData(
       this.record
-        ? this.userService.update(this.record.id, body)
-        : this.userService.create(this.saveForm.value),
+        ? this.staffService.update(this.record.id, body)
+        : this.staffService.create(this.saveForm.value),
       'staff'
     );
   }

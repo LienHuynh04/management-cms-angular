@@ -2,8 +2,11 @@ import {FormGroup} from '@angular/forms';
 import {IPaginateList, IPagination} from '../../core/interfaces';
 import {ActivatedRoute} from '@angular/router';
 import {NzTableQueryParams} from 'ng-zorro-antd/table';
-import {Observable} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {NzModalService} from 'ng-zorro-antd/modal';
+import {NzNotificationService} from 'ng-zorro-antd/notification';
+import {catchError} from 'rxjs/operators';
+import {HttpErrorResponse} from '@angular/common/http';
 
 export abstract class BaseTable<T> {
   records: T[] = [];
@@ -17,7 +20,8 @@ export abstract class BaseTable<T> {
 
   protected constructor(
     protected activatedRouteBase: ActivatedRoute,
-    protected modalService: NzModalService
+    protected modalService: NzModalService,
+    protected notification: NzNotificationService,
   ) {
     this.resolvedData = this.activatedRouteBase?.snapshot?.data?.resolvedData;
     this.setDataAndPagination(this.resolvedData?.data, this.resolvedData?.pagination);
@@ -29,7 +33,16 @@ export abstract class BaseTable<T> {
   }
 
   processData(request: Observable<IPaginateList<T>>): void {
-    request.subscribe((resp: IPaginateList<T>) => {
+    request.pipe(
+      catchError((err: HttpErrorResponse) => {
+        this.notification.create(
+          'error',
+          'Thất bại',
+          ''
+        );
+        return throwError(err)
+      })
+    ).subscribe((resp: IPaginateList<T>) => {
       this.setDataAndPagination(resp.data, resp.pagination);
     });
   }
@@ -88,5 +101,11 @@ export abstract class BaseTable<T> {
     })
   }
 
- protected confirm(id: number | string | undefined) {}
+ protected confirm(id?: number | string | undefined) {
+   this.notification.create(
+     'success',
+     'Thành công',
+     ''
+   );
+ }
 }

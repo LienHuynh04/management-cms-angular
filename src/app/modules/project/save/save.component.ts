@@ -1,11 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
-import {ProjectService} from '../../../core/services';
+import {LoadingOverlayService, ProjectService} from '../../../core/services';
 import {map, switchMap} from 'rxjs/operators';
 import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
 import {BaseForm} from '../../../shared/abstracts';
 import {Observable} from 'rxjs';
 import {IPaginateList, ProjectInterface} from '../../../core/interfaces';
+import {NzNotificationService} from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-save',
@@ -20,9 +21,11 @@ export class SaveComponent extends BaseForm<ProjectInterface> implements OnInit 
     private projectService: ProjectService,
     private modal: NzModalRef,
     private fb: FormBuilder,
-    public modalService: NzModalService
+    public modalService: NzModalService,
+    public loadingOverlayService: LoadingOverlayService,
+    public notification: NzNotificationService
   ) {
-    super(modalService);
+    super(modalService, loadingOverlayService, notification);
   }
 
   ngOnInit(): void {

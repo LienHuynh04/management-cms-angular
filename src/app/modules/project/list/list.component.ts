@@ -6,6 +6,7 @@ import {ProjectService} from '../../../core/services';
 import {NzModalService} from 'ng-zorro-antd/modal';
 import {SaveComponent} from '../save/save.component';
 import {BaseTable} from '../../../shared/abstracts';
+import {NzNotificationService} from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-list',
@@ -20,9 +21,10 @@ export class ListComponent extends BaseTable<ProjectInterface> implements OnInit
     public colums: ColumnConfig,
     private activatedRoute: ActivatedRoute,
     private projectService: ProjectService,
-    public modalService: NzModalService
+    public modalService: NzModalService,
+    public notification: NzNotificationService,
   ) {
-    super(activatedRoute, modalService);
+    super(activatedRoute, modalService, notification);
   }
 
   ngOnInit(): void {
@@ -32,6 +34,7 @@ export class ListComponent extends BaseTable<ProjectInterface> implements OnInit
   confirm(id: number | string | undefined) {
     this.projectService.delete(id).subscribe(() => {
       this.processData(this.projectService.getAll());
+      super.confirm()
     });
   }
 

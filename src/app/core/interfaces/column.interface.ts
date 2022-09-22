@@ -24,6 +24,7 @@ export interface ColumnInterface {
   colspan?: number;
   isAction?: boolean;
   hasLocked?: boolean;
+  isLeft?: boolean
   actions?: Action[];
 }
 

@@ -32,7 +32,7 @@
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="description">Mô tả</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24">
-        <input nz-input formControlName="description" id="description"/>
+        <textarea nz-input formControlName="description" id="description"> </textarea>
         <app-control-errors
           fieldName="description"
         ></app-control-errors>
@@ -42,9 +42,10 @@
 
     <nz-form-item nz-row class="create-area">
       <nz-form-control [nzSpan]="14" [nzOffset]="6">
-        <button nz-button [routerLink]="['', 'users']">Quay lại</button>
+        <button nz-button [routerLink]="['', 'teams']">Quay lại</button>
         <button nz-button nzType="primary"
                 (click)="confirmUpdate()"
+                [nzLoading]="isLoading"
                 [disabled]="!saveForm.valid">
           {{record ? 'Cập nhật' : 'Tạo mới'}}
         </button>

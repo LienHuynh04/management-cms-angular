@@ -7,7 +7,7 @@ import {IPaginateList, UserInterface} from '../interfaces';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class StaffService {
 
   constructor(
     private apiBase: ApiBase

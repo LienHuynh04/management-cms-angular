@@ -82,10 +82,11 @@
     <tr>
       <th
         *ngFor="let col of cols"
-        [nzWidth]="col.style?.width">
+        [nzWidth]="col.style?.width"
+      >
         {{col.header}}
       </th>
-      <th [nzWidth]="'150px'"></th>
+      <th [nzWidth]="'150px'" nzRight></th>
     </tr>
     </thead>
     <tbody>
@@ -93,7 +94,7 @@
       <td *ngFor="let col of cols;">
         {{ data[col?.field] }}
       </td>
-      <td style="text-align: center">
+      <td style="text-align: center" nzRight>
         <button nz-button
                 nzType="primary" nzShape="circle"
                 [routerLink]="['update', data.id]"

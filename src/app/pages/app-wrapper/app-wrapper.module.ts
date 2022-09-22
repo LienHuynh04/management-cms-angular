@@ -5,7 +5,7 @@ import {AppWrapperComponent} from './app-wrapper.component';
 import {NgxPermissionsModule} from 'ngx-permissions';
 import {SharedModule} from '../../shared/shared.module';
 import {ProfileComponent} from '../../modules/profile/profile.component';
-import {NzSpinModule} from 'ng-zorro-antd/spin';
+import {NzNotificationService} from 'ng-zorro-antd/notification';
 
 @NgModule({
   declarations: [AppWrapperComponent, ProfileComponent],
@@ -14,7 +14,8 @@ import {NzSpinModule} from 'ng-zorro-antd/spin';
     AppWrapperRoutingModule,
     NgxPermissionsModule,
     SharedModule,
-  ]
+  ],
+  providers: [NzNotificationService]
 })
 export class AppWrapperModule {
 }

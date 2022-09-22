@@ -1,22 +1,32 @@
 import {FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, throwError} from 'rxjs';
-import {catchError} from 'rxjs/operators';
+import {catchError, delay} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
 import {NzModalService} from 'ng-zorro-antd/modal';
+import {LoadingOverlayService} from '../../core/services';
+import {NzNotificationService} from 'ng-zorro-antd/notification';
 
 export abstract class BaseForm<T> {
   resolvedData;
   record: T;
   saveForm!: FormGroup;
+  isLoading = false;
 
   protected constructor(
     protected modalSerice: NzModalService,
+    protected loadingOverlayService: LoadingOverlayService,
+    protected notification: NzNotificationService,
     protected activatedRouteBase?: ActivatedRoute,
     protected routerBase?: Router
   ) {
     this.resolvedData = this.activatedRouteBase?.snapshot?.data?.resolvedData;
     this.record = this.resolvedData?.data;
+    this.loadingOverlayService.isLoading$
+      .pipe(delay(0))
+      .subscribe((isLoading) => {
+        this.isLoading = isLoading;
+      });
   }
 
   /*Process Data*/
@@ -24,6 +34,11 @@ export abstract class BaseForm<T> {
     request
       .pipe(
         catchError((error: HttpErrorResponse | any) => {
+          this.notification.create(
+            'error',
+            'Thất bại',
+            ''
+          );
           if (error.status === 422) {
             this.setFormErrors(error.error.errors);
           }
@@ -33,6 +48,11 @@ export abstract class BaseForm<T> {
       .subscribe(resp => {
         this.record = resp;
         if(redirectUrl) this.routerBase?.navigate([redirectUrl])
+        this.notification.create(
+          'success',
+          'Thành công',
+          ''
+        );
       });
   }
 

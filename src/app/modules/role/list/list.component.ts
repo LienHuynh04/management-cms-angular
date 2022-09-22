@@ -5,6 +5,7 @@ import {RoleService} from '../../../core/services';
 import {BaseTable} from '../../../shared/abstracts';
 import {NzModalService} from 'ng-zorro-antd/modal';
 import {RoleEnum} from '../../../core/enums';
+import {NzNotificationService} from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-list',
@@ -20,9 +21,10 @@ export class ListComponent extends BaseTable<IRole> implements OnInit {
     public colums: ColumnConfig,
     private activatedRoute: ActivatedRoute,
     private roleService: RoleService,
-    public modalService: NzModalService
+    public modalService: NzModalService,
+    public notification: NzNotificationService,
   ) {
-    super(activatedRoute, modalService);
+    super(activatedRoute, modalService, notification);
   }
 
   ngOnInit(): void {

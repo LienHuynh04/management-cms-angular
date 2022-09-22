@@ -2,14 +2,14 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs';
 import {CustomerInterface, IPaginateList} from '../../../core/interfaces';
-import {UserService} from '../../../core/services/user.service';
+import {StaffService} from '../../../core/services/staff.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ListResolver implements Resolve<boolean> {
   constructor(
-    private userService: UserService
+    private staffService: StaffService
   ) {
   }
 
@@ -17,6 +17,6 @@ export class ListResolver implements Resolve<boolean> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot)
     : Observable<IPaginateList<CustomerInterface>> | boolean | any {
-    return this.userService.getAll()
+    return this.staffService.getAll()
   }
 }

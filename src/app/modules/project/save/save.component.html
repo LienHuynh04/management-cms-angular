@@ -13,5 +13,10 @@
 
 <div *nzModalFooter>
   <button (click)="closeModal(null)" nz-button nzType="default">Quay lại</button>
-  <button (click)="confirmUpdate()" nz-button nzType="primary">{{id ? 'Cập nhật' : 'Tạo mới'}}</button>
+  <button (click)="confirmUpdate()"
+          nz-button
+          nzType="primary"
+          [nzLoading]="isLoading"
+  >
+    {{id ? 'Cập nhật' : 'Tạo mới'}}</button>
 </div>

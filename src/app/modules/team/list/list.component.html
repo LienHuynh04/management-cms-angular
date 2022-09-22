@@ -30,7 +30,7 @@
     [nzVirtualItemSize]="54"
     [nzData]="records"
     [nzPaginationPosition]="'both'"
-   [nzScroll]="{ x: '1024px', y: '100vh' }"
+    [nzScroll]="{ x: '1024px', y: '100vh' }"
     [nzFrontPagination]="false"
     [nzTotal]="pagination.total"
     [nzPageSize]="pagination.perPage"
@@ -45,7 +45,7 @@
         [nzWidth]="col.style?.width">
         {{col.header}}
       </th>
-      <th [nzWidth]="'150px'"></th>
+      <th [nzWidth]="'150px'" nzRight></th>
     </tr>
     </thead>
     <tbody>
@@ -53,7 +53,7 @@
       <td *ngFor="let col of cols;">
         {{ data[col?.field] }}
       </td>
-      <td>
+      <td style="text-align: center" nzRight>
         <button nz-button
                 nzType="primary" nzShape="circle"
                 style="margin-right: 5px"

@@ -5,6 +5,6 @@ export * from './customer.service';
 export * from './loading.service';
 export * from './project.service';
 export * from './customer-care.service';
-export * from './user.service';
+export * from './staff.service';
 export * from './role.service';
 export * from './team.service';

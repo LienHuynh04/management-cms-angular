@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {BaseTable} from '../../../shared/abstracts';
 import {CustomerCareService} from '../../../core/services';
 import {NzModalService} from 'ng-zorro-antd/modal';
+import {NzNotificationService} from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-list',
@@ -18,9 +19,10 @@ export class ListComponent extends BaseTable<CustomerCareInterface> implements O
     public colums: ColumnConfig,
     private activatedRoute: ActivatedRoute,
     private careService: CustomerCareService,
-    public modalService: NzModalService
+    public modalService: NzModalService,
+    public notification: NzNotificationService,
   ) {
-    super(activatedRoute, modalService);
+    super(activatedRoute, modalService, notification);
   }
 
   ngOnInit(): void {
