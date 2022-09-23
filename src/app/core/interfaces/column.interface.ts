@@ -4,7 +4,6 @@ export interface ColumnConfig {
   customer: ColumnInterface[];
   staff: ColumnInterface[];
   project: ColumnInterface[];
-  customer_care: ColumnInterface[];
   role: ColumnInterface[];
   care: ColumnInterface[];
 

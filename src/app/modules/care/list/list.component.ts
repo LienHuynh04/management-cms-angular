@@ -13,8 +13,8 @@ import { RoleEnum } from '../../../core/enums';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent extends BaseTable<CareInterface> implements OnInit {
-  cols: ColumnInterface[] = this.colums.staff;
-  roleEnum = RoleEnum;
+  cols: ColumnInterface[] = this.colums.care;
+  care: CareInterface[] = [];
 
   constructor(
     @Inject(COLUMNS)

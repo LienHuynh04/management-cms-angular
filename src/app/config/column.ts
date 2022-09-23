@@ -70,20 +70,6 @@ export const column: ColumnConfig = {
       }
     }
   ],
-  customer_care: [
-    {
-      header: 'Login ID',
-      field: 'login_id'
-    },
-    {
-      header: 'Tên',
-      field: 'full_name'
-    },
-    {
-      header: 'Email',
-      field: 'email'
-    },
-  ],
   role: [
     {
       header: 'ID',
@@ -100,14 +86,17 @@ export const column: ColumnConfig = {
   ],
   care: [
     {
-      header: 'Nhân Viên',
-      field: 'staff',
-      colspan: 2
+      header: 'Tên nhân viên',
+      field: 'staff_name'
     },
     {
-      header: 'Khách hàng',
-      field: 'customer',
-      colspan: 2
+      header: 'Email nhân viên',
+      field: 'staff_email'
+    },
+    {
+      header: 'Ngày tạo',
+      field: 'created_at',
+      slot: 'datetime'
     }
   ],
   team: [
