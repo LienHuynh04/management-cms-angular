@@ -1,12 +1,12 @@
-import {FormGroup} from '@angular/forms';
-import {IPaginateList, IPagination} from '../../core/interfaces';
-import {ActivatedRoute} from '@angular/router';
-import {NzTableQueryParams} from 'ng-zorro-antd/table';
-import {Observable, throwError} from 'rxjs';
-import {NzModalService} from 'ng-zorro-antd/modal';
-import {NzNotificationService} from 'ng-zorro-antd/notification';
-import {catchError} from 'rxjs/operators';
-import {HttpErrorResponse} from '@angular/common/http';
+import { FormGroup } from '@angular/forms';
+import { IPaginateList, IPagination } from '../../core/interfaces';
+import { ActivatedRoute } from '@angular/router';
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
+import { Observable, throwError } from 'rxjs';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { catchError } from 'rxjs/operators';
+import { HttpErrorResponse } from '@angular/common/http';
 
 export abstract class BaseTable<T> {
   records: T[] = [];
@@ -40,7 +40,7 @@ export abstract class BaseTable<T> {
           'Thất bại',
           ''
         );
-        return throwError(err)
+        return throwError(err);
       })
     ).subscribe((resp: IPaginateList<T>) => {
       this.setDataAndPagination(resp.data, resp.pagination);
@@ -98,14 +98,14 @@ export abstract class BaseTable<T> {
       },
       nzCancelText: 'Không',
       nzOnOk: () => this.confirm(id),
-    })
+    });
   }
 
- protected confirm(id?: number | string | undefined) {
-   this.notification.create(
-     'success',
-     'Thành công',
-     ''
-   );
- }
+  protected confirm(id?: number | string | undefined) {
+    this.notification.create(
+      'success',
+      'Thành công',
+      ''
+    );
+  }
 }

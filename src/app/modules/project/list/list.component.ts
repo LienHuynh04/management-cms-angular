@@ -1,12 +1,11 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {ColumnConfig, ColumnInterface, COLUMNS, ProjectInterface} from '../../../core/interfaces';
-import {ActivatedRoute} from '@angular/router';
-import {switchMap} from 'rxjs/operators';
-import {ProjectService} from '../../../core/services';
-import {NzModalService} from 'ng-zorro-antd/modal';
-import {SaveComponent} from '../save/save.component';
-import {BaseTable} from '../../../shared/abstracts';
-import {NzNotificationService} from 'ng-zorro-antd/notification';
+import { Component, Inject, OnInit } from '@angular/core';
+import { ColumnConfig, ColumnInterface, COLUMNS, ProjectInterface } from '../../../core/interfaces';
+import { ActivatedRoute } from '@angular/router';
+import { ProjectService } from '../../../core/services';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { SaveComponent } from '../save/save.component';
+import { BaseTable } from '../../../shared/abstracts';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-list',
@@ -34,7 +33,7 @@ export class ListComponent extends BaseTable<ProjectInterface> implements OnInit
   confirm(id: number | string | undefined) {
     this.projectService.delete(id).subscribe(() => {
       this.processData(this.projectService.getAll());
-      super.confirm()
+      super.confirm();
     });
   }
 
@@ -48,7 +47,7 @@ export class ListComponent extends BaseTable<ProjectInterface> implements OnInit
     });
 
     modal.afterClose.subscribe((res) => {
-      if(res) {
+      if (res) {
         this.setDataAndPagination(res.data, res.pagination);
       }
     });

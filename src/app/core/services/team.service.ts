@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {ApiBase} from './api.service';
-import {apiEndpoints} from '../../config/global-vars';
-import {IPaginateList} from '../interfaces';
-import {TeamInterface} from '../interfaces/team.interface';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ApiBase } from './api.service';
+import { apiEndpoints } from '../../config/global-vars';
+import { IPaginateList } from '../interfaces';
+import { TeamInterface } from '../interfaces/team.interface';
 
 @Injectable({
   providedIn: 'root'

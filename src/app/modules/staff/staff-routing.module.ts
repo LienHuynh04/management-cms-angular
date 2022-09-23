@@ -1,9 +1,9 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {ListComponent} from './list/list.component';
-import {SaveComponent} from './save/save.component';
-import {SaveResolver} from './save/save.resolver';
-import {ListResolver} from './list/list.resolver';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { ListComponent } from './list/list.component';
+import { SaveComponent } from './save/save.component';
+import { SaveResolver } from './save/save.resolver';
+import { ListResolver } from './list/list.resolver';
 
 const routes: Routes = [
   {

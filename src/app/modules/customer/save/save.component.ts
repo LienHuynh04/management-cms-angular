@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {CustomerService, LoadingOverlayService} from '../../../core/services';
-import {CustomerInterface, ProjectInterface, UserInterface} from '../../../core/interfaces';
-import {BaseForm} from '../../../shared/abstracts';
-import {ResultEnum} from '../../../core/enums';
-import {NzModalService} from 'ng-zorro-antd/modal';
-import {NzNotificationService} from 'ng-zorro-antd/notification';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CustomerService, LoadingOverlayService } from '../../../core/services';
+import { CustomerInterface, ProjectInterface, UserInterface } from '../../../core/interfaces';
+import { BaseForm } from '../../../shared/abstracts';
+import { ResultEnum } from '../../../core/enums';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-save',
@@ -16,8 +16,8 @@ import {NzNotificationService} from 'ng-zorro-antd/notification';
 export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit {
   projects!: ProjectInterface[];
   users !: UserInterface[];
-  resultEnum : any = ResultEnum
-  optionResultField = Object.keys(this.resultEnum).filter(r => r)
+  resultEnum: any = ResultEnum;
+  optionResultField = Object.keys(this.resultEnum).filter(r => r);
 
   constructor(
     private fb: FormBuilder,
@@ -28,7 +28,7 @@ export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit
     public loadingOverlayService: LoadingOverlayService,
     public notification: NzNotificationService
   ) {
-    super(modalService, loadingOverlayService, notification,  activatedRoute, router);
+    super(modalService, loadingOverlayService, notification, activatedRoute, router);
     this.projects = this.resolvedData.projects;
     this.users = this.resolvedData.users;
   }

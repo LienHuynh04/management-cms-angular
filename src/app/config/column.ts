@@ -1,4 +1,4 @@
-import {ColumnConfig} from '../core/interfaces';
+import { ColumnConfig } from '../core/interfaces';
 
 export const column: ColumnConfig = {
   customer: [

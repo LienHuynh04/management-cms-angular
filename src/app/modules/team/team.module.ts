@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { TeamRoutingModule } from './team-routing.module';
-import {ListComponent} from './list/list.component';
-import {SaveComponent} from './save/save.component';
-import {SharedModule} from '../../shared/shared.module';
+import { ListComponent } from './list/list.component';
+import { SaveComponent } from './save/save.component';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
@@ -15,4 +15,5 @@ import {SharedModule} from '../../shared/shared.module';
     SharedModule
   ]
 })
-export class TeamModule { }
+export class TeamModule {
+}

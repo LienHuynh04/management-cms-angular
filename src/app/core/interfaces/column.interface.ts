@@ -1,4 +1,4 @@
-import {InjectionToken} from '@angular/core';
+import { InjectionToken } from '@angular/core';
 
 export interface ColumnConfig {
   customer: ColumnInterface[];
@@ -24,7 +24,7 @@ export interface ColumnInterface {
   colspan?: number;
   isAction?: boolean;
   hasLocked?: boolean;
-  isLeft?: boolean
+  isLeft?: boolean;
   actions?: Action[];
 }
 

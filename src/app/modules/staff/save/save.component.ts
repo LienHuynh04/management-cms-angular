@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {LoadingOverlayService, StaffService} from '../../../core/services';
-import {BaseForm} from '../../../shared/abstracts';
-import {ConfirmedValidator} from '../../../shared';
-import {IRole, UserInterface} from '../../../core/interfaces';
-import {NzModalService} from 'ng-zorro-antd/modal';
-import {RoleEnum} from '../../../core/enums';
-import {NzNotificationService} from 'ng-zorro-antd/notification';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoadingOverlayService, StaffService } from '../../../core/services';
+import { BaseForm } from '../../../shared/abstracts';
+import { ConfirmedValidator } from '../../../shared';
+import { IRole, UserInterface } from '../../../core/interfaces';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { RoleEnum } from '../../../core/enums';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-save',
@@ -50,18 +50,18 @@ export class SaveComponent extends BaseForm<UserInterface> implements OnInit {
     });
     super.patchValueForm();
 
-    if(this.record) {
-      this.field('role_id').disable()
-      this.field('login_id').disable()
-      this.field('password').setValidators([Validators.minLength(8)])
+    if (this.record) {
+      this.field('role_id').disable();
+      this.field('login_id').disable();
+      this.field('password').setValidators([Validators.minLength(8)]);
     }
   }
 
   submitForm(): void {
-    const body  = {...this.saveForm.value}
-    if(!body.password) {
+    const body = {...this.saveForm.value};
+    if (!body.password) {
       delete body.password;
-      delete body.password_confirmation
+      delete body.password_confirmation;
     }
     this.processData(
       this.record

@@ -1,25 +1,24 @@
-import {Injectable} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {BehaviorSubject, forkJoin, Observable, of} from 'rxjs';
-import {catchError, finalize, map, switchMap, tap} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { catchError, finalize, map, switchMap, tap } from 'rxjs/operators';
 
 // Plugins
-import {NgxPermissionsService, NgxRolesService} from 'ngx-permissions';
+import { NgxPermissionsService, NgxRolesService } from 'ngx-permissions';
 
 // Core Module
-import {ApiBase} from './api.service';
-import {apiEndpoints} from '../../config/global-vars';
-import {CredentialsService} from './credentials.service';
-import {IAdmin, IPaginateList, IRole, UserInterface} from '../interfaces';
-import {RoleService} from './role.service';
+import { ApiBase } from './api.service';
+import { apiEndpoints } from '../../config/global-vars';
+import { CredentialsService } from './credentials.service';
+import { IAdmin } from '../interfaces';
+import { RoleService } from './role.service';
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
   public currentUser: Observable<IAdmin | null>;
   currentUserSubject = new BehaviorSubject<IAdmin | null>(null);
-
-  private sessionName = 'management';
   returnUrl: string;
+  private sessionName = 'management';
 
   constructor(
     private apiBase: ApiBase,
@@ -37,23 +36,23 @@ export class AuthenticationService {
     this.returnUrl = this.activatedRoute.snapshot.queryParams.returnUrl || '/';
   }
 
+  public get currentUserValue(): any {
+    return this.currentUserSubject.value;
+  }
+
   readUserData(): any {
     const userData: any = sessionStorage.getItem(this.sessionName) || localStorage.getItem(this.sessionName);
     return JSON.parse(userData);
-  }
-
-  public get currentUserValue(): any {
-    return this.currentUserSubject.value;
   }
 
   login(username: string, password: string, rememberMe?: false): Observable<any> {
     return this.apiBase.post(apiEndpoints.login, {login_id: username, password}).pipe(
       tap((user) => {
         if (user) {
-          const { data } = user;
+          const {data} = user;
           this.currentUserSubject.next(data.user);
           this.credentialsService.setCredentials(
-            { access_token: data.access_token },
+            {access_token: data.access_token},
             rememberMe
           );
         }
@@ -61,7 +60,7 @@ export class AuthenticationService {
       switchMap((resp) => {
         return this.profile().pipe(
           finalize(() => {
-            this.router.navigate(['/profile']);
+            this.router.navigate(['/dashboard']);
           })
         );
       })
@@ -81,7 +80,7 @@ export class AuthenticationService {
           // Load permission
           this.ngxPermissionsService.flushPermissions();
           this.ngxPermissionsService.loadPermissions(
-           [user.role[0].name]
+            [user.role[0].name]
           );
           return true;
         }),
@@ -101,7 +100,7 @@ export class AuthenticationService {
       .delete(apiEndpoints.logout)
       .pipe(
         finalize(() => {
-         this.clearAndLogout()
+          this.clearAndLogout();
         })
       )
       .subscribe();

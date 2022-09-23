@@ -14,10 +14,7 @@ const credentialsKey = 'credentials';
   providedIn: 'root'
 })
 export class CredentialsService {
-  private _credentials: ICredentials | null = null;
-
-  constructor(
-  ) {
+  constructor() {
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
 
     if (savedCredentials) {
@@ -25,13 +22,7 @@ export class CredentialsService {
     }
   }
 
-  /**
-   * Checks is the user is authenticated.
-   * @return True if the user is authenticated.
-   */
-  isAuthenticated(): boolean {
-    return !!this._credentials
-  }
+  private _credentials: ICredentials | null = null;
 
   /**
    * Gets the user credentials.
@@ -39,6 +30,14 @@ export class CredentialsService {
    */
   get credentials(): ICredentials | null {
     return this._credentials;
+  }
+
+  /**
+   * Checks is the user is authenticated.
+   * @return True if the user is authenticated.
+   */
+  isAuthenticated(): boolean {
+    return !!this._credentials;
   }
 
   /**

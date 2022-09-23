@@ -1,14 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
-import {AuthenticationService, LoadingOverlayService, StaffService} from '../../core/services';
-import {ConfirmedValidator} from '../../shared';
-import {IAdmin} from '../../core/interfaces';
-import {BaseForm} from '../../shared/abstracts';
-import {switchMap} from 'rxjs/operators';
-import {NzModalService} from 'ng-zorro-antd/modal';
-import {RoleEnum} from '../../core/enums';
-import {Router} from '@angular/router';
-import {NzNotificationService} from 'ng-zorro-antd/notification';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { AuthenticationService, LoadingOverlayService, StaffService } from '../../core/services';
+import { ConfirmedValidator } from '../../shared';
+import { IAdmin } from '../../core/interfaces';
+import { BaseForm } from '../../shared/abstracts';
+import { switchMap } from 'rxjs/operators';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { RoleEnum } from '../../core/enums';
+import { Router } from '@angular/router';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-login',
@@ -51,19 +51,19 @@ export class ProfileComponent extends BaseForm<IAdmin> implements OnInit {
   }
 
   submitForm() {
-    const body  = {...this.saveForm.value}
-    if(!body.password) {
+    const body = {...this.saveForm.value};
+    if (!body.password) {
       delete body.password;
-      delete body.password_confirmation
+      delete body.password_confirmation;
     }
 
     this.staffService.updateProfile(body)
       .pipe(
         switchMap(() => this.authService.profile())
       )
-      .subscribe( _ => {
+      .subscribe(_ => {
         super.patchValueForm();
-        this.router.navigate(['dashboard'])
+        this.router.navigate(['dashboard']);
       });
   }
 }

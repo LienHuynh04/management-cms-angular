@@ -1,12 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
-import {LoadingOverlayService, ProjectService} from '../../../core/services';
-import {map, switchMap} from 'rxjs/operators';
-import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
-import {BaseForm} from '../../../shared/abstracts';
-import {Observable} from 'rxjs';
-import {IPaginateList, ProjectInterface} from '../../../core/interfaces';
-import {NzNotificationService} from 'ng-zorro-antd/notification';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { LoadingOverlayService, ProjectService } from '../../../core/services';
+import { map, switchMap } from 'rxjs/operators';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { BaseForm } from '../../../shared/abstracts';
+import { Observable } from 'rxjs';
+import { IPaginateList, ProjectInterface } from '../../../core/interfaces';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-save',

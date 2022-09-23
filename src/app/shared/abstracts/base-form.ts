@@ -1,11 +1,11 @@
-import {FormGroup} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Observable, throwError} from 'rxjs';
-import {catchError, delay} from 'rxjs/operators';
-import {HttpErrorResponse} from '@angular/common/http';
-import {NzModalService} from 'ng-zorro-antd/modal';
-import {LoadingOverlayService} from '../../core/services';
-import {NzNotificationService} from 'ng-zorro-antd/notification';
+import { FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, throwError } from 'rxjs';
+import { catchError, delay } from 'rxjs/operators';
+import { HttpErrorResponse } from '@angular/common/http';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { LoadingOverlayService } from '../../core/services';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 export abstract class BaseForm<T> {
   resolvedData;
@@ -47,7 +47,7 @@ export abstract class BaseForm<T> {
       )
       .subscribe(resp => {
         this.record = resp;
-        if(redirectUrl) this.routerBase?.navigate([redirectUrl])
+        if (redirectUrl) this.routerBase?.navigate([redirectUrl]);
         this.notification.create(
           'success',
           'Thành công',
@@ -87,8 +87,8 @@ export abstract class BaseForm<T> {
   }
 
   protected patchValueForm() {
-    if(this.record) {
-      this.saveForm.patchValue(this.record)
+    if (this.record) {
+      this.saveForm.patchValue(this.record);
     }
   }
 
@@ -107,7 +107,7 @@ export abstract class BaseForm<T> {
         taken: errors[key][0]
       });
     });
-    this.saveForm.markAllAsTouched()
+    this.saveForm.markAllAsTouched();
   }
 
 

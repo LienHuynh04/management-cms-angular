@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {ApiBase} from './api.service';
-import {apiEndpoints} from '../../config/global-vars';
-import {IPaginateList, ProjectInterface} from '../interfaces';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ApiBase } from './api.service';
+import { apiEndpoints } from '../../config/global-vars';
+import { IPaginateList, ProjectInterface } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'

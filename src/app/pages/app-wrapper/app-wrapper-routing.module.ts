@@ -1,8 +1,7 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {AppWrapperComponent} from './app-wrapper.component';
-import {AuthGuard} from '../../core/guards';
-import {ProfileComponent} from '../../modules/profile/profile.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AppWrapperComponent } from './app-wrapper.component';
+import { ProfileComponent } from '../../modules/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -54,4 +53,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AppWrapperRoutingModule { }
+export class AppWrapperRoutingModule {
+}

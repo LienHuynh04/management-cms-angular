@@ -9,6 +9,7 @@ interface Endpoint {
   customer_care: string;
   role: string;
   team: string;
+
   [key: string]: string;
 }
 

@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {ApiBase} from './api.service';
-import {apiEndpoints} from '../../config/global-vars';
-import {IPaginateList, UserInterface} from '../interfaces';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ApiBase } from './api.service';
+import { apiEndpoints } from '../../config/global-vars';
+import { IPaginateList, UserInterface } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,8 @@ export class StaffService {
 
   constructor(
     private apiBase: ApiBase
-  ) { }
+  ) {
+  }
 
   getAll(params ?: any): Observable<IPaginateList<UserInterface>> {
     return this.apiBase.get(apiEndpoints.user, {
@@ -43,6 +44,6 @@ export class StaffService {
   }
 
   updateProfile(body: UserInterface) {
-    return this.apiBase.put(apiEndpoints.profile_update, body)
+    return this.apiBase.put(apiEndpoints.profile_update, body);
   }
 }

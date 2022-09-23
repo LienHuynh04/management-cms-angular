@@ -1,7 +1,7 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { delay } from 'rxjs/operators';
-import {NavbarItem, NAVIGATIONS} from '../../core/interfaces';
-import {AuthenticationService, LoadingOverlayService} from '../../core/services';
+import { NavbarItem, NAVIGATIONS } from '../../core/interfaces';
+import { AuthenticationService, LoadingOverlayService } from '../../core/services';
 
 @Component({
   selector: 'app-app-wrapper',
@@ -11,6 +11,7 @@ import {AuthenticationService, LoadingOverlayService} from '../../core/services'
 export class AppWrapperComponent implements OnInit {
   isLoading = false;
   isCollapsed = false;
+
   constructor(
     @Inject(NAVIGATIONS)
     public navigations: NavbarItem[],
@@ -28,7 +29,7 @@ export class AppWrapperComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout()
+    this.authService.logout();
   }
 
 }

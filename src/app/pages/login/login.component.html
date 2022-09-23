@@ -1,16 +1,16 @@
 <nz-layout>
-  <div class="login-form-wrapper" [ngStyle]="{backgroundImage: 'url(assets/images/background.svg)'}">
+  <div [ngStyle]="{backgroundImage: 'url(assets/images/background.svg)'}" class="login-form-wrapper">
     <div class="login-card">
       <nz-spin [nzSpinning]="false">
         <!-- [nzTitle]="'AUTH.LOGIN' | translate"-->
         <nz-card [ngStyle]="{width: '400px'}">
           <!-- Login Form -->
-          <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="login()">
+          <form (ngSubmit)="login()" [formGroup]="validateForm" class="login-form" nz-form>
             <!-- Username -->
             <nz-form-item>
               <nz-form-control>
                 <nz-input-group nzPrefixIcon="user">
-                  <input type="text" nz-input formControlName="userName" placeholder="username"/>
+                  <input formControlName="userName" nz-input placeholder="username" type="text"/>
                 </nz-input-group>
               </nz-form-control>
             </nz-form-item>
@@ -18,25 +18,25 @@
             <!-- Password -->
             <nz-form-item>
               <nz-form-control>
-                <nz-input-group nzPrefixIcon="lock" [nzSuffix]="suffixTemplate">
+                <nz-input-group [nzSuffix]="suffixTemplate" nzPrefixIcon="lock">
                   <input [type]="passwordVisible ? 'text' : 'password'"
+                         formControlName="password"
                          nz-input
-                         placeholder="password"
-                         formControlName="password"/>
+                         placeholder="password"/>
                 </nz-input-group>
                 <ng-template #suffixTemplate>
                   <span
-                    nz-icon
-                    [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
                     (click)="passwordVisible = !passwordVisible"
+                    [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+                    nz-icon
                   ></span>
                 </ng-template>
               </nz-form-control>
             </nz-form-item>
 
             <!-- Login button -->
-            <button nz-button class="login-form-button login-form-margin"
-                    [nzType]="'primary'">Login
+            <button [nzType]="'primary'" class="login-form-button login-form-margin"
+                    nz-button>Login
             </button>
           </form>
         </nz-card>
@@ -44,8 +44,8 @@
     </div>
   </div>
 </nz-layout>
-<div class="loading-overlay" [hidden]="!isLoading">
+<div [hidden]="!isLoading" class="loading-overlay">
   <div class="spinner">
-    <nz-spin nzSimple [nzSize]="'large'"></nz-spin>
+    <nz-spin [nzSize]="'large'" nzSimple></nz-spin>
   </div>
 </div>

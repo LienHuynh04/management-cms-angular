@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-import {Observable} from 'rxjs';
-import {IPaginateList, IRole} from '../../../core/interfaces';
-import {RoleService} from '../../../core/services';
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
+import { Observable } from 'rxjs';
+import { IPaginateList, IRole } from '../../../core/interfaces';
+import { RoleService } from '../../../core/services';
 
 @Injectable({
   providedIn: 'root'

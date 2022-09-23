@@ -1,12 +1,12 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {ColumnConfig, ColumnInterface, COLUMNS} from '../../../core/interfaces';
-import {ActivatedRoute} from '@angular/router';
-import {TeamService} from '../../../core/services';
-import {BaseTable} from '../../../shared/abstracts';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {TeamInterface} from '../../../core/interfaces/team.interface';
-import {NzModalService} from 'ng-zorro-antd/modal';
-import {NzNotificationService} from 'ng-zorro-antd/notification';
+import { Component, Inject, OnInit } from '@angular/core';
+import { ColumnConfig, ColumnInterface, COLUMNS } from '../../../core/interfaces';
+import { ActivatedRoute } from '@angular/router';
+import { TeamService } from '../../../core/services';
+import { BaseTable } from '../../../shared/abstracts';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { TeamInterface } from '../../../core/interfaces/team.interface';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-list',
@@ -42,7 +42,7 @@ export class ListComponent extends BaseTable<TeamInterface> implements OnInit {
   confirm(id: number | string | undefined) {
     this.teamService.delete(id).subscribe(() => {
       this.processData(this.teamService.getAll(super.processFilter()));
-      super.confirm()
+      super.confirm();
     });
   }
 

@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-import {Observable} from 'rxjs';
-import {CustomerCareInterface, IPaginateList} from '../../../core/interfaces';
-import {CustomerCareService} from '../../../core/services';
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
+import { Observable } from 'rxjs';
+import { CustomerCareInterface, IPaginateList } from '../../../core/interfaces';
+import { CustomerCareService } from '../../../core/services';
 
 @Injectable({
   providedIn: 'root'

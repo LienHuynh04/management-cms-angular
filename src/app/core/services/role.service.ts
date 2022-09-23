@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {ApiBase} from './api.service';
-import {apiEndpoints} from '../../config/global-vars';
-import {IPaginateList, IRole} from '../interfaces';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ApiBase } from './api.service';
+import { apiEndpoints } from '../../config/global-vars';
+import { IPaginateList, IRole } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,8 @@ export class RoleService {
 
   constructor(
     private apiBase: ApiBase
-  ) { }
+  ) {
+  }
 
   getAll(): Observable<IPaginateList<IRole>> {
     return this.apiBase.get(apiEndpoints.role, {

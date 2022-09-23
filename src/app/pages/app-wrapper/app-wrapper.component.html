@@ -34,7 +34,7 @@
             ></i>
         </span>
         <a nz-dropdown [nzDropdownMenu]="menu" [nzPlacement]="'bottomRight'">
-            {{authService.currentUserValue.full_name}}
+          {{authService.currentUserValue.full_name}}
           <i nz-icon nzType="down"></i>
         </a>
         <nz-dropdown-menu #menu="nzDropdownMenu">
@@ -47,7 +47,7 @@
       </div>
     </nz-header>
     <nz-content>
-        <router-outlet></router-outlet>
+      <router-outlet></router-outlet>
     </nz-content>
   </nz-layout>
   <div class="loading-overlay" [hidden]="!isLoading">

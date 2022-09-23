@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {ListComponent} from './list/list.component';
-import {ListResolver} from './list/list.resolver';
-import {SaveComponent} from './save/save.component';
-import {SaveResolver} from './save/save.resolver';
+import { ListComponent } from './list/list.component';
+import { ListResolver } from './list/list.resolver';
+import { SaveComponent } from './save/save.component';
+import { SaveResolver } from './save/save.resolver';
 
 const routes: Routes = [
   {
@@ -33,4 +33,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class TeamRoutingModule { }
+export class TeamRoutingModule {
+}

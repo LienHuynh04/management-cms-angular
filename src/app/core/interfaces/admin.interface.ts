@@ -1,5 +1,5 @@
-import {IPagination} from './paginate-list.interface';
-import {IRole} from './role.interface';
+import { IPagination } from './paginate-list.interface';
+import { IRole } from './role.interface';
 
 export interface IAdminList {
   data: IAdmin[];

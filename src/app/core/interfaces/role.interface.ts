@@ -1,7 +1,7 @@
 export interface IRole {
   id: string | number;
   name: string;
-  permission: Permission[]
+  permission: Permission[];
 }
 
 export interface Permission {

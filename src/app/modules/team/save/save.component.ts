@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {LoadingOverlayService, TeamService} from '../../../core/services';
-import {BaseForm} from '../../../shared/abstracts';
-import {UserInterface} from '../../../core/interfaces';
-import {NzModalService} from 'ng-zorro-antd/modal';
-import {NzNotificationService} from 'ng-zorro-antd/notification';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoadingOverlayService, TeamService } from '../../../core/services';
+import { BaseForm } from '../../../shared/abstracts';
+import { UserInterface } from '../../../core/interfaces';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-save',

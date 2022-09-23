@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {ListComponent} from './list/list.component';
-import {ListResolver} from './list/list.resolver';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { ListComponent } from './list/list.component';
+import { ListResolver } from './list/list.resolver';
 
 const routes: Routes = [
   {

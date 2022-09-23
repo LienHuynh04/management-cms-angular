@@ -1,13 +1,13 @@
-import {NgModule, Optional, SkipSelf} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {COLUMNS, NAVIGATIONS} from './interfaces';
-import {column} from '../config/column';
-import {navigations} from '../config/menu';
-import {AuthInterceptorProviders} from './intercepters/auth.interceptor';
-import {ErrorInterceptorProviders} from './intercepters/error.interceptor';
-import {LoadingOverlayInterceptor} from './intercepters/loading-overlay-interceptor.service';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {LoadingOverlayService} from './services/loading.service';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { COLUMNS, NAVIGATIONS } from './interfaces';
+import { column } from '../config/column';
+import { navigations } from '../config/menu';
+import { AuthInterceptorProviders } from './intercepters/auth.interceptor';
+import { ErrorInterceptorProviders } from './intercepters/error.interceptor';
+import { LoadingOverlayInterceptor } from './intercepters/loading-overlay-interceptor.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoadingOverlayService } from './services/loading.service';
 
 
 @NgModule({

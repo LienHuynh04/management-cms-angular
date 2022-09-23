@@ -1,12 +1,12 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {ColumnConfig, ColumnInterface, COLUMNS, CustomerInterface, UserInterface} from '../../../core/interfaces';
-import {ActivatedRoute} from '@angular/router';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {CustomerService} from '../../../core/services';
-import {BaseTable} from '../../../shared/abstracts';
-import {CareTableComponent} from '../care-table/care-table.component';
-import {NzModalService} from 'ng-zorro-antd/modal';
-import {NzNotificationService} from 'ng-zorro-antd/notification';
+import { Component, Inject, OnInit } from '@angular/core';
+import { ColumnConfig, ColumnInterface, COLUMNS, CustomerInterface, UserInterface } from '../../../core/interfaces';
+import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { CustomerService } from '../../../core/services';
+import { BaseTable } from '../../../shared/abstracts';
+import { CareTableComponent } from '../care-table/care-table.component';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-list',
@@ -93,7 +93,7 @@ export class ListComponent extends BaseTable<CustomerInterface> implements OnIni
           });
         }
       });
-    }else {
+    } else {
       this.isVisibleAssign = false;
     }
   }

@@ -1,6 +1,6 @@
-import {Component, Input} from '@angular/core';
-import {FormControl, FormGroupDirective} from '@angular/forms';
-import {ERROR_MESSAGE} from '../../../config/error-messgae';
+import { Component, Input } from '@angular/core';
+import { FormControl, FormGroupDirective } from '@angular/forms';
+import { ERROR_MESSAGE } from '../../../config/error-messgae';
 
 @Component({
   selector: 'app-control-errors',

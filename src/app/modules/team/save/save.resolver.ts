@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from '@angular/router';
-import {forkJoin, Observable} from 'rxjs';
-import {TeamService, StaffService} from '../../../core/services';
-import {map} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
+import { forkJoin, Observable } from 'rxjs';
+import { StaffService, TeamService } from '../../../core/services';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

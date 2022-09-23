@@ -1,4 +1,4 @@
-import {NavbarItem} from '../core/interfaces';
+import { NavbarItem } from '../core/interfaces';
 
 export const navigations: NavbarItem[] = [
   {

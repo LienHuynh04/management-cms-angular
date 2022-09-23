@@ -1,14 +1,15 @@
-import {Injectable} from '@angular/core';
-import {HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {CredentialsService} from '../services';
+import { Injectable } from '@angular/core';
+import { HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { CredentialsService } from '../services';
 
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   constructor(
     private credentialsService: CredentialsService
-  ) { }
+  ) {
+  }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // add auth header with jwt if user is logged in and request is to api url
@@ -27,5 +28,5 @@ export class AuthInterceptor implements HttpInterceptor {
 }
 
 export const AuthInterceptorProviders = [
-  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
 ];

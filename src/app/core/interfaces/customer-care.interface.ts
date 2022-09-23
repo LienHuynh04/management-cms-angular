@@ -1,5 +1,5 @@
-import {UserInterface} from './user.interface';
-import {CustomerInterface} from './customer.interface';
+import { UserInterface } from './user.interface';
+import { CustomerInterface } from './customer.interface';
 
 export interface CustomerCareInterface {
   id: string | number;

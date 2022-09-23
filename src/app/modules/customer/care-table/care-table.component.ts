@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-care-table',
@@ -6,8 +6,10 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./care-table.component.scss']
 })
 export class CareTableComponent implements OnInit {
-  @Input() care: any
-  constructor() { }
+  @Input() care: any;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
