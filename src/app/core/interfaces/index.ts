@@ -6,4 +6,4 @@ export * from './navigation';
 export * from './customer.interface';
 export * from './user.interface';
 export * from './project.interface';
-export * from './customer-care.interface';
+export * from './care.interface';

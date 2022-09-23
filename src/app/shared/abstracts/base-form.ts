@@ -37,7 +37,8 @@ export abstract class BaseForm<T> {
           this.notification.create(
             'error',
             'Thất bại',
-            ''
+            '',
+            { nzDuration: 1500 }
           );
           if (error.status === 422) {
             this.setFormErrors(error.error.errors);
@@ -51,7 +52,8 @@ export abstract class BaseForm<T> {
         this.notification.create(
           'success',
           'Thành công',
-          ''
+          '',
+          { nzDuration: 1500 }
         );
       });
   }

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseForm } from '../../../shared/abstracts';
-import { CustomerCareService, LoadingOverlayService } from '../../../core/services';
-import { CustomerCareInterface, CustomerInterface, ProjectInterface, UserInterface } from '../../../core/interfaces';
+import { CareService, LoadingOverlayService } from '../../../core/services';
+import { CareInterface, CustomerInterface, ProjectInterface, UserInterface } from '../../../core/interfaces';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
@@ -12,16 +12,16 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
   templateUrl: './save.component.html',
   styleUrls: ['./save.component.scss']
 })
-export class SaveComponent extends BaseForm<CustomerCareInterface> implements OnInit {
+export class SaveComponent extends BaseForm<CareInterface> implements OnInit {
   project: ProjectInterface[] = [];
   customer !: CustomerInterface[];
   user!: UserInterface[];
-  care!: CustomerCareInterface[];
+  care!: CareInterface[];
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private customerCareService: CustomerCareService,
+    private customerCareService: CareService,
     private activatedRoute: ActivatedRoute,
     public modalService: NzModalService,
     public loadingOverlayService: LoadingOverlayService,
@@ -33,23 +33,23 @@ export class SaveComponent extends BaseForm<CustomerCareInterface> implements On
   }
 
   ngOnInit(): void {
-    this.initForm();
+    // this.initForm();
   }
 
-  initForm() {
-    this.saveForm = this.fb.group({
-      customer_id: [this.record ? this.record.customer.id : '', Validators.required],
-      staff_id: [this.record ? this.record.staff.id : '', [Validators.required]],
-      description: [this.record?.description, Validators.required],
-    });
-  }
-
-  submitForm(): void {
-    this.processData(
-      this.record
-        ? this.customerCareService.update(this.record.id, this.saveForm.value)
-        : this.customerCareService.create(this.saveForm.value),
-      'customer-care'
-    );
-  }
+  // initForm() {
+  //   this.saveForm = this.fb.group({
+  //     customer_id: [this.record ? this.record.customer.id : '', Validators.required],
+  //     staff_id: [this.record ? this.record.staff.id : '', [Validators.required]],
+  //     description: [this.record?.description, Validators.required],
+  //   });
+  // }
+  //
+  // submitForm(): void {
+  //   this.processData(
+  //     this.record
+  //       ? this.customerCareService.update(this.record.id, this.saveForm.value)
+  //       : this.customerCareService.create(this.saveForm.value),
+  //     'care'
+  //   );
+  // }
 }

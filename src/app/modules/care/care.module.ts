@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CustomerCareRoutingModule } from './customer-care-routing.module';
+import { CareRoutingModule } from './care-routing.module';
 import { ListComponent } from './list/list.component';
 import { SaveComponent } from './save/save.component';
 import { SharedModule } from '../../shared/shared.module';
@@ -14,7 +14,7 @@ import { SharedModule } from '../../shared/shared.module';
   ],
   imports: [
     CommonModule,
-    CustomerCareRoutingModule,
+    CareRoutingModule,
     SharedModule
   ]
 })

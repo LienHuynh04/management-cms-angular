@@ -7,7 +7,7 @@ import { SaveResolver } from './save/save.resolver';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':customer',
     component: ListComponent,
     resolve: {
       resolvedData: ListResolver
@@ -34,5 +34,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CustomerCareRoutingModule {
+export class CareRoutingModule {
 }

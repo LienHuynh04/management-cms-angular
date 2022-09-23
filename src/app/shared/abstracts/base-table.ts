@@ -38,7 +38,8 @@ export abstract class BaseTable<T> {
         this.notification.create(
           'error',
           'Thất bại',
-          ''
+          '',
+          { nzDuration: 1500 }
         );
         return throwError(err);
       })
@@ -87,7 +88,7 @@ export abstract class BaseTable<T> {
     }
   }
 
-  confirmDelete(id: number | string | undefined) {
+  confirmDelete(id: number | string | undefined): void {
     this.modalService.confirm({
       nzTitle: 'Bạn có chắc chắn xóa không?',
       nzOkText: 'Có',
@@ -101,11 +102,12 @@ export abstract class BaseTable<T> {
     });
   }
 
-  protected confirm(id?: number | string | undefined) {
+  protected confirm(id?: number | string | undefined): void {
     this.notification.create(
       'success',
-      'Thành công',
-      ''
+      'Xoá thành công',
+      '',
+      { nzDuration: 1500 }
     );
   }
 }

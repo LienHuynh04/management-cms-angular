@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { CustomerService } from '../../../core/services';
 import { BaseTable } from '../../../shared/abstracts';
-import { CareTableComponent } from '../care-table/care-table.component';
+import { StaffCareComponent } from '../staff-care/staff-care.component';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
@@ -55,10 +55,10 @@ export class ListComponent extends BaseTable<CustomerInterface> implements OnIni
     this.processData(request);
   }
 
-  openModalCare(care: any) {
+  openModalCare(care: any): void {
     this.modalService.create({
       nzTitle: 'Thông tin nhân viên chăm sóc',
-      nzContent: CareTableComponent,
+      nzContent: StaffCareComponent,
       nzMaskClosable: false,
       nzClosable: false,
       nzWidth: '70vw',
@@ -66,7 +66,7 @@ export class ListComponent extends BaseTable<CustomerInterface> implements OnIni
         top: '30%'
       },
       nzComponentParams: {
-        care: care
+        care
       }
     });
   }
