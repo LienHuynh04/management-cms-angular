@@ -1,0 +1,6 @@
+::ng-deep .ant-form-horizontal .ant-form-item-label {
+  white-space: break-spaces;
+  @media only screen and (max-width: 768px) {
+    text-align: left;
+  }
+}

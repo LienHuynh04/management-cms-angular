@@ -14,18 +14,23 @@ const routes: Routes = [
     }
   },
   {
-    path: 'create',
+    path: ':customer/create',
     component: SaveComponent,
     resolve: {
       resolvedData: SaveResolver
     }
   },
   {
-    path: 'update/:id',
+    path: ':customer/update/:id',
     component: SaveComponent,
     resolve: {
       resolvedData: SaveResolver
     }
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: '/customers'
   },
 ];
 

@@ -1,8 +1,8 @@
 <form [formGroup]="saveForm" nz-form>
   <!--phone_number-->
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name" nzRequired>Tên</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
+    <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="name" nzRequired>Tên</nz-form-label>
+    <nz-form-control [nzMd]="12" [nzXs]="24">
       <input formControlName="name" id="name" nz-input/>
       <app-control-errors
         fieldName="name"

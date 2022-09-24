@@ -2,7 +2,7 @@
 <nz-card nzTitle="Tìm kiếm" style="margin-bottom: 15px" [nzExtra]="extraTemplate">
   <form nz-form nzLayout="vertical" [formGroup]="filterForm">
     <div nz-row [nzGutter]="24">
-      <div nz-col [nzSpan]="12">
+      <div nz-col [nzMd]="12" [nzXs]="24">
         <nz-form-item>
           <nz-form-label [nzFor]="'name'">Tên</nz-form-label>
           <nz-form-control>
@@ -10,6 +10,16 @@
               nz-input
               formControlName="name"
             />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzMd]="12" [nzXs]="24">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'name'">Trưởng nhóm</nz-form-label>
+          <nz-form-control>
+            <nz-select formControlName="leader">
+              <nz-option *ngFor="let user of leader" [nzLabel]="user.full_name" [nzValue]="user.id"></nz-option>
+            </nz-select>
           </nz-form-control>
         </nz-form-item>
       </div>
@@ -50,19 +60,25 @@
     </thead>
     <tbody>
     <tr *ngFor="let data of basicTable.data">
-      <td *ngFor="let col of cols;">
-        {{ data[col?.field] }}
-      </td>
+      <td>{{data.name}}</td>
+      <td>{{data?.leader?.full_name}}</td>
+      <td>{{data.description}}</td>
       <td style="text-align: center" nzRight>
         <button nz-button
                 nzType="primary" nzShape="circle"
                 style="margin-right: 5px"
                 [routerLink]="['update', data.id]"
+                nz-tooltip
+                nzTooltipPlacement="top"
+                [nzTooltipTitle]="'Sửa'"
         >
           <i nz-icon nzType="edit" nzTheme="outline"></i>
         </button>
         <button nz-button nzShape="circle" nzDanger
                 (click)="confirmDelete(data.id)"
+                nz-tooltip
+                nzTooltipPlacement="top"
+                [nzTooltipTitle]="'Xóa'"
         >
           <i nz-icon nzType="delete"></i>
         </button>

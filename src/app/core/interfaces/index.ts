@@ -4,6 +4,6 @@ export * from './role.interface';
 export * from './column.interface';
 export * from './navigation';
 export * from './customer.interface';
-export * from './user.interface';
+export * from './staff.interface';
 export * from './project.interface';
 export * from './care.interface';

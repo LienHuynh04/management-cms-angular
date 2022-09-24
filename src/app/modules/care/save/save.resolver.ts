@@ -16,9 +16,14 @@ export class SaveResolver implements Resolve<boolean> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
-    const source$ = [this.customerService.getAll(), this.staffService.getAll()];
+    const source$ = [
+      this.customerService.getById(route.params.customer),
+      this.staffService.getAll({
+        'filter[sales]' : 1
+      })
+    ];
     if (route.params.id) {
-      // source$.push(this.careService.getById(route.params.id));
+      source$.push(this.careService.getById(route.params.customer, route.params.id));
     }
     return forkJoin(source$).pipe(
       map(res => {

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiBase } from './api.service';
 import { apiEndpoints } from '../../config/global-vars';
-import { IPaginateList, UserInterface } from '../interfaces';
+import { IPaginateList, StaffInterface } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class StaffService {
   ) {
   }
 
-  getAll(params ?: any): Observable<IPaginateList<UserInterface>> {
+  getAll(params ?: any): Observable<IPaginateList<StaffInterface>> {
     return this.apiBase.get(apiEndpoints.user, {
       page: 1,
       per_page: 50,
@@ -23,7 +23,7 @@ export class StaffService {
     });
   }
 
-  create(body: UserInterface) {
+  create(body: StaffInterface) {
     return this.apiBase.post(apiEndpoints.user, {
       ...body
     });
@@ -37,13 +37,13 @@ export class StaffService {
     return this.apiBase.delete(apiEndpoints.user + '/' + id);
   }
 
-  update(id: number | string | undefined, body: UserInterface) {
+  update(id: number | string | undefined, body: StaffInterface) {
     return this.apiBase.put(apiEndpoints.user + '/' + id, {
       ...body
     });
   }
 
-  updateProfile(body: UserInterface) {
+  updateProfile(body: StaffInterface) {
     return this.apiBase.put(apiEndpoints.profile_update, body);
   }
 }

@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { ColumnConfig, ColumnInterface, COLUMNS, UserInterface } from '../../../core/interfaces';
+import { ColumnConfig, ColumnInterface, COLUMNS, StaffInterface } from '../../../core/interfaces';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService, StaffService } from '../../../core/services';
 import { BaseTable } from '../../../shared/abstracts';
@@ -13,7 +13,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent extends BaseTable<UserInterface> implements OnInit {
+export class ListComponent extends BaseTable<StaffInterface> implements OnInit {
   cols: ColumnInterface[] = this.colums.staff;
   roleEnum = RoleEnum;
 

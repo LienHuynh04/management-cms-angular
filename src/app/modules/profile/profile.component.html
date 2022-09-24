@@ -2,16 +2,16 @@
   <form [formGroup]="saveForm" nz-form>
     <!--phone_number-->
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="login_id">Login ID</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="login_id">Login ID</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
         {{record.login_id}}
       </nz-form-control>
     </nz-form-item>
 
     <!--full_name-->
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="full_name">Tên</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzRequired nzFor="full_name">Tên</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
         <input nz-input formControlName="full_name" id="full_name"/>
         <app-control-errors
           fieldName="full_name"
@@ -21,8 +21,8 @@
 
     <!--email-->
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="email" nzRequired>Email</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="email" nzRequired>Email</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
         <input nz-input formControlName="email" id="email"/>
         <app-control-errors
           fieldName="email"
@@ -32,8 +32,8 @@
 
     <!--password-->
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password">Mật khẩu</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="password">Mật khẩu</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
         <nz-input-group [nzSuffix]="suffixTemplate">
           <input
             [type]="passwordVisible ? 'text' : 'password'"
@@ -57,8 +57,8 @@
 
     <!--confirm password-->
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password_confirmation">Xác nhận mật khẩu</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="password_confirmation">Xác nhận mật khẩu</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
         <nz-input-group [nzSuffix]="suffixTemplateConfirm">
           <input
             [type]="passwordVisibleConfirm ? 'text' : 'password'"
@@ -82,8 +82,8 @@
 
     <!--Role-->
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="role_id">Quyền</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="role_id">Quyền</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
         {{[roleEnum[record.role[0].name]]}}
 
       </nz-form-control>

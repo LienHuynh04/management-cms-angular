@@ -90,7 +90,7 @@ nz-content {
   margin-right: 30px;
 }
 
-.active {
+.active, .menu-item:hover {
   background-color: #1890ff;
   color: #fff;
 }

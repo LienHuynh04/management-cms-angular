@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseForm } from '../../../shared/abstracts';
 import { CareService, LoadingOverlayService } from '../../../core/services';
-import { CareInterface, CustomerInterface, ProjectInterface, UserInterface } from '../../../core/interfaces';
+import { CareInterface, CustomerInterface, ProjectInterface, StaffInterface } from '../../../core/interfaces';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
@@ -14,8 +14,8 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 })
 export class SaveComponent extends BaseForm<CareInterface> implements OnInit {
   project: ProjectInterface[] = [];
-  customer !: CustomerInterface[];
-  user!: UserInterface[];
+  customer !: CustomerInterface;
+  user!: StaffInterface[];
   care!: CareInterface[];
 
   constructor(
@@ -33,23 +33,22 @@ export class SaveComponent extends BaseForm<CareInterface> implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.initForm();
+    this.initForm();
   }
 
-  // initForm() {
-  //   this.saveForm = this.fb.group({
-  //     customer_id: [this.record ? this.record.customer.id : '', Validators.required],
-  //     staff_id: [this.record ? this.record.staff.id : '', [Validators.required]],
-  //     description: [this.record?.description, Validators.required],
-  //   });
-  // }
+  initForm() {
+    this.saveForm = this.fb.group({
+      staff_id: [this.record ? this.record.staff.id : '', [Validators.required]],
+      description: [this.record?.description, Validators.required],
+    });
+  }
   //
-  // submitForm(): void {
-  //   this.processData(
-  //     this.record
-  //       ? this.customerCareService.update(this.record.id, this.saveForm.value)
-  //       : this.customerCareService.create(this.saveForm.value),
-  //     'care'
-  //   );
-  // }
+  submitForm(): void {
+    this.processData(
+      this.record
+        ? this.customerCareService.update(+this.customer.id, this.record.id, this.saveForm.value)
+        : this.customerCareService.create(+this.customer.id, this.saveForm.value),
+      `care/${this.customer.id}`
+    );
+  }
 }

@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { CustomerInterface, IPaginateList } from '../../../core/interfaces';
-import { TeamService } from '../../../core/services';
+import { StaffService, TeamService } from '../../../core/services';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ListResolver implements Resolve<boolean> {
   constructor(
-    private teamService: TeamService
+    private teamService: TeamService,
+    private staffService: StaffService
   ) {
   }
 
@@ -17,6 +19,14 @@ export class ListResolver implements Resolve<boolean> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot)
     : Observable<IPaginateList<CustomerInterface>> | boolean | any {
-    return this.teamService.getAll();
+    return forkJoin([this.teamService.getAll(), this.staffService.getAll()]).pipe(
+      map(resp => {
+        return {
+          data: resp[0].data,
+          pagination: resp[0].pagination,
+          leader: resp[1].data
+        }
+      })
+    )
   }
 }

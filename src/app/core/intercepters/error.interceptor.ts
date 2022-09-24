@@ -1,18 +1,10 @@
 import { Injectable } from '@angular/core';
-import {
-  HTTP_INTERCEPTORS,
-  HttpErrorResponse,
-  HttpEvent,
-  HttpHandler,
-  HttpInterceptor,
-  HttpRequest
-} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, finalize } from 'rxjs/operators';
+import { AuthenticationService, CredentialsService, LoadingOverlayService } from '../services';
 import { Router } from '@angular/router';
-import { CredentialsService } from '../services/credentials.service';
-import { LoadingOverlayService } from '../services/loading.service';
-import { AuthenticationService } from '../services/authentication.service';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -21,6 +13,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     private loadingOverlayService: LoadingOverlayService,
     private credentialService: CredentialsService,
     private router: Router,
+    private notification: NzNotificationService
   ) {
   }
 
@@ -34,12 +27,13 @@ export class ErrorInterceptor implements HttpInterceptor {
         this.loadingOverlayService.isLoading = false;
       }),
       catchError((err: HttpErrorResponse) => {
-        if (err.status == 403) {
-          this.router.navigate(['/profile']);
-        }
         if (err.status == 401) {
-          this.authenticationService.clearAndLogout();
-          this.router.navigate(['/login']);
+          this.credentialService.setCredentials();
+          this.router.navigate(['', 'login']);
+          this.notification.create('error', 'Lỗi đăng nhập', '')
+        }
+        if (err.status == 404) {
+          this.router.navigate(['', '404']);
         }
         return throwError(err);
       })

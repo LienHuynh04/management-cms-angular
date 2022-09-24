@@ -9,7 +9,7 @@ export const navigations: NavbarItem[] = [
   {
     title: 'Khách hàng',
     url: '/customers',
-    icon: 'team',
+    icon: 'user',
     permissions: {
       only: ['admin', 'marketing', 'sales', 'agency', 'cooperator']
     }
@@ -17,7 +17,7 @@ export const navigations: NavbarItem[] = [
   {
     title: 'Phòng kinh doanh',
     url: '/teams',
-    icon: 'team',
+    icon: 'dollar-circle',
     permissions: {
       only: ['admin']
     }
@@ -25,7 +25,7 @@ export const navigations: NavbarItem[] = [
   {
     title: 'Nhân viên',
     url: '/staff',
-    icon: 'user',
+    icon: 'team',
     permissions: {
       only: ['admin', 'human-resource']
     }

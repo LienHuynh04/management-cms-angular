@@ -2,8 +2,8 @@
   <form [formGroup]="saveForm" nz-form>
     <!--Name-->
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">Tên nhóm</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzRequired nzFor="name">Tên nhóm</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
         <input nz-input formControlName="name" id="name"/>
         <app-control-errors
           fieldName="name"
@@ -13,8 +13,8 @@
 
     <!--description-->
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="role_id" nzRequired>Trưởng nhóm</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="role_id" nzRequired>Trưởng nhóm</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
         <nz-select
           nzPlaceHolder="Vui lòng chọn"
           formControlName="leader"
@@ -30,8 +30,8 @@
 
     <!--Leader-->
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="description">Mô tả</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzRequired nzFor="description">Mô tả</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
         <textarea nz-input formControlName="description" id="description"> </textarea>
         <app-control-errors
           fieldName="description"

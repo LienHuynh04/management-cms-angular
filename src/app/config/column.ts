@@ -106,7 +106,7 @@ export const column: ColumnConfig = {
     },
     {
       header: 'Trưởng nhóm',
-      field: 'leader.full_name',
+      field: 'leader'
     },
     {
       header: 'Mô tả',

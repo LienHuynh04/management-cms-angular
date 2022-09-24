@@ -1,25 +1,12 @@
-<nz-card [nzTitle]="record ? 'Cập nhật' : 'Tạo mới'">
+<nz-card [nzTitle]="record ? 'Cập nhật' : 'Tạo mới'"> <h3>
+  Tên khách hàng: <b>{{customer?.full_name}}</b>
+</h3>
+  <br/>
   <form [formGroup]="saveForm" nz-form>
-    <!--customer_id-->
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="customer_id" nzRequired>Khách hàng</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24">
-        <nz-select
-          nzPlaceHolder="Vui lòng chọn"
-          formControlName="customer_id"
-        >
-          <nz-option *ngFor="let item of customer" [nzLabel]="item.full_name" [nzValue]="item.id"></nz-option>
-        </nz-select>
-        <app-control-errors
-          fieldName="customer_id"
-        ></app-control-errors>
-      </nz-form-control>
-    </nz-form-item>
-
     <!--staff_id-->
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="staff_id" nzRequired>Nhân viên</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="staff_id" nzRequired>Nhân viên</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
         <nz-select
           nzPlaceHolder="Vui lòng chọn"
           formControlName="staff_id"
@@ -34,8 +21,8 @@
 
     <!--description-->
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="customer_id" nzRequired>Mô tả</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="customer_id" nzRequired>Mô tả</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
         <textarea rows="4" nz-input formControlName="description" id="description"></textarea>
         <app-control-errors
           fieldName="description"

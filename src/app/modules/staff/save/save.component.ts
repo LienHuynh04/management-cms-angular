@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingOverlayService, StaffService } from '../../../core/services';
 import { BaseForm } from '../../../shared/abstracts';
 import { ConfirmedValidator } from '../../../shared';
-import { IRole, UserInterface } from '../../../core/interfaces';
+import { IRole, StaffInterface } from '../../../core/interfaces';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { RoleEnum } from '../../../core/enums';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
@@ -14,7 +14,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
   templateUrl: './save.component.html',
   styleUrls: ['./save.component.scss']
 })
-export class SaveComponent extends BaseForm<UserInterface> implements OnInit {
+export class SaveComponent extends BaseForm<StaffInterface> implements OnInit {
   roles: IRole[] = [];
   passwordVisible = false;
   passwordVisibleConfirm = false;

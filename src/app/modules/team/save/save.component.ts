@@ -3,17 +3,18 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingOverlayService, TeamService } from '../../../core/services';
 import { BaseForm } from '../../../shared/abstracts';
-import { UserInterface } from '../../../core/interfaces';
+import { StaffInterface } from '../../../core/interfaces';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { TeamInterface } from '../../../core/interfaces/team.interface';
 
 @Component({
   selector: 'app-save',
   templateUrl: './save.component.html',
   styleUrls: ['./save.component.scss']
 })
-export class SaveComponent extends BaseForm<UserInterface> implements OnInit {
-  users: UserInterface[] = [];
+export class SaveComponent extends BaseForm<TeamInterface> implements OnInit {
+  users: StaffInterface[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -39,6 +40,9 @@ export class SaveComponent extends BaseForm<UserInterface> implements OnInit {
       leader: ['', Validators.required],
     });
     super.patchValueForm();
+    if (this.record) {
+      this.field('leader').patchValue(this.record.leader.id);
+    }
   }
 
   submitForm(): void {

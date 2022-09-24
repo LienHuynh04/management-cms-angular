@@ -98,28 +98,31 @@
         <button nz-button
                 nzType="primary" nzShape="circle"
                 [routerLink]="['update', data.id]"
+                nz-tooltip
+                nzTooltipPlacement="top"
+                [nzTooltipTitle]="'Sửa'"
         >
           <i nz-icon nzType="edit" nzTheme="outline"></i>
         </button>
-        <button nz-button
-                [disabled]="!data.care.length"
-                nzType="default" nzShape="circle"
-                (click)="openModalCare(data.care)"
-        >
-          <i nz-icon nzType="eye" nzTheme="outline"></i>
-        </button>
+
         <button nz-button
                 nzType="default" nzShape="circle"
                 (click)="openModalAssign(data)"
+                nz-tooltip
+                nzTooltipPlacement="top"
+                [nzTooltipTitle]="'Phân công cho nhân viên'"
         >
-          <i nz-icon nzType="plus" nzTheme="outline"></i>
+          <i nz-icon nzType="gold" nzTheme="outline"></i>
         </button>
 
         <button nz-button
                 nzType="default" nzShape="circle"
                 [routerLink]="['/care', data.id]"
+                nz-tooltip
+                nzTooltipPlacement="top"
+                [nzTooltipTitle]="'Danh sách nhân viên chăm sóc'"
         >
-          <i nz-icon nzType="plus" nzTheme="outline"></i>
+          <i nz-icon nzType="team" nzTheme="outline"></i>
         </button>
 
       </td>

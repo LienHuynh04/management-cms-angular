@@ -1,10 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { ColumnConfig, ColumnInterface, COLUMNS, CustomerInterface, UserInterface } from '../../../core/interfaces';
+import { ColumnConfig, ColumnInterface, COLUMNS, CustomerInterface, StaffInterface } from '../../../core/interfaces';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { CustomerService } from '../../../core/services';
 import { BaseTable } from '../../../shared/abstracts';
-import { StaffCareComponent } from '../staff-care/staff-care.component';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
@@ -16,7 +15,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 export class ListComponent extends BaseTable<CustomerInterface> implements OnInit {
   isVisibleAssign = false;
   cols: ColumnInterface[] = this.colums.customer;
-  staff: UserInterface[] = [];
+  staff: StaffInterface[] = [];
   staffControl = new FormControl('');
   customer !: CustomerInterface;
 
@@ -53,22 +52,6 @@ export class ListComponent extends BaseTable<CustomerInterface> implements OnIni
   fetchData(): void {
     const request = this.customerService.getAll(super.processFilter());
     this.processData(request);
-  }
-
-  openModalCare(care: any): void {
-    this.modalService.create({
-      nzTitle: 'Thông tin nhân viên chăm sóc',
-      nzContent: StaffCareComponent,
-      nzMaskClosable: false,
-      nzClosable: false,
-      nzWidth: '70vw',
-      nzStyle: {
-        top: '30%'
-      },
-      nzComponentParams: {
-        care
-      }
-    });
   }
 
   openModalAssign(customer: CustomerInterface) {

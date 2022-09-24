@@ -2,8 +2,8 @@
   <form [formGroup]="saveForm" nz-form>
     <!--full_name-->
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="full_name">Tên khách hàng</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzRequired nzFor="full_name">Tên khách hàng</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
         <input nz-input formControlName="full_name" id="full_name"/>
         <app-control-errors
           fieldName="full_name"
@@ -13,8 +13,8 @@
 
     <!--phone_number-->
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="phone_number">Số điện thoại</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzRequired nzFor="phone_number">Số điện thoại</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
         <input nz-input formControlName="phone_number" id="phone_number"/>
         <app-control-errors
           fieldName="phone_number"
@@ -24,8 +24,8 @@
 
     <!--address-->
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="address">Địa chỉ</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzRequired nzFor="address">Địa chỉ</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
         <input nz-input formControlName="address" id="address"/>
         <app-control-errors
           fieldName="address"
@@ -35,8 +35,8 @@
 
     <!--email-->
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Email</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzRequired nzFor="email">Email</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
         <input nz-input formControlName="email" id="email"/>
         <app-control-errors
           fieldName="email"
@@ -46,8 +46,8 @@
 
     <!--staff-->
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="assign_for_user_id">Chỉ định nhân viên kinh doanh</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="assign_for_user_id">Chỉ định nhân nhân viên kinh doanh</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
         <nz-select
           nzPlaceHolder="Vui lòng chọn"
           formControlName="assign_for_user_id"
@@ -64,8 +64,8 @@
 
     <!--project_note-->
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="project_note">Ghi chú dự án</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="project_note">Ghi chú dự án</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
         <textarea rows="4" nz-input formControlName="project_note" id="project_note"></textarea>
         <app-control-errors
           fieldName="project_note"
@@ -75,8 +75,8 @@
 
     <!--note-->
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="note">Ghi chú</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="note">Ghi chú</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
         <textarea rows="4" nz-input formControlName="note" id="note"></textarea>
         <app-control-errors
           fieldName="note"
@@ -86,8 +86,8 @@
 
     <!--result-->
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="result">Kết quả</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="result">Kết quả</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
         <nz-radio-group formControlName="result">
           <label nz-radio
                  *ngFor="let result of optionResultField"
@@ -103,8 +103,8 @@
 
     <!--customer_project-->
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="customer_project">Dự án khách hàng</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="customer_project">Dự án khách hàng</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
         <nz-select
           nzMode="multiple"
           nzPlaceHolder="Vui lòng chọn"

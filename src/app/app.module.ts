@@ -24,6 +24,7 @@ import { LoadingOverlayInterceptor } from './core/intercepters/loading-overlay-i
 import { ErrorInterceptor } from './core/intercepters/error.interceptor';
 import { LoadingOverlayService } from './core/services/loading.service';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 registerLocaleData(en);
 
@@ -56,9 +57,11 @@ registerLocaleData(en);
     {provide: HTTP_INTERCEPTORS, useClass: LoadingOverlayInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     ApiBase,
-    LoadingOverlayService
+    LoadingOverlayService,
+    NzNotificationService
   ],
   bootstrap: [AppComponent]
+
 })
 export class AppModule {
 }

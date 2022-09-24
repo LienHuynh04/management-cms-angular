@@ -1,4 +1,4 @@
-import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { ErrorHandler, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { COLUMNS, NAVIGATIONS } from './interfaces';
 import { column } from '../config/column';
@@ -8,7 +8,7 @@ import { ErrorInterceptorProviders } from './intercepters/error.interceptor';
 import { LoadingOverlayInterceptor } from './intercepters/loading-overlay-interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoadingOverlayService } from './services/loading.service';
-
+import { GlobalErrorHandler } from './intercepters/global-error-handler';
 
 @NgModule({
   declarations: [],
@@ -16,9 +16,13 @@ import { LoadingOverlayService } from './services/loading.service';
     CommonModule,
   ],
   providers: [
-    {provide: COLUMNS, useValue: column},
-    {provide: NAVIGATIONS, useValue: navigations},
     {provide: HTTP_INTERCEPTORS, useClass: LoadingOverlayInterceptor, multi: true},
+    {provide: NAVIGATIONS, useValue: navigations},
+    {provide: COLUMNS, useValue: column},
+    {
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandler,
+    },
     AuthInterceptorProviders,
     ErrorInterceptorProviders,
     LoadingOverlayService,

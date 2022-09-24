@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService, LoadingOverlayService } from '../../core/services';
 import { delay } from 'rxjs/operators';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthenticationService,
-    public loadingOverlayService: LoadingOverlayService
+    public loadingOverlayService: LoadingOverlayService,
+    public notification: NzNotificationService
   ) {
   }
 
@@ -49,6 +51,8 @@ export class LoginComponent implements OnInit {
   doLogin(): void {
     const data = this.validateForm.value;
     this.authService.login(data.userName, data.password)
-      .subscribe();
+      .subscribe(() => {
+        this.notification.create('success', 'Đăng nhập thành công', '')
+      });
   }
 }

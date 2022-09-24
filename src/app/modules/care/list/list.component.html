@@ -1,12 +1,12 @@
 <nz-card nzTitle="Danh sách nhân viên chăm sóc" [nzExtra]="extraTemplate">
   <h3>
-    Tên khách hàng: <b>{{records[0].customer.full_name}}</b>
+    Tên khách hàng: <b>{{customer?.full_name}}</b>
   </h3>
   <br/>
   <nz-table
     #basicTable
     [nzVirtualItemSize]="54"
-    [nzData]="records[0].customer.care"
+    [nzData]="care"
     [nzPaginationPosition]="'bottom'"
     [nzScroll]="{ x: '1024px', y: '100vh' }"
     [nzFrontPagination]="false"
@@ -29,30 +29,22 @@
     <tbody>
     <tr *ngFor="let data of basicTable.data">
       <td *ngFor="let col of cols;">
-        {{data[col?.field]}}
+        {{col.slot ?( data[col?.field]  |  date:'yyyy-M-dd HH:mm'): data[col?.field] }}
       </td>
-
-      <!--      <td *ngFor="let col of cols;">-->
-      <!--        {{-->
-      <!--        col.slot == 'role'-->
-      <!--          ? [roleEnum[data.role[0].name]]-->
-      <!--          : data[col?.field]-->
-      <!--        }}-->
-      <!--      </td>-->
       <td style="text-align: center" nzRight>
 <!--        <button nz-button-->
 <!--                nzType="primary" nzShape="circle"-->
 <!--                style="margin-right: 5px"-->
-<!--                [routerLink]="['update', data.id]"-->
+<!--                [routerLink]="['update', records[0]?.id]"-->
 <!--        >-->
 <!--          <i nz-icon nzType="edit" nzTheme="outline"></i>-->
 <!--        </button>-->
-<!--        <button nz-button nzShape="circle"-->
-<!--                nzDanger-->
-<!--                (click)="confirmDelete(data.id)"-->
-<!--        >-->
-<!--          <i nz-icon nzType="delete"></i>-->
-<!--        </button>-->
+        <button nz-button nzShape="circle"
+                nzDanger
+                (click)="confirmDelete(records[0]?.id)"
+        >
+          <i nz-icon nzType="delete"></i>
+        </button>
       </td>
     </tr>
     </tbody>
@@ -62,7 +54,7 @@
 <ng-template #extraTemplate>
   <!--Button Create-->
   <button
-    [routerLink]="['/care', 'create']"
+    [routerLink]="['create']"
     class="btn-create"
     nz-button
     nzType="primary"

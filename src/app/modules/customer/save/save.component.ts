@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerService, LoadingOverlayService } from '../../../core/services';
-import { CustomerInterface, ProjectInterface, UserInterface } from '../../../core/interfaces';
+import { CustomerInterface, ProjectInterface, StaffInterface } from '../../../core/interfaces';
 import { BaseForm } from '../../../shared/abstracts';
 import { ResultEnum } from '../../../core/enums';
 import { NzModalService } from 'ng-zorro-antd/modal';
@@ -15,7 +15,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 })
 export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit {
   projects!: ProjectInterface[];
-  users !: UserInterface[];
+  users !: StaffInterface[];
   resultEnum: any = ResultEnum;
   optionResultField = Object.keys(this.resultEnum).filter(r => r);
 

@@ -6,11 +6,10 @@ import { ListComponent } from './list/list.component';
 import { SaveComponent } from './save/save.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
-import { StaffCareComponent } from './staff-care/staff-care.component';
 
 
 @NgModule({
-  declarations: [ListComponent, SaveComponent, StaffCareComponent],
+  declarations: [ListComponent, SaveComponent],
   imports: [
     CommonModule,
     CustomerRoutingModule,
