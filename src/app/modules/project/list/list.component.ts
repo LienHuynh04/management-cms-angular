@@ -6,6 +6,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { SaveComponent } from '../save/save.component';
 import { BaseTable } from '../../../shared/abstracts';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-list',
@@ -22,12 +23,13 @@ export class ListComponent extends BaseTable<ProjectInterface> implements OnInit
     private projectService: ProjectService,
     public modalService: NzModalService,
     public notification: NzNotificationService,
+    public fb: FormBuilder
   ) {
     super(activatedRoute, modalService, notification);
   }
 
   ngOnInit(): void {
-
+    this.initForm()
   }
 
   confirm(id: number | string | undefined) {
@@ -35,6 +37,12 @@ export class ListComponent extends BaseTable<ProjectInterface> implements OnInit
       this.processData(this.projectService.getAll());
       super.confirm();
     });
+  }
+
+  initForm() {
+    this.filterForm = this.fb.group({
+      name: ['']
+    })
   }
 
   openModal(id?: number | string | undefined) {

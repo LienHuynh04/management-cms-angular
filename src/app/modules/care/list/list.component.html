@@ -32,13 +32,14 @@
         {{col.slot ?( data[col?.field]  |  date:'yyyy-M-dd HH:mm'): data[col?.field] }}
       </td>
       <td style="text-align: center" nzRight>
-<!--        <button nz-button-->
-<!--                nzType="primary" nzShape="circle"-->
-<!--                style="margin-right: 5px"-->
-<!--                [routerLink]="['update', records[0]?.id]"-->
-<!--        >-->
-<!--          <i nz-icon nzType="edit" nzTheme="outline"></i>-->
-<!--        </button>-->
+        <button nz-button
+                nzType="primary" nzShape="circle"
+                style="margin-right: 5px"
+                [routerLink]="['update', records[0]?.id]"
+        >
+          <i nz-icon nzType="edit" nzTheme="outline"></i>
+        </button>
+
         <button nz-button nzShape="circle"
                 nzDanger
                 (click)="confirmDelete(records[0]?.id)"

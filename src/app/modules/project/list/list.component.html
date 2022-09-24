@@ -1,4 +1,33 @@
-<nz-card nzTitle="Danh sách dự án" [nzExtra]="extraTemplate">
+<!--Filter-->
+<nz-card nzTitle="Tìm kiếm" [nzExtra]="extraTemplate" style="margin-bottom: 15px">
+  <form nz-form nzLayout="vertical" [formGroup]="filterForm">
+    <!--CONTROLS-->
+    <div nz-row [nzGutter]="24">
+      <div nz-col [nzMd]="12" [nzXs]="24">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'name'">Tên dự án</nz-form-label>
+          <nz-form-control>
+            <input
+              nz-input
+              formControlName="name"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+
+
+    <div nz-row>
+      <div nz-col [nzSpan]="24" class="search-area">
+        <button nz-button (click)="onSearch(true)">Xóa tìm kiếm</button>
+        <button nz-button [nzType]="'primary'" (click)="onSearch()">Tìm kiếm</button>
+      </div>
+    </div>
+  </form>
+</nz-card>
+
+
+<nz-card nzTitle="Danh sách dự án">
   <nz-table
     #basicTable
     [nzVirtualItemSize]="54"

@@ -5,6 +5,7 @@ import { BaseTable } from '../../../shared/abstracts';
 import { CareService } from '../../../core/services';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { finalize, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-list',
@@ -27,11 +28,6 @@ export class ListComponent extends BaseTable<CareInterface> implements OnInit {
     super(activatedRoute, modalService, notification);
     this.care = this.records[0]?.customer?.care || [];
     this.customer = this.resolvedData.customer;
-
-    // if (!this.records.length) {
-    //   this.router.navigate(['customers']);
-    //   this.notification.info('Không có danh sách nhân viên chăm sóc', '');
-    // }
   }
 
   ngOnInit(): void {
@@ -46,8 +42,11 @@ export class ListComponent extends BaseTable<CareInterface> implements OnInit {
   }
 
   confirm(id?: number | string | undefined) {
-    this.careService.delete(+this.customer.id, id).subscribe(() => {
-      this.processData(this.careService.getAll(+this.customer.id));
+    this.careService.delete(+this.customer.id, id).pipe(
+      switchMap(() => this.careService.getAll(+this.customer.id))
+    ).subscribe((resp) => {
+      this.setDataAndPagination(resp.data, resp.pagination);
+      this.care = resp?.data.length ? resp?.data[0].customer?.care : [];
       super.confirm(id);
     });
   }

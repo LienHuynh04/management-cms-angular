@@ -20,7 +20,6 @@ export class ListResolver implements Resolve<boolean> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot)
     : Observable<IPaginateList<CareInterface>> | boolean | any {
-    console.log(route.params);
     if (!route.params.customer) {
       return this.router.navigate(['/customers']);
     }
