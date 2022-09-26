@@ -45,14 +45,6 @@ export const navigations: NavbarItem[] = [
     permissions: {
       only: ['admin']
     }
-  },
-  {
-    title: 'Thống kê',
-    url: '/bar-chart',
-    icon: 'bar-chart',
-    permissions: {
-      only: ['admin']
-    }
   }
 ];
 

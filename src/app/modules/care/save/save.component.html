@@ -5,17 +5,11 @@
   <form [formGroup]="saveForm" nz-form>
     <!--staff_id-->
     <nz-form-item>
-      <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="staff_id" nzRequired>Nhân viên</nz-form-label>
+      <nz-form-label [nzMd]="6" [nzXs]="24">
+        Lần chăm sóc
+      </nz-form-label>
       <nz-form-control [nzMd]="12" [nzXs]="24">
-        <nz-select
-          nzPlaceHolder="Vui lòng chọn"
-          formControlName="staff_id"
-        >
-          <nz-option *ngFor="let item of user" [nzLabel]="item.full_name" [nzValue]="item.id"></nz-option>
-        </nz-select>
-        <app-control-errors
-          fieldName="staff_id"
-        ></app-control-errors>
+       {{authService.currentUserValue.full_name}}
       </nz-form-control>
     </nz-form-item>
 

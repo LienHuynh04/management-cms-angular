@@ -1,1 +1,77 @@
-<p>dashboard works!</p>
+<nz-card>
+  <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+    <div nz-col class="gutter-row" [nzMd]="6" [nzSm]="12" [nzXs]="24">
+      <div class="inner-box bg-gradient-success">
+        <div class="header">
+          <img src="assets/images/circle.svg" alt="circle">
+          <div class="result">{{record.total_customer}}</div>
+          <span nz-icon nzType="user" nzTheme="outline"></span>
+        </div>
+        <div class="subheader">Khách hàng</div>
+      </div>
+    </div>
+    <div nz-col class="gutter-row" [nzMd]="6" [nzSm]="12" [nzXs]="24">
+      <div class="inner-box bg-gradient-danger">
+        <div class="header">
+          <img src="assets/images/circle.svg" alt="circle">
+          <div class="result">{{record.total_project}}</div>
+          <span nz-icon nzType="project" nzTheme="outline"></span>
+        </div>
+        <div class="subheader">Dự án</div>
+      </div>
+    </div>
+    <div nz-col class="gutter-row" [nzMd]="6" [nzSm]="12" [nzXs]="24">
+      <div class="inner-box bg-gradient-info">
+        <div class="header">
+          <img src="assets/images/circle.svg" alt="circle">
+          <div class="result">{{record.total_staff}}</div>
+          <span nz-icon nzType="team" nzTheme="outline"></span>
+        </div>
+        <div class="subheader">Nhân viên</div>
+      </div>
+    </div>
+    <div nz-col class="gutter-row" [nzMd]="6" [nzSm]="12" [nzXs]="24">
+      <div class="inner-box bg-gradient-pink">
+        <div class="header">
+          <img src="assets/images/circle.svg" alt="circle">
+          <div class="result">{{record.total_team}}</div>
+          <span nz-icon nzType="cluster" nzTheme="outline"></span>
+        </div>
+        <div class="subheader">Phòng kinh doanh</div>
+      </div>
+    </div>
+  </div>
+</nz-card>
+
+<nz-card>
+  <div nz-row>
+    <div nz-col nzSpan="12">
+      <canvas baseChart
+              [data]="generalSummaryChart.value"
+              [labels]="generalSummaryChart.label"
+              [options]="doughnutChartOptions"
+              [legend]="false"
+              [chartType]="doughnutChartType">
+      </canvas>
+    </div>
+    <div nz-col nzSpan="12">
+      <canvas baseChart
+              [data]="teamChart.value"
+              [labels]="teamChart.label"
+              [options]="doughnutChartOptions"
+              [legend]="false"
+              [chartType]="doughnutChartType">
+      </canvas>
+    </div>
+    <div nz-col nzSpan="24">
+      <canvas baseChart
+              [data]="careChart.value"
+              [labels]="careChart.label"
+              [options]="doughnutChartOptions"
+              [legend]="false"
+              [chartType]="doughnutChartType">
+      </canvas>
+    </div>
+  </div>
+</nz-card>
+

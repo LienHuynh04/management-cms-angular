@@ -120,7 +120,8 @@
                 [routerLink]="['/care', data.id]"
                 nz-tooltip
                 nzTooltipPlacement="top"
-                [nzTooltipTitle]="'Danh sách nhân viên chăm sóc'"
+                [nzTooltipTitle]="'Danh sách những lần chăm sóc'"
+                *ngxPermissionsOnly="['admin', 'marketing', 'sales', 'agency', 'cooperator']"
         >
           <i nz-icon nzType="team" nzTheme="outline"></i>
         </button>

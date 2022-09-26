@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { ApiBase } from './api.service';
 import { apiEndpoints } from '../../config/global-vars';
 import { CareInterface, IPaginateList } from '../interfaces';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class CareService {
   getAll(customer: number, params ?: any): Observable<IPaginateList<CareInterface>> {
     return this.apiBase.get(`${apiEndpoints.customer}/${customer}/cares`, {
       page: 1,
-      per_page: 50,
+      per_page: 5000,
       ...params
     });
   }

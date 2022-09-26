@@ -19,10 +19,11 @@
     "@angular/platform-browser": "~10.2.4",
     "@angular/platform-browser-dynamic": "~10.2.4",
     "@angular/router": "~10.2.4",
-    "chart.js": "^3.9.1",
+    "chart.js": "^2.9.3",
     "date-fns": "^2.22.1",
     "ng-zorro-antd": "^10.2.2",
     "ngx-permissions": "^8.1.1",
+    "ng2-charts": "^2.4.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

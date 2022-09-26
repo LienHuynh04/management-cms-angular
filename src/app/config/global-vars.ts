@@ -9,6 +9,7 @@ interface Endpoint {
   customer_care: string;
   role: string;
   team: string;
+  statistics: string;
 
   [key: string]: string;
 }
@@ -23,6 +24,7 @@ export const apiEndpoints: Endpoint = {
   user: 'users',
   customer_care: 'cares',
   role: 'roles',
-  team: 'teams'
+  team: 'teams',
+  statistics: 'statistics'
 };
 

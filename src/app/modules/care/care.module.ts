@@ -5,6 +5,7 @@ import { CareRoutingModule } from './care-routing.module';
 import { ListComponent } from './list/list.component';
 import { SaveComponent } from './save/save.component';
 import { SharedModule } from '../../shared/shared.module';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 
 
 @NgModule({
@@ -12,11 +13,12 @@ import { SharedModule } from '../../shared/shared.module';
     ListComponent,
     SaveComponent
   ],
-  imports: [
-    CommonModule,
-    CareRoutingModule,
-    SharedModule
-  ]
+    imports: [
+        CommonModule,
+        CareRoutingModule,
+        SharedModule,
+        NzCollapseModule
+    ]
 })
 export class CustomerCareModule {
 }
