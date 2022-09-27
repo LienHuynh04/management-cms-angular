@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ChartType } from 'chart.js';
-import { Label } from 'ng2-charts';
+import { ChartOptions, ChartType } from 'chart.js';
+import { Label, MultiDataSet } from 'ng2-charts';
 
 interface Chart {
   value: any,
@@ -16,17 +16,12 @@ interface Chart {
 })
 export class DashboardComponent implements OnInit {
   record: any;
-  chart: any;
+  public doughnutChartType: ChartType = 'doughnut';
   data: Chart[] = [];
   generalSummaryChart!: Chart;
   teamChart!: Chart;
   careChart!: Chart;
-  doughnutChartOptions = {
-    responsive: true,
-    maintainAspectRatio: false
-  };
 
-  doughnutChartType: ChartType = 'doughnut';
 
   constructor(
     private activatedRoute: ActivatedRoute
@@ -37,6 +32,10 @@ export class DashboardComponent implements OnInit {
       value: Object.values(this.record.get_general_summary.detail),
       label: Object.keys(this.record.get_general_summary.detail),
       options: {
+        responsive: true,
+        legend: {
+          position: 'right'
+        },
         scales: {
           yAxes: [{
             ticks: {
@@ -51,6 +50,10 @@ export class DashboardComponent implements OnInit {
       value: Object.values(this.record.get_statistic_for_team.detail),
       label: Object.keys(this.record.get_statistic_for_team.detail),
       options: {
+        responsive: true,
+        legend: {
+          position: 'right'
+        },
         scales: {
           yAxes: [{
             ticks: {
@@ -65,6 +68,10 @@ export class DashboardComponent implements OnInit {
       value: Object.values(this.record.get_statistic_number_care.detail),
       label: Object.keys(this.record.get_statistic_number_care.detail),
       options: {
+        responsive: true,
+        legend: {
+          position: 'left'
+        },
         scales: {
           yAxes: [{
             ticks: {
