@@ -43,39 +43,33 @@
   </div>
 </nz-card>
 
-<nz-card>
-  <div nz-row>
-    <div nz-col nzSpan="12">
+<div nz-row [nzGutter]="8" class="chart-dashboard">
+  <div nz-col nzSpan="12" class="item-chart">
+    <nz-card nzTitle="Tổng quan">
       <canvas baseChart
               [data]="generalSummaryChart.value"
               [labels]="generalSummaryChart.label"
               [chartType]="generalSummaryChart.type"
               [options]="generalSummaryChart.options"
+              [colors]="generalSummaryChart.color"
               [legend]="false">
       </canvas>
-    </div>
-    <div nz-col nzSpan="12">
-      <canvas baseChart
-              [data]="generalSummaryChart.value"
-              [labels]="generalSummaryChart.label"
-              [chartType]="generalSummaryChart.type"
-              [options]="generalSummaryChart.options"
-              [legend]="false">
-      </canvas>
-    </div>
+    </nz-card>
   </div>
-  <div nz-row>
-    <div nz-col nzSpan="12">
+  <div nz-col nzSpan="12" class="item-chart">
+    <nz-card nzTitle="Số lần chăm sóc">
       <canvas baseChart
               [data]="careChart.value"
               [labels]="careChart.label"
               [chartType]="careChart.type"
               [options]="careChart.options"
               [colors]="careChart.color"
-              [legend]="false">
+              [legend]="true">
       </canvas>
-    </div>
-    <div nz-col nzSpan="12">
+    </nz-card>
+  </div>
+  <div nz-col nzSpan="12" class="item-chart">
+    <nz-card nzTitle="Nhóm kinh doanh">
       <canvas baseChart
               [data]="teamChart.value"
               [labels]="teamChart.label"
@@ -83,36 +77,22 @@
               [options]="teamChart.options"
               [legend]="true">
       </canvas>
-    </div>
-  </div>
-</nz-card>
+    </nz-card>
 
-<div nz-row>
-  <div nz-col nzSpan="8">
-    <canvas baseChart
-            [data]="generalSummaryChart.value"
-            [labels]="generalSummaryChart.label"
-            [chartType]="'pie'"
-            [options]="generalSummaryChart.options"
-            [legend]="false">
-    </canvas>
   </div>
-  <div nz-col nzSpan="8">
-    <canvas baseChart
-            [data]="careChart.value"
-            [labels]="careChart.label"
-            [chartType]="'pie'"
-            [options]="careChart.options"
-            [legend]="false">
-    </canvas>
+  <div nz-col nzSpan="12" class="item-chart">
+    <nz-card nzTitle="Nhóm kinh doanh">
+      <canvas baseChart
+              [data]="teamChart.value"
+              [labels]="teamChart.label"
+              [chartType]="teamChart.type"
+              [options]="teamChart.options"
+              [legend]="true">
+      </canvas>
+    </nz-card>
+
   </div>
-  <div nz-col nzSpan="8">
-    <canvas baseChart
-            [data]="teamChart.value"
-            [labels]="teamChart.label"
-            [chartType]="'pie'"
-            [options]="teamChart.options"
-            [legend]="false">
-    </canvas>
-  </div>
+</div>
+<div nz-row [nzGutter]="8">
+
 </div>

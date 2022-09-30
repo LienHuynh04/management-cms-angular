@@ -59,3 +59,11 @@
   }
 }
 
+.chart-dashboard {
+  .item-chart {
+    margin-top: 20px;
+    &:nth-child(3), &:nth-child(4) {
+      margin-bottom: 20px;
+    }
+  }
+}
