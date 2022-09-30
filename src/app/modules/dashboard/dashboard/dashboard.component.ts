@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ChartOptions, ChartType } from 'chart.js';
-import { Label, MultiDataSet } from 'ng2-charts';
+import { Color, Label } from 'ng2-charts';
 
 interface Chart {
-  value: any,
-  label: Label[],
-  options: {}
+  value: any;
+  label: Label[];
+  type: ChartType;
+  options: ChartOptions;
+  color: Color[];
 }
 
 @Component({
@@ -16,7 +18,6 @@ interface Chart {
 })
 export class DashboardComponent implements OnInit {
   record: any;
-  public doughnutChartType: ChartType = 'doughnut';
   data: Chart[] = [];
   generalSummaryChart!: Chart;
   teamChart!: Chart;
@@ -31,11 +32,15 @@ export class DashboardComponent implements OnInit {
     this.generalSummaryChart = {
       value: Object.values(this.record.get_general_summary.detail),
       label: Object.keys(this.record.get_general_summary.detail),
+      type: 'pie',
       options: {
         responsive: true,
-        legend: {
-          position: 'right'
+        title: {
+          display: true,
+          text: 'Tổng quan',
+          position: 'bottom'
         },
+        aspectRatio: 1.5,
         scales: {
           yAxes: [{
             ticks: {
@@ -43,17 +48,22 @@ export class DashboardComponent implements OnInit {
             }
           }]
         }
-      }
+      },
+      color: []
     }
 
     this.teamChart = {
       value: Object.values(this.record.get_statistic_for_team.detail),
       label: Object.keys(this.record.get_statistic_for_team.detail),
+      type: 'pie',
       options: {
         responsive: true,
-        legend: {
-          position: 'right'
+        title: {
+          display: true,
+          text: 'Nhóm kinh doanh',
+          position: 'bottom'
         },
+        aspectRatio: 1.5,
         scales: {
           yAxes: [{
             ticks: {
@@ -61,25 +71,29 @@ export class DashboardComponent implements OnInit {
             }
           }]
         }
-      }
+      },
+      color: []
     }
 
     this.careChart = {
       value: Object.values(this.record.get_statistic_number_care.detail),
       label: Object.keys(this.record.get_statistic_number_care.detail),
+      type: 'line',
       options: {
         responsive: true,
-        legend: {
-          position: 'left'
+        aspectRatio: 1.5,
+        title: {
+          display: true,
+          text: 'Số lần chăm sóc',
+          position: 'bottom'
         },
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
+      },
+      color: [
+        {
+          borderColor: '#86c7f3',
+          backgroundColor: 'transparent',
         }
-      }
+      ]
     }
   }
 
