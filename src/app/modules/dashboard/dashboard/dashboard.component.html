@@ -44,19 +44,18 @@
 </nz-card>
 
 <div nz-row [nzGutter]="8" class="chart-dashboard">
-  <div nz-col nzSpan="12" class="item-chart">
+  <div nz-col [nzMd]="12" [nzXs]="24" class="item-chart">
     <nz-card nzTitle="Tổng quan">
       <canvas baseChart
               [data]="generalSummaryChart.value"
               [labels]="generalSummaryChart.label"
               [chartType]="generalSummaryChart.type"
               [options]="generalSummaryChart.options"
-              [colors]="generalSummaryChart.color"
               [legend]="false">
       </canvas>
     </nz-card>
   </div>
-  <div nz-col nzSpan="12" class="item-chart">
+  <div nz-col [nzMd]="12" [nzXs]="24" class="item-chart">
     <nz-card nzTitle="Số lần chăm sóc">
       <canvas baseChart
               [data]="careChart.value"
@@ -64,30 +63,30 @@
               [chartType]="careChart.type"
               [options]="careChart.options"
               [colors]="careChart.color"
-              [legend]="true">
+              [legend]="false">
       </canvas>
     </nz-card>
   </div>
-  <div nz-col nzSpan="12" class="item-chart">
+  <div nz-col [nzMd]="12" [nzXs]="24" class="item-chart">
     <nz-card nzTitle="Nhóm kinh doanh">
       <canvas baseChart
               [data]="teamChart.value"
               [labels]="teamChart.label"
               [chartType]="teamChart.type"
               [options]="teamChart.options"
-              [legend]="true">
+              [legend]="false">
       </canvas>
     </nz-card>
 
   </div>
-  <div nz-col nzSpan="12" class="item-chart">
-    <nz-card nzTitle="Nhóm kinh doanh">
+  <div nz-col [nzMd]="12" [nzXs]="24" class="item-chart">
+    <nz-card nzTitle="Phòng ban">
       <canvas baseChart
-              [data]="teamChart.value"
-              [labels]="teamChart.label"
-              [chartType]="teamChart.type"
-              [options]="teamChart.options"
-              [legend]="true">
+              [data]="departmentChart.value"
+              [labels]="departmentChart.label"
+              [chartType]="departmentChart.type"
+              [options]="departmentChart.options"
+              [legend]="false">
       </canvas>
     </nz-card>
 

@@ -7,3 +7,4 @@ export * from './customer.interface';
 export * from './staff.interface';
 export * from './project.interface';
 export * from './care.interface';
+export * from './chart.interface';

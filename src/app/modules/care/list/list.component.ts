@@ -26,7 +26,6 @@ export class ListComponent extends BaseTable<CareInterface> implements OnInit {
     super(activatedRoute, modalService, notification);
     this.cares = this.records[0]?.customer?.care || [];
     this.customer = this.resolvedData.customer;
-    console.log(this.cares);
   }
 
   ngOnInit(): void {
