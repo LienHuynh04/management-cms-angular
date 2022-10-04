@@ -34,12 +34,6 @@ export abstract class BaseForm<T> {
     request
       .pipe(
         catchError((error: HttpErrorResponse | any) => {
-          this.notification.create(
-            'error',
-            'Thất bại',
-            '',
-            { nzDuration: 1500 }
-          );
           if (error.status === 422) {
             this.setFormErrors(error.error.errors);
           }
@@ -53,7 +47,7 @@ export abstract class BaseForm<T> {
           'success',
           'Thành công',
           '',
-          { nzDuration: 1500 }
+          {nzDuration: 1500}
         );
       });
   }
@@ -64,15 +58,12 @@ export abstract class BaseForm<T> {
   deleteItem(id: string): void {
   }
 
+  // tslint:disable-next-line:typedef
   field(name: string) {
     return this.saveForm.get(`${name}`) as FormGroup;
   }
 
   /*End - Process Data*/
-
-  valueForm(name: string) {
-    return this.field(name).value;
-  }
 
   validationForm(): void {
     for (const item in this.saveForm.controls) {
@@ -88,7 +79,7 @@ export abstract class BaseForm<T> {
     this.submitForm();
   }
 
-  protected patchValueForm() {
+  protected patchValueForm(): void {
     if (this.record) {
       this.saveForm.patchValue(this.record);
     }
@@ -114,7 +105,7 @@ export abstract class BaseForm<T> {
 
 
   /*End - Handle Form*/
-  confirmUpdate() {
+  confirmUpdate(): void {
     this.modalSerice.confirm({
       nzTitle: this.record ? 'Bạn có muốn thay đổi ?' : 'Bạn có muốn tạo mới ?',
       nzOkText: 'Có',
@@ -126,5 +117,16 @@ export abstract class BaseForm<T> {
       nzCancelText: 'Không',
       nzOnOk: () => this.validationForm(),
     });
+  }
+
+  removeValueNull(obj: any) {
+    const data = {...obj};
+    Object.keys(data).forEach(key => {
+      if (data[key] === null) {
+        delete data[key];
+      }
+    });
+    console.log(data);
+    return data;
   }
 }

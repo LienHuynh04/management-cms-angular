@@ -51,6 +51,7 @@
         <nz-select
           nzPlaceHolder="Vui lòng chọn"
           formControlName="assign_for_user_id"
+          [nzDisabled]="['sales', 'agency', 'cooperator'].includes(authService.currentUserValue.role[0].name)"
         >
           <nz-option *ngFor="let item of users"
                      [nzLabel]="item.full_name"

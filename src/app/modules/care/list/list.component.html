@@ -5,12 +5,21 @@
   <br/>
   <nz-collapse>
     <nz-collapse-panel
-      *ngFor="let care of cares"
-      [nzHeader]="care.staff_name"
+      *ngFor="let care of cares; let i = index"
+      [nzHeader]="'Lần ' + (i + 1)"
+      [nzExtra]="extraTpl"
     >
-      <p style="margin:0;">
-        {{care.description}}
-      </p>
+      <div nz-row>
+        <div nz-col [nzSpan]="4">Tên nhân viên:</div>
+        <div nz-col [nzSpan]="18">{{care.staff_name}}</div>
+        <div nz-col [nzSpan]="4">Email nhân viên:</div>
+        <div nz-col [nzSpan]="18">{{care.staff_email}}</div>
+        <div nz-col [nzSpan]="4">Mô tả:</div>
+        <div nz-col [nzSpan]="18">{{care.description}}</div>
+      </div>
+      <ng-template #extraTpl>
+        {{care.created_at}}
+      </ng-template>
     </nz-collapse-panel>
   </nz-collapse>
 </nz-card>
@@ -28,3 +37,5 @@
     Tạo lần chăm sóc mới
   </button>
 </ng-template>
+
+

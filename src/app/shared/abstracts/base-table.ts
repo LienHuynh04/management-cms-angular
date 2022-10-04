@@ -35,12 +35,6 @@ export abstract class BaseTable<T> {
   processData(request: Observable<IPaginateList<T>>): void {
     request.pipe(
       catchError((err: HttpErrorResponse) => {
-        this.notification.create(
-          'error',
-          'Thất bại',
-          '',
-          { nzDuration: 1500 }
-        );
         return throwError(err);
       })
     ).subscribe((resp: IPaginateList<T>) => {

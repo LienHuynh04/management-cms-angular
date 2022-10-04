@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CustomerService, LoadingOverlayService } from '../../../core/services';
+import { AuthenticationService, CustomerService, LoadingOverlayService } from '../../../core/services';
 import { CustomerInterface, ProjectInterface, StaffInterface } from '../../../core/interfaces';
 import { BaseForm } from '../../../shared/abstracts';
 import { ResultEnum } from '../../../core/enums';
@@ -26,7 +26,8 @@ export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit
     private activatedRoute: ActivatedRoute,
     public modalService: NzModalService,
     public loadingOverlayService: LoadingOverlayService,
-    public notification: NzNotificationService
+    public notification: NzNotificationService,
+    public authService: AuthenticationService
   ) {
     super(modalService, loadingOverlayService, notification, activatedRoute, router);
     this.projects = this.resolvedData.projects;
@@ -37,7 +38,7 @@ export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit
     this.initForm();
   }
 
-  initForm() {
+  initForm(): void {
     this.saveForm = this.fb.group({
       full_name: ['', Validators.required],
       phone_number: ['', Validators.required],
@@ -61,8 +62,8 @@ export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit
 
   submitForm(): void {
     this.processData(this.record
-        ? this.customerService.update(this.record.id, this.saveForm.value)
-        : this.customerService.create(this.saveForm.value),
+        ? this.customerService.update(this.record.id, this.removeValueNull(this.saveForm.value))
+        : this.customerService.create(this.removeValueNull(this.saveForm.value)),
       'customers'
     );
   }
