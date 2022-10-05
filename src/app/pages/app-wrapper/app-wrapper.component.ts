@@ -28,8 +28,8 @@ export class AppWrapperComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  logout() {
-    this.authService.logout();
+  logout(): void {
+    return this.authService.logout();
   }
 
 }

@@ -47,9 +47,8 @@ export class CredentialsService {
    * @param credentials The user credentials.
    * @param remember True to remember credentials across sessions.
    */
-  setCredentials(credentials?: ICredentials, remember?: boolean) {
+  setCredentials(credentials?: ICredentials, remember?: boolean): void {
     this._credentials = credentials || null;
-
     if (credentials) {
       const storage = remember ? localStorage : sessionStorage;
       storage.setItem(credentialsKey, JSON.stringify(credentials));

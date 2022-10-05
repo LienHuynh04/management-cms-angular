@@ -53,9 +53,6 @@ registerLocaleData(en);
   ],
   providers: [
     {provide: NZ_I18N, useValue: en_US},
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: LoadingOverlayInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     ApiBase,
     LoadingOverlayService,
     NzNotificationService

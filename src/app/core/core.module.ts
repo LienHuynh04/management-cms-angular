@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { COLOR_CHART, COLUMNS, NAVIGATIONS, OPTION_CHART } from './interfaces';
 import { column } from '../config/column';
 import { navigations } from '../config/menu';
-import { AuthInterceptorProviders } from './intercepters/auth.interceptor';
-import { ErrorInterceptorProviders } from './intercepters/error.interceptor';
+import { AuthInterceptor, AuthInterceptorProviders } from './intercepters/auth.interceptor';
+import { ErrorInterceptor, ErrorInterceptorProviders } from './intercepters/error.interceptor';
 import { LoadingOverlayInterceptor } from './intercepters/loading-overlay-interceptor.service';
 import { LoadingOverlayService } from './services/loading.service';
 import { GlobalErrorHandler } from './intercepters/global-error-handler';
@@ -22,6 +22,8 @@ import { ColorChart, OptionsChart } from '../config/chart';
     {provide: COLUMNS, useValue: column},
     {provide: OPTION_CHART, useValue: OptionsChart},
     {provide: COLOR_CHART, useValue: ColorChart},
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {
       provide: ErrorHandler,
       useClass: GlobalErrorHandler,

@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable()
 export class LoadingOverlayService {
   public isLoading$: Observable<boolean>;
-  private isLoadingSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public isLoadingSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor() {
     this.isLoading$ = this.isLoadingSubject.asObservable();
@@ -12,5 +12,9 @@ export class LoadingOverlayService {
 
   set isLoading(value: boolean) {
     this.isLoadingSubject.next(value);
+  }
+
+  get isLoading(): boolean {
+    return  this.isLoadingSubject.value;
   }
 }

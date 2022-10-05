@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HTTP_INTERCEPTORS, HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest
+} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, finalize } from 'rxjs/operators';
 import { AuthenticationService, CredentialsService, LoadingOverlayService } from '../services';
@@ -27,12 +34,12 @@ export class ErrorInterceptor implements HttpInterceptor {
         this.loadingOverlayService.isLoading = false;
       }),
       catchError((err: HttpErrorResponse) => {
-        if (err.status == 401) {
+        if (err.status === 401) {
           this.credentialService.setCredentials();
           this.router.navigate(['', 'login']);
-          this.notification.create('error', 'Lỗi đăng nhập', '')
+          this.notification.create('error', 'Lỗi đăng nhập', '');
         }
-        if (err.status == 404) {
+        if (err.status === 404) {
           this.router.navigate(['', '404']);
         }
         return throwError(err);

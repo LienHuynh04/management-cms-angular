@@ -98,18 +98,15 @@ export class AuthenticationService {
   logout(): void {
     this.apiBase
       .delete(apiEndpoints.logout)
-      .pipe(
-        finalize(() => {
-          this.clearAndLogout();
-        })
-      )
-      .subscribe();
+      .subscribe(_ => {
+        this.clearAndLogout();
+      });
   }
 
 
   clearAndLogout(): void {
     this.credentialsService.setCredentials();
     this.currentUserSubject.next(null);
-    this.router.navigate(['/login']);
+    location.href = '/login'
   }
 }
