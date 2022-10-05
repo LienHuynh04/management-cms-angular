@@ -46,11 +46,12 @@
 
     <!--staff-->
     <nz-form-item>
-      <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="assign_for_user_id">Chỉ định nhân nhân viên kinh doanh</nz-form-label>
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="assign_for_user_id" nzRequired>Chỉ định nhân viên</nz-form-label>
       <nz-form-control [nzMd]="12" [nzXs]="24">
         <nz-select
           nzPlaceHolder="Vui lòng chọn"
           formControlName="assign_for_user_id"
+          nzAllowClear
           [nzDisabled]="record && ['sales', 'agency', 'cooperator'].includes(authService.currentUserValue.role[0].name)"
         >
           <nz-option *ngFor="let item of users"

@@ -44,7 +44,7 @@ export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit
       phone_number: ['', Validators.required],
       address: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      assign_for_user_id: [null],
+      assign_for_user_id: [null, [Validators.required]],
       project_note: [null],
       note: [null],
       result: [null],
