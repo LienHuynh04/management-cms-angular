@@ -64,8 +64,6 @@ export class DashboardComponent implements OnInit {
       },
       color: this.colorChart.pie
     };
-    console.log(this.generalSummaryChart);
-    debugger
 
     /*Chart của phòng kinh doanh*/
     this.teamChart = {
@@ -107,5 +105,9 @@ export class DashboardComponent implements OnInit {
       },
       color: this.colorChart.pie
     };
+  }
+
+  isCheckZeroChart(item : any) {
+    return !!Object.values(item).filter((i: any) => i > 0).length
   }
 }

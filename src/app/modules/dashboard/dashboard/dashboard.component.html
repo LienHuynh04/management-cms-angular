@@ -47,19 +47,20 @@
   <div nz-col [nzMd]="12" [nzXs]="24" class="item-chart">
     <nz-card nzTitle="Tổng quan">
       <canvas baseChart
-              *ngIf="generalSummaryChart"
+              *ngIf="isCheckZeroChart(generalSummaryChart?.value || {}); else noSummaryChart"
               [data]="generalSummaryChart.value"
               [labels]="generalSummaryChart.label"
               [chartType]="generalSummaryChart.type"
               [options]="generalSummaryChart.options"
               [legend]="false">
       </canvas>
+      <ng-template #noSummaryChart>Không có thống kê của tổng quan</ng-template>
     </nz-card>
   </div>
   <div nz-col [nzMd]="12" [nzXs]="24" class="item-chart">
     <nz-card nzTitle="Số lần chăm sóc">
       <canvas baseChart
-              *ngIf="careChart"
+              *ngIf="isCheckZeroChart(careChart?.value || {}); else noCareChart"
               [data]="careChart.value"
               [labels]="careChart.label"
               [chartType]="careChart.type"
@@ -67,32 +68,33 @@
               [colors]="careChart.color"
               [legend]="false">
       </canvas>
+      <ng-template #noCareChart>Không có thống kê của số lần chăm sóc</ng-template>
     </nz-card>
   </div>
   <div nz-col [nzMd]="12" [nzXs]="24" class="item-chart">
     <nz-card nzTitle="Nhóm kinh doanh">
       <canvas baseChart
-              *ngIf="teamChart"
+              *ngIf="isCheckZeroChart(teamChart?.value || {}); else noTeamChart"
               [data]="teamChart.value"
               [labels]="teamChart.label"
               [chartType]="teamChart.type"
               [options]="teamChart.options"
               [legend]="false">
       </canvas>
+      <ng-template #noTeamChart>Không có thống kê của nhóm kinh doanh</ng-template>
     </nz-card>
-
   </div>
   <div nz-col [nzMd]="12" [nzXs]="24" class="item-chart">
-    <nz-card nzTitle="Phòng ban" >
+    <nz-card nzTitle="Phòng ban">
       <canvas baseChart
-              *ngIf="departmentChart"
+              *ngIf="isCheckZeroChart(departmentChart?.value || {}); else noDepartmentChart"
               [data]="departmentChart.value"
               [labels]="departmentChart.label"
               [chartType]="departmentChart.type"
               [options]="departmentChart.options"
               [legend]="false">
       </canvas>
+      <ng-template #noDepartmentChart>Không có thống kê của tổng quan</ng-template>
     </nz-card>
-
   </div>
 </div>
