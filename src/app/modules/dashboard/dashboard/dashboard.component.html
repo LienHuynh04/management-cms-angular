@@ -47,6 +47,7 @@
   <div nz-col [nzMd]="12" [nzXs]="24" class="item-chart">
     <nz-card nzTitle="Tổng quan">
       <canvas baseChart
+              #summaryBaseChart="base-chart"
               *ngIf="isCheckZeroChart(generalSummaryChart?.value || {}); else noSummaryChart"
               [data]="generalSummaryChart.value"
               [labels]="generalSummaryChart.label"
@@ -55,18 +56,28 @@
               [legend]="false">
       </canvas>
       <ng-template #noSummaryChart>Không có thống kê của tổng quan</ng-template>
+      <div class="my-legend" *ngIf="summaryBaseChart?.chart?.legend?.legendItems">
+        <ul nz-row class="legend-labels">
+          <li nz-col [nzSpan]="12" *ngFor=" let item of summaryBaseChart.chart?.legend.legendItems;let i = index"
+              class="custom-legend-item">
+            <span [ngStyle]="{ 'background-color': item.fillStyle }"></span>
+            {{ item.text }}
+          </li>
+        </ul>
+      </div>
     </nz-card>
   </div>
   <div nz-col [nzMd]="12" [nzXs]="24" class="item-chart">
     <nz-card nzTitle="Số lần chăm sóc">
       <canvas baseChart
+              #careBaseChart="base-chart"
               *ngIf="isCheckZeroChart(careChart?.value || {}); else noCareChart"
               [data]="careChart.value"
               [labels]="careChart.label"
               [chartType]="careChart.type"
               [options]="careChart.options"
               [colors]="careChart.color"
-              [legend]="false">
+              [legend]="true">
       </canvas>
       <ng-template #noCareChart>Không có thống kê của số lần chăm sóc</ng-template>
     </nz-card>
@@ -74,6 +85,7 @@
   <div nz-col [nzMd]="12" [nzXs]="24" class="item-chart">
     <nz-card nzTitle="Nhóm kinh doanh">
       <canvas baseChart
+              #teamBaseChart="base-chart"
               *ngIf="isCheckZeroChart(teamChart?.value || {}); else noTeamChart"
               [data]="teamChart.value"
               [labels]="teamChart.label"
@@ -82,11 +94,21 @@
               [legend]="false">
       </canvas>
       <ng-template #noTeamChart>Không có thống kê của nhóm kinh doanh</ng-template>
+      <div class="my-legend" *ngIf="teamBaseChart?.chart?.legend?.legendItems">
+        <ul nz-row class="legend-labels">
+          <li nz-col [nzSpan]="12" *ngFor=" let item of teamBaseChart.chart?.legend.legendItems;let i = index"
+              class="custom-legend-item">
+            <span [ngStyle]="{ 'background-color': item.fillStyle }"></span>
+            {{ item.text }}
+          </li>
+        </ul>
+      </div>
     </nz-card>
   </div>
   <div nz-col [nzMd]="12" [nzXs]="24" class="item-chart">
     <nz-card nzTitle="Phòng ban">
       <canvas baseChart
+              #departmentBaseChart="base-chart"
               *ngIf="isCheckZeroChart(departmentChart?.value || {}); else noDepartmentChart"
               [data]="departmentChart.value"
               [labels]="departmentChart.label"
@@ -95,6 +117,15 @@
               [legend]="false">
       </canvas>
       <ng-template #noDepartmentChart>Không có thống kê của tổng quan</ng-template>
+      <div class="my-legend" *ngIf="departmentBaseChart?.chart?.legend?.legendItems">
+        <ul nz-row class="legend-labels">
+          <li nz-col [nzSpan]="12" *ngFor=" let item of departmentBaseChart.chart?.legend.legendItems;let i = index"
+              class="custom-legend-item">
+            <span [ngStyle]="{ 'background-color': item.fillStyle }"></span>
+            {{ item.text }}
+          </li>
+        </ul>
+      </div>
     </nz-card>
   </div>
 </div>

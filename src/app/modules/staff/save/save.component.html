@@ -101,6 +101,7 @@
           *ngIf="!record; else updateTemplate"
           nzPlaceHolder="Vui lòng chọn"
           formControlName="role_id"
+          nzAllowClear
         >
           <nz-option *ngFor="let item of roles" [nzLabel]="$any([roleEnum[item.name]])"
                      [nzValue]="$any(item?.id)"></nz-option>

@@ -18,6 +18,7 @@
         <nz-select
           nzPlaceHolder="Vui lòng chọn"
           formControlName="leader"
+          nzAllowClear
         >
           <nz-option *ngFor="let item of users" [nzLabel]="$any(item?.full_name)"
                      [nzValue]="$any(item?.id)"></nz-option>

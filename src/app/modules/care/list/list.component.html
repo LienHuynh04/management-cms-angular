@@ -9,16 +9,24 @@
       [nzHeader]="'Lần ' + (i + 1)"
       [nzExtra]="extraTpl"
     >
-      <div nz-row>
-        <div nz-col [nzSpan]="4">Tên nhân viên:</div>
-        <div nz-col [nzSpan]="18">{{care.staff_name}}</div>
-        <div nz-col [nzSpan]="4">Email nhân viên:</div>
-        <div nz-col [nzSpan]="18">{{care.staff_email}}</div>
-        <div nz-col [nzSpan]="4">Mô tả:</div>
-        <div nz-col [nzSpan]="18">{{care.description}}</div>
-      </div>
+      <nz-descriptions>
+        <nz-descriptions-item nzTitle="Tên nhân viên" [nzSpan]="3">
+          {{care.staff_name}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Email nhân viên" [nzSpan]="3">
+          {{care.staff_email}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Mô tả" [nzSpan]="3">
+          {{care.description}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Trạng thái" [nzSpan]="3">
+          <nz-badge *ngIf="!!care.status" nzStatus="processing" nzText="Hoàn thành"></nz-badge>
+          <nz-badge *ngIf="!!!care.status" nzStatus="default" nzText="Chưa hoàn thành"></nz-badge>
+        </nz-descriptions-item>
+      </nz-descriptions>
       <ng-template #extraTpl>
         {{care.created_at}}
+        <span nz-icon nzType="edit" (click)="$event.stopPropagation()"></span>
       </ng-template>
     </nz-collapse-panel>
   </nz-collapse>

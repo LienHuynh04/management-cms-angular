@@ -17,7 +17,7 @@
         <nz-form-item>
           <nz-form-label [nzFor]="'name'">Trưởng nhóm</nz-form-label>
           <nz-form-control>
-            <nz-select formControlName="leader">
+            <nz-select formControlName="leader" nzAllowClear>
               <nz-option *ngFor="let user of leader" [nzLabel]="user.full_name" [nzValue]="user.id"></nz-option>
             </nz-select>
           </nz-form-control>

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   ChartInterface,
@@ -8,6 +8,8 @@ import {
   OptionChartConfig
 } from '../../../core/interfaces';
 import { DashboardEnum } from '../../../core/enums';
+import { BaseChartDirective } from 'ng2-charts';
+import * as Chart from 'chart.js';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,6 +17,10 @@ import { DashboardEnum } from '../../../core/enums';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  @ViewChild('summaryBaseChart') summaryBaseChart!: BaseChartDirective | any;
+  @ViewChild('careBaseChart') careBaseChart!: BaseChartDirective | any;
+  @ViewChild('teamBaseChart') teamBaseChart!: BaseChartDirective | any;
+  @ViewChild('departmentBaseChart') departmentBaseChart!: BaseChartDirective | any;
   record: any;
   generalSummaryChart!: ChartInterface;
   teamChart!: ChartInterface;
@@ -29,7 +35,6 @@ export class DashboardComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.record = this.activatedRoute.snapshot.data.resolvedData;
-    console.log(this.record);
   }
 
   getNamebyKeys(label: any, enumLabel: any) {
@@ -110,4 +115,10 @@ export class DashboardComponent implements OnInit {
   isCheckZeroChart(item : any) {
     return !!Object.values(item).filter((i: any) => i > 0).length
   }
+  legendOnClick(legendItem: any) {
+    var index = legendItem.datasetIndex;
+    console.log(index);
+    alert(legendItem);
+  }
+
 }

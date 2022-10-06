@@ -6,6 +6,8 @@ import { ListComponent } from './list/list.component';
 import { SaveComponent } from './save/save.component';
 import { SharedModule } from '../../shared/shared.module';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
 
 
 @NgModule({
@@ -13,12 +15,14 @@ import { NzCollapseModule } from 'ng-zorro-antd/collapse';
     ListComponent,
     SaveComponent
   ],
-    imports: [
-        CommonModule,
-        CareRoutingModule,
-        SharedModule,
-        NzCollapseModule
-    ]
+  imports: [
+    CommonModule,
+    CareRoutingModule,
+    SharedModule,
+    NzCollapseModule,
+    NzDescriptionsModule,
+    NzBadgeModule
+  ]
 })
 export class CustomerCareModule {
 }

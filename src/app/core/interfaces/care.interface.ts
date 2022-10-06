@@ -9,6 +9,7 @@ export interface CareInterface {
   staff_login_id: string;
   staff_name: string;
   created_at: string;
+  status: string;
   description: string;
   staff: StaffInterface;
   customer: CustomerInterface;
