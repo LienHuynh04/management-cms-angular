@@ -8,6 +8,7 @@ import { IRole, StaffInterface } from '../../../core/interfaces';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { RoleEnum } from '../../../core/enums';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { TeamInterface } from '../../../core/interfaces/team.interface';
 
 @Component({
   selector: 'app-save',
@@ -19,6 +20,7 @@ export class SaveComponent extends BaseForm<StaffInterface> implements OnInit {
   passwordVisible = false;
   passwordVisibleConfirm = false;
   roleEnum = RoleEnum;
+  teams: TeamInterface[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -31,6 +33,7 @@ export class SaveComponent extends BaseForm<StaffInterface> implements OnInit {
   ) {
     super(modalService, loadingOverlayService, notification, activatedRoute, router);
     this.roles = this.resolvedData.roles;
+    this.teams = this.resolvedData.teams;
   }
 
   ngOnInit(): void {
@@ -44,7 +47,8 @@ export class SaveComponent extends BaseForm<StaffInterface> implements OnInit {
       full_name: ['', Validators.required],
       password: [null, [Validators.required, Validators.minLength(8)]],
       password_confirmation: [null],
-      role_id: ['', [Validators.required]]
+      role_id: ['', [Validators.required]],
+      team_id: ['']
     }, {
       validator: ConfirmedValidator('password', 'password_confirmation')
     });

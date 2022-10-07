@@ -93,6 +93,21 @@
       </nz-form-control>
     </nz-form-item>
 
+    <!--Team-->
+    <nz-form-item>
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="role_id">Nhóm</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
+        <nz-select
+          nzPlaceHolder="Vui lòng chọn"
+          formControlName="team_id"
+          nzAllowClear
+        >
+          <nz-option *ngFor="let item of teams" [nzLabel]="$any(item.name)"
+                     [nzValue]="$any(item?.id)"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
     <!--Role-->
     <nz-form-item>
       <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="role_id" nzRequired>Phân quyền</nz-form-label>
