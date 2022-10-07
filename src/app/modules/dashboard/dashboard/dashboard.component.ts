@@ -111,7 +111,6 @@ export class DashboardComponent implements OnInit {
 
     /*Chart của phòng ban*/
     if(this.record?.get_statistic_for_department) {
-      debugger
       this.departmentChart = {
         value: this.getValues(this.record?.get_statistic_for_department?.detail),
         label: this.getNamebyKeys(this.record?.get_statistic_for_department?.detail, DashboardEnum),

@@ -41,6 +41,7 @@ export class SaveComponent extends BaseForm<CareInterface> implements OnInit {
     this.saveForm = this.fb.group({
       staff_id: [this.authService.currentUserValue.id],
       description: [this.record?.description, Validators.required],
+      status: [this.record?.status || 0],
     });
   }
 
