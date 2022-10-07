@@ -48,6 +48,7 @@
     <nz-card nzTitle="Tổng quan">
       <canvas baseChart
               #summaryBaseChart="base-chart"
+              class="chart"
               *ngIf="isCheckZeroChart(generalSummaryChart?.value || {}); else noSummaryChart"
               [data]="generalSummaryChart.value"
               [labels]="generalSummaryChart.label"
@@ -71,21 +72,32 @@
     <nz-card nzTitle="Số lần chăm sóc">
       <canvas baseChart
               #careBaseChart="base-chart"
+              class="chart"
               *ngIf="isCheckZeroChart(careChart?.value || {}); else noCareChart"
               [data]="careChart.value"
               [labels]="careChart.label"
               [chartType]="careChart.type"
               [options]="careChart.options"
               [colors]="careChart.color"
-              [legend]="true">
+              [legend]="false">
       </canvas>
       <ng-template #noCareChart>Không có thống kê của số lần chăm sóc</ng-template>
+      <div class="my-legend" *ngIf="careBaseChart?.chart?.legend?.legendItems">
+        <ul nz-row class="legend-labels">
+          <li nz-col [nzSpan]="8" *ngFor=" let item of careBaseChart.chart?.legend.legendItems;let i = index"
+              class="custom-legend-item">
+            <span [ngStyle]="{ 'background-color': item.fillStyle }"></span>
+            {{ item.text }} lần {{i === 4 ? 'trở lên' : ''}}
+          </li>
+        </ul>
+      </div>
     </nz-card>
   </div>
   <div nz-col [nzMd]="12" [nzXs]="24" class="item-chart">
     <nz-card nzTitle="Nhóm kinh doanh">
       <canvas baseChart
               #teamBaseChart="base-chart"
+              class="chart"
               *ngIf="isCheckZeroChart(teamChart?.value || {}); else noTeamChart"
               [data]="teamChart.value"
               [labels]="teamChart.label"
@@ -109,6 +121,7 @@
     <nz-card nzTitle="Phòng ban">
       <canvas baseChart
               #departmentBaseChart="base-chart"
+              class="chart"
               *ngIf="isCheckZeroChart(departmentChart?.value || {}); else noDepartmentChart"
               [data]="departmentChart.value"
               [labels]="departmentChart.label"

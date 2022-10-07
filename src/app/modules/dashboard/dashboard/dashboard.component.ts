@@ -53,71 +53,87 @@ export class DashboardComponent implements OnInit {
 
   drawChart() {
     /*Chart của Tổng quan*/
-    this.generalSummaryChart = {
-      value: this.getValues(this.record?.get_general_summary?.detail),
-      label: this.getNamebyKeys(this.record?.get_general_summary?.detail, DashboardEnum),
-      type: 'pie',
-      options: {
-        ...this.optionsChart.pie,
-        legend: {
-          display: true,
-          position: 'bottom',
-          labels: {
-            usePointStyle: true,
-          },
-        }
-      },
-      color: this.colorChart.pie
-    };
+    if(this.record?.get_general_summary) {
+      this.generalSummaryChart = {
+        value: this.getValues(this.record?.get_general_summary?.detail),
+        label: this.getNamebyKeys(this.record?.get_general_summary?.detail, DashboardEnum),
+        type: 'pie',
+        options: {
+          ...this.optionsChart.pie,
+          legend: {
+            display: true,
+            position: 'bottom',
+            labels: {
+              usePointStyle: true,
+            },
+          }
+        },
+        color: this.colorChart.pie
+      };
+    }
 
     /*Chart của phòng kinh doanh*/
-    this.teamChart = {
-      value: this.getValues(this.record?.get_statistic_for_team?.detail),
-      label: this.getNamebyKeys(this.record?.get_statistic_for_team?.detail, DashboardEnum),
-      type: 'pie',
-      options: {
-        ...this.optionsChart.pie,
-        legend: {
-          display: true,
-          position: 'bottom'
-        }
-      },
-      color: this.colorChart.pie
-    };
+    if(this.record?.get_statistic_for_team) {
+      this.teamChart = {
+        value: this.getValues(this.record?.get_statistic_for_team?.detail),
+        label: this.getNamebyKeys(this.record?.get_statistic_for_team?.detail, DashboardEnum),
+        type: 'pie',
+        options: {
+          ...this.optionsChart.pie,
+          legend: {
+            display: true,
+            position: 'bottom'
+          }
+        },
+        color: this.colorChart.pie
+      };
+    }
 
     /*Chart của danh sách chăm sóc*/
-    this.careChart = {
-      value: this.getValues(this.record?.get_statistic_number_care?.detail),
-      label: Object.keys(this.record?.get_statistic_number_care?.detail),
-      type: 'line',
-      options: {
-        ...this.optionsChart.line,
-      },
-      color: this.colorChart.line
-    };
+    if(this.record?.get_statistic_number_care) {
+      this.careChart = {
+        value: this.getValues(this.record?.get_statistic_number_care?.detail),
+        label: Object.keys(this.record?.get_statistic_number_care?.detail),
+        type: 'pie',
+        options: {
+          ...this.optionsChart.pie,
+          legend: {
+            display: true,
+            position: 'bottom',
+            labels: {
+              usePointStyle: true,
+            },
+          }
+        },
+        color: this.colorChart.pie
+      };
+    }
 
     /*Chart của phòng ban*/
-    this.departmentChart = {
-      value: this.getValues(this.record?.get_statistic_for_department?.detail),
-      label: this.getNamebyKeys(this.record?.get_statistic_for_department?.detail, DashboardEnum),
-      type: 'pie',
-      options: {
-        ...this.optionsChart.line,
-        legend: {
-          display: true,
-          position: 'bottom'
-        }
-      },
-      color: this.colorChart.pie
-    };
+    if(this.record?.get_statistic_for_department) {
+      debugger
+      this.departmentChart = {
+        value: this.getValues(this.record?.get_statistic_for_department?.detail),
+        label: this.getNamebyKeys(this.record?.get_statistic_for_department?.detail, DashboardEnum),
+        type: 'pie',
+        options: {
+          ...this.optionsChart.line,
+          legend: {
+            display: true,
+            position: 'bottom'
+          }
+        },
+        color: this.colorChart.pie
+      };
+    }
   }
 
   isCheckZeroChart(item : any) {
     return !!Object.values(item).filter((i: any) => i > 0).length
   }
+
   legendOnClick(legendItem: any) {
-    var index = legendItem.datasetIndex;
-    console.log(index);
+    let index = legendItem.datasetIndex;
     alert(legendItem);
   }
 
