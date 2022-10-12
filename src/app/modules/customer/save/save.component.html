@@ -49,10 +49,10 @@
       <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="assign_for_user_id" nzRequired>Chỉ định nhân viên</nz-form-label>
       <nz-form-control [nzMd]="12" [nzXs]="24">
         <nz-select
-          nzPlaceHolder="Vui lòng chọn"
+          nzPlaceHolder="Vui  lòng chọn"
           formControlName="assign_for_user_id"
           nzAllowClear
-          [nzDisabled]="record && ['sales', 'agency', 'cooperator'].includes(authService.currentUserValue.role[0].name)"
+          [nzDisabled]="!['admin', 'marketing'].includes(authService.currentUserValue.role[0].name)"
         >
           <nz-option *ngFor="let item of users"
                      [nzLabel]="item.full_name"
@@ -103,7 +103,7 @@
       </nz-form-control>
     </nz-form-item>
 
-    <!--customer_project-->
+    <!--customer project-->
     <nz-form-item>
       <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="customer_project">Dự án khách hàng</nz-form-label>
       <nz-form-control [nzMd]="12" [nzXs]="24">

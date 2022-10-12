@@ -44,7 +44,12 @@ export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit
       phone_number: ['', Validators.required],
       address: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      assign_for_user_id: [null, [Validators.required]],
+      assign_for_user_id: [
+        ['admin', 'marketing'].includes(this.authService.currentUserValue.role[0].name)
+          ? ''
+          : this.authService.currentUserValue.id
+        ,
+        [Validators.required]],
       project_note: [null],
       note: [null],
       result: [null],
@@ -55,7 +60,6 @@ export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit
       this.record.customer_project = this.record.customer_project.map((p: any) => {
         return p?.name;
       });
-
     }
     super.patchValueForm();
   }
