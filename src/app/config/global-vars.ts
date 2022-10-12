@@ -10,6 +10,9 @@ interface Endpoint {
   role: string;
   team: string;
   statistics: string;
+  get_field_dashboard_admin: string;
+  get_statistic_department: string;
+  get_statistic_team: string;
 
   [key: string]: string;
 }
@@ -25,6 +28,9 @@ export const apiEndpoints: Endpoint = {
   customer_care: 'cares',
   role: 'roles',
   team: 'teams',
-  statistics: 'statistics'
+  statistics: 'statistics',
+  get_field_dashboard_admin: 'get-field',
+  get_statistic_department: 'get-statistic-by-department',
+  get_statistic_team: 'get-statistic-by-team',
 };
 

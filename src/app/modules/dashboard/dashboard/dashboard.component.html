@@ -94,7 +94,7 @@
     </nz-card>
   </div>
   <div nz-col [nzMd]="12" [nzXs]="24" class="item-chart">
-    <nz-card nzTitle="Nhóm kinh doanh">
+    <nz-card nzTitle="Nhóm kinh doanh" [nzExtra]="selectTeamTemplate">
       <canvas baseChart
               #teamBaseChart="base-chart"
               class="chart"
@@ -118,7 +118,7 @@
     </nz-card>
   </div>
   <div nz-col [nzMd]="12" [nzXs]="24" class="item-chart">
-    <nz-card nzTitle="Phòng ban">
+    <nz-card nzTitle="Phòng ban" [nzExtra]="departmentTemplate">
       <canvas baseChart
               #departmentBaseChart="base-chart"
               class="chart"
@@ -142,3 +142,21 @@
     </nz-card>
   </div>
 </div>
+
+<ng-template #selectTeamTemplate>
+  <nz-select *ngIf="isRoleAdmin"
+             [formControl]="selectTeamControl"
+             nzPlaceHolder="Vui lòng chọn">
+    <nz-option *ngFor="let team of selectStaticAdmin['team']"
+               [nzValue]="team.id" [nzLabel]="team.name"></nz-option>
+  </nz-select>
+</ng-template>
+
+<ng-template #departmentTemplate>
+  <nz-select *ngIf="isRoleAdmin"
+             [formControl]="selectDepartmentControl"
+             nzPlaceHolder="Vui lòng chọn">
+    <nz-option *ngFor="let team of selectStaticAdmin['department']"
+               [nzValue]="team.id" [nzLabel]="team.name"></nz-option>
+  </nz-select>
+</ng-template>

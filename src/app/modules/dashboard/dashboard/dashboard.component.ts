@@ -1,22 +1,18 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  ChartInterface,
-  COLOR_CHART,
-  ColorChartConfig,
-  OPTION_CHART,
-  OptionChartConfig
-} from '../../../core/interfaces';
+import { ChartInterface, COLOR_CHART, ColorChartConfig, OPTION_CHART, OptionChartConfig } from '../../../core/interfaces';
 import { DashboardEnum } from '../../../core/enums';
 import { BaseChartDirective } from 'ng2-charts';
-import * as Chart from 'chart.js';
+import { NgxPermissionsService } from 'ngx-permissions';
+import { FormControl } from '@angular/forms';
+import { DashboardService } from '../../../core/services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewInit {
   @ViewChild('summaryBaseChart') summaryBaseChart!: BaseChartDirective | any;
   @ViewChild('careBaseChart') careBaseChart!: BaseChartDirective | any;
   @ViewChild('teamBaseChart') teamBaseChart!: BaseChartDirective | any;
@@ -26,15 +22,46 @@ export class DashboardComponent implements OnInit {
   teamChart!: ChartInterface;
   careChart!: ChartInterface;
   departmentChart!: ChartInterface;
+  selectStaticAdmin: any = {};
+  isRoleAdmin = false;
+  selectTeamControl = new FormControl();
+  selectDepartmentControl = new FormControl();
 
   constructor(
     @Inject(OPTION_CHART)
     public optionsChart: OptionChartConfig,
     @Inject(COLOR_CHART)
     public colorChart: ColorChartConfig,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private permissionService: NgxPermissionsService,
+    private dashboardService: DashboardService
   ) {
-    this.record = this.activatedRoute.snapshot.data.resolvedData;
+    const resolvedData = this.activatedRoute.snapshot.data.resolvedData;
+    this.record = resolvedData.data;
+    this.selectStaticAdmin = resolvedData?.selectStaticAdmin;
+
+  }
+
+  setupStaticAdmin() {
+    this.isRoleAdmin = !!this.permissionService.getPermission('admin');
+    if (this.isRoleAdmin) {
+      this.selectTeamControl.patchValue(this.selectStaticAdmin['team'][0].id);
+      this.selectDepartmentControl.patchValue(this.selectStaticAdmin['department'][0].id);
+      this.getDepartmentAdmin();
+      this.getTeamAdmin();
+    }
+  }
+
+  getDepartmentAdmin() {
+    this.dashboardService.getStaticDepartmentAdmin(this.selectDepartmentControl.value).subscribe(resp => {
+      this.record.get_statistic_for_team = resp;
+    });
+  }
+
+  getTeamAdmin() {
+    this.dashboardService.getStaticTeamAdmin(this.selectTeamControl.value).subscribe(resp => {
+      this.record.get_statistic_for_department = resp;
+    });
   }
 
   getNamebyKeys(label: any, enumLabel: any) {
@@ -125,10 +152,11 @@ export class DashboardComponent implements OnInit {
         color: this.colorChart.pie
       };
     }
+    this.setupStaticAdmin();
   }
 
-  isCheckZeroChart(item : any) {
-    return !!Object.values(item).filter((i: any) => i > 0).length
+  isCheckZeroChart(item: any) {
+    return !!Object.values(item).filter((i: any) => i > 0).length;
   }
 
   legendOnClick(legendItem: any) {
@@ -136,4 +164,12 @@ export class DashboardComponent implements OnInit {
     alert(legendItem);
   }
 
+  ngAfterViewInit(): void {
+    this.selectTeamControl.valueChanges.subscribe(value => {
+      this.getTeamAdmin();
+    });
+    this.selectDepartmentControl.valueChanges.subscribe(value => {
+      this.getDepartmentAdmin();
+    });
+  }
 }
