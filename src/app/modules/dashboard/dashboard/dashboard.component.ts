@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ChartInterface, COLOR_CHART, ColorChartConfig, OPTION_CHART, OptionChartConfig } from '../../../core/interfaces';
-import { DashboardEnum } from '../../../core/enums';
 import { BaseChartDirective } from 'ng2-charts';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { FormControl } from '@angular/forms';
 import { DashboardService } from '../../../core/services/dashboard.service';
+import { drawChart } from './draw-chart';
 
 @Component({
   selector: 'app-dashboard',
@@ -42,117 +42,128 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   }
 
-  setupStaticAdmin() {
+  setupStatic() {
     this.isRoleAdmin = !!this.permissionService.getPermission('admin');
     if (this.isRoleAdmin) {
       this.selectTeamControl.patchValue(this.selectStaticAdmin['team'][0].id);
       this.selectDepartmentControl.patchValue(this.selectStaticAdmin['department'][0].id);
       this.getDepartmentAdmin();
       this.getTeamAdmin();
+      this.drawChartGeneralSummary();
+      this.drawChartCare();
+    } else {
+      this.drawChartGeneralSummary();
+      this.drawChartTeam();
+      this.drawChartCare();
+      this.drawChartDepartment();
     }
   }
 
   getDepartmentAdmin() {
     this.dashboardService.getStaticDepartmentAdmin(this.selectDepartmentControl.value).subscribe(resp => {
-      this.record.get_statistic_for_team = resp;
+      this.record.get_statistic_for_department = resp;
+      this.drawChartDepartment();
     });
   }
 
   getTeamAdmin() {
     this.dashboardService.getStaticTeamAdmin(this.selectTeamControl.value).subscribe(resp => {
-      this.record.get_statistic_for_department = resp;
+      this.record.get_statistic_for_team = resp;
+      this.drawChartTeam();
     });
-  }
-
-  getNamebyKeys(label: any, enumLabel: any) {
-    return Object.keys(label).map((la: string) => {
-      return enumLabel[la];
-    });
-  }
-
-  getValues(value: any) {
-    return Object.values(value);
   }
 
   ngOnInit(): void {
-    this.drawChart();
+    this.setupStatic();
   }
 
-  drawChart() {
+  drawChartGeneralSummary() {
     /*Chart của Tổng quan*/
-    if(this.record?.get_general_summary) {
-      this.generalSummaryChart = {
-        value: this.getValues(this.record?.get_general_summary?.detail),
-        label: this.getNamebyKeys(this.record?.get_general_summary?.detail, DashboardEnum),
-        type: 'pie',
-        options: {
-          ...this.optionsChart.pie,
-          legend: {
-            display: true,
-            position: 'bottom',
-            labels: {
-              usePointStyle: true,
-            },
-          }
-        },
-        color: this.colorChart.pie
+    if (this.record?.get_general_summary) {
+      const options = {
+        ...this.optionsChart.pie,
+        legend: {
+          display: true,
+          position: 'bottom',
+          labels: {
+            usePointStyle: true,
+          },
+        }
       };
-    }
 
+      this.generalSummaryChart = drawChart(
+        this.record?.get_general_summary,
+        options,
+        this.colorChart.pie,
+        'pie',
+        true
+      );
+    }
+  }
+
+  drawChartTeam() {
     /*Chart của phòng kinh doanh*/
-    if(this.record?.get_statistic_for_team) {
-      this.teamChart = {
-        value: this.getValues(this.record?.get_statistic_for_team?.detail),
-        label: this.getNamebyKeys(this.record?.get_statistic_for_team?.detail, DashboardEnum),
-        type: 'pie',
-        options: {
-          ...this.optionsChart.pie,
-          legend: {
-            display: true,
-            position: 'bottom'
-          }
-        },
-        color: this.colorChart.pie
+    if (this.record?.get_statistic_for_team) {
+      const options = {
+        ...this.optionsChart.pie,
+        legend: {
+          display: true,
+          position: 'bottom'
+        }
       };
-    }
 
+      this.teamChart = drawChart(
+        this.record?.get_statistic_for_team,
+        options,
+        this.colorChart.pie,
+        'pie',
+        true
+      );
+    }
+  }
+
+  drawChartCare() {
     /*Chart của danh sách chăm sóc*/
-    if(this.record?.get_statistic_number_care) {
-      this.careChart = {
-        value: this.getValues(this.record?.get_statistic_number_care?.detail),
-        label: Object.keys(this.record?.get_statistic_number_care?.detail),
-        type: 'pie',
-        options: {
-          ...this.optionsChart.pie,
-          legend: {
-            display: true,
-            position: 'bottom',
-            labels: {
-              usePointStyle: true,
-            },
-          }
-        },
-        color: this.colorChart.pie
+    if (this.record?.get_statistic_number_care) {
+      const options = {
+        ...this.optionsChart.pie,
+        legend: {
+          display: true,
+          position: 'bottom',
+          labels: {
+            usePointStyle: true,
+          },
+        }
       };
-    }
 
-    /*Chart của phòng ban*/
-    if(this.record?.get_statistic_for_department) {
-      this.departmentChart = {
-        value: this.getValues(this.record?.get_statistic_for_department?.detail),
-        label: this.getNamebyKeys(this.record?.get_statistic_for_department?.detail, DashboardEnum),
-        type: 'pie',
-        options: {
-          ...this.optionsChart.line,
-          legend: {
-            display: true,
-            position: 'bottom'
-          }
-        },
-        color: this.colorChart.pie
-      };
+      this.careChart = drawChart(
+        this.record?.get_statistic_number_care,
+        options,
+        this.colorChart.pie,
+        'pie'
+      );
     }
-    this.setupStaticAdmin();
+  }
+
+  drawChartDepartment() {
+    /*Chart của phòng ban*/
+    if (this.record?.get_statistic_for_department) {
+      const options = {
+        ...this.optionsChart.line,
+        legend: {
+          display: true,
+          position: 'bottom'
+        }
+      };
+
+      this.departmentChart = drawChart(
+        this.record?.get_statistic_for_department,
+        options,
+        this.colorChart.pie,
+        'pie',
+        true
+      );
+    }
   }
 
   isCheckZeroChart(item: any) {
