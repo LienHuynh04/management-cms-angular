@@ -11,7 +11,7 @@ export const navigations: NavbarItem[] = [
     url: '/customers',
     icon: 'user',
     permissions: {
-      only: ['admin', 'marketing', 'sales', 'agency', 'cooperator']
+      only: ['admin', 'marketing', 'sales', 'agency', 'cooperator', 'sales-manager']
     }
   },
   {
@@ -27,7 +27,7 @@ export const navigations: NavbarItem[] = [
     url: '/staff',
     icon: 'team',
     permissions: {
-      only: ['admin', 'human-resource']
+      only: ['admin', 'human-resource', 'sales-manager']
     }
   },
   {
@@ -35,7 +35,7 @@ export const navigations: NavbarItem[] = [
     url: '/project',
     icon: 'project',
     permissions: {
-      only: ['admin', 'marketing', 'sales', 'agency', 'cooperator']
+      only: ['admin', 'marketing', 'sales', 'agency', 'cooperator', 'sales-manager']
     }
   },
   {

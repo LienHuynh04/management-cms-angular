@@ -4,6 +4,7 @@ import { ListComponent } from './list/list.component';
 import { SaveComponent } from './save/save.component';
 import { SaveResolver } from './save/save.resolver';
 import { ListResolver } from './list/list.resolver';
+import { NgxPermissionsGuard } from 'ngx-permissions';
 
 const routes: Routes = [
   {
@@ -18,6 +19,13 @@ const routes: Routes = [
     component: SaveComponent,
     resolve: {
       resolvedData: SaveResolver
+    },
+    canActivate: [NgxPermissionsGuard],
+    data: {
+      permissions: {
+        only:['admin', 'human-resource'],
+        redirectTo: 'staff'
+      }
     }
   },
   {
@@ -25,6 +33,13 @@ const routes: Routes = [
     component: SaveComponent,
     resolve: {
       resolvedData: SaveResolver
+    },
+    canActivate: [NgxPermissionsGuard],
+    data: {
+      permissions: {
+        only:['admin', 'human-resource'],
+        redirectTo: 'staff'
+      }
     }
   },
 ];

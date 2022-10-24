@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppWrapperComponent } from './app-wrapper.component';
 import { ProfileComponent } from '../../modules/profile/profile.component';
+import { NgxPermissionsGuard } from 'ngx-permissions';
 
 const routes: Routes = [
   {
@@ -18,15 +19,36 @@ const routes: Routes = [
       },
       {
         path: 'customers',
-        loadChildren: () => import('../../modules/customer/customer.module').then(m => m.CustomerModule)
+        loadChildren: () => import('../../modules/customer/customer.module').then(m => m.CustomerModule),
+        canActivate: [NgxPermissionsGuard],
+        data: {
+          permissions: {
+            only: ['admin', 'marketing', 'sales', 'agency', 'cooperator', 'sales-manager'],
+            redirectTo: 'dashboard'
+          }
+        }
       },
       {
         path: 'staff',
-        loadChildren: () => import('../../modules/staff/staff.module').then(m => m.StaffModule)
+        loadChildren: () => import('../../modules/staff/staff.module').then(m => m.StaffModule),
+        canActivate: [NgxPermissionsGuard],
+        data: {
+          permissions: {
+            only: ['admin', 'human-resource', 'sales-manager'],
+            redirectTo: 'dashboard'
+          }
+        }
       },
       {
         path: 'project',
-        loadChildren: () => import('../../modules/project/project.module').then(m => m.ProjectModule)
+        loadChildren: () => import('../../modules/project/project.module').then(m => m.ProjectModule),
+        canActivate: [NgxPermissionsGuard],
+        data: {
+          permissions: {
+            only: ['admin', 'marketing', 'sales', 'agency', 'cooperator', 'sales-manager'],
+            redirectTo: 'dashboard'
+          }
+        }
       },
       {
         path: 'care',
@@ -34,11 +56,25 @@ const routes: Routes = [
       },
       {
         path: 'roles',
-        loadChildren: () => import('../../modules/role/role.module').then(m => m.RoleModule)
+        loadChildren: () => import('../../modules/role/role.module').then(m => m.RoleModule),
+        canActivate: [NgxPermissionsGuard],
+        data: {
+          permissions: {
+            only: ['admin'],
+            redirectTo: 'dashboard'
+          }
+        }
       },
       {
         path: 'teams',
-        loadChildren: () => import('../../modules/team/team.module').then(m => m.TeamModule)
+        loadChildren: () => import('../../modules/team/team.module').then(m => m.TeamModule),
+        canActivate: [NgxPermissionsGuard],
+        data: {
+          permissions: {
+            only: ['admin'],
+            redirectTo: 'dashboard'
+          }
+        }
       },
       {
         path: '',

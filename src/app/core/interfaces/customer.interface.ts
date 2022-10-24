@@ -6,7 +6,8 @@ export interface CustomerInterface {
   email: string;
   assign_for_user_id: number;
   assign_for_user: {
-    id: number
+    id: number,
+    full_name: string
   };
   project_note: string;
   note: string;

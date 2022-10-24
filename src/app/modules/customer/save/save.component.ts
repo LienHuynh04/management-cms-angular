@@ -7,6 +7,7 @@ import { BaseForm } from '../../../shared/abstracts';
 import { ResultEnum } from '../../../core/enums';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-save',
@@ -27,7 +28,8 @@ export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit
     public modalService: NzModalService,
     public loadingOverlayService: LoadingOverlayService,
     public notification: NzNotificationService,
-    public authService: AuthenticationService
+    public authService: AuthenticationService,
+    private permissionService: NgxPermissionsService
   ) {
     super(modalService, loadingOverlayService, notification, activatedRoute, router);
     this.projects = this.resolvedData.projects;
@@ -55,12 +57,20 @@ export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit
       result: [null],
       customer_project: []
     });
+
+    const isRole = ['sales', 'agency', 'cooperator'].includes(this.authService.currentUserValue.role[0].name)
+
+    if(isRole) {
+      this.field('assign_for_user_id').patchValue(this.users[0].id as any)
+    }
+
     if (this.record) {
       this.record.assign_for_user_id = this.record.assign_for_user?.id;
       this.record.customer_project = this.record.customer_project.map((p: any) => {
         return p?.name;
       });
     }
+
     super.patchValueForm();
   }
 

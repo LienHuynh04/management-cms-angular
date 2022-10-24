@@ -126,7 +126,6 @@ export abstract class BaseForm<T> {
         delete data[key];
       }
     });
-    console.log(data);
     return data;
   }
 }

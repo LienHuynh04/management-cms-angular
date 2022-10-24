@@ -49,15 +49,18 @@
       <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="assign_for_user_id" nzRequired>Chỉ định nhân viên</nz-form-label>
       <nz-form-control [nzMd]="12" [nzXs]="24">
         <nz-select
-          nzPlaceHolder="Vui  lòng chọn"
+          *ngIf="!record && !['sales', 'agency', 'cooperator'].includes(authService.currentUserValue.role[0].name); else assignCurrentUser"
+          nzPlaceHolder="Vui lòng chọn"
           formControlName="assign_for_user_id"
           nzAllowClear
-          [nzDisabled]="!['admin', 'marketing'].includes(authService.currentUserValue.role[0].name)"
         >
           <nz-option *ngFor="let item of users"
                      [nzLabel]="item.full_name"
                      [nzValue]="item.id"></nz-option>
         </nz-select>
+        <ng-template #assignCurrentUser>
+          {{record ? record.assign_for_user?.full_name : users[0].full_name}}
+        </ng-template>
         <app-control-errors
           fieldName="assign_for_user_id"
         ></app-control-errors>
