@@ -95,9 +95,9 @@ export abstract class BaseForm<T> {
   }
 
   setFormErrors(errors: any): void {
-    Object.keys(errors).forEach((key: string) => {
-      this.saveForm.get(key)?.setErrors({
-        taken: errors[key][0]
+    errors.forEach((err: any) => {
+      this.saveForm.get(err.field)?.setErrors({
+        taken: err.message[0]
       });
     });
     this.saveForm.markAllAsTouched();

@@ -4,11 +4,13 @@ import { AuthenticationService, LoadingOverlayService, StaffService } from '../.
 import { ConfirmedValidator } from '../../shared';
 import { IAdmin } from '../../core/interfaces';
 import { BaseForm } from '../../shared/abstracts';
-import { switchMap } from 'rxjs/operators';
+import { catchError, switchMap } from 'rxjs/operators';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { RoleEnum } from '../../core/enums';
 import { Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { HttpErrorResponse } from '@angular/common/http';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -59,7 +61,13 @@ export class ProfileComponent extends BaseForm<IAdmin> implements OnInit {
 
     this.staffService.updateProfile(body)
       .pipe(
-        switchMap(() => this.authService.profile())
+        switchMap(() => this.authService.profile()),
+        catchError((error: HttpErrorResponse | any) => {
+          if (error.status === 422) {
+            this.setFormErrors(error.error.errors);
+          }
+          return throwError(error);
+        })
       )
       .subscribe(_ => {
         super.patchValueForm();

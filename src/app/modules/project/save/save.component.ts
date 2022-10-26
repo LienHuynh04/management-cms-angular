@@ -1,12 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { LoadingOverlayService, ProjectService } from '../../../core/services';
-import { map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { BaseForm } from '../../../shared/abstracts';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { IPaginateList, ProjectInterface } from '../../../core/interfaces';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-save',
@@ -48,6 +49,12 @@ export class SaveComponent extends BaseForm<ProjectInterface> implements OnInit 
       ? this.projectService.update(this.id, this.saveForm.value)
       : this.projectService.create(this.saveForm.value);
     source$.pipe(
+      catchError((error: HttpErrorResponse | any) => {
+        if (error.status === 422) {
+          this.setFormErrors(error.error.errors);
+        }
+        return throwError(error);
+      }),
       switchMap(() => this.projectService.getAll())
     ).subscribe((res) => {
       this.closeModal(res);
