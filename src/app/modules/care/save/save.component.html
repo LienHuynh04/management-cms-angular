@@ -28,7 +28,7 @@
     <nz-form-item>
       <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="status" nzRequired>Trạng thái</nz-form-label>
       <nz-form-control [nzMd]="12" [nzXs]="24">
-        <nz-select formControlName="status" [nzDisabled]="!!record.status">
+        <nz-select formControlName="status" [nzDisabled]="!!record?.status">
           <nz-option [nzValue]="1" nzLabel="Hoàn thành"></nz-option>
           <nz-option [nzValue]="0" nzLabel="Chưa hoàn thành"></nz-option>
         </nz-select>
