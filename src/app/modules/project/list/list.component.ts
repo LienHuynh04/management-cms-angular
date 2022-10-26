@@ -55,6 +55,7 @@ export class ListComponent extends BaseTable<ProjectInterface> implements OnInit
     });
 
     modal.afterClose.subscribe((res) => {
+      this.filterForm.reset();
       if (res) {
         this.setDataAndPagination(res.data, res.pagination);
       }
