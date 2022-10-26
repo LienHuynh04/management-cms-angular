@@ -52,9 +52,9 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let data of basicTable.data">
+    <tr *ngFor="let data of basicTable.data; let i = index">
       <td *ngFor="let col of cols;">
-        {{ data[col?.field] }}
+        {{ col.field == 'stt' ? (i + 1) : data[col?.field] }}
       </td>
       <td style="text-align: center" nzRight>
         <button (click)="openModal(data.id)"

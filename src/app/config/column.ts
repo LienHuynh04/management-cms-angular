@@ -56,8 +56,8 @@ export const column: ColumnConfig = {
   ],
   project: [
     {
-      header: 'ID',
-      field: 'id',
+      header: 'STT',
+      field: 'stt',
       style: {
         width: '100px'
       }
@@ -72,7 +72,7 @@ export const column: ColumnConfig = {
   ],
   role: [
     {
-      header: 'ID',
+      header: 'STT',
       field: 'id',
       style: {
         width: '100px'
