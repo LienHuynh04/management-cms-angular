@@ -6,7 +6,7 @@
     <!--staff_id-->
     <nz-form-item>
       <nz-form-label [nzMd]="6" [nzXs]="24">
-        Lần chăm sóc
+        Người chăm sóc
       </nz-form-label>
       <nz-form-control [nzMd]="12" [nzXs]="24">
        {{authService.currentUserValue.full_name}}
@@ -35,9 +35,8 @@
 
       </nz-form-control>
     </nz-form-item>
-
-    <nz-form-item class="create-area" nz-row>
-      <nz-form-control [nzOffset]="6" [nzSpan]="14">
+    <div nz-row>
+      <div nz-col [nzSpan]="24" class="create-area">
         <button [routerLink]="['/care', customer.id]" nz-button>Quay lại</button>
         <button
           nz-button
@@ -46,7 +45,7 @@
           nzType="primary">
           {{record ? 'Cập nhật' : 'Tạo mới'}}
         </button>
-      </nz-form-control>
-    </nz-form-item>
+      </div>
+    </div>
   </form>
 </nz-card>

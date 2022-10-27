@@ -12,6 +12,6 @@ export interface CustomerInterface {
   project_note: string;
   note: string;
   result: string;
-  customer_project: string[];
+  customer_project: any;
   care: [];
 }

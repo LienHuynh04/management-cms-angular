@@ -1,11 +1,11 @@
-import { DashboardEnum } from '../../../core/enums';
+import { ChartType } from 'chart.js';
+import { ResultEnum } from '../../../core/enums';
 import { ChartInterface } from '../../../core/interfaces';
-import { ChartOptions, ChartType } from 'chart.js';
 
 export function drawChart(data: any, options: any, color: any, type: ChartType, isEnum = false): ChartInterface {
   return {
     value: getValues(data?.detail),
-    label: getNamebyKeys(data?.detail, isEnum ? DashboardEnum : ''),
+    label: getNamebyKeys(data?.detail, isEnum ? ResultEnum : ''),
     type: type,
     options: {...options},
     color: color

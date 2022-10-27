@@ -64,9 +64,7 @@ export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit
 
     if (this.record) {
       this.record.assign_for_user_id = this.record.assign_for_user?.id;
-      this.record.customer_project = this.record.customer_project.map((p: any) => {
-        return p?.name;
-      });
+      this.record.customer_project = this.record.customer_project[0]?.name;
     }
 
     super.patchValueForm();
