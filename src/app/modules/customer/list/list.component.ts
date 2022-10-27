@@ -57,7 +57,7 @@ export class ListComponent extends BaseTable<CustomerInterface> implements OnIni
   openModalAssign(customer: CustomerInterface) {
     this.isVisibleAssign = true;
     this.customer = {...customer};
-    this.staffControl.setValue(customer.assign_for_user.id);
+    this.staffControl.patchValue(customer.assign_for_user.id);
   }
 
   assignStaff() {
@@ -71,8 +71,10 @@ export class ListComponent extends BaseTable<CustomerInterface> implements OnIni
         nzOnOk: () => {
           this.customerService.update(this.customer.id, {
             assign_for_user_id: this.staffControl.value
-          }).subscribe((_) => {
+          }).subscribe(({data}) => {
             this.isVisibleAssign = false;
+            const index = this.records.findIndex(d => d.id == this.customer.id);
+            this.records[index] = data
           });
         }
       });
