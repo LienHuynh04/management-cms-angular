@@ -35,7 +35,7 @@
             ></i>
         </span>
         <a nz-dropdown [nzDropdownMenu]="menu" [nzPlacement]="'bottomRight'">
-          {{authService.currentUserValue.full_name}}
+          {{authService.currentUserValue.full_name}} - {{authService.currentUserValue.role[0].name}}
           <i nz-icon nzType="down"></i>
         </a>
         <nz-dropdown-menu #menu="nzDropdownMenu">
