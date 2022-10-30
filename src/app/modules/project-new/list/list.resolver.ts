@@ -18,7 +18,7 @@ export class ListResolver implements Resolve<boolean> {
     state: RouterStateSnapshot)
     : Observable<IPaginateList<ProjectInterface>> | boolean | any {
     return this.projectService.getAll({
-     'filter[type_project]': 0
+      'filter[type_project]': 1
     });
 
   }

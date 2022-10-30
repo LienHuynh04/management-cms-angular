@@ -1,0 +1,74 @@
+<nz-card [nzTitle]="record ? 'Cập nhật' : 'Tạo mới'">
+  <form [formGroup]="saveForm" nz-form autocomplete="off">
+    <!--name-->
+    <nz-form-item>
+      <nz-form-label [nzMd]="6" [nzXs]="24"
+                     nzRequired nzFor="name">
+        Tên dự án
+      </nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
+        <input nz-input
+               *ngIf="!record"
+               formControlName="name"
+               autocomplete="new-input"
+               id="name"/>
+        <span *ngIf="record">{{record.name}}</span>
+        <app-control-errors
+          fieldName="name"
+        ></app-control-errors>
+      </nz-form-control>
+    </nz-form-item>
+
+    <!--type-->
+    <nz-form-item>
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzRequired nzFor="type">Loại hình</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
+        <nz-select
+          nzPlaceHolder="Vui lòng chọn"
+          formControlName="type"
+          nzAllowClear
+        >
+          <nz-option [nzLabel]="'Đất'" [nzValue]="'SOIL'"></nz-option>
+          <nz-option [nzLabel]="'Nhà'" [nzValue]="'HOME'"></nz-option>
+        </nz-select>
+        <app-control-errors
+          fieldName="type"
+        ></app-control-errors>
+      </nz-form-control>
+    </nz-form-item>
+
+    <!--price-->
+    <nz-form-item>
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="price" nzRequired>Tiền</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
+        <input nz-input formControlName="price" id="price" />
+        <app-control-errors
+          fieldName="price"
+        ></app-control-errors>
+      </nz-form-control>
+    </nz-form-item>
+
+    <!--local-->
+    <nz-form-item>
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="local" nzRequired>Dự án chuyển nhượng</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
+        <input nz-input formControlName="local" id="local"/>
+        <app-control-errors
+          fieldName="local"
+        ></app-control-errors>
+      </nz-form-control>
+    </nz-form-item>
+
+    <div nz-row>
+      <div nz-col [nzSpan]="24" class="create-area">
+        <button nz-button [routerLink]="['', 'project-new']">Quay lại</button>
+        <button nz-button nzType="primary"
+                [nzLoading]="isLoading"
+                (click)="confirmUpdate()"
+                [disabled]="!saveForm.valid">
+          {{record ? 'Cập nhật' : 'Tạo mới'}}
+        </button>
+      </div>
+    </div>
+  </form>
+</nz-card>

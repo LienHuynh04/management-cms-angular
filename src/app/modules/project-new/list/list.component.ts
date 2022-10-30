@@ -1,12 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { BaseTable } from '../../../shared/abstracts';
 import { ColumnConfig, ColumnInterface, COLUMNS, ProjectInterface } from '../../../core/interfaces';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from '../../../core/services';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { SaveComponent } from '../save/save.component';
-import { BaseTable } from '../../../shared/abstracts';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { FormBuilder } from '@angular/forms';
+import { SaveComponent } from '../../project/save/save.component';
 
 @Component({
   selector: 'app-list',
@@ -67,7 +67,7 @@ export class ListComponent extends BaseTable<ProjectInterface> implements OnInit
    * Call api to get list
    */
   fetchData(): void {
-    const request = this.projectService.getAll({...super.processFilter(), 'filter[type_project]': 0});
+    const request = this.projectService.getAll({...super.processFilter(), 'filter[type_project]': 1});
     this.processData(request);
   }
 }

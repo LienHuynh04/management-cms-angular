@@ -39,6 +39,14 @@ export const navigations: NavbarItem[] = [
     }
   },
   {
+    title: 'Dự án mới',
+    url: '/project-new',
+    icon: 'file-protect',
+    permissions: {
+      only: ['admin', 'marketing', 'sales', 'agency', 'cooperator', 'sales-manager']
+    }
+  },
+  {
     title: 'Phân quyền',
     url: '/roles',
     icon: 'apartment',

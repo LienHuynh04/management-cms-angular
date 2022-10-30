@@ -77,6 +77,17 @@ const routes: Routes = [
         }
       },
       {
+        path: 'project-new',
+        loadChildren: () => import('../../modules/project-new/project-new.module').then(m => m.ProjectNewModule),
+        canActivate: [NgxPermissionsGuard],
+        data: {
+          permissions: {
+            only: ['admin', 'marketing', 'sales', 'agency', 'cooperator', 'sales-manager'],
+            redirectTo: 'dashboard'
+          }
+        }
+      },
+      {
         path: '',
         pathMatch: 'full',
         redirectTo: 'dashboard'
