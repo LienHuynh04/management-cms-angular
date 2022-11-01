@@ -97,16 +97,18 @@
           >
             <i nz-icon nzType="edit" nzTheme="outline"></i>
           </button>
-          <button nz-button nzShape="circle"
-                  *ngxPermissionsOnly="['admin', 'human-resource']"
-                  nzDanger
-                  (click)="confirmDelete(data.id)"
-                  nz-tooltip
-                  nzTooltipPlacement="top"
-                  [nzTooltipTitle]="'Xóa'"
-          >
-            <i nz-icon nzType="delete"></i>
-          </button>
+          <ng-container *ngIf="!!data.is_active">
+            <button nz-button nzShape="circle"
+                    *ngxPermissionsOnly="['admin', 'human-resource']"
+                    nzDanger
+                    (click)="confirmDelete(data.id)"
+                    nz-tooltip
+                    nzTooltipPlacement="top"
+                    [nzTooltipTitle]="'Xóa'"
+            >
+              <i nz-icon nzType="delete"></i>
+            </button>
+          </ng-container>
         </ng-container>
       </td>
     </tr>

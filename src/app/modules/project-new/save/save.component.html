@@ -41,7 +41,7 @@
     <nz-form-item>
       <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="price" nzRequired>Tiền</nz-form-label>
       <nz-form-control [nzMd]="12" [nzXs]="24">
-        <input nz-input formControlName="price" id="price" />
+        <input nz-input formControlName="price" id="price" type="number"/>
         <app-control-errors
           fieldName="price"
         ></app-control-errors>

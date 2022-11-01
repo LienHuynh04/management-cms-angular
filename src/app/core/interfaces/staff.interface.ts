@@ -4,4 +4,5 @@ export interface StaffInterface {
   full_name: string;
   email: string;
   role: any[];
+  is_active?: any;
 }

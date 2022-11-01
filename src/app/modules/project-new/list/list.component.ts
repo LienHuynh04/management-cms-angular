@@ -34,7 +34,7 @@ export class ListComponent extends BaseTable<ProjectInterface> implements OnInit
 
   confirm(id: number | string | undefined) {
     this.projectService.delete(id).subscribe(() => {
-      this.processData(this.projectService.getAll());
+      this.processData(this.projectService.getAll({...super.processFilter(), 'filter[type_project]': 1}));
       super.confirm();
     });
   }

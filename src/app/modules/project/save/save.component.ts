@@ -55,7 +55,7 @@ export class SaveComponent extends BaseForm<ProjectInterface> implements OnInit 
         }
         return throwError(error);
       }),
-      switchMap(() => this.projectService.getAll())
+      switchMap(() => this.projectService.getAll({'filter[type_project]': 0}))
     ).subscribe((res) => {
       this.closeModal(res);
     });

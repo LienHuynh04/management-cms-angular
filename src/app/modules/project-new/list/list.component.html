@@ -57,7 +57,7 @@
         {{ col.field == 'stt' ? (i + 1) : data[col?.field] }}
       </td>
       <td style="text-align: center" nzRight>
-        <button  [routerLink]="['/project-new', data.id]"
+        <button  [routerLink]="['/project-new/update', data.id]"
                 nz-button nzShape="circle"
                 nzType="primary"
                 style="margin-right: 5px"

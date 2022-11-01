@@ -5,4 +5,5 @@ export interface TeamInterface {
   leader: {
     [key: string]: any;
   };
+  is_active: any;
 }

@@ -15,10 +15,6 @@ export class SaveResolver implements Resolve<boolean> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
-    return this.projectService.getById(route.params.id).pipe(
-      map(resp => {
-        return resp.data;
-      })
-    );
+    return this.projectService.getById(route.params.id);
   }
 }
