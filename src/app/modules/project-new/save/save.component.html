@@ -24,6 +24,7 @@
       <nz-form-label [nzMd]="6" [nzXs]="24" nzRequired nzFor="type">Loại hình</nz-form-label>
       <nz-form-control [nzMd]="12" [nzXs]="24">
         <nz-select
+          *ngIf="!record || (record && record.is_active)"
           nzPlaceHolder="Vui lòng chọn"
           formControlName="type"
           nzAllowClear
@@ -31,6 +32,8 @@
           <nz-option [nzLabel]="'Đất'" [nzValue]="'SOIL'"></nz-option>
           <nz-option [nzLabel]="'Nhà'" [nzValue]="'HOME'"></nz-option>
         </nz-select>
+        <span *ngIf="record && !record.is_active">{{LocalProjectNewEnum[record.type]}}</span>
+
         <app-control-errors
           fieldName="type"
         ></app-control-errors>
@@ -41,7 +44,10 @@
     <nz-form-item>
       <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="price" nzRequired>Tiền</nz-form-label>
       <nz-form-control [nzMd]="12" [nzXs]="24">
-        <input nz-input formControlName="price" id="price" type="number"/>
+        <input *ngIf="!record || (record && record.is_active)" nz-input formControlName="price" id="price"
+               type="number"/>
+        <span *ngIf="record && !record.is_active">{{record.price}}</span>
+
         <app-control-errors
           fieldName="price"
         ></app-control-errors>
@@ -52,7 +58,9 @@
     <nz-form-item>
       <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="local" nzRequired>Dự án chuyển nhượng</nz-form-label>
       <nz-form-control [nzMd]="12" [nzXs]="24">
-        <input nz-input formControlName="local" id="local"/>
+        <input *ngIf="!record || (record && record.is_active)" nz-input formControlName="local" id="local"/>
+        <span *ngIf="record && !record.is_active">{{record.local}}</span>
+
         <app-control-errors
           fieldName="local"
         ></app-control-errors>
@@ -63,6 +71,7 @@
       <div nz-col [nzSpan]="24" class="create-area">
         <button nz-button [routerLink]="['', 'project-new']">Quay lại</button>
         <button nz-button nzType="primary"
+                *ngIf="!record || (record && record.is_active)"
                 [nzLoading]="isLoading"
                 (click)="confirmUpdate()"
                 [disabled]="!saveForm.valid">

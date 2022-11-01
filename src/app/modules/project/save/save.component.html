@@ -3,7 +3,9 @@
   <nz-form-item>
     <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="name" nzRequired>Tên</nz-form-label>
     <nz-form-control [nzMd]="12" [nzXs]="24">
-      <input formControlName="name" id="name" nz-input/>
+      <input *ngIf="!record || (record && record.is_active)" formControlName="name" id="name" nz-input/>
+      <span *ngIf="record && !record.is_active">{{record.name}}</span>
+
       <app-control-errors
         fieldName="name"
       ></app-control-errors>
@@ -14,6 +16,7 @@
 <div *nzModalFooter>
   <button (click)="closeModal(null)" nz-button nzType="default">Quay lại</button>
   <button (click)="confirmUpdate()"
+          *ngIf="!record || (record && record.is_active)"
           nz-button
           nzType="primary"
           [nzLoading]="isLoading"

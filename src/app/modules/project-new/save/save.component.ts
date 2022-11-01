@@ -3,10 +3,10 @@ import { BaseForm } from '../../../shared/abstracts';
 import { ProjectInterface } from '../../../core/interfaces';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoadingOverlayService, ProjectService, StaffService } from '../../../core/services';
+import { LoadingOverlayService, ProjectService } from '../../../core/services';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { ConfirmedValidator } from '../../../shared';
+import { LocalProjectNewEnum } from '../../../core/enums';
 
 @Component({
   selector: 'app-save',
@@ -14,6 +14,7 @@ import { ConfirmedValidator } from '../../../shared';
   styleUrls: ['./save.component.scss']
 })
 export class SaveComponent extends BaseForm<ProjectInterface> implements OnInit {
+  LocalProjectNewEnum = LocalProjectNewEnum;
   constructor(
     private fb: FormBuilder,
     private router: Router,

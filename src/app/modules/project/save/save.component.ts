@@ -39,6 +39,7 @@ export class SaveComponent extends BaseForm<ProjectInterface> implements OnInit 
     });
     if (this.id) {
       this.fetchData().subscribe(resp => {
+        this.record = resp;
         this.saveForm.patchValue(resp);
       });
     }
