@@ -74,4 +74,7 @@ export class SaveComponent extends BaseForm<StaffInterface> implements OnInit {
       'staff'
     );
   }
+  getNameTeam(ids: number) {
+    return this.teams.find(value => value.id === ids)?.name
+  }
 }

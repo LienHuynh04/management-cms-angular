@@ -13,7 +13,7 @@
                autocomplete="new-input"
                id="login_id"/>
 
-        <span *ngIf="record || !!record.is_active">{{record.login_id}}</span>
+        <span *ngIf="record">{{record.login_id}}</span>
 
         <app-control-errors
           fieldName="login_id"
@@ -25,9 +25,8 @@
     <nz-form-item>
       <nz-form-label [nzMd]="6" [nzXs]="24" nzRequired nzFor="full_name">Tên</nz-form-label>
       <nz-form-control [nzMd]="12" [nzXs]="24">
-        <input *ngIf="record && !!record.is_active" nz-input formControlName="full_name" id="full_name"/>
-
-        <span *ngIf="record && !!!record.is_active">{{record.full_name}}</span>
+        <input *ngIf="!record || (record && record.is_active)" nz-input formControlName="full_name" id="full_name"/>
+        <span *ngIf="record && !record.is_active">{{record.full_name}}</span>
 
         <app-control-errors
           fieldName="full_name"
@@ -39,8 +38,8 @@
     <nz-form-item>
       <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="email" nzRequired>Email</nz-form-label>
       <nz-form-control [nzMd]="12" [nzXs]="24">
-        <input *ngIf="record && !!record.is_active" nz-input formControlName="email" id="email"/>
-        <span *ngIf="record && !!!record.is_active">{{record.email}}</span>
+        <input *ngIf="!record || (record && record.is_active)" nz-input formControlName="email" id="email"/>
+        <span *ngIf="record && !record.is_active">{{record.email}}</span>
 
         <app-control-errors
           fieldName="email"
@@ -49,7 +48,7 @@
     </nz-form-item>
 
     <!--password-->
-    <nz-form-item *ngIf="record && !!record.is_active">
+    <nz-form-item *ngIf="!record || (record && record.is_active)">
       <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="password">Mật khẩu</nz-form-label>
       <nz-form-control [nzMd]="12" [nzXs]="24">
         <nz-input-group [nzSuffix]="suffixTemplate">
@@ -75,7 +74,7 @@
     </nz-form-item>
 
     <!--confirm password-->
-    <nz-form-item *ngIf="record && !!record.is_active">
+    <nz-form-item *ngIf="!record || (record && record.is_active)">
       <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="password_confirmation">Xác nhận mật khẩu</nz-form-label>
       <nz-form-control [nzMd]="12" [nzXs]="24">
         <nz-input-group [nzSuffix]="suffixTemplateConfirm">
@@ -105,7 +104,7 @@
       <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="role_id">Nhóm</nz-form-label>
       <nz-form-control [nzMd]="12" [nzXs]="24">
         <nz-select
-          [nzDisabled]="!(record && !!record.is_active)"
+          *ngIf="!record || (record && record.is_active)"
           nzPlaceHolder="Vui lòng chọn"
           formControlName="team_id"
           nzAllowClear
@@ -113,6 +112,7 @@
           <nz-option *ngFor="let item of teams" [nzLabel]="$any(item.name)"
                      [nzValue]="$any(item?.id)"></nz-option>
         </nz-select>
+        <span *ngIf="record && !record.is_active">{{getNameTeam(record.team_id)}}</span>
       </nz-form-control>
     </nz-form-item>
 
@@ -143,7 +143,7 @@
       <div nz-col [nzSpan]="24" class="create-area">
         <button nz-button [routerLink]="['', 'staff']">Quay lại</button>
         <button nz-button nzType="primary"
-                *ngIf="!!record.is_active"
+                *ngIf="!record || (record && record.is_active)"
                 [nzLoading]="isLoading"
                 (click)="confirmUpdate()"
                 [disabled]="!saveForm.valid">
