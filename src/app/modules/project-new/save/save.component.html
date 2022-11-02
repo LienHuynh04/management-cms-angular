@@ -56,7 +56,7 @@
 
     <!--local-->
     <nz-form-item>
-      <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="local" nzRequired>Dự án chuyển nhượng</nz-form-label>
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="local" nzRequired>Vị trí</nz-form-label>
       <nz-form-control [nzMd]="12" [nzXs]="24">
         <input *ngIf="!record || (record && record.is_active)" nz-input formControlName="local" id="local"/>
         <span *ngIf="record && !record.is_active">{{record.local}}</span>

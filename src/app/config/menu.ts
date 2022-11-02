@@ -39,7 +39,7 @@ export const navigations: NavbarItem[] = [
     }
   },
   {
-    title: 'Dự án mới',
+    title: 'Dự án chuyển nhượng',
     url: '/project-new',
     icon: 'file-protect',
     permissions: {

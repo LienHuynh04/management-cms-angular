@@ -5,7 +5,10 @@
             nzBreakpoint="md"
             [(nzCollapsed)]="isCollapsed"
             [nzTrigger]="null">
-    <div class="logo"></div>
+    <div class="logo">
+      <img *ngIf="!isCollapsed" src="assets/images/logo.png" alt="logo">
+      <img *ngIf="isCollapsed" src="assets/images/logo-mobile.png" alt="logo-mobile">
+    </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
       <ng-container *ngFor="let nav of navigations">
         <li

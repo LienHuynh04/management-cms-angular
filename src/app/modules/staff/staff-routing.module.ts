@@ -23,7 +23,7 @@ const routes: Routes = [
     canActivate: [NgxPermissionsGuard],
     data: {
       permissions: {
-        only:['admin', 'human-resource'],
+        only:['admin', 'human-resource', 'sales-manager'],
         redirectTo: 'staff'
       }
     }
@@ -37,7 +37,7 @@ const routes: Routes = [
     canActivate: [NgxPermissionsGuard],
     data: {
       permissions: {
-        only:['admin', 'human-resource'],
+        only:['admin', 'human-resource', 'sales-manager'],
         redirectTo: 'staff'
       }
     }
