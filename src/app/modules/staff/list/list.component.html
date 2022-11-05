@@ -83,6 +83,7 @@
           ? [roleEnum[data.role[0].name]]
           : data[col?.field]
         }}
+        <p class="cl-red" *ngIf="col.field === 'login_id' && !data.is_active">( Đã xóa )</p>
       </td>
       <td style="text-align: center" nzRight>
         <ng-container *ngIf="!(data.id == 1 || authService.currentUserValue.id == data.id)">

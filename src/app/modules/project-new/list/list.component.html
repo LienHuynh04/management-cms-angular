@@ -55,6 +55,7 @@
     <tr *ngFor="let data of basicTable.data; let i = index">
       <td *ngFor="let col of cols;">
         {{ col.field == 'stt' ? (i + 1) : data[col?.field] }}
+        <p class="cl-red" *ngIf="col.field === 'name' && !data.is_active">( Đã xóa )</p>
       </td>
       <td style="text-align: center" nzRight>
         <button  [routerLink]="['/project-new/update', data.id]"
