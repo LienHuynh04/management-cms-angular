@@ -13,7 +13,10 @@
                autocomplete="new-input"
                id="login_id"/>
 
-        <span *ngIf="record">{{record.login_id}}</span>
+        <span *ngIf="record">
+          {{record.login_id}}
+          <span class="cl-red" *ngIf="!record.is_active">( Đã xóa )</span>
+        </span>
 
         <app-control-errors
           fieldName="login_id"

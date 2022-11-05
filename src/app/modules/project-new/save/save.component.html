@@ -12,7 +12,10 @@
                formControlName="name"
                autocomplete="new-input"
                id="name"/>
-        <span *ngIf="record">{{record.name}}</span>
+        <span *ngIf="record">
+          {{record.name}}
+          <span class="cl-red" *ngIf="!record.is_active">( Đã xóa )</span>
+        </span>
         <app-control-errors
           fieldName="name"
         ></app-control-errors>

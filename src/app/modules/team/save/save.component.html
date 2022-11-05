@@ -5,7 +5,10 @@
       <nz-form-label [nzMd]="6" [nzXs]="24" nzRequired nzFor="name">Tên nhóm</nz-form-label>
       <nz-form-control [nzMd]="12" [nzXs]="24">
         <input *ngIf="!record || (record && record.is_active)" nz-input formControlName="name" id="name"/>
-        <span *ngIf="record && !record.is_active">{{record.name}}</span>
+        <span *ngIf="record && !record.is_active">
+          {{record.name}}
+          <span class="cl-red" *ngIf="!record.is_active">( Đã xóa )</span>
+        </span>
         <app-control-errors
           fieldName="name"
         ></app-control-errors>
