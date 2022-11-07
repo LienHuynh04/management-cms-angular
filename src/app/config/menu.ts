@@ -28,7 +28,7 @@ export const navigations: NavbarItem[] = [
     url: '/staff',
     icon: 'team',
     permissions: {
-      only: ROLE_CONFIG.get('staff')?.concat(['marketing', 'sales', 'human-resource'])
+      only: ROLE_CONFIG.get('staff')?.concat(['marketing', 'sales'])
     }
   },
   {

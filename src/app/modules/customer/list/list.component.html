@@ -112,6 +112,7 @@
                 nz-tooltip
                 nzTooltipPlacement="top"
                 [nzTooltipTitle]="'Phân công cho nhân viên'"
+                *ngxPermissionsOnly="ROLE_CONFIG?.get('customers')"
         >
           <i nz-icon nzType="gold" nzTheme="outline"></i>
         </button>

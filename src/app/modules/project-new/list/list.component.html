@@ -65,6 +65,7 @@
                 nz-tooltip
                 nzTooltipPlacement="top"
                 [nzTooltipTitle]="'Sửa'"
+                 *ngxPermissionsOnly="ROLE_CONFIG?.get('project_new')"
         >
           <i nz-icon nzTheme="outline" nzType="edit"></i>
         </button>
@@ -75,6 +76,7 @@
                   nz-tooltip
                   nzTooltipPlacement="top"
                   [nzTooltipTitle]="'Xóa'"
+                  *ngxPermissionsOnly="ROLE_CONFIG?.get('project_new')"
           >
             <i nz-icon nzType="delete"></i>
           </button>
@@ -92,7 +94,7 @@
     nz-button
     nzType="primary"
     [routerLink]="['/project-new', 'create']"
-    *ngxPermissionsOnly="['admin', 'marketing', 'sales-manager']"
+    *ngxPermissionsOnly="ROLE_CONFIG?.get('project_new')"
   >
     <i nz-icon nzTheme="outline" nzType="plus"></i>
     Tạo mới
