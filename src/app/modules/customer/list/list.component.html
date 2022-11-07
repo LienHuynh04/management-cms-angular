@@ -96,6 +96,7 @@
       </td>
       <td style="text-align: center" nzRight>
         <button nz-button
+                *ngxPermissionsOnly="ROLE_CONFIG?.get('customers')"
                 nzType="primary" nzShape="circle"
                 [routerLink]="['update', data.id]"
                 nz-tooltip
@@ -121,7 +122,7 @@
                 nz-tooltip
                 nzTooltipPlacement="top"
                 [nzTooltipTitle]="'Danh sách những lần chăm sóc'"
-                *ngxPermissionsOnly="['admin', 'marketing', 'sales', 'sales-manager']"
+                *ngxPermissionsOnly="ROLE_CONFIG?.get('customers')"
         >
           <i nz-icon nzType="team" nzTheme="outline"></i>
         </button>
@@ -135,6 +136,7 @@
 <ng-template #extraTemplate>
   <!--Button Create-->
   <button
+    *ngxPermissionsOnly="ROLE_CONFIG?.get('customers')"
     nz-button
     nzType="primary"
     class="btn-create"

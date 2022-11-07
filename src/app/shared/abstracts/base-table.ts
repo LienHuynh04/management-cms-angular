@@ -7,8 +7,10 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { catchError } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ROLE_CONFIG } from 'src/app/config/role-config';
 
 export abstract class BaseTable<T> {
+  ROLE_CONFIG = ROLE_CONFIG;
   records: T[] = [];
   filterForm!: FormGroup;
   resolvedData: any;

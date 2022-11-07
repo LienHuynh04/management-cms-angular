@@ -88,7 +88,7 @@
       <td style="text-align: center" nzRight>
         <ng-container *ngIf="!(data.id == 1 || authService.currentUserValue.id == data.id)">
           <button nz-button
-                  *ngxPermissionsOnly="['admin', 'human-resource', 'sales-manager']"
+                  *ngxPermissionsOnly="ROLE_CONFIG.get('staff')"
                   nzType="primary" nzShape="circle"
                   style="margin-right: 5px"
                   [routerLink]="['update', data.id]"
@@ -100,7 +100,7 @@
           </button>
           <ng-container *ngIf="data.is_active">
             <button nz-button nzShape="circle"
-                    *ngxPermissionsOnly="['admin', 'human-resource', 'sales-manager']"
+                    *ngxPermissionsOnly="ROLE_CONFIG.get('staff')"
                     nzDanger
                     (click)="confirmDelete(data.id)"
                     nz-tooltip
@@ -124,7 +124,7 @@
     nzType="primary"
     class="btn-create"
     [routerLink]="['/staff', 'create']"
-    *ngxPermissionsOnly="['admin', 'human-resource', 'sales-manager']"
+    *ngxPermissionsOnly="ROLE_CONFIG.get('staff')"
   >
     <i nz-icon nzType="plus" nzTheme="outline"></i>
     Tạo mới

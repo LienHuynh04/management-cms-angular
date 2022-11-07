@@ -5,6 +5,7 @@ import { SaveComponent } from './save/save.component';
 import { SaveResolver } from './save/save.resolver';
 import { ListResolver } from './list/list.resolver';
 import { NgxPermissionsGuard } from 'ngx-permissions';
+import { ROLE_CONFIG } from '../../config/role-config';
 
 const routes: Routes = [
   {
@@ -23,7 +24,7 @@ const routes: Routes = [
     canActivate: [NgxPermissionsGuard],
     data: {
       permissions: {
-        only:['admin', 'human-resource', 'sales-manager'],
+        only: ROLE_CONFIG.get('staff'),
         redirectTo: 'staff'
       }
     }
@@ -37,7 +38,7 @@ const routes: Routes = [
     canActivate: [NgxPermissionsGuard],
     data: {
       permissions: {
-        only:['admin', 'human-resource', 'sales-manager'],
+        only: ROLE_CONFIG.get('staff'),
         redirectTo: 'staff'
       }
     }

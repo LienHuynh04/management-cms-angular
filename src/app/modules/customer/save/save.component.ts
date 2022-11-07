@@ -71,7 +71,6 @@ export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit
       this.record.assign_for_user_id = this.record.assign_for_user?.id;
       this.record.customer_project = this.record.customer_project?.name;
       this.radioProject = !!Number(this.record.type_project);
-      console.log(!!Number(this.record.type_project));
     }
 
     super.patchValueForm();

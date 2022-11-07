@@ -24,7 +24,7 @@ const routes: Routes = [
         canActivate: [NgxPermissionsGuard],
         data: {
           permissions: {
-            only: ROLE_CONFIG.get('customers'),
+            only: ROLE_CONFIG.get('customers')?.concat(['human-resource']),
             redirectTo: 'dashboard'
           }
         }
@@ -35,7 +35,7 @@ const routes: Routes = [
         canActivate: [NgxPermissionsGuard],
         data: {
           permissions: {
-            only: ROLE_CONFIG.get('staff')?.concat(['marketing', 'sales', 'sales-manager']),
+            only: ROLE_CONFIG.get('staff')?.concat(['marketing', 'sales', 'human-resource']),
             redirectTo: 'dashboard'
           }
         }

@@ -4,6 +4,7 @@ import { ListComponent } from './list/list.component';
 import { SaveComponent } from './save/save.component';
 import { ListResolver } from './list/list.resolver';
 import { SaveResolver } from './save/save.resolver';
+import { ROLE_CONFIG } from '../../config/role-config';
 
 const routes: Routes = [
   {
@@ -18,6 +19,12 @@ const routes: Routes = [
     component: SaveComponent,
     resolve: {
       resolvedData: SaveResolver
+    },
+    data: {
+      permissions: {
+        only: ROLE_CONFIG.get('customers'),
+        redirectTo: 'customers'
+      }
     }
   },
   {
@@ -25,6 +32,12 @@ const routes: Routes = [
     component: SaveComponent,
     resolve: {
       resolvedData: SaveResolver
+    },
+    data: {
+      permissions: {
+        only: ROLE_CONFIG.get('customers'),
+        redirectTo: 'customers'
+      }
     }
   },
 ];

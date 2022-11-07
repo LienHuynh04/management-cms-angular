@@ -12,7 +12,7 @@ export const navigations: NavbarItem[] = [
     url: '/customers',
     icon: 'user',
     permissions: {
-      only: ROLE_CONFIG.get('customers'),
+      only: ROLE_CONFIG.get('customers')?.concat(['human-resource']),
     }
   },
   {
@@ -28,7 +28,7 @@ export const navigations: NavbarItem[] = [
     url: '/staff',
     icon: 'team',
     permissions: {
-      only: ROLE_CONFIG.get('staff')
+      only: ROLE_CONFIG.get('staff')?.concat(['marketing', 'sales', 'human-resource'])
     }
   },
   {
@@ -52,7 +52,7 @@ export const navigations: NavbarItem[] = [
     url: '/roles',
     icon: 'apartment',
     permissions: {
-      only: ROLE_CONFIG.get('roles-new')
+      only: ROLE_CONFIG.get('roles')
     }
   }
 ];
