@@ -50,6 +50,19 @@
       </nz-form-control>
     </nz-form-item>
 
+    <!--phone-->
+    <nz-form-item>
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="phone" nzRequired>Số điện thoại</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
+        <input type="text" *ngIf="!record || (record && record.is_active)" nz-input formControlName="phone" id="phone"/>
+        <span *ngIf="record && !record.is_active">{{record.phone}}</span>
+
+        <app-control-errors
+          fieldName="phone"
+        ></app-control-errors>
+      </nz-form-control>
+    </nz-form-item>
+
     <!--password-->
     <nz-form-item *ngIf="!record || (record && record.is_active)">
       <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="password">Mật khẩu</nz-form-label>

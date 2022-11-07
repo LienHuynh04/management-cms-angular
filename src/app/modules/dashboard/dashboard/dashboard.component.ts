@@ -6,6 +6,7 @@ import { NgxPermissionsService } from 'ngx-permissions';
 import { FormControl } from '@angular/forms';
 import { DashboardService } from '../../../core/services/dashboard.service';
 import { drawChart } from './draw-chart';
+import { ROLE_CONFIG } from '../../../config/role-config';
 
 @Component({
   selector: 'app-dashboard',

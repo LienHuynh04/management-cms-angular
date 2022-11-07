@@ -48,7 +48,8 @@ export class SaveComponent extends BaseForm<StaffInterface> implements OnInit {
       password: [null, [Validators.required, Validators.minLength(8)]],
       password_confirmation: [null],
       role_id: ['', [Validators.required]],
-      team_id: ['']
+      team_id: [''],
+      phone: ['', [Validators.required]],
     }, {
       validator: ConfirmedValidator('password', 'password_confirmation')
     });

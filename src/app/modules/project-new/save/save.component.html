@@ -70,6 +70,17 @@
       </nz-form-control>
     </nz-form-item>
 
+    <!--description-->
+    <nz-form-item>
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="description">Ghi chú</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
+        <textarea rows="4" nz-input formControlName="description" id="description"></textarea>
+        <app-control-errors
+          fieldName="description"
+        ></app-control-errors>
+      </nz-form-control>
+    </nz-form-item>
+
     <div nz-row>
       <div nz-col [nzSpan]="24" class="create-area">
         <button nz-button [routerLink]="['', 'project-new']">Quay lại</button>

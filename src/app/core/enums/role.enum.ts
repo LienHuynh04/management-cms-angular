@@ -7,9 +7,5 @@ export enum RoleEnum {
 
   'sales' = 'Kinh doanh',
 
-  'agency' = 'Đại lí',
-
-  'cooperator' = 'Nhà phân phối',
-
   'sales-manager' = 'Quản lý kinh doanh'
 }

@@ -85,6 +85,7 @@ nz-content {
   img{
     width: 100%;
     max-height: 50px;
+    object-fit: contain;
     -webkit-transition: opacity 200ms linear;
     -moz-transition: opacity 200ms linear;
     -o-transition: opacity 200ms linear;

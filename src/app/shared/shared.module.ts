@@ -20,6 +20,7 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { ValueColumnPipe } from './pipes/value-column.pipe';
 
 const ANTD = [
   NzGridModule,
@@ -41,9 +42,12 @@ const ANTD = [
   NzRadioModule,
   NzSpinModule
 ];
+const PIPES = [
+  ValueColumnPipe
+]
 
 @NgModule({
-  declarations: [ControlErrorsComponent],
+  declarations: [ControlErrorsComponent, ...PIPES],
   imports: [
     CommonModule,
     NgxPermissionsModule,
@@ -52,6 +56,7 @@ const ANTD = [
   exports: [
     ControlErrorsComponent,
     NgxPermissionsModule,
+    ...PIPES,
     ...ANTD
   ],
   providers: [NzModalService]

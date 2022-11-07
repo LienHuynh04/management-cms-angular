@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppWrapperComponent } from './app-wrapper.component';
 import { ProfileComponent } from '../../modules/profile/profile.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
+import { ROLE_CONFIG } from '../../config/role-config';
 
 const routes: Routes = [
   {
@@ -23,7 +24,7 @@ const routes: Routes = [
         canActivate: [NgxPermissionsGuard],
         data: {
           permissions: {
-            only: ['admin', 'marketing', 'sales', 'agency', 'cooperator', 'sales-manager'],
+            only: ROLE_CONFIG.get('customers'),
             redirectTo: 'dashboard'
           }
         }
@@ -34,7 +35,7 @@ const routes: Routes = [
         canActivate: [NgxPermissionsGuard],
         data: {
           permissions: {
-            only: ['admin', 'human-resource', 'sales-manager'],
+            only: ROLE_CONFIG.get('staff')?.concat(['marketing', 'sales', 'sales-manager']),
             redirectTo: 'dashboard'
           }
         }
@@ -45,7 +46,7 @@ const routes: Routes = [
         canActivate: [NgxPermissionsGuard],
         data: {
           permissions: {
-            only: ['admin', 'marketing', 'sales', 'agency', 'cooperator', 'sales-manager'],
+            only: ROLE_CONFIG.get('project'),
             redirectTo: 'dashboard'
           }
         }
@@ -60,7 +61,7 @@ const routes: Routes = [
         canActivate: [NgxPermissionsGuard],
         data: {
           permissions: {
-            only: ['admin'],
+            only: ROLE_CONFIG.get('roles'),
             redirectTo: 'dashboard'
           }
         }
@@ -71,7 +72,7 @@ const routes: Routes = [
         canActivate: [NgxPermissionsGuard],
         data: {
           permissions: {
-            only: ['admin'],
+            only: ROLE_CONFIG.get('admin'),
             redirectTo: 'dashboard'
           }
         }
@@ -82,7 +83,7 @@ const routes: Routes = [
         canActivate: [NgxPermissionsGuard],
         data: {
           permissions: {
-            only: ['admin', 'marketing', 'sales', 'agency', 'cooperator', 'sales-manager'],
+            only: ROLE_CONFIG.get('project-new'),
             redirectTo: 'dashboard'
           }
         }

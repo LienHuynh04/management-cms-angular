@@ -1,4 +1,5 @@
 import { NavbarItem } from '../core/interfaces';
+import { ROLE_CONFIG } from './role-config';
 
 export const navigations: NavbarItem[] = [
   {
@@ -11,7 +12,7 @@ export const navigations: NavbarItem[] = [
     url: '/customers',
     icon: 'user',
     permissions: {
-      only: ['admin', 'marketing', 'sales', 'agency', 'cooperator', 'sales-manager']
+      only: ROLE_CONFIG.get('customers'),
     }
   },
   {
@@ -19,7 +20,7 @@ export const navigations: NavbarItem[] = [
     url: '/teams',
     icon: 'dollar-circle',
     permissions: {
-      only: ['admin']
+      only: ROLE_CONFIG.get('teams')
     }
   },
   {
@@ -27,7 +28,7 @@ export const navigations: NavbarItem[] = [
     url: '/staff',
     icon: 'team',
     permissions: {
-      only: ['admin', 'human-resource', 'sales-manager']
+      only: ROLE_CONFIG.get('staff')
     }
   },
   {
@@ -35,15 +36,15 @@ export const navigations: NavbarItem[] = [
     url: '/project',
     icon: 'project',
     permissions: {
-      only: ['admin', 'marketing', 'sales', 'agency', 'cooperator', 'sales-manager']
+      only: ROLE_CONFIG.get('project')
     }
   },
   {
-    title: 'Dự án chuyển nhượng',
+    title: 'Sản phẩm chuyển nhượng',
     url: '/project-new',
     icon: 'file-protect',
     permissions: {
-      only: ['admin', 'marketing', 'sales', 'agency', 'cooperator', 'sales-manager']
+      only: ROLE_CONFIG.get('project-new')
     }
   },
   {
@@ -51,7 +52,7 @@ export const navigations: NavbarItem[] = [
     url: '/roles',
     icon: 'apartment',
     permissions: {
-      only: ['admin']
+      only: ROLE_CONFIG.get('roles-new')
     }
   }
 ];

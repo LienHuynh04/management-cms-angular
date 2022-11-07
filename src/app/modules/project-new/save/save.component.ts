@@ -36,7 +36,8 @@ export class SaveComponent extends BaseForm<ProjectInterface> implements OnInit 
       name: ['', Validators.required],
       type: ['SOIL', [Validators.required]],
       price: ['', Validators.required],
-      local: ['', [Validators.required]]
+      local: ['', [Validators.required]],
+      description: [''],
     });
     super.patchValueForm();
   }

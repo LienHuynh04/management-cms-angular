@@ -38,10 +38,10 @@ export abstract class BaseForm<T> {
             this.setFormErrors(error.error.errors);
           }
           return throwError(error);
-        })
+        }),
       )
-      .subscribe(resp => {
-        this.record = resp;
+      .subscribe((resp) => {
+        if(!redirectUrl) this.record = resp.data;
         if (redirectUrl) this.routerBase?.navigate([redirectUrl]);
         this.notification.create(
           'success',

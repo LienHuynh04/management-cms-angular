@@ -81,7 +81,7 @@
         {{
         col.slot == 'role'
           ? [roleEnum[data.role[0].name]]
-          : data[col?.field]
+          : data[col?.field] | valueColumn: col?.field_child
         }}
         <p class="cl-red" *ngIf="col.field === 'login_id' && !data.is_active">( Đã xóa )</p>
       </td>

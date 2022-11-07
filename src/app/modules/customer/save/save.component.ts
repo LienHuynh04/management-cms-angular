@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService, CustomerService, LoadingOverlayService } from '../../../core/services';
 import { CustomerInterface, ProjectInterface, StaffInterface } from '../../../core/interfaces';
@@ -7,6 +7,7 @@ import { BaseForm } from '../../../shared/abstracts';
 import { ResultEnum } from '../../../core/enums';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-save',
@@ -14,6 +15,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
   styleUrls: ['./save.component.scss']
 })
 export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit {
+  chooseProject = new FormControl(true)
   projects!: ProjectInterface[];
   users !: StaffInterface[];
   resultEnum: any = ResultEnum;
@@ -53,10 +55,11 @@ export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit
       project_note: [null],
       note: [null],
       result: [null],
-      customer_project: []
+      customer_project: [],
+      created_day: ['', [Validators.required]],
     });
 
-    const isRole = ['sales', 'agency', 'cooperator'].includes(this.authService.currentUserValue.role[0].name);
+    const isRole = ['sales'].includes(this.authService.currentUserValue.role[0].name);
 
     if (isRole) {
       this.field('assign_for_user_id').patchValue(this.users[0].id as any);
@@ -71,9 +74,14 @@ export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit
   }
 
   submitForm(): void {
+    const body = this.saveForm.value;
+
+    /* Convert Date*/
+    body.created_day = format(body.created_day, "yyyy-MM-dd");
+
     this.processData(this.record
-        ? this.customerService.update(this.record.id, this.removeValueNull(this.saveForm.value))
-        : this.customerService.create(this.removeValueNull(this.saveForm.value)),
+        ? this.customerService.update(this.record.id, this.removeValueNull(body))
+        : this.customerService.create(this.removeValueNull(body)),
       'customers'
     );
   }

@@ -49,6 +49,11 @@ export const column: ColumnConfig = {
       field: 'email'
     },
     {
+      header: 'Nhóm',
+      field: 'team',
+      field_child: 'name'
+    },
+    {
       header: 'Phân quyền',
       field: 'role',
       slot: 'role'
