@@ -49,7 +49,7 @@ export class SaveComponent extends BaseForm<StaffInterface> implements OnInit {
       password_confirmation: [null],
       role_id: ['', [Validators.required]],
       team_id: [''],
-      phone: ['', [Validators.required]],
+      phone: ['', [Validators.required, Validators.pattern('^\\d+$')]],
     }, {
       validator: ConfirmedValidator('password', 'password_confirmation')
     });

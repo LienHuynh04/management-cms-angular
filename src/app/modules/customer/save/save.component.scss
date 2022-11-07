@@ -19,3 +19,12 @@ button {
 nz-date-picker {
   width: 100%;
 }
+
+.customer-project {
+  nz-radio-group {
+    width: 100%;
+    label:nth-child(1) {
+      margin-bottom: 15px;
+    }
+  }
+}

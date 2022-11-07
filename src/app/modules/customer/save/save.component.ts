@@ -15,8 +15,9 @@ import { format } from 'date-fns';
   styleUrls: ['./save.component.scss']
 })
 export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit {
-  chooseProject = new FormControl(true)
+  radioProject = true;
   projects!: ProjectInterface[];
+  projects_new!: ProjectInterface[];
   users !: StaffInterface[];
   resultEnum: any = ResultEnum;
   optionResultField = Object.keys(this.resultEnum).filter(r => r);
@@ -33,6 +34,7 @@ export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit
   ) {
     super(modalService, loadingOverlayService, notification, activatedRoute, router);
     this.projects = this.resolvedData.projects;
+    this.projects_new = this.resolvedData?.projects_new;
     this.users = this.resolvedData.users;
   }
 
@@ -43,7 +45,7 @@ export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit
   initForm(): void {
     this.saveForm = this.fb.group({
       full_name: ['', Validators.required],
-      phone_number: ['', Validators.required],
+      phone_number: ['',[Validators.required, Validators.pattern('^\\d+$')]],
       address: ['', Validators.required],
       email: ['', [Validators.email]],
       assign_for_user_id: [
@@ -67,7 +69,9 @@ export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit
 
     if (this.record) {
       this.record.assign_for_user_id = this.record.assign_for_user?.id;
-      this.record.customer_project = this.record.customer_project[0]?.name;
+      this.record.customer_project = this.record.customer_project?.name;
+      this.radioProject = !!Number(this.record.type_project);
+      console.log(!!Number(this.record.type_project));
     }
 
     super.patchValueForm();
@@ -77,12 +81,15 @@ export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit
     const body = this.saveForm.value;
 
     /* Convert Date*/
-    body.created_day = format(body.created_day, "yyyy-MM-dd");
-
+    body.created_day = format(new Date(body.created_day), "yyyy-MM-dd");
     this.processData(this.record
         ? this.customerService.update(this.record.id, this.removeValueNull(body))
         : this.customerService.create(this.removeValueNull(body)),
       'customers'
     );
+  }
+
+  changeRadioProject() {
+    this.field('customer_project').reset()
   }
 }

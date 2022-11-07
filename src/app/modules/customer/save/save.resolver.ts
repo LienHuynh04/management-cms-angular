@@ -16,7 +16,10 @@ export class SaveResolver implements Resolve<boolean> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
-    const source$ = [this.projectService.getAll(), this.staffService.getAll({
+    const source$ = [
+      this.projectService.getAll({'filter[type_project]': 0}),
+      this.projectService.getAll({'filter[type_project]': 1}),
+      this.staffService.getAll({
       'filter[sales]': 1
     })];
     if (route.params.id) {
@@ -26,8 +29,9 @@ export class SaveResolver implements Resolve<boolean> {
       map((resp) => {
         return {
           projects: resp[0]?.data,
-          users: resp[1]?.data,
-          data: resp[2]?.data
+          projects_new: resp[1]?.data,
+          users: resp[2]?.data,
+          data: resp[3]?.data
         };
       })
     );

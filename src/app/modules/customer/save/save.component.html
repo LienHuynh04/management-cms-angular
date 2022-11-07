@@ -121,17 +121,38 @@
 
     <!--customer project-->
     <nz-form-item>
-      <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="customer_project">Dự án khách hàng</nz-form-label>
-      <nz-form-control [nzMd]="12" [nzXs]="24">
-        <nz-select
-          nzAllowClear
-          nzPlaceHolder="Vui lòng chọn"
-          formControlName="customer_project"
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="customer_project">Dự án</nz-form-label>
+      <nz-form-control class="customer-project" [nzMd]="12" [nzXs]="24">
+        <nz-radio-group
+          [(ngModel)]="radioProject"
+          [ngModelOptions]="{ standalone: true }"
+          (ngModelChange)="changeRadioProject()"
         >
-          <nz-option *ngFor="let item of projects"
-                     [nzLabel]="item.name"
-                     [nzValue]="item.name"></nz-option>
-        </nz-select>
+          <label nz-radio [nzValue]="false">
+            <nz-select
+              [nzDisabled]="radioProject"
+              nzAllowClear
+              nzPlaceHolder="Chọn dự án"
+              formControlName="customer_project"
+            >
+              <nz-option *ngFor="let item of projects"
+                         [nzLabel]="item.name"
+                         [nzValue]="item.name"></nz-option>
+            </nz-select>
+          </label>
+          <label nz-radio [nzValue]="true">
+            <nz-select
+              [nzDisabled]="!radioProject"
+              nzAllowClear
+              nzPlaceHolder="Chọn sản phẩm chuyển nhượng"
+              formControlName="customer_project"
+            >
+              <nz-option *ngFor="let item of projects_new"
+                         [nzLabel]="item.name"
+                         [nzValue]="item.name"></nz-option>
+            </nz-select>
+          </label>
+        </nz-radio-group>
       </nz-form-control>
     </nz-form-item>
 
