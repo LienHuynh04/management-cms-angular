@@ -49,7 +49,7 @@ export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit
       address: ['', Validators.required],
       email: ['', [Validators.email]],
       assign_for_user_id: [
-        ['admin', 'marketing'].includes(this.authService.currentUserValue.role[0].name)
+        ['admin', 'sales-manager'].includes(this.authService.currentUserValue.role[0].name)
           ? ''
           : this.authService.currentUserValue.id
         ,
