@@ -56,6 +56,7 @@
         >
           <nz-option *ngFor="let item of users"
                      [nzLabel]="item.full_name"
+                     [nzDisabled]="!!!item.is_active"
                      [nzValue]="item.id"></nz-option>
         </nz-select>
         <ng-template #assignCurrentUser>
@@ -137,6 +138,7 @@
             >
               <nz-option *ngFor="let item of projects"
                          [nzLabel]="item.name"
+                         [nzDisabled]="!!!item.is_active"
                          [nzValue]="item.name"></nz-option>
             </nz-select>
           </label>
@@ -149,6 +151,7 @@
             >
               <nz-option *ngFor="let item of projects_new"
                          [nzLabel]="item.name"
+                         [nzDisabled]="!!!item.is_active"
                          [nzValue]="item.name"></nz-option>
             </nz-select>
           </label>

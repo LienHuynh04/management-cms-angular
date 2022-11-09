@@ -125,7 +125,9 @@
           formControlName="team_id"
           nzAllowClear
         >
-          <nz-option *ngFor="let item of teams" [nzLabel]="$any(item.name)"
+          <nz-option *ngFor="let item of teams"
+                     [nzLabel]="$any(item.name)"
+                     [nzDisabled]="!!!item.is_active"
                      [nzValue]="$any(item?.id)"></nz-option>
         </nz-select>
         <span *ngIf="record && !record.is_active">{{getNameTeam(record.team_id)}}</span>
@@ -142,7 +144,8 @@
           formControlName="role_id"
           nzAllowClear
         >
-          <nz-option *ngFor="let item of roles" [nzLabel]="$any([roleEnum[item.name]])"
+          <nz-option *ngFor="let item of roles"
+                     [nzLabel]="$any([roleEnum[item.name]])"
                      [nzValue]="$any(item?.id)"></nz-option>
         </nz-select>
 
