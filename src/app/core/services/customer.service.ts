@@ -37,4 +37,8 @@ export class CustomerService {
       ...body
     });
   }
+
+  delete(id: number | string | undefined) {
+    return this.apiBase.delete(apiEndpoints.customer + '/' + id);
+  }
 }

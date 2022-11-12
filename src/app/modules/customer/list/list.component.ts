@@ -82,4 +82,11 @@ export class ListComponent extends BaseTable<CustomerInterface> implements OnIni
       this.isVisibleAssign = false;
     }
   }
+
+  confirm(id: number | string | undefined) {
+    this.customerService.delete(id).subscribe(() => {
+      this.processData(this.customerService.getAll({...super.processFilter()}));
+      super.confirm();
+    });
+  }
 }

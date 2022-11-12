@@ -86,7 +86,7 @@
       >
         {{col.header}}
       </th>
-      <th [nzWidth]="'150px'" nzRight></th>
+      <th [nzWidth]="'200px'" nzRight></th>
     </tr>
     </thead>
     <tbody>
@@ -126,6 +126,18 @@
                 *ngxPermissionsOnly="ROLE_CONFIG?.get('customers')"
         >
           <i nz-icon nzType="team" nzTheme="outline"></i>
+        </button>
+
+        <button nz-button
+                nzDanger
+                nzShape="circle"
+                (click)="confirmDelete(data.id)"
+                nz-tooltip
+                nzTooltipPlacement="top"
+                [nzTooltipTitle]="'Xóa'"
+                *ngxPermissionsOnly="['admin']"
+        >
+          <i nz-icon nzType="delete"></i>
         </button>
 
       </td>
