@@ -27,7 +27,7 @@ export class ListComponent extends BaseTable<StaffInterface> implements OnInit {
     public modalService: NzModalService,
     public notification: NzNotificationService,
   ) {
-    super(activatedRoute, modalService, notification);
+    super(activatedRoute, modalService, notification, authService);
   }
 
   ngOnInit(): void {

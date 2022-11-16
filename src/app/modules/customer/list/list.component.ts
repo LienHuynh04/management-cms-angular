@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { ColumnConfig, ColumnInterface, COLUMNS, CustomerInterface, StaffInterface } from '../../../core/interfaces';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { CustomerService } from '../../../core/services';
+import { AuthenticationService, CustomerService } from '../../../core/services';
 import { BaseTable } from '../../../shared/abstracts';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
@@ -27,8 +27,9 @@ export class ListComponent extends BaseTable<CustomerInterface> implements OnIni
     private customerService: CustomerService,
     public modalService: NzModalService,
     public notification: NzNotificationService,
+    public authService: AuthenticationService,
   ) {
-    super(activatedRoute, modalService, notification);
+    super(activatedRoute, modalService, notification, authService);
   }
 
   ngOnInit(): void {

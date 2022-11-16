@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ColumnConfig, ColumnInterface, COLUMNS, ProjectInterface } from '../../../core/interfaces';
 import { ActivatedRoute } from '@angular/router';
-import { ProjectService } from '../../../core/services';
+import { AuthenticationService, ProjectService } from '../../../core/services';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { SaveComponent } from '../save/save.component';
 import { BaseTable } from '../../../shared/abstracts';
@@ -23,9 +23,10 @@ export class ListComponent extends BaseTable<ProjectInterface> implements OnInit
     private projectService: ProjectService,
     public modalService: NzModalService,
     public notification: NzNotificationService,
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    public authService: AuthenticationService,
   ) {
-    super(activatedRoute, modalService, notification);
+    super(activatedRoute, modalService, notification, authService);
   }
 
   ngOnInit(): void {

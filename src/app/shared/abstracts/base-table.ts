@@ -8,6 +8,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { catchError } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ROLE_CONFIG } from 'src/app/config/role-config';
+import { AuthenticationService } from '../../core/services';
 
 export abstract class BaseTable<T> {
   ROLE_CONFIG = ROLE_CONFIG;
@@ -24,6 +25,7 @@ export abstract class BaseTable<T> {
     protected activatedRouteBase: ActivatedRoute,
     protected modalService: NzModalService,
     protected notification: NzNotificationService,
+    protected authService: AuthenticationService,
   ) {
     this.resolvedData = this.activatedRouteBase?.snapshot?.data?.resolvedData;
     this.setDataAndPagination(this.resolvedData?.data, this.resolvedData?.pagination);
@@ -85,8 +87,9 @@ export abstract class BaseTable<T> {
   }
 
   confirmDelete(id: number | string | undefined): void {
+    const isAdmin = this.authService.currentUserValue.role[0].name == 'admin'
     this.modalService.confirm({
-      nzTitle: 'Bạn có chắc chắn xóa không?',
+      nzTitle: isAdmin ? 'Bạn đang thực hiện xoá thông tin khỏi hệ thống, những thông tin liên quan cũng sẽ bị xoá.' : 'Bạn có chắc chắn xóa không?',
       nzOkText: 'Có',
       nzOkType: 'primary',
       nzOkDanger: true,

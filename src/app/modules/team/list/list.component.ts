@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ColumnConfig, ColumnInterface, COLUMNS, StaffInterface } from '../../../core/interfaces';
 import { ActivatedRoute } from '@angular/router';
-import { TeamService } from '../../../core/services';
+import { AuthenticationService, TeamService } from '../../../core/services';
 import { BaseTable } from '../../../shared/abstracts';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TeamInterface } from '../../../core/interfaces/team.interface';
@@ -16,6 +16,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 export class ListComponent extends BaseTable<TeamInterface> implements OnInit {
   cols: ColumnInterface[] = this.colums.team;
   leader: StaffInterface[] = [];
+
   constructor(
     @Inject(COLUMNS)
     public colums: ColumnConfig,
@@ -24,9 +25,10 @@ export class ListComponent extends BaseTable<TeamInterface> implements OnInit {
     private fb: FormBuilder,
     public modalService: NzModalService,
     public notification: NzNotificationService,
+    public authService: AuthenticationService,
   ) {
-    super(activatedRoute, modalService, notification);
-    this.leader =this.resolvedData.leader;
+    super(activatedRoute, modalService, notification, authService);
+    this.leader = this.resolvedData.leader;
   }
 
   ngOnInit(): void {

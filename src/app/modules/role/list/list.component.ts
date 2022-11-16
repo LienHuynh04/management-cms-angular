@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ColumnConfig, ColumnInterface, COLUMNS, IRole } from '../../../core/interfaces';
 import { ActivatedRoute } from '@angular/router';
-import { RoleService } from '../../../core/services';
+import { AuthenticationService, RoleService } from '../../../core/services';
 import { BaseTable } from '../../../shared/abstracts';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { RoleEnum } from '../../../core/enums';
@@ -23,8 +23,9 @@ export class ListComponent extends BaseTable<IRole> implements OnInit {
     private roleService: RoleService,
     public modalService: NzModalService,
     public notification: NzNotificationService,
+    public authService: AuthenticationService,
   ) {
-    super(activatedRoute, modalService, notification);
+    super(activatedRoute, modalService, notification, authService);
   }
 
   ngOnInit(): void {
