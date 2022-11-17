@@ -11,6 +11,7 @@ import { ROLE_CONFIG } from 'src/app/config/role-config';
 import { AuthenticationService } from '../../core/services';
 
 export abstract class BaseTable<T> {
+  isAdminPermissison = false;
   ROLE_CONFIG = ROLE_CONFIG;
   records: T[] = [];
   filterForm!: FormGroup;
@@ -29,6 +30,8 @@ export abstract class BaseTable<T> {
   ) {
     this.resolvedData = this.activatedRouteBase?.snapshot?.data?.resolvedData;
     this.setDataAndPagination(this.resolvedData?.data, this.resolvedData?.pagination);
+    this.isAdminPermissison = this.authService.currentUserValue.role[0].name == 'admin';
+
   }
 
 

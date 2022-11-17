@@ -107,6 +107,6 @@ export class AuthenticationService {
   clearAndLogout(): void {
     this.credentialsService.setCredentials();
     this.currentUserSubject.next(null);
-    location.href = '/login'
+    location.href = '/login';
   }
 }

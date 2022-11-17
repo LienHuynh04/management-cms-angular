@@ -80,7 +80,7 @@
         >
           <i nz-icon nzType="edit" nzTheme="outline"></i>
         </button>
-        <ng-container *ngIf="data.is_active">
+        <ng-container *ngIf="data.is_active || isAdminPermissison">
           <button nz-button nzShape="circle" nzDanger
                   (click)="confirmDelete(data.id)"
                   nz-tooltip

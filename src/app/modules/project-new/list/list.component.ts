@@ -15,7 +15,6 @@ import { SaveComponent } from '../../project/save/save.component';
 })
 export class ListComponent extends BaseTable<ProjectInterface> implements OnInit {
   cols: ColumnInterface[] = this.colums.project;
-
   constructor(
     @Inject(COLUMNS)
     public colums: ColumnConfig,
