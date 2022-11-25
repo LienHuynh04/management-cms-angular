@@ -14,7 +14,7 @@ import { SaveComponent } from '../../project/save/save.component';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent extends BaseTable<ProjectInterface> implements OnInit {
-  cols: ColumnInterface[] = this.colums.project;
+  cols: ColumnInterface[] = this.colums.project_new;
   constructor(
     @Inject(COLUMNS)
     public colums: ColumnConfig,

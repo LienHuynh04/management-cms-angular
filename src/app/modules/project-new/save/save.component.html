@@ -70,6 +70,30 @@
       </nz-form-control>
     </nz-form-item>
 
+    <!--Hoa hồng -->
+    <nz-form-item>
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="bonus">Hoa hồng Sale</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
+        <input nz-input formControlName="bonus" id="bonus" type="number"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <!--Tình trạng-->
+    <nz-form-item>
+      <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="status">Tình trạng</nz-form-label>
+      <nz-form-control [nzMd]="12" [nzXs]="24">
+
+        <nz-select
+          nzPlaceHolder="Vui lòng chọn"
+          formControlName="status"
+          nzAllowClear
+        >
+          <nz-option [nzLabel]="'Đang giao dịch'" [nzValue]="'Đang giao dịch'"></nz-option>
+          <nz-option [nzLabel]="'Chưa giao dịch'" [nzValue]="'Chưa giao dịch'"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
     <!--description-->
     <nz-form-item>
       <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="description">Ghi chú</nz-form-label>

@@ -75,6 +75,50 @@ export const column: ColumnConfig = {
       }
     }
   ],
+  project_new: [
+    {
+      header: 'STT',
+      field: 'stt',
+      style: {
+        width: '100px'
+      }
+    },
+    {
+      header: 'Tên',
+      field: 'name',
+      style: {
+        width: '400px'
+      }
+    },
+    {
+      header: 'Giá bán',
+      field: 'price',
+      style: {
+        width: '200px'
+      }
+    },
+    {
+      header: 'Hoa hồng Sale',
+      field: 'bonus',
+      style: {
+        width: '200px'
+      }
+    },
+    {
+      header: 'Tình trạng',
+      field: 'status',
+      style: {
+        width: '200px'
+      }
+    },
+    {
+      header: 'Ghi chú',
+      field: 'description',
+      style: {
+        width: '400px'
+      }
+    }
+  ],
   role: [
     {
       header: 'STT',
