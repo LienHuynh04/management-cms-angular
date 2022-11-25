@@ -30,6 +30,9 @@ export class ListResolver implements Resolve<boolean> {
       ]
     ).pipe(
       map(resp => {
+        if(resp[1].data?.customer_project.type) {
+          return this.router.navigate(['customers'])
+        }
         return {
           data: resp[0].data,
           pagination: resp[0].pagination,

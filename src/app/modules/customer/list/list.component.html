@@ -117,16 +117,18 @@
           <i nz-icon nzType="gold" nzTheme="outline"></i>
         </button>
 
-        <button nz-button
-                nzType="default" nzShape="circle"
-                [routerLink]="['/care', data.id]"
-                nz-tooltip
-                nzTooltipPlacement="top"
-                [nzTooltipTitle]="'Danh sách những lần chăm sóc'"
-                *ngxPermissionsOnly="ROLE_CONFIG?.get('customers')"
-        >
-          <i nz-icon nzType="team" nzTheme="outline"></i>
-        </button>
+        <ng-container *ngIf="!data?.customer_project.type">
+          <button nz-button
+                  nzType="default" nzShape="circle"
+                  [routerLink]="['/care', data.id]"
+                  nz-tooltip
+                  nzTooltipPlacement="top"
+                  [nzTooltipTitle]="'Danh sách những lần chăm sóc'"
+                  *ngxPermissionsOnly="ROLE_CONFIG?.get('customers')"
+          >
+            <i nz-icon nzType="team" nzTheme="outline"></i>
+          </button>
+        </ng-container>
 
         <button nz-button
                 nzDanger

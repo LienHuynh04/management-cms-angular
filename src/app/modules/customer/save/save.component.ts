@@ -15,7 +15,7 @@ import { format } from 'date-fns';
   styleUrls: ['./save.component.scss']
 })
 export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit {
-  radioProject = true;
+  radioProject = false;
   projects!: ProjectInterface[];
   projects_new!: ProjectInterface[];
   users !: StaffInterface[];
@@ -58,7 +58,7 @@ export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit
       note: [null],
       result: [null],
       customer_project: [],
-      created_day: ['', [Validators.required]],
+      created_day: [new Date(), [Validators.required]],
     });
 
     const isRole = ['sales'].includes(this.authService.currentUserValue.role[0].name);
