@@ -117,7 +117,7 @@
           <i nz-icon nzType="gold" nzTheme="outline"></i>
         </button>
 
-        <ng-container *ngIf="!data?.customer_project.type">
+        <ng-container *ngIf="!data?.customer_project?.type">
           <button nz-button
                   nzType="default" nzShape="circle"
                   [routerLink]="['/care', data.id]"

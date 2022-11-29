@@ -78,7 +78,12 @@
     <nz-form-item>
       <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="bonus">Hoa hồng Sale</nz-form-label>
       <nz-form-control [nzMd]="12" [nzXs]="24">
-        <input nz-input formControlName="bonus" id="bonus" type="number"/>
+        <input nz-input formControlName="bonus" id="bonus"
+               mask="separator.0"
+               [specialCharacters]="[ '[' ,']' , ' ' ]"
+               thousandSeparator="."
+               type="text"
+        />
       </nz-form-control>
     </nz-form-item>
 

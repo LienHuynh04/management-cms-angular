@@ -25,9 +25,9 @@ export class ListResolver implements Resolve<boolean> {
     })]).pipe(
       map(res => {
         return {
-          data: res[0].data,
-          pagination: res[0].pagination,
-          staff: res[1].data
+          data: res[0]?.data,
+          pagination: res[0]?.pagination,
+          staff: res[1]?.data
         };
       })
     );

@@ -34,7 +34,7 @@ export class ListComponent extends BaseTable<CustomerInterface> implements OnIni
 
   ngOnInit(): void {
     this.initFormFilter();
-    this.staff = this.resolvedData.staff;
+    this.staff = this.resolvedData?.staff;
   }
 
   initFormFilter(): FormGroup {
@@ -58,7 +58,7 @@ export class ListComponent extends BaseTable<CustomerInterface> implements OnIni
   openModalAssign(customer: CustomerInterface) {
     this.isVisibleAssign = true;
     this.customer = {...customer};
-    this.staffControl.patchValue(customer.assign_for_user.id);
+    this.staffControl.patchValue(customer?.assign_for_user.id);
   }
 
   assignStaff() {
