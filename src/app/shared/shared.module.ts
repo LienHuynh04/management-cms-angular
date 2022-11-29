@@ -21,7 +21,9 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { ValueColumnPipe } from './pipes/value-column.pipe';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
+export const options: Partial<null|IConfig> | (() => Partial<IConfig>) | any = null;
 const ANTD = [
   NzGridModule,
   NzLayoutModule,
@@ -51,7 +53,8 @@ const PIPES = [
   imports: [
     CommonModule,
     NgxPermissionsModule,
-    ...ANTD
+    ...ANTD,
+    NgxMaskModule.forRoot(),
   ],
   exports: [
     ControlErrorsComponent,

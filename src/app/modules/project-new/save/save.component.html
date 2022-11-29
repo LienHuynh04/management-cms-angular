@@ -47,7 +47,9 @@
     <nz-form-item>
       <nz-form-label [nzMd]="6" [nzXs]="24" nzFor="price" nzRequired>Tiền</nz-form-label>
       <nz-form-control [nzMd]="12" [nzXs]="24">
-        <input *ngIf="!record || (record && record.is_active)" nz-input formControlName="price" id="price"
+        <input *ngIf="!record || (record && record.is_active)" nz-input
+               formControlName="price" id="price"
+               [mask]="'dot_separator'"
                type="number"/>
         <span *ngIf="record && !record.is_active">{{record.price}}</span>
 

@@ -5,6 +5,7 @@ import { ProjectNewRoutingModule } from './project-new-routing.module';
 import { ListComponent } from './list/list.component';
 import { SaveComponent } from './save/save.component';
 import { SharedModule } from '../../shared/shared.module';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { SharedModule } from '../../shared/shared.module';
   imports: [
     CommonModule,
     ProjectNewRoutingModule,
-    SharedModule
+    SharedModule,
+    NgxMaskModule
   ]
 })
 export class ProjectNewModule {
