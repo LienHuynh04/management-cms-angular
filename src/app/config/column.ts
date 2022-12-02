@@ -19,6 +19,10 @@ export const column: ColumnConfig = {
       field: 'email'
     },
     {
+      header: 'Nhân viên phụ trách',
+      field: 'assign_for_user',
+    },
+    {
       header: 'Ghi chú dự án',
       field: 'project_note'
     },

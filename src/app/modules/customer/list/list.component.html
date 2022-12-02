@@ -92,7 +92,12 @@
     <tbody>
     <tr *ngFor="let data of basicTable.data">
       <td *ngFor="let col of cols;">
-        {{ data[col?.field] }}
+        <p *ngIf="col.field !== 'assign_for_user'; else assignStaffTemplate">
+          {{ data[col?.field] }}
+        </p>
+        <ng-template #assignStaffTemplate>
+          {{data[col?.field]['full_name']}} - {{data[col?.field]['login_id']}}
+        </ng-template>
       </td>
       <td style="text-align: center" nzRight>
         <button nz-button
