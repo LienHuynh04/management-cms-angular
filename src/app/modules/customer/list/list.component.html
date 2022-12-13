@@ -1,54 +1,18 @@
 <!--Filter-->
-<nz-card nzTitle="Tìm kiếm" [nzExtra]="extraTemplate" style="margin-bottom: 15px">
-  <form nz-form nzLayout="vertical" [formGroup]="filterForm">
+<nz-card nzTitle="Danh sách khách hàng" [nzExtra]="extraTemplate" style="margin-bottom: 15px">
+  <form nz-form nzLayout="vertical"
+        [formGroup]="filterForm"
+        (keydown.enter)="$event.preventDefault()">
     <!--CONTROLS-->
     <div nz-row [nzGutter]="24">
       <div nz-col [nzMd]="12" [nzXs]="24">
         <nz-form-item>
-          <nz-form-label [nzFor]="'full_name'">Tên</nz-form-label>
+          <nz-form-label [nzFor]="'search'">Tìm kiếm</nz-form-label>
           <nz-form-control>
             <input
               nz-input
-              formControlName="full_name"
-            />
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-
-      <!--Search sdt-->
-      <div nz-col [nzMd]="12" [nzXs]="24">
-        <nz-form-item>
-          <nz-form-label [nzFor]="'phone_number'">Số điện thoại</nz-form-label>
-          <nz-form-control>
-            <input
-              nz-input
-              formControlName="phone_number"
-            />
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-
-      <!--Search địa chỉ-->
-      <div nz-col [nzMd]="12" [nzXs]="24">
-        <nz-form-item>
-          <nz-form-label [nzFor]="'address'">Địa chỉ</nz-form-label>
-          <nz-form-control>
-            <input
-              nz-input
-              formControlName="address"
-            />
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-
-      <!--Search email-->
-      <div nz-col [nzMd]="12" [nzXs]="24">
-        <nz-form-item>
-          <nz-form-label [nzFor]="'email'">Email</nz-form-label>
-          <nz-form-control>
-            <input
-              nz-input
-              formControlName="email"
+              (keyup.enter)="onSearch()"
+              formControlName="search"
             />
           </nz-form-control>
         </nz-form-item>
@@ -66,6 +30,27 @@
 </nz-card>
 
 <nz-card>
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzMd]="12" [nzXs]="24">
+      <nz-form-item>
+        <nz-form-label
+          [nzSpan]="24"
+          [nzFor]="'result'">Trạng thái
+        </nz-form-label>
+        <nz-form-control [nzSpan]="24">
+          <nz-select id="result" nzShowSearch nzAllowClear nzPlaceHolder="Select a person"
+                     [formControl]="resultControl">
+            <nz-option nzLabel="Tất cả" nzValue=""></nz-option>
+            <nz-option *ngFor="let value of keys(resultSelect)"
+                       [nzLabel]="resultSelect[value]"
+                       [nzValue]="value"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+
+
   <nz-table
     #basicTable
     [nzBordered]="true"
@@ -92,12 +77,17 @@
     <tbody>
     <tr *ngFor="let data of basicTable.data">
       <td *ngFor="let col of cols;">
-        <p *ngIf="col.field !== 'assign_for_user'; else assignStaffTemplate">
-          {{ data[col?.field] }}
-        </p>
-        <ng-template #assignStaffTemplate>
-          {{data[col?.field]['full_name']}} - {{data[col?.field]['login_id']}}
-        </ng-template>
+        <ng-container [ngSwitch]="col.field">
+          <p *ngSwitchCase="'assign_for_user'">
+            {{data[col?.field]['full_name']}} - {{data[col?.field]['login_id']}}
+          </p>
+          <p *ngSwitchCase="'customer_project'">
+            {{data[col?.field] ? data[col?.field]['name'] : ''}}
+          </p>
+          <p *ngSwitchDefault>
+            {{ data[col?.field] || ''}}
+          </p>
+        </ng-container>
       </td>
       <td style="text-align: center" nzRight>
         <button nz-button

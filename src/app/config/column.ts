@@ -3,7 +3,19 @@ import { ColumnConfig } from '../core/interfaces';
 export const column: ColumnConfig = {
   customer: [
     {
-      header: 'Tên',
+      header: 'Ngày tạo',
+      field: 'created_at'
+    },
+    {
+      header: 'Nhân viên phụ trách',
+      field: 'assign_for_user',
+    },
+    {
+      header: 'Tên dự án',
+      field: 'customer_project'
+    },
+    {
+      header: 'Tên khách hàng',
       field: 'full_name'
     },
     {
@@ -11,33 +23,21 @@ export const column: ColumnConfig = {
       field: 'phone_number'
     },
     {
-      header: 'Địa chỉ',
-      field: 'address'
-    },
-    {
       header: 'Email',
       field: 'email'
     },
-    {
-      header: 'Nhân viên phụ trách',
-      field: 'assign_for_user',
-    },
-    {
-      header: 'Ghi chú dự án',
-      field: 'project_note'
-    },
-    {
-      header: 'Ghi chú',
-      field: 'note'
-    },
-    {
-      header: 'Ngày tạo',
-      field: 'created_at'
-    },
-    {
-      header: 'Ngày cập nhật',
-      field: 'updated_at'
-    },
+    // {
+    //   header: 'Ghi chú dự án',
+    //   field: 'project_note'
+    // },
+    // {
+    //   header: 'Ghi chú',
+    //   field: 'note'
+    // },
+    // {
+    //   header: 'Ngày cập nhật',
+    //   field: 'updated_at'
+    // },
   ],
   staff: [
     {

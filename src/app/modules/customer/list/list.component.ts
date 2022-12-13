@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit } from '@angular/core';
 import { ColumnConfig, ColumnInterface, COLUMNS, CustomerInterface, StaffInterface } from '../../../core/interfaces';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
@@ -6,19 +6,22 @@ import { AuthenticationService, CustomerService } from '../../../core/services';
 import { BaseTable } from '../../../shared/abstracts';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { ResultEnum } from '../../../core/enums';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent extends BaseTable<CustomerInterface> implements OnInit {
+export class ListComponent extends BaseTable<CustomerInterface> implements OnInit, AfterViewInit {
   isVisibleAssign = false;
   cols: ColumnInterface[] = this.colums.customer;
   staff: StaffInterface[] = [];
   staffControl = new FormControl('');
   customer !: CustomerInterface;
-
+  keys = Object.keys;
+  resultSelect = ResultEnum
+  resultControl = new FormControl('')
   constructor(
     @Inject(COLUMNS)
     public colums: ColumnConfig,
@@ -39,10 +42,7 @@ export class ListComponent extends BaseTable<CustomerInterface> implements OnIni
 
   initFormFilter(): FormGroup {
     this.filterForm = this.fb.group({
-      full_name: [null],
-      phone_number: [null],
-      address: [null],
-      email: [null]
+      search: [null]
     });
     return this.filterForm;
   }
@@ -51,7 +51,10 @@ export class ListComponent extends BaseTable<CustomerInterface> implements OnIni
    * Call api to get list
    */
   fetchData(): void {
-    const request = this.customerService.getAll(super.processFilter());
+    const request = this.customerService.getAll({
+      ...super.processFilter(),
+     'filter[result]': this.resultControl.value
+    });
     this.processData(request);
   }
 
@@ -86,8 +89,17 @@ export class ListComponent extends BaseTable<CustomerInterface> implements OnIni
 
   confirm(id: number | string | undefined) {
     this.customerService.delete(id).subscribe(() => {
-      this.processData(this.customerService.getAll({...super.processFilter()}));
+      this.processData(this.customerService.getAll({
+        ...super.processFilter(),
+        'filter[result]': this.resultControl.value
+      }));
       super.confirm();
     });
+  }
+
+  ngAfterViewInit(): void {
+   this.resultControl.valueChanges.subscribe(_ => {
+     this.fetchData()
+   })
   }
 }

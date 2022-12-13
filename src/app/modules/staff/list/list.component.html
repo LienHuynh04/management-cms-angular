@@ -1,41 +1,17 @@
 <!--Filter-->
-<nz-card nzTitle="Tìm kiếm" [nzExtra]="extraTemplate" style="margin-bottom: 15px">
+<nz-card nzTitle="Danh sách nhân viên" [nzExtra]="extraTemplate" style="margin-bottom: 15px"
+         (keydown.enter)="$event.preventDefault()">
   <form nz-form nzLayout="vertical" [formGroup]="filterForm">
     <!--CONTROLS-->
     <div nz-row [nzGutter]="24">
       <div nz-col [nzMd]="12" [nzXs]="24">
         <nz-form-item>
-          <nz-form-label [nzFor]="'login_id'">Login ID</nz-form-label>
+          <nz-form-label [nzFor]="'search'">Tìm kiếm</nz-form-label>
           <nz-form-control>
             <input
               nz-input
-              formControlName="login_id"
-            />
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-      <!--Search email-->
-      <div nz-col [nzMd]="12" [nzXs]="24">
-        <nz-form-item>
-          <nz-form-label [nzFor]="'email'">Email</nz-form-label>
-          <nz-form-control>
-            <input
-              nz-input
-              formControlName="email"
-            />
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-    </div>
-
-    <div nz-row [nzGutter]="24">
-      <div nz-col [nzMd]="12" [nzXs]="24">
-        <nz-form-item>
-          <nz-form-label [nzFor]="'full_name'">Tên</nz-form-label>
-          <nz-form-control>
-            <input
-              nz-input
-              formControlName="full_name"
+              formControlName="search"
+              (keyup.enter)="onSearch()"
             />
           </nz-form-control>
         </nz-form-item>
@@ -76,7 +52,9 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let data of basicTable.data">
+    <tr *ngFor="let data of basicTable.data"
+        style="cursor: pointer"
+        (click)="getDataCustomer(data.id); $event.stopPropagation()">
       <td *ngFor="let col of cols;">
         {{
         col.slot == 'role'
@@ -92,6 +70,7 @@
                   nzType="primary" nzShape="circle"
                   style="margin-right: 5px"
                   [routerLink]="['update', data.id]"
+                  (click)="$event.stopPropagation()"
                   nz-tooltip
                   nzTooltipPlacement="top"
                   [nzTooltipTitle]="'Sửa'"
@@ -102,7 +81,7 @@
             <button nz-button nzShape="circle"
                     *ngxPermissionsOnly="ROLE_CONFIG.get('staff')"
                     nzDanger
-                    (click)="confirmDelete(data.id)"
+                    (click)="confirmDelete(data.id); $event.stopPropagation()"
                     nz-tooltip
                     nzTooltipPlacement="top"
                     [nzTooltipTitle]="'Xóa'"
@@ -130,3 +109,51 @@
     Tạo mới
   </button>
 </ng-template>
+
+<nz-modal [(nzVisible)]="isModalCustomer"
+          (nzOnCancel)="handleCancel()"
+          [nzFooter]="modalFooter"
+          nzCentered
+          [nzWidth]="customerList.length ? '80vw' : '20vw'"
+          nzTitle="Danh sách khách hàng">
+  <ng-container *nzModalContent>
+    <p  *ngIf="!customerList.length">Không có thông tin khách hàng</p>
+    <nz-table #basicTable
+              *ngIf="customerList.length"
+              [nzData]="customerList"
+              [nzPageSize]="50"
+              [nzScroll]="{ x:'1204px', y: '50vh' }"
+              [nzShowPagination]="false">
+      <thead>
+      <tr>
+        <th
+          *ngFor="let col of colsCustomer"
+          [nzWidth]="col.style?.width"
+        >
+          {{col.header}}
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td *ngFor="let col of colsCustomer;">
+          <ng-container [ngSwitch]="col.field">
+            <p *ngSwitchCase="'assign_for_user'">
+              {{data[col?.field]['full_name']}} - {{data[col?.field]['login_id']}}
+            </p>
+            <p *ngSwitchCase="'customer_project'">
+              {{data[col?.field] ? data[col?.field]['name'] : ''}}
+            </p>
+            <p *ngSwitchDefault>
+              {{ data[col?.field] || ''}}
+            </p>
+          </ng-container>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </ng-container>
+  <ng-template #modalFooter>
+    <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
+  </ng-template>
+</nz-modal>

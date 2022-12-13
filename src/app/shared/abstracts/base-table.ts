@@ -1,4 +1,4 @@
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { IPaginateList, IPagination } from '../../core/interfaces';
 import { ActivatedRoute } from '@angular/router';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';

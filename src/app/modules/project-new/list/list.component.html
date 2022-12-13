@@ -1,5 +1,8 @@
 <!--Filter-->
-<nz-card nzTitle="Tìm kiếm" [nzExtra]="extraTemplate" style="margin-bottom: 15px">
+<nz-card nzTitle="Danh sách sản phẩm chuyển nhượng"
+         [nzExtra]="extraTemplate" style="margin-bottom: 15px"
+         (keydown.enter)="$event.preventDefault()"
+>
   <form nz-form nzLayout="vertical" [formGroup]="filterForm">
     <!--CONTROLS-->
     <div nz-row [nzGutter]="24">
@@ -10,6 +13,7 @@
             <input
               nz-input
               formControlName="name"
+              (keyup.enter)="onSearch()"
             />
           </nz-form-control>
         </nz-form-item>

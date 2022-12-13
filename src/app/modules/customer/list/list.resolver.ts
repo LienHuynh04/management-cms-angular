@@ -20,8 +20,10 @@ export class ListResolver implements Resolve<boolean> {
     state: RouterStateSnapshot)
     : Observable<IPaginateList<CustomerInterface>> | boolean | any {
 
-    return forkJoin([this.customerService.getAll(), this.staffService.getAll({
-      'filter[sales] ': 1
+    return forkJoin([this.customerService.getAll({
+      'filter[result]': ''
+    }), this.staffService.getAll({
+      'filter[sales] ': 1,
     })]).pipe(
       map(res => {
         return {
