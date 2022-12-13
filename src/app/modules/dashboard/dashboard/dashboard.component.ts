@@ -1,12 +1,11 @@
 import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ChartInterface, COLOR_CHART, ColorChartConfig, OPTION_CHART, OptionChartConfig } from '../../../core/interfaces';
 import { BaseChartDirective } from 'ng2-charts';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { FormControl } from '@angular/forms';
 import { DashboardService } from '../../../core/services/dashboard.service';
 import { drawChart } from './draw-chart';
-import { ROLE_CONFIG } from '../../../config/role-config';
 
 @Component({
   selector: 'app-dashboard',
@@ -35,7 +34,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     public colorChart: ColorChartConfig,
     private activatedRoute: ActivatedRoute,
     private permissionService: NgxPermissionsService,
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    private router: Router
   ) {
     const resolvedData = this.activatedRoute.snapshot.data.resolvedData;
     this.record = resolvedData.data;
@@ -89,7 +89,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           labels: {
             usePointStyle: true,
           },
-        }
+        },
+        onClick: (event: any, item: any) => {
+          this.redirectCustomer(item[0]._index, this.record?.get_general_summary.detail);
+        },
       };
 
       this.generalSummaryChart = drawChart(
@@ -110,7 +113,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         legend: {
           display: true,
           position: 'bottom'
-        }
+        },
+        // onClick: (event: any, item: any) => {
+        //   this.redirectCustomer(item[0]._index, this.record?.get_statistic_for_team.detail);
+        // },
       };
 
       this.teamChart = drawChart(
@@ -133,8 +139,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           position: 'bottom',
           labels: {
             usePointStyle: true,
-          },
-        }
+          }
+        },
+        // onClick: (event: any, item: any) => {
+        //   this.redirectCustomer(item[0]._index, this.record?.get_statistic_number_care.detail);
+        // },
       };
 
       this.careChart = drawChart(
@@ -154,7 +163,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         legend: {
           display: true,
           position: 'bottom'
-        }
+        },
+        // onClick: (event: any, item: any) => {
+        //   this.redirectCustomer(item[0]._index, this.record?.get_statistic_for_department.detail);
+        // },
       };
 
       this.departmentChart = drawChart(
@@ -183,5 +195,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.selectDepartmentControl.valueChanges.subscribe(value => {
       this.getDepartmentAdmin();
     });
+  }
+
+  redirectCustomer(id: number, data: any) {
+    const value =  Object.keys(data).sort().find((k, index) => index + 1 == id) || '';
+    this.router.navigate(['customers'], {
+     queryParams: {
+       filter: value
+     }
+   })
   }
 }

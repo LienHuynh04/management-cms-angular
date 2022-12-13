@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Inject, OnInit } from '@angular/core';
 import { ColumnConfig, ColumnInterface, COLUMNS, CustomerInterface, StaffInterface } from '../../../core/interfaces';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AuthenticationService, CustomerService } from '../../../core/services';
 import { BaseTable } from '../../../shared/abstracts';
@@ -31,8 +31,15 @@ export class ListComponent extends BaseTable<CustomerInterface> implements OnIni
     public modalService: NzModalService,
     public notification: NzNotificationService,
     public authService: AuthenticationService,
+    public router: Router
   ) {
     super(activatedRoute, modalService, notification, authService);
+    this.resultControl.patchValue(this.activatedRoute.snapshot.queryParams.filter || '');
+    this.activatedRoute.queryParams.subscribe((params) => {
+      if (!Object.keys(params).length) {
+        this.resultControl.patchValue('');
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -56,6 +63,7 @@ export class ListComponent extends BaseTable<CustomerInterface> implements OnIni
      'filter[result]': this.resultControl.value
     });
     this.processData(request);
+    history.pushState({}, '', location.href.split('?')[0]);
   }
 
   openModalAssign(customer: CustomerInterface) {
@@ -99,7 +107,7 @@ export class ListComponent extends BaseTable<CustomerInterface> implements OnIni
 
   ngAfterViewInit(): void {
    this.resultControl.valueChanges.subscribe(_ => {
-     this.fetchData()
+     this.fetchData();
    })
   }
 }
