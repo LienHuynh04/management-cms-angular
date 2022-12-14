@@ -34,12 +34,6 @@ export class ListComponent extends BaseTable<CustomerInterface> implements OnIni
     public router: Router
   ) {
     super(activatedRoute, modalService, notification, authService);
-    this.resultControl.patchValue(this.activatedRoute.snapshot.queryParams.filter || '');
-    this.activatedRoute.queryParams.subscribe((params) => {
-      if (!Object.keys(params).length) {
-        this.resultControl.patchValue('');
-      }
-    });
   }
 
   ngOnInit(): void {

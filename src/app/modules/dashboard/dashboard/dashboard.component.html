@@ -160,3 +160,52 @@
                [nzValue]="team.id" [nzLabel]="team.name"></nz-option>
   </nz-select>
 </ng-template>
+
+
+<nz-modal [(nzVisible)]="isModalCustomer"
+          (nzOnCancel)="handleCancel()"
+          [nzFooter]="modalFooter"
+          nzCentered
+          [nzWidth]="customerList.length ? '80vw' : '20vw'"
+          nzTitle="Danh sách khách hàng">
+  <ng-container *nzModalContent>
+    <p  *ngIf="!customerList.length">Không có thông tin khách hàng</p>
+    <nz-table #basicTable
+              *ngIf="customerList.length"
+              [nzData]="customerList"
+              [nzPageSize]="50"
+              [nzScroll]="{ x:'1204px', y: '50vh' }"
+              [nzShowPagination]="false">
+      <thead>
+      <tr>
+        <th
+          *ngFor="let col of colsCustomer"
+          [nzWidth]="col.style?.width"
+        >
+          {{col.header}}
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td *ngFor="let col of colsCustomer;">
+          <ng-container [ngSwitch]="col.field">
+            <p *ngSwitchCase="'assign_for_user'">
+              {{data[col?.field]['full_name']}} - {{data[col?.field]['login_id']}}
+            </p>
+            <p *ngSwitchCase="'customer_project'">
+              {{data[col?.field] ? data[col?.field]['name'] : ''}}
+            </p>
+            <p *ngSwitchDefault>
+              {{ data[col?.field] || ''}}
+            </p>
+          </ng-container>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </ng-container>
+  <ng-template #modalFooter>
+    <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
+  </ng-template>
+</nz-modal>

@@ -19,10 +19,7 @@ export class ListResolver implements Resolve<boolean> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot)
     : Observable<IPaginateList<CustomerInterface>> | boolean | any {
-    const paramFilter = route.queryParams.filter;
-    return forkJoin([this.customerService.getAll({
-      'filter[result]': paramFilter || ''
-    }), this.staffService.getAll({
+    return forkJoin([this.customerService.getAll(), this.staffService.getAll({
       'filter[sales] ': 1,
     })]).pipe(
       map(res => {

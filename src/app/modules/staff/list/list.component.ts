@@ -28,7 +28,7 @@ export class ListComponent extends BaseTable<StaffInterface> implements OnInit {
     private fb: FormBuilder,
     public modalService: NzModalService,
     public notification: NzNotificationService,
-    protected customerService: CustomerService
+    public customerService: CustomerService
   ) {
     super(activatedRoute, modalService, notification, authService);
   }

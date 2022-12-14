@@ -1,11 +1,19 @@
 import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ChartInterface, COLOR_CHART, ColorChartConfig, OPTION_CHART, OptionChartConfig } from '../../../core/interfaces';
+import {
+  ChartInterface,
+  COLOR_CHART,
+  ColorChartConfig, ColumnConfig, ColumnInterface, COLUMNS, CustomerInterface,
+  OPTION_CHART,
+  OptionChartConfig
+} from '../../../core/interfaces';
 import { BaseChartDirective } from 'ng2-charts';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { FormControl } from '@angular/forms';
 import { DashboardService } from '../../../core/services/dashboard.service';
 import { drawChart } from './draw-chart';
+import { ResultEnum } from '../../../core/enums';
+import { CustomerService } from '../../../core/services';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,6 +21,9 @@ import { drawChart } from './draw-chart';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
+  isModalCustomer = false;
+  customerList: CustomerInterface[] = [];
+  colsCustomer: ColumnInterface[] = this.colums.customer;
   @ViewChild('summaryBaseChart') summaryBaseChart!: BaseChartDirective | any;
   @ViewChild('careBaseChart') careBaseChart!: BaseChartDirective | any;
   @ViewChild('teamBaseChart') teamBaseChart!: BaseChartDirective | any;
@@ -28,6 +39,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   selectDepartmentControl = new FormControl();
 
   constructor(
+    @Inject(COLUMNS)
+    public colums: ColumnConfig,
     @Inject(OPTION_CHART)
     public optionsChart: OptionChartConfig,
     @Inject(COLOR_CHART)
@@ -35,7 +48,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     private activatedRoute: ActivatedRoute,
     private permissionService: NgxPermissionsService,
     private dashboardService: DashboardService,
-    private router: Router
+    public customerService: CustomerService,
+    public router: Router
   ) {
     const resolvedData = this.activatedRoute.snapshot.data.resolvedData;
     this.record = resolvedData.data;
@@ -91,7 +105,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           },
         },
         onClick: (event: any, item: any) => {
-          this.redirectCustomer(item[0]._index, this.record?.get_general_summary.detail);
+        // , item[0]._model.label,'filter[result]'
+          this.getDataCustomer('general', item[0]._model.label);
         },
       };
 
@@ -114,9 +129,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           display: true,
           position: 'bottom'
         },
-        // onClick: (event: any, item: any) => {
-        //   this.redirectCustomer(item[0]._index, this.record?.get_statistic_for_team.detail);
-        // },
+        onClick: (event: any, item: any) => {
+          this.getDataCustomer('statistic_for_team', item[0]._model.label);
+        }
       };
 
       this.teamChart = drawChart(
@@ -141,9 +156,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
             usePointStyle: true,
           }
         },
-        // onClick: (event: any, item: any) => {
-        //   this.redirectCustomer(item[0]._index, this.record?.get_statistic_number_care.detail);
-        // },
+        onClick: (event: any, item: any) => {
+          this.getDataCustomer('statistic_number_care', item[0]._model.label);
+        },
       };
 
       this.careChart = drawChart(
@@ -164,9 +179,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           display: true,
           position: 'bottom'
         },
-        // onClick: (event: any, item: any) => {
-        //   this.redirectCustomer(item[0]._index, this.record?.get_statistic_for_department.detail);
-        // },
+        onClick: (event: any, item: any) => {
+          this.getDataCustomer('statistic_for_department', item[0]._model.label);
+        },
       };
 
       this.departmentChart = drawChart(
@@ -197,12 +212,51 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     });
   }
 
-  redirectCustomer(id: number, data: any) {
-    const value =  Object.keys(data).sort().find((k, index) => index + 1 == id) || '';
-    this.router.navigate(['customers'], {
-     queryParams: {
-       filter: value
-     }
-   })
+
+  getDataCustomer(nameChart = '', label = '') {
+    const resultEnum: any = ResultEnum
+    const value = Object.keys(resultEnum).find(k => resultEnum[k] === label);
+    console.log('label', label);
+    console.log(value);
+    let  param: any;
+    switch (nameChart) {
+      case 'general' : {
+        param = {
+          'filter[result]': value
+        }
+        break;
+      }
+      case 'statistic_for_team': {
+        param = {
+          'filter[result]': value,
+          'filter[team_id]': this.selectTeamControl.value
+        }
+        break
+      }
+      case 'statistic_number_care' :{
+        param = {
+          'filter[number_of_times_care]': label,
+        }
+        break
+      }
+      case 'statistic_for_department' :{
+        this.router.navigate(['customers'])
+        break
+      }
+    }
+
+    this.customerService.getAll({
+      page: 0,
+      per_page: 0,
+      ...param
+    }).subscribe((res) => {
+      this.isModalCustomer = true;
+      this.customerList = res.data;
+      console.log(this.customerList);
+    })
+  }
+  handleCancel() {
+    this.customerList = [];
+    this.isModalCustomer = false;
   }
 }
