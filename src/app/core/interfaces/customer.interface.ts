@@ -9,7 +9,7 @@ export interface CustomerInterface {
     id: number,
     full_name: string
   };
-  project_note: string;
+  project_note?: string;
   note: string;
   result: string;
   type_project?: string;

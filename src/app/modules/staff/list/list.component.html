@@ -53,8 +53,8 @@
     </thead>
     <tbody>
     <tr *ngFor="let data of basicTable.data"
-        style="cursor: pointer"
-        (click)="getDataCustomer(data.id); $event.stopPropagation()">
+        [ngClass]="{'cursor-point' : isAdmin}"
+        (click)="(isAdmin ? getDataCustomer(data.id) : $event.preventDefault()); $event.stopPropagation()">
       <td *ngFor="let col of cols;">
         {{
         col.slot == 'role'
@@ -114,7 +114,7 @@
           (nzOnCancel)="handleCancel()"
           [nzFooter]="modalFooter"
           nzCentered
-          [nzWidth]="customerList.length ? '80vw' : '20vw'"
+          [nzWidth]="customerList.length ? '80vw' : '50vw'"
           nzTitle="Danh sách khách hàng">
   <ng-container *nzModalContent>
     <p  *ngIf="!customerList.length">Không có thông tin khách hàng</p>

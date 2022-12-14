@@ -54,7 +54,6 @@ export class SaveComponent extends BaseForm<CustomerInterface> implements OnInit
           : this.authService.currentUserValue.id
         ,
         [Validators.required]],
-      project_note: [null],
       note: [null],
       result: [null],
       customer_project: [],

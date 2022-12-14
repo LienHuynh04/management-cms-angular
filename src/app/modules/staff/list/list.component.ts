@@ -19,6 +19,7 @@ export class ListComponent extends BaseTable<StaffInterface> implements OnInit {
   customerList: CustomerInterface[] = [];
   isModalCustomer = false;
   colsCustomer: ColumnInterface[] = this.colums.customer;
+  isAdmin = false;
   constructor(
     @Inject(COLUMNS)
     public colums: ColumnConfig,
@@ -35,6 +36,7 @@ export class ListComponent extends BaseTable<StaffInterface> implements OnInit {
 
   ngOnInit(): void {
     this.initFormFilter();
+    this.isAdmin = !!this.authService.currentUserValue.role[0].name;
   }
 
   initFormFilter(): FormGroup {
