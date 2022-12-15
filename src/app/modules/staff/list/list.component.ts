@@ -36,7 +36,7 @@ export class ListComponent extends BaseTable<StaffInterface> implements OnInit {
 
   ngOnInit(): void {
     this.initFormFilter();
-    this.isAdmin = !!this.authService.currentUserValue.role[0].name;
+    this.isAdmin = this.authService.currentUserValue.role[0].name === 'admin';
   }
 
   initFormFilter(): FormGroup {

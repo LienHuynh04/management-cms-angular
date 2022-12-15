@@ -1,211 +1,217 @@
-<nz-card>
-  <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
-    <div nz-col class="gutter-row" [nzMd]="6" [nzSm]="12" [nzXs]="24">
-      <div class="inner-box bg-gradient-success">
-        <div class="header">
-          <img src="assets/images/circle.svg" alt="circle">
-          <div class="result">{{record.total_customer}}</div>
-          <span nz-icon nzType="user" nzTheme="outline"></span>
+<div *ngIf="isRoleAdmin">
+  <nz-card>
+    <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+      <div nz-col class="gutter-row" [nzMd]="6" [nzSm]="12" [nzXs]="24">
+        <div class="inner-box bg-gradient-success">
+          <div class="header">
+            <img src="assets/images/circle.svg" alt="circle">
+            <div class="result">{{record.total_customer}}</div>
+            <span nz-icon nzType="user" nzTheme="outline"></span>
+          </div>
+          <div class="subheader">Khách hàng</div>
         </div>
-        <div class="subheader">Khách hàng</div>
+      </div>
+      <div nz-col class="gutter-row" [nzMd]="6" [nzSm]="12" [nzXs]="24">
+        <div class="inner-box bg-gradient-danger">
+          <div class="header">
+            <img src="assets/images/circle.svg" alt="circle">
+            <div class="result">{{record.total_project}}</div>
+            <span nz-icon nzType="project" nzTheme="outline"></span>
+          </div>
+          <div class="subheader">Dự án</div>
+        </div>
+      </div>
+      <div nz-col class="gutter-row" [nzMd]="6" [nzSm]="12" [nzXs]="24">
+        <div class="inner-box bg-gradient-info">
+          <div class="header">
+            <img src="assets/images/circle.svg" alt="circle">
+            <div class="result">{{record.total_staff}}</div>
+            <span nz-icon nzType="team" nzTheme="outline"></span>
+          </div>
+          <div class="subheader">Nhân viên</div>
+        </div>
+      </div>
+      <div nz-col class="gutter-row" [nzMd]="6" [nzSm]="12" [nzXs]="24">
+        <div class="inner-box bg-gradient-pink">
+          <div class="header">
+            <img src="assets/images/circle.svg" alt="circle">
+            <div class="result">{{record.total_team}}</div>
+            <span nz-icon nzType="cluster" nzTheme="outline"></span>
+          </div>
+          <div class="subheader">Phòng kinh doanh</div>
+        </div>
       </div>
     </div>
-    <div nz-col class="gutter-row" [nzMd]="6" [nzSm]="12" [nzXs]="24">
-      <div class="inner-box bg-gradient-danger">
-        <div class="header">
-          <img src="assets/images/circle.svg" alt="circle">
-          <div class="result">{{record.total_project}}</div>
-          <span nz-icon nzType="project" nzTheme="outline"></span>
-        </div>
-        <div class="subheader">Dự án</div>
-      </div>
-    </div>
-    <div nz-col class="gutter-row" [nzMd]="6" [nzSm]="12" [nzXs]="24">
-      <div class="inner-box bg-gradient-info">
-        <div class="header">
-          <img src="assets/images/circle.svg" alt="circle">
-          <div class="result">{{record.total_staff}}</div>
-          <span nz-icon nzType="team" nzTheme="outline"></span>
-        </div>
-        <div class="subheader">Nhân viên</div>
-      </div>
-    </div>
-    <div nz-col class="gutter-row" [nzMd]="6" [nzSm]="12" [nzXs]="24">
-      <div class="inner-box bg-gradient-pink">
-        <div class="header">
-          <img src="assets/images/circle.svg" alt="circle">
-          <div class="result">{{record.total_team}}</div>
-          <span nz-icon nzType="cluster" nzTheme="outline"></span>
-        </div>
-        <div class="subheader">Phòng kinh doanh</div>
-      </div>
-    </div>
-  </div>
-</nz-card>
+  </nz-card>
 
-<div nz-row [nzGutter]="8" class="chart-dashboard">
-  <div nz-col [nzMd]="12" [nzXs]="24" class="item-chart">
-    <nz-card nzTitle="Tổng quan">
-      <canvas baseChart
-              #summaryBaseChart="base-chart"
-              class="chart"
-              *ngIf="isCheckZeroChart(generalSummaryChart?.value || {}); else noSummaryChart"
-              [data]="generalSummaryChart.value"
-              [labels]="generalSummaryChart.label"
-              [chartType]="generalSummaryChart.type"
-              [options]="generalSummaryChart.options"
-              [legend]="false">
-      </canvas>
-      <ng-template #noSummaryChart>Không có thống kê của tổng quan</ng-template>
-      <div class="my-legend" *ngIf="summaryBaseChart?.chart?.legend?.legendItems">
-        <ul nz-row class="legend-labels">
-          <li nz-col [nzSpan]="12" *ngFor=" let item of summaryBaseChart.chart?.legend.legendItems;let i = index"
-              class="custom-legend-item">
-            <span [ngStyle]="{ 'background-color': item.fillStyle }"></span>
-            {{ item.text }}
-          </li>
-        </ul>
-      </div>
-    </nz-card>
+  <div nz-row [nzGutter]="8" class="chart-dashboard">
+    <div nz-col [nzMd]="12" [nzXs]="24" class="item-chart">
+      <nz-card nzTitle="Tổng quan">
+        <canvas baseChart
+                #summaryBaseChart="base-chart"
+                class="chart"
+                *ngIf="isCheckZeroChart(generalSummaryChart?.value || {}); else noSummaryChart"
+                [data]="generalSummaryChart.value"
+                [labels]="generalSummaryChart.label"
+                [chartType]="generalSummaryChart.type"
+                [options]="generalSummaryChart.options"
+                [legend]="false">
+        </canvas>
+        <ng-template #noSummaryChart>Không có thống kê của tổng quan</ng-template>
+        <div class="my-legend" *ngIf="summaryBaseChart?.chart?.legend?.legendItems">
+          <ul nz-row class="legend-labels">
+            <li nz-col [nzSpan]="12" *ngFor=" let item of summaryBaseChart.chart?.legend.legendItems;let i = index"
+                class="custom-legend-item">
+              <span [ngStyle]="{ 'background-color': item.fillStyle }"></span>
+              {{ item.text }}
+            </li>
+          </ul>
+        </div>
+      </nz-card>
+    </div>
+    <div nz-col [nzMd]="12" [nzXs]="24" class="item-chart">
+      <nz-card nzTitle="Số lần chăm sóc">
+        <canvas baseChart
+                #careBaseChart="base-chart"
+                class="chart"
+                *ngIf="isCheckZeroChart(careChart?.value || {}); else noCareChart"
+                [data]="careChart.value"
+                [labels]="careChart.label"
+                [chartType]="careChart.type"
+                [options]="careChart.options"
+                [colors]="careChart.color"
+                [legend]="false">
+        </canvas>
+        <ng-template #noCareChart>Không có thống kê của số lần chăm sóc</ng-template>
+        <div class="my-legend" *ngIf="careBaseChart?.chart?.legend?.legendItems">
+          <ul nz-row class="legend-labels">
+            <li nz-col [nzSpan]="8" *ngFor=" let item of careBaseChart.chart?.legend.legendItems;let i = index"
+                class="custom-legend-item">
+              <span [ngStyle]="{ 'background-color': item.fillStyle }"></span>
+              {{ item.text }} lần {{i === 4 ? 'trở lên' : ''}}
+            </li>
+          </ul>
+        </div>
+      </nz-card>
+    </div>
+    <div nz-col [nzMd]="12" [nzXs]="24" class="item-chart">
+      <nz-card nzTitle="Nhóm kinh doanh" [nzExtra]="selectTeamTemplate">
+        <canvas baseChart
+                #teamBaseChart="base-chart"
+                class="chart"
+                *ngIf="isCheckZeroChart(teamChart?.value || {}); else noTeamChart"
+                [data]="teamChart.value"
+                [labels]="teamChart.label"
+                [chartType]="teamChart.type"
+                [options]="teamChart.options"
+                [legend]="false">
+        </canvas>
+        <ng-template #noTeamChart>Không có thống kê của nhóm kinh doanh</ng-template>
+        <div class="my-legend" *ngIf="teamBaseChart?.chart?.legend?.legendItems">
+          <ul nz-row class="legend-labels">
+            <li nz-col [nzSpan]="12" *ngFor=" let item of teamBaseChart.chart?.legend.legendItems;let i = index"
+                class="custom-legend-item">
+              <span [ngStyle]="{ 'background-color': item.fillStyle }"></span>
+              {{ item.text }}
+            </li>
+          </ul>
+        </div>
+      </nz-card>
+    </div>
+    <div nz-col [nzMd]="12" [nzXs]="24" class="item-chart">
+      <nz-card nzTitle="Phòng ban" [nzExtra]="departmentTemplate">
+        <canvas baseChart
+                #departmentBaseChart="base-chart"
+                class="chart"
+                *ngIf="isCheckZeroChart(departmentChart?.value || {}); else noDepartmentChart"
+                [data]="departmentChart.value"
+                [labels]="departmentChart.label"
+                [chartType]="departmentChart.type"
+                [options]="departmentChart.options"
+                [legend]="false">
+        </canvas>
+        <ng-template #noDepartmentChart>Không có thống kê của tổng quan</ng-template>
+        <div class="my-legend" *ngIf="departmentBaseChart?.chart?.legend?.legendItems">
+          <ul nz-row class="legend-labels">
+            <li nz-col [nzSpan]="12" *ngFor=" let item of departmentBaseChart.chart?.legend.legendItems;let i = index"
+                class="custom-legend-item">
+              <span [ngStyle]="{ 'background-color': item.fillStyle }"></span>
+              {{ item.text }}
+            </li>
+          </ul>
+        </div>
+      </nz-card>
+    </div>
   </div>
-  <div nz-col [nzMd]="12" [nzXs]="24" class="item-chart">
-    <nz-card nzTitle="Số lần chăm sóc">
-      <canvas baseChart
-              #careBaseChart="base-chart"
-              class="chart"
-              *ngIf="isCheckZeroChart(careChart?.value || {}); else noCareChart"
-              [data]="careChart.value"
-              [labels]="careChart.label"
-              [chartType]="careChart.type"
-              [options]="careChart.options"
-              [colors]="careChart.color"
-              [legend]="false">
-      </canvas>
-      <ng-template #noCareChart>Không có thống kê của số lần chăm sóc</ng-template>
-      <div class="my-legend" *ngIf="careBaseChart?.chart?.legend?.legendItems">
-        <ul nz-row class="legend-labels">
-          <li nz-col [nzSpan]="8" *ngFor=" let item of careBaseChart.chart?.legend.legendItems;let i = index"
-              class="custom-legend-item">
-            <span [ngStyle]="{ 'background-color': item.fillStyle }"></span>
-            {{ item.text }} lần {{i === 4 ? 'trở lên' : ''}}
-          </li>
-        </ul>
-      </div>
-    </nz-card>
-  </div>
-  <div nz-col [nzMd]="12" [nzXs]="24" class="item-chart">
-    <nz-card nzTitle="Nhóm kinh doanh" [nzExtra]="selectTeamTemplate">
-      <canvas baseChart
-              #teamBaseChart="base-chart"
-              class="chart"
-              *ngIf="isCheckZeroChart(teamChart?.value || {}); else noTeamChart"
-              [data]="teamChart.value"
-              [labels]="teamChart.label"
-              [chartType]="teamChart.type"
-              [options]="teamChart.options"
-              [legend]="false">
-      </canvas>
-      <ng-template #noTeamChart>Không có thống kê của nhóm kinh doanh</ng-template>
-      <div class="my-legend" *ngIf="teamBaseChart?.chart?.legend?.legendItems">
-        <ul nz-row class="legend-labels">
-          <li nz-col [nzSpan]="12" *ngFor=" let item of teamBaseChart.chart?.legend.legendItems;let i = index"
-              class="custom-legend-item">
-            <span [ngStyle]="{ 'background-color': item.fillStyle }"></span>
-            {{ item.text }}
-          </li>
-        </ul>
-      </div>
-    </nz-card>
-  </div>
-  <div nz-col [nzMd]="12" [nzXs]="24" class="item-chart">
-    <nz-card nzTitle="Phòng ban" [nzExtra]="departmentTemplate">
-      <canvas baseChart
-              #departmentBaseChart="base-chart"
-              class="chart"
-              *ngIf="isCheckZeroChart(departmentChart?.value || {}); else noDepartmentChart"
-              [data]="departmentChart.value"
-              [labels]="departmentChart.label"
-              [chartType]="departmentChart.type"
-              [options]="departmentChart.options"
-              [legend]="false">
-      </canvas>
-      <ng-template #noDepartmentChart>Không có thống kê của tổng quan</ng-template>
-      <div class="my-legend" *ngIf="departmentBaseChart?.chart?.legend?.legendItems">
-        <ul nz-row class="legend-labels">
-          <li nz-col [nzSpan]="12" *ngFor=" let item of departmentBaseChart.chart?.legend.legendItems;let i = index"
-              class="custom-legend-item">
-            <span [ngStyle]="{ 'background-color': item.fillStyle }"></span>
-            {{ item.text }}
-          </li>
-        </ul>
-      </div>
-    </nz-card>
-  </div>
+
+  <ng-template #selectTeamTemplate>
+    <nz-select *ngIf="isRoleAdmin"
+               [formControl]="selectTeamControl"
+               nzPlaceHolder="Vui lòng chọn">
+      <nz-option *ngFor="let team of selectStaticAdmin['team']"
+                 [nzValue]="team.id" [nzLabel]="team.name"></nz-option>
+    </nz-select>
+  </ng-template>
+
+  <ng-template #departmentTemplate>
+    <nz-select *ngIf="isRoleAdmin"
+               [formControl]="selectDepartmentControl"
+               nzPlaceHolder="Vui lòng chọn">
+      <nz-option *ngFor="let team of selectStaticAdmin['department']"
+                 [nzValue]="team.id" [nzLabel]="team.name"></nz-option>
+    </nz-select>
+  </ng-template>
+
+
+  <nz-modal [(nzVisible)]="isModalCustomer"
+            (nzOnCancel)="handleCancel()"
+            [nzFooter]="modalFooter"
+            nzCentered
+            [nzWidth]="customerList.length ? '80vw' : '20vw'"
+            nzTitle="Danh sách khách hàng">
+    <ng-container *nzModalContent>
+      <p  *ngIf="!customerList.length">Không có thông tin khách hàng</p>
+      <nz-table #basicTable
+                *ngIf="customerList.length"
+                [nzData]="customerList"
+                [nzPageSize]="50"
+                [nzScroll]="{ x:'1204px', y: '50vh' }"
+                [nzShowPagination]="false">
+        <thead>
+        <tr>
+          <th
+            *ngFor="let col of colsCustomer"
+            [nzWidth]="col.style?.width"
+          >
+            {{col.header}}
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of basicTable.data">
+          <td *ngFor="let col of colsCustomer;">
+            <ng-container [ngSwitch]="col.field">
+              <p *ngSwitchCase="'assign_for_user'">
+                {{data[col?.field]['full_name']}} - {{data[col?.field]['login_id']}}
+              </p>
+              <p *ngSwitchCase="'customer_project'">
+                {{data[col?.field] ? data[col?.field]['name'] : ''}}
+              </p>
+              <p *ngSwitchDefault>
+                {{ data[col?.field] || ''}}
+              </p>
+            </ng-container>
+          </td>
+        </tr>
+        </tbody>
+      </nz-table>
+    </ng-container>
+    <ng-template #modalFooter>
+      <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
+    </ng-template>
+  </nz-modal>
 </div>
 
-<ng-template #selectTeamTemplate>
-  <nz-select *ngIf="isRoleAdmin"
-             [formControl]="selectTeamControl"
-             nzPlaceHolder="Vui lòng chọn">
-    <nz-option *ngFor="let team of selectStaticAdmin['team']"
-               [nzValue]="team.id" [nzLabel]="team.name"></nz-option>
-  </nz-select>
-</ng-template>
-
-<ng-template #departmentTemplate>
-  <nz-select *ngIf="isRoleAdmin"
-             [formControl]="selectDepartmentControl"
-             nzPlaceHolder="Vui lòng chọn">
-    <nz-option *ngFor="let team of selectStaticAdmin['department']"
-               [nzValue]="team.id" [nzLabel]="team.name"></nz-option>
-  </nz-select>
-</ng-template>
-
-
-<nz-modal [(nzVisible)]="isModalCustomer"
-          (nzOnCancel)="handleCancel()"
-          [nzFooter]="modalFooter"
-          nzCentered
-          [nzWidth]="customerList.length ? '80vw' : '20vw'"
-          nzTitle="Danh sách khách hàng">
-  <ng-container *nzModalContent>
-    <p  *ngIf="!customerList.length">Không có thông tin khách hàng</p>
-    <nz-table #basicTable
-              *ngIf="customerList.length"
-              [nzData]="customerList"
-              [nzPageSize]="50"
-              [nzScroll]="{ x:'1204px', y: '50vh' }"
-              [nzShowPagination]="false">
-      <thead>
-      <tr>
-        <th
-          *ngFor="let col of colsCustomer"
-          [nzWidth]="col.style?.width"
-        >
-          {{col.header}}
-        </th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let data of basicTable.data">
-        <td *ngFor="let col of colsCustomer;">
-          <ng-container [ngSwitch]="col.field">
-            <p *ngSwitchCase="'assign_for_user'">
-              {{data[col?.field]['full_name']}} - {{data[col?.field]['login_id']}}
-            </p>
-            <p *ngSwitchCase="'customer_project'">
-              {{data[col?.field] ? data[col?.field]['name'] : ''}}
-            </p>
-            <p *ngSwitchDefault>
-              {{ data[col?.field] || ''}}
-            </p>
-          </ng-container>
-        </td>
-      </tr>
-      </tbody>
-    </nz-table>
-  </ng-container>
-  <ng-template #modalFooter>
-    <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
-  </ng-template>
-</nz-modal>
+<nz-card *ngIf="!isRoleAdmin">
+  <h3>Bạn không có quyền để xem thông tin trang chủ.</h3>
+</nz-card>
