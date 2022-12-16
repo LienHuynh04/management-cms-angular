@@ -23,6 +23,10 @@ export const column: ColumnConfig = {
       field: 'phone_number'
     },
     {
+      header: 'Người tạo',
+      field: 'created_by'
+    },
+    {
       header: 'Email',
       field: 'email'
     },
