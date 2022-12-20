@@ -144,6 +144,9 @@
             <p *ngSwitchCase="'customer_project'">
               {{data[col?.field] ? data[col?.field]['name'] : ''}}
             </p>
+            <p *ngSwitchCase="'created_by'">
+              {{data[col?.field] ? data[col?.field]['full_name'] : ''}}
+            </p>
             <p *ngSwitchDefault>
               {{ data[col?.field] || ''}}
             </p>

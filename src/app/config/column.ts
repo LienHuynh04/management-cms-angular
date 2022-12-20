@@ -30,18 +30,6 @@ export const column: ColumnConfig = {
       header: 'Email',
       field: 'email'
     },
-    // {
-    //   header: 'Ghi chú dự án',
-    //   field: 'project_note'
-    // },
-    // {
-    //   header: 'Ghi chú',
-    //   field: 'note'
-    // },
-    // {
-    //   header: 'Ngày cập nhật',
-    //   field: 'updated_at'
-    // },
   ],
   staff: [
     {
